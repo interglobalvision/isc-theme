@@ -5,8 +5,8 @@ function add_menu_icons_styles(){
 ?>
 
 <style>
-#menu-posts-project .dashicons-admin-post:before {
-    content: '\f319';
+#menu-posts-album .dashicons-admin-post:before {
+    content: '\f514';
 }
 </style>
 
@@ -16,23 +16,23 @@ add_action( 'admin_head', 'add_menu_icons_styles' );
 
 
 //Register Custom Post Types
-add_action( 'init', 'register_cpt_project' );
+add_action( 'init', 'register_cpt_album' );
 
-function register_cpt_project() {
+function register_cpt_album() {
 
   $labels = array(
-    'name' => _x( 'Projects', 'project' ),
-    'singular_name' => _x( 'Project', 'project' ),
-    'add_new' => _x( 'Add New', 'project' ),
-    'add_new_item' => _x( 'Add New Project', 'project' ),
-    'edit_item' => _x( 'Edit Project', 'project' ),
-    'new_item' => _x( 'New Project', 'project' ),
-    'view_item' => _x( 'View Project', 'project' ),
-    'search_items' => _x( 'Search Projects', 'project' ),
-    'not_found' => _x( 'No projects found', 'project' ),
-    'not_found_in_trash' => _x( 'No projects found in Trash', 'project' ),
-    'parent_item_colon' => _x( 'Parent Project:', 'project' ),
-    'menu_name' => _x( 'Projects', 'project' ),
+    'name' => _x( 'Collection', 'igv' ),
+    'singular_name' => _x( 'Album', 'igv' ),
+    'add_new' => _x( 'Add New', 'igv' ),
+    'add_new_item' => _x( 'Add New Album', 'igv' ),
+    'edit_item' => _x( 'Edit Album', 'igv' ),
+    'new_item' => _x( 'New Album', 'igv' ),
+    'view_item' => _x( 'View Album', 'igv' ),
+    'search_items' => _x( 'Search Collection', 'igv' ),
+    'not_found' => _x( 'No albums found', 'igv' ),
+    'not_found_in_trash' => _x( 'No albums found in Trash', 'igv' ),
+    'parent_item_colon' => _x( 'Parent Album:', 'igv' ),
+    'menu_name' => _x( 'Collection', 'igv' ),
   );
 
   $args = array(
@@ -49,7 +49,7 @@ function register_cpt_project() {
     'show_in_nav_menus' => true,
     'publicly_queryable' => true,
     'exclude_from_search' => false,
-    'has_archive' => true,
+    'has_archive' => 'collection',
     'query_var' => true,
     'can_export' => true,
     'rewrite' => true,
@@ -67,5 +67,5 @@ function register_cpt_project() {
 		//'template_lock'     => 'all',
   );
 
-  register_post_type( 'project', $args );
+  register_post_type( 'album', $args );
 }
