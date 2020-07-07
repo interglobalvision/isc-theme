@@ -39,5 +39,30 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
+  $album_metabox = new_cmb2_box( array(
+		'id'            => 'album_metabox',
+		'title'         => __( 'Options', 'cmb2' ),
+		'object_types'  => array( 'album', ), // Post type
+	) );
+
+	$album_metabox->add_field( array(
+		'name'       => __( 'Artist', 'cmb2' ),
+		'id'         => $prefix . 'album_artist',
+		'type'       => 'text',
+	) );
+
+	$album_metabox->add_field( array(
+		'name'       => __( 'Title', 'cmb2' ),
+		'id'         => $prefix . 'album_title',
+		'type'       => 'text',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Images', 'cmb2' ),
+		'id'         => $prefix . 'album_images',
+		'type'       => 'file',
+    'repeatable' => true,
+	) );
+
 }
 ?>
