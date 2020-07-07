@@ -29,5 +29,22 @@ get_template_part('partials/seo');
 <section id="main-container">
 
   <header id="header">
-    <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+    <div class="container">
+      <div class="grid-row margin-top-tiny">
+        <div class="grid-item flex-grow margin-bottom-tiny">
+          <h1><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+        </div>
+        <nav class="grid-row">
+          <div class="grid-item margin-bottom-tiny">
+            <a href="<?php echo home_url('collection'); ?>">Collection</a>
+          </div>
+          <div class="grid-item margin-bottom-tiny">
+            <a href="<?php echo home_url('features'); ?>">Features</a>
+          </div>
+          <div class="grid-item">
+            Search
+          </div>
+        </nav>
+      <div>
+    </div>
   </header>
