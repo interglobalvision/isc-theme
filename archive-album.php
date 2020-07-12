@@ -8,7 +8,7 @@ get_header();
 
       <?php get_template_part('partials/collection-filter'); ?>
 
-      <div class="grid-row">
+      <div id="posts" class="grid-row" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
 <?php
 if (have_posts()) {
   while (have_posts()) {

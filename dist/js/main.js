@@ -101,7 +101,7 @@ module.exports = function (module) {
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document */
+/* global document, WP */
 
 // Import dependencies
 
@@ -141,6 +141,84 @@ var Site = function () {
     key: 'onReady',
     value: function onReady() {
       _lazysizes2.default.init();
+      this.bindLinks();
+      this.bindBack();
+
+      //this.count();
+      //this.thetime = 1;
+    }
+  }, {
+    key: 'count',
+    value: function count() {
+      var _this = this;
+      setInterval(function () {
+        _this.thetime++;
+        console.log(_this.thetime);
+        (0, _jquery2.default)('#counter').html(_this.thetime);
+      }, 1000);
+    }
+  }, {
+    key: 'bindLinks',
+    value: function bindLinks() {
+      var _this = this;
+
+      (0, _jquery2.default)('a').off().on('click', function (e) {
+        var href = (0, _jquery2.default)(this).attr('href');
+        var target = e.currentTarget;
+
+        if (!href.startsWith(WP.siteUrl)) {
+          window.location = href;
+        }
+
+        var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
+        _this.handleRequest(href, context);
+
+        return false;
+      });
+    }
+  }, {
+    key: 'pushState',
+    value: function pushState(data, url, context) {
+      var title = (0, _jquery2.default)(data).filter('title').text();
+      document.title = title;
+      history.pushState({ context: context }, title, url);
+    }
+  }, {
+    key: 'bindBack',
+    value: function bindBack() {
+      var _this = this;
+      (0, _jquery2.default)(window).on('popstate', function () {
+        _this.handleRequest(window.location.href, history.state.context);
+      });
+    }
+  }, {
+    key: 'handleRequest',
+    value: function handleRequest(url, context) {
+      switch (context) {
+        case 'filter':
+          console.log('filter');
+          break;
+        case 'paginate':
+          console.log('paginate');
+          break;
+        default:
+          this.handleAjax(url);
+          break;
+      }
+    }
+  }, {
+    key: 'handleAjax',
+    value: function handleAjax(url) {
+      var _this = this;
+      _jquery2.default.ajax({
+        url: url,
+        success: function success(data) {
+          var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
+          (0, _jquery2.default)('#main-content').html(content);
+          _this.bindLinks();
+          _this.pushState(data, url, 'content');
+        }
+      });
     }
   }, {
     key: 'fixWidows',

@@ -31,7 +31,7 @@ function wpb_imagelink_setup() {
     update_option('image_default_link_type', 'none');
   }
 }
-add_action('admin_init', 'wpb_imagelink_setup', 10);
+//add_action('admin_init', 'wpb_imagelink_setup', 10);
 
 // Clean site desc. after theme activation
 function clean_site_blog_info() {

@@ -15,12 +15,15 @@ $styles = get_terms('style', array(
             <span class="select-value">Value</span>
           </div>
           <div class="select-options grid-column text-align-center">
-            <span data-term-id="0">All</span>
-            <?php foreach($styles as $key => $value) {
-              echo '<span data-term-id="' . $value->term_id . '" data-name="' . $value->name . '">';
-              echo $value->name;
-              echo '</span>';
-            } ?>
+            <?php
+              echo '<a href="' . get_post_type_archive_link('album') . '" data-context="filter">All</a>';
+
+              foreach($styles as $key => $value) {
+                echo '<a href="' . get_post_type_archive_link('album') . '?style=' . $value->slug . '" data-context="filter" data-term-id="' . $value->term_id . '" data-slug="' . $value->slug . '">';
+                echo $value->name;
+                echo '</a>';
+              }
+            ?>
           </div>
         </div>
       </div>

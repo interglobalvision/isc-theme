@@ -36,10 +36,10 @@ if(1 == $paged) {
 }
 ?>
 
-  <section id="posts" class="border-square">
+  <section class="border-square">
 
     <div class="container">
-      <div class="grid-row">
+      <div id="posts" class="grid-row" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
 
       <?php
       if (have_posts()) {
