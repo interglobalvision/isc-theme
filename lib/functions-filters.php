@@ -45,3 +45,19 @@ function add_lazysize_on_srcset($attr) {
 
 }
 add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
+
+function set_post_query_args($query){
+  if($query->is_main_query() && $query->is_home()){
+    $latest_post = get_posts(array('numberposts' => 1));
+    $query->set('post__not_in', array($latest_post[0]->ID)); //exclude queries by post ID
+    $query->set('posts_per_page', 6);
+  }
+}
+add_action('pre_get_posts','set_post_query_args');
+
+function set_album_query_args($query){
+  if($query->is_main_query() && is_post_type_archive('album')){
+    $query->set('posts_per_page', 24);
+  }
+}
+add_action('pre_get_posts','set_album_query_args');

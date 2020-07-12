@@ -1722,6 +1722,13 @@ dom-serializer@0:
     domelementtype "~1.1.1"
     entities "~1.1.1"
 
+dom7@^3.0.0-alpha.5:
+  version "3.0.0-alpha.5"
+  resolved "https://registry.yarnpkg.com/dom7/-/dom7-3.0.0-alpha.5.tgz#9db8d5f0b28248c3fa07651306ce8dd08ad6d623"
+  integrity sha512-8qnd76DAkn12DSOPCu5EtGiWwMDsagt1lb8zC50UfZ1sfLHixM510RXiQc4DTQsEAi/i3BjD3es7awqUCB+IjQ==
+  dependencies:
+    ssr-window "^3.0.0-alpha.1"
+
 domain-browser@^1.1.1:
   version "1.1.7"
   resolved "https://registry.yarnpkg.com/domain-browser/-/domain-browser-1.1.7.tgz#867aa4b093faa05f1de08c06f4d7b21fdf8698bc"
@@ -2386,10 +2393,10 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-globie-styl-library@1.0.8:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/globie-styl-library/-/globie-styl-library-1.0.8.tgz#c2c3ff1083ff1a9525808d3a111d5530ba778132"
-  integrity sha512-8II0BOesFNpehZd531joh/qKMvCUpiTM5BJU3eX1s3uh1gE3EgUN2Zt72alObN+Ry4WbMiDJw+XDecLjkOwXeA==
+globie-styl-library@1.0.9:
+  version "1.0.9"
+  resolved "https://registry.yarnpkg.com/globie-styl-library/-/globie-styl-library-1.0.9.tgz#131afce9cd5f11d34333911b4ac94f6b1e1f15b8"
+  integrity sha512-udPr1eNQplBn+eEHsy8yDabqw7CPmCU+mYaC9zSeWSNYRXjxVU81902GsiXHLWdLnLVi0dB3QFfxJ87Wz7b/yA==
 
 glogg@^1.0.0:
   version "1.0.0"
@@ -4665,6 +4672,11 @@ sshpk@^1.7.0:
     jsbn "~0.1.0"
     tweetnacl "~0.14.0"
 
+ssr-window@^3.0.0-alpha.1, ssr-window@^3.0.0-alpha.4:
+  version "3.0.0-alpha.4"
+  resolved "https://registry.yarnpkg.com/ssr-window/-/ssr-window-3.0.0-alpha.4.tgz#0c69a18c4305ecccdd8e11596155ca07b635f345"
+  integrity sha512-+dBRP/pZ+VyITxTzD0lMDzDwN/BmfUl8xi2e6t5Nz4+FqUphfcBLB1OOUSYCRNFB25rD3c8AJRYpY5rHTbL+kg==
+
 stat-mode@^0.2.0:
   version "0.2.2"
   resolved "https://registry.yarnpkg.com/stat-mode/-/stat-mode-0.2.2.tgz#e6c80b623123d7d80cf132ce538f346289072502"
@@ -4863,6 +4875,14 @@ svgo@^0.7.0:
     mkdirp "~0.5.1"
     sax "~1.2.1"
     whet.extend "~0.9.9"
+
+swiper@^6.0.2:
+  version "6.0.2"
+  resolved "https://registry.yarnpkg.com/swiper/-/swiper-6.0.2.tgz#24da06d7fc24589821ec2fb3c0fc91fc0022fdc8"
+  integrity sha512-zHIvTiy5U4nH3L8oP8bN9l2M1TB2sj9MD5id2fjlhBmwytb0A4s/5xeVd/PEYg0ruRLE9fWmA0Cm5k+MrWh6GA==
+  dependencies:
+    dom7 "^3.0.0-alpha.5"
+    ssr-window "^3.0.0-alpha.4"
 
 tapable@^0.2.7:
   version "0.2.8"

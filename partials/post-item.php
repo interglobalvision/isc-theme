@@ -14,12 +14,12 @@
     <span>FEATURE</span>
   </div>
   <div class="grid-item item-s-9">
-    <h2><?php the_title(); ?></h2>
+    <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
   </div>
   <div class="grid-item item-s-12">
     <?php the_excerpt(); ?>
   </div>
   <div class="grid-item offset-s-9">
-    ->
+    <a href="<?php the_permalink(); ?>">-></a>
   </div>
 </article>

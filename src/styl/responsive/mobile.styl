@@ -19,3 +19,22 @@ grid-maker(96%, $gutter, s)
 space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
 font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
+
+.not-mobile
+  display: none !important
+
+.border-square
+  border-top: 10px solid red
+  border-bottom: 10px solid red
+  position: relative
+  &:after, &:before
+    height: 100%
+    width: 10px
+    position: absolute
+    top: 0
+    right: 0
+    background: yellow
+    content: ''
+  &:before
+    left: 0
+    right: auto
