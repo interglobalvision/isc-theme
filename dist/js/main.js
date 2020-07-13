@@ -144,8 +144,8 @@ var Site = function () {
       this.bindLinks();
       this.bindBack();
 
-      //this.count();
-      //this.thetime = 1;
+      this.count();
+      this.thetime = 1;
     }
   }, {
     key: 'count',
@@ -153,7 +153,6 @@ var Site = function () {
       var _this = this;
       setInterval(function () {
         _this.thetime++;
-        console.log(_this.thetime);
         (0, _jquery2.default)('#counter').html(_this.thetime);
       }, 1000);
     }
@@ -178,45 +177,89 @@ var Site = function () {
     }
   }, {
     key: 'pushState',
-    value: function pushState(data, url, context) {
+    value: function pushState(data, url, context, filter) {
       var title = (0, _jquery2.default)(data).filter('title').text();
       document.title = title;
-      history.pushState({ context: context }, title, url);
+      console.log('push', {
+        context: context,
+        filter: filter
+      }, url);
+      history.pushState({
+        context: context,
+        filter: filter
+      }, title, url);
     }
   }, {
     key: 'bindBack',
     value: function bindBack() {
       var _this = this;
       (0, _jquery2.default)(window).on('popstate', function () {
-        _this.handleRequest(window.location.href, history.state.context);
+        console.log('back', window.location.href);
+        _this.handleRequest(window.location.href, history.state.context, true);
       });
     }
   }, {
     key: 'handleRequest',
-    value: function handleRequest(url, context) {
-      switch (context) {
-        case 'filter':
-          console.log('filter');
-          break;
-        case 'paginate':
-          console.log('paginate');
-          break;
-        default:
-          this.handleAjax(url);
-          break;
+    value: function handleRequest(href) {
+      var context = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'content';
+      var isPop = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : false;
+
+      if (isPop) {
+        this.replaceContent(href, context, isPop);
+      } else {
+        switch (context) {
+          case 'filter':
+            this.filterResults(href);
+            break;
+          case 'paginate':
+            this.paginateResults(href);
+            break;
+          default:
+            this.replaceContent(href, context);
+            break;
+        }
       }
     }
   }, {
-    key: 'handleAjax',
-    value: function handleAjax(url) {
+    key: 'filterResults',
+    value: function filterResults(href) {
       var _this = this;
+      var url = new URL(window.location.href);
+      var newUrl = new URL(href);
+      newUrl.searchParams.forEach(function (value, key) {
+        url.searchParams.set(key, value);
+      });
+
+      (0, _jquery2.default)('body').addClass('filtering');
+
       _jquery2.default.ajax({
         url: url,
+        success: function success(data) {
+          var posts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
+          (0, _jquery2.default)('#posts').html(posts);
+          _this.bindLinks();
+          _this.pushState(data, url, 'filter', url.searchParams.toString());
+          (0, _jquery2.default)('body').removeClass('filtering');
+        }
+      });
+    }
+  }, {
+    key: 'replaceContent',
+    value: function replaceContent(href, context, isPop) {
+      var _this = this;
+
+      (0, _jquery2.default)('body').addClass('loading');
+
+      _jquery2.default.ajax({
+        url: href,
         success: function success(data) {
           var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
           (0, _jquery2.default)('#main-content').html(content);
           _this.bindLinks();
-          _this.pushState(data, url, 'content');
+          if (!isPop) {
+            _this.pushState(data, href, context);
+          }
+          (0, _jquery2.default)('body').removeClass('loading');
         }
       });
     }

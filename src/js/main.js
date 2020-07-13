@@ -26,15 +26,14 @@ class Site {
     this.bindLinks();
     this.bindBack();
 
-    //this.count();
-    //this.thetime = 1;
+    this.count();
+    this.thetime = 1;
   }
 
   count() {
     const _this = this;
     setInterval(function() {
       _this.thetime++;
-      console.log(_this.thetime);
       $('#counter').html(_this.thetime);
     }, 1000);
   }
@@ -57,42 +56,82 @@ class Site {
     });
   }
 
-  pushState(data, url, context) {
+  pushState(data, url, context, filter) {
     const title = $(data).filter('title').text();
     document.title = title;
-    history.pushState({context}, title, url);
+    console.log('push', {
+      context,
+      filter
+    }, url);
+    history.pushState({
+      context,
+      filter
+    }, title, url);
   }
 
   bindBack() {
     const _this = this;
     $(window).on('popstate', function() {
-      _this.handleRequest(window.location.href, history.state.context);
+      console.log('back', window.location.href);
+      _this.handleRequest(window.location.href, history.state.context, true);
     });
   }
 
-  handleRequest(url, context) {
-    switch (context) {
-      case 'filter':
-        console.log('filter');
-        break;
-      case 'paginate':
-        console.log('paginate');
-        break;
-      default:
-        this.handleAjax(url);
-        break;
+  handleRequest(href, context = 'content', isPop = false) {
+    if (isPop) {
+      this.replaceContent(href, context, isPop);
+    } else {
+      switch (context) {
+        case 'filter':
+          this.filterResults(href);
+          break;
+        case 'paginate':
+          this.paginateResults(href);
+          break;
+        default:
+          this.replaceContent(href, context);
+          break;
+      }
     }
   }
 
-  handleAjax(url) {
+  filterResults(href) {
     const _this = this;
+    const url = new URL(window.location.href);
+    const newUrl = new URL(href);
+    newUrl.searchParams.forEach(function(value, key) {
+      url.searchParams.set(key, value);
+    });
+
+    $('body').addClass('filtering');
+
     $.ajax({
       url,
+      success: function(data){
+        const posts = $(data).find('#posts')[0].innerHTML;
+        $('#posts').html(posts);
+        _this.bindLinks();
+        _this.pushState(data, url, 'filter', url.searchParams.toString());
+        $('body').removeClass('filtering');
+      }
+    });
+  }
+
+  replaceContent(href, context, isPop) {
+    const _this = this;
+
+    $('body').addClass('loading');
+
+    $.ajax({
+      url: href,
       success: function(data){
         const content = $(data).find('#main-content')[0].innerHTML;
         $('#main-content').html(content);
         _this.bindLinks();
-        _this.pushState(data, url, 'content');
+        if (!isPop) {
+          _this.pushState(data, href, context);
+        }
+        $('body').removeClass('loading');
       }
     });
   }

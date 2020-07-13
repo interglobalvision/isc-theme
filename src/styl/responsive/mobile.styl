@@ -38,3 +38,34 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   &:before
     left: 0
     right: auto
+
+#loader
+  opacity: 0
+  pointer-events: none
+  display: flex
+  justify-content: center
+  align-items: center
+  width: 100vw
+  height: 100vh
+  top: 0
+  left: 0
+  position: fixed
+
+#main-content,
+#posts,
+#loader
+  transition: opacity 200ms ease-in-out
+  will-change: opacity
+
+body
+  &.loading, &.filtering
+    #loader
+      opacity: 1
+  &.loading
+    #main-content
+      opacity: 0
+      pointer-events: none
+  &.filtering
+    #posts
+      opacity: 0
+      pointer-events: none

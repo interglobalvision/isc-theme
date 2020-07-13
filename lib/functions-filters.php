@@ -59,7 +59,7 @@ function set_album_query_args($query){
   if($query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);
 
-    if (isset($_GET['style'])) {
+    /*if (isset($_GET['style'])) {
       $taxquery = array(
         array(
           'taxonomy' => 'style',
@@ -68,7 +68,7 @@ function set_album_query_args($query){
           'operator'=> 'IN'
         )
       );
-    }
+    }*/
   }
 }
 add_action('pre_get_posts','set_album_query_args');
