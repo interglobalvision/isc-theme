@@ -24,10 +24,11 @@ class Site {
   onReady() {
     lazySizes.init();
     this.bindLinks();
+    this.bindFilters();
     this.bindBack();
 
-    this.count();
-    this.thetime = 1;
+    //this.count();
+    //this.thetime = 1;
   }
 
   count() {
@@ -42,6 +43,7 @@ class Site {
     const _this = this;
 
     $('a').off().on('click', function(e) {
+      console.log('link');
       const href = $(this).attr('href');
       const target = e.currentTarget;
 
@@ -56,13 +58,32 @@ class Site {
     });
   }
 
+  bindFilters() {
+    const _this = this;
+    
+    if ($('.filter').length) {
+      $('.filter-trigger').off().on('click', function() {
+        $(this).closest('.filter').addClass('show');
+      });
+
+      $('.filter-option').off().on('click', function() {
+        const filterText = $(this).text();
+        const $filter = $(this).closest('.filter');
+        const href = $(this).attr('href');
+
+        $filter.find('.filter-value').text(filterText);
+        $filter.removeClass('show');
+
+        _this.handleRequest(href, 'filter');
+
+        return false;
+      });
+    }
+  }
+
   pushState(data, url, context, filter) {
     const title = $(data).filter('title').text();
     document.title = title;
-    console.log('push', {
-      context,
-      filter
-    }, url);
     history.pushState({
       context,
       filter
@@ -111,6 +132,7 @@ class Site {
         const posts = $(data).find('#posts')[0].innerHTML;
         $('#posts').html(posts);
         _this.bindLinks();
+        _this.bindFilters();
         _this.pushState(data, url, 'filter', url.searchParams.toString());
         $('body').removeClass('filtering');
       }
@@ -128,6 +150,7 @@ class Site {
         const content = $(data).find('#main-content')[0].innerHTML;
         $('#main-content').html(content);
         _this.bindLinks();
+        _this.bindFilters();
         if (!isPop) {
           _this.pushState(data, href, context);
         }

@@ -69,3 +69,26 @@ body
     #posts
       opacity: 0
       pointer-events: none
+
+.filter-trigger
+  background: $color-white
+  border: 1px solid $color-black
+  cursor: pointer
+
+.filter-options
+  background: $color-white
+  border: 1px solid transparent
+  position: absolute
+  width: 100%
+  height: 0
+  overflow: hidden
+  z-index: 100
+
+.filter
+  position: relative
+  &.show
+    .filter-options
+      height: auto
+      max-height: 300px
+      overflow: scroll
+      border-color: $color-black

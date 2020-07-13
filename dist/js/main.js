@@ -142,10 +142,11 @@ var Site = function () {
     value: function onReady() {
       _lazysizes2.default.init();
       this.bindLinks();
+      this.bindFilters();
       this.bindBack();
 
-      this.count();
-      this.thetime = 1;
+      //this.count();
+      //this.thetime = 1;
     }
   }, {
     key: 'count',
@@ -162,6 +163,7 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('a').off().on('click', function (e) {
+        console.log('link');
         var href = (0, _jquery2.default)(this).attr('href');
         var target = e.currentTarget;
 
@@ -176,14 +178,34 @@ var Site = function () {
       });
     }
   }, {
+    key: 'bindFilters',
+    value: function bindFilters() {
+      var _this = this;
+
+      if ((0, _jquery2.default)('.filter').length) {
+        (0, _jquery2.default)('.filter-trigger').off().on('click', function () {
+          (0, _jquery2.default)(this).closest('.filter').addClass('show');
+        });
+
+        (0, _jquery2.default)('.filter-option').off().on('click', function () {
+          var filterText = (0, _jquery2.default)(this).text();
+          var $filter = (0, _jquery2.default)(this).closest('.filter');
+          var href = (0, _jquery2.default)(this).attr('href');
+
+          $filter.find('.filter-value').text(filterText);
+          $filter.removeClass('show');
+
+          _this.handleRequest(href, 'filter');
+
+          return false;
+        });
+      }
+    }
+  }, {
     key: 'pushState',
     value: function pushState(data, url, context, filter) {
       var title = (0, _jquery2.default)(data).filter('title').text();
       document.title = title;
-      console.log('push', {
-        context: context,
-        filter: filter
-      }, url);
       history.pushState({
         context: context,
         filter: filter
@@ -238,6 +260,7 @@ var Site = function () {
           var posts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
           (0, _jquery2.default)('#posts').html(posts);
           _this.bindLinks();
+          _this.bindFilters();
           _this.pushState(data, url, 'filter', url.searchParams.toString());
           (0, _jquery2.default)('body').removeClass('filtering');
         }
@@ -256,6 +279,7 @@ var Site = function () {
           var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
           (0, _jquery2.default)('#main-content').html(content);
           _this.bindLinks();
+          _this.bindFilters();
           if (!isPop) {
             _this.pushState(data, href, context);
           }

@@ -3,7 +3,6 @@ $styles = get_terms('style', array(
     'hide_empty' => true,
 ));
 ?>
-<span id="counter"></span>
 <div class="grid-row">
   <div class="grid-item no-gutter item-s-12 item-m-7 item-l-9 grid-row">
     <div class="grid-item item-s-3 item-m-auto">
@@ -13,7 +12,7 @@ $styles = get_terms('style', array(
       <div class="filter-wrapper">
         <div class="filter">
           <div class="filter-trigger text-align-center">
-            <span class="filter-value">Value</span>
+            <span class="filter-value">All</span>
           </div>
           <div class="filter-options grid-column text-align-center">
             <?php
@@ -40,7 +39,7 @@ $styles = get_terms('style', array(
       <div class="filter-wrapper">
         <div class="filter">
           <div class="filter-trigger text-align-center">
-            <span class="filter-value">Value</span>
+            <span class="filter-value">Newest</span>
           </div>
           <div class="filter-options grid-column text-align-center">
             <?php
