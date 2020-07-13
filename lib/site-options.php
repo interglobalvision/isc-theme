@@ -3,15 +3,11 @@ add_action( 'cmb2_admin_init', 'igv_register_theme_options_metabox' );
 
 function igv_register_theme_options_metabox() {
   $prefix = '_igv_';
-
-  $boiler_options = new_cmb2_box( array(
+/*
+  $player_options = new_cmb2_box( array(
     'id'           => $prefix . 'player_options_page',
     'title'        => esc_html__( 'Audio Player', 'cmb2' ),
     'object_types' => array( 'options-page' ),
-    /*
-     * The following parameters are specific to the options-page box
-     * Several of these parameters are passed along to add_menu_page()/add_submenu_page().
-     */
     'option_key'      => $prefix . 'player_options', // The option key and admin menu page slug.
     'icon_url'        => 'dashicons-format-audio', // Menu icon. Only applicable if 'parent_slug' is left empty.
     // 'menu_title'      => esc_html__( 'Options', 'cmb2' ), // Falls back to 'title' (above).
@@ -23,21 +19,21 @@ function igv_register_theme_options_metabox() {
     'save_button'     => esc_html__( 'Save', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
   ) );
 
-  $boiler_options->add_field( array(
+  $player_options->add_field( array(
     'name'    => esc_html__( 'THE TITLE', 'cmb2' ),
     'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
     'id'      => 'title',
     'type'    => 'title',
   ) );
 
-  $boiler_options->add_field( array(
+  $player_options->add_field( array(
     'name'    => esc_html__( 'Site Background Color', 'cmb2' ),
     'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
     'id'      => 'bg_color',
     'type'    => 'colorpicker',
     'default' => '#ffffff',
   ) );
-
+*/
   // Site options for general data
 
   $site_options = new_cmb2_box( array(
@@ -56,6 +52,26 @@ function igv_register_theme_options_metabox() {
     // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
     // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
     // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
+  ) );
+
+  // Audio Player
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Audio Player', 'cmb2' ),
+    'id'      => $prefix . 'player_title',
+    'type'    => 'title',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Soundcloud Client ID', 'cmb2' ),
+    'id'      => 'player_client_id',
+    'type'    => 'text',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Soundcloud Playlist URL', 'cmb2' ),
+    'id'      => 'player_playlist_url',
+    'type'    => 'text',
   ) );
 
   // Social Media variables

@@ -117,6 +117,10 @@ var _lazysizes = __webpack_require__(3);
 
 var _lazysizes2 = _interopRequireDefault(_lazysizes);
 
+var _player = __webpack_require__(10);
+
+var _player2 = _interopRequireDefault(_player);
+
 __webpack_require__(4);
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
@@ -303,6 +307,7 @@ var Site = function () {
 }();
 
 new Site();
+new _player2.default();
 
 /***/ }),
 /* 2 */
@@ -11155,6 +11160,159 @@ var _typeof = typeof Symbol === "function" && typeof Symbol.iterator === "symbol
 /***/ (function(module, exports) {
 
 // removed by extract-text-webpack-plugin
+
+/***/ }),
+/* 5 */,
+/* 6 */,
+/* 7 */,
+/* 8 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+
+var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
+/* global document, WP, SC */
+
+var _jquery = __webpack_require__(2);
+
+var _jquery2 = _interopRequireDefault(_jquery);
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+var Player = function () {
+  function Player() {
+    _classCallCheck(this, Player);
+
+    this.mobileThreshold = 601;
+    this.currentTrack = 0;
+    this.player = null;
+
+    // Bind functions
+    this.onReady = this.onReady.bind(this);
+    this.handlePlaylist = this.handlePlaylist.bind(this);
+    this.handleStream = this.handleStream.bind(this);
+    this.handlePlay = this.handlePlay.bind(this);
+    this.handlePause = this.handlePause.bind(this);
+    this.setCurrentTime = this.setCurrentTime.bind(this);
+    this.updateCurrentTime = this.updateCurrentTime.bind(this);
+
+    (0, _jquery2.default)(document).ready(this.onReady);
+  }
+
+  _createClass(Player, [{
+    key: 'onReady',
+    value: function onReady() {
+      this.$trackTitle = (0, _jquery2.default)('#player-track-title');
+      this.$duration = (0, _jquery2.default)('#player-duration');
+      this.$currentTime = (0, _jquery2.default)('#player-current-time');
+
+      this.initSC();
+    }
+  }, {
+    key: 'initSC',
+    value: function initSC() {
+      if (WP.playerClientId && WP.playerPlaylistUrl) {
+        SC.initialize({
+          client_id: WP.playerClientId
+        });
+
+        this.bindControls();
+        this.getPlaylist();
+      } else {
+        (0, _jquery2.default)('#player').remove();
+      }
+    }
+  }, {
+    key: 'getPlaylist',
+    value: function getPlaylist() {
+      SC.resolve(WP.playerPlaylistUrl).then(this.handlePlaylist).catch(function (e) {
+        console.error('Playlist error', e);
+      });
+    }
+  }, {
+    key: 'handlePlaylist',
+    value: function handlePlaylist(response) {
+      this.tracks = response.tracks;
+      this.createPlayer();
+    }
+  }, {
+    key: 'createPlayer',
+    value: function createPlayer() {
+      SC.stream('/tracks/' + this.tracks[this.currentTrack].id).then(this.handleStream).catch(function (e) {
+        console.error('Stream error', e);
+      });
+    }
+  }, {
+    key: 'handleStream',
+    value: function handleStream(player) {
+      console.log('streaming');
+      this.player = player;
+      this.setDuration();
+      this.setTrackTitle();
+    }
+  }, {
+    key: 'setDuration',
+    value: function setDuration() {
+      var duration = this.millisToMinutesAndSeconds(this.tracks[this.currentTrack].duration);
+      this.$duration.text(duration);
+    }
+  }, {
+    key: 'bindControls',
+    value: function bindControls() {
+      (0, _jquery2.default)('#player-play').on('click', this.handlePlay);
+      (0, _jquery2.default)('#player-pause').on('click', this.handlePause);
+    }
+  }, {
+    key: 'handlePlay',
+    value: function handlePlay() {
+      this.player.play().then(this.setCurrentTime).catch(function (e) {
+        console.error('Playback rejected', e);
+      });
+    }
+  }, {
+    key: 'handlePause',
+    value: function handlePause() {
+      this.player.pause();
+      clearInterval(this.timeUpdater);
+    }
+  }, {
+    key: 'setTrackTitle',
+    value: function setTrackTitle() {
+      this.$trackTitle.text(this.tracks[this.currentTrack].title);
+    }
+  }, {
+    key: 'setCurrentTime',
+    value: function setCurrentTime() {
+      this.timeUpdater = setInterval(this.updateCurrentTime, 500);
+    }
+  }, {
+    key: 'updateCurrentTime',
+    value: function updateCurrentTime() {
+      var currentTime = this.millisToMinutesAndSeconds(this.player.currentTime());
+      this.$currentTime.text(currentTime);
+    }
+  }, {
+    key: 'millisToMinutesAndSeconds',
+    value: function millisToMinutesAndSeconds(millis) {
+      var minutes = Math.floor(millis / 60000);
+      var seconds = (millis % 60000 / 1000).toFixed(0);
+      return seconds === 60 ? minutes + 1 + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds;
+    }
+  }]);
+
+  return Player;
+}();
+
+exports.default = Player;
 
 /***/ })
 /******/ ]);

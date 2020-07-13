@@ -4,6 +4,7 @@
 // Import dependencies
 import $ from 'jquery';
 import lazySizes from 'lazysizes';
+import Player from './player';
 
 // Import style
 import '../styl/site.styl';
@@ -60,7 +61,7 @@ class Site {
 
   bindFilters() {
     const _this = this;
-    
+
     if ($('.filter').length) {
       $('.filter-trigger').off().on('click', function() {
         $(this).closest('.filter').addClass('show');
@@ -170,3 +171,4 @@ class Site {
 }
 
 new Site();
+new Player();

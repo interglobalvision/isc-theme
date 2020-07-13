@@ -4,17 +4,23 @@
 
 function scripts_and_styles_method() {
   $templateuri = get_template_directory_uri();
-
+  $soundcloudSdk = 'https://connect.soundcloud.com/sdk/sdk-3.3.2.js';
   $javascriptMain = $templateuri . '/dist/js/main.js';
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
+  $options = get_site_option('_igv_site_options');
 
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
     'postsPerPage' => get_query_var('posts_per_page'),
+    'playerClientId' => $options['player_client_id'],
+    'playerPlaylistUrl' => $options['player_playlist_url']
   );
+
+  wp_register_script('soundcloud', $soundcloudSdk);
+  wp_enqueue_script('soundcloud', $soundcloudSdk, '', '', true);
 
   wp_register_script('javascript-main', $javascriptMain);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
