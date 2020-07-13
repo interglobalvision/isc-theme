@@ -11179,6 +11179,7 @@ Object.defineProperty(exports, "__esModule", {
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global document, WP, SC */
+// https://developers.soundcloud.com/docs/api/sdks#javascript
 
 var _jquery = __webpack_require__(2);
 
@@ -11200,8 +11201,8 @@ var Player = function () {
     this.onReady = this.onReady.bind(this);
     this.handlePlaylist = this.handlePlaylist.bind(this);
     this.handleStream = this.handleStream.bind(this);
-    this.handlePlay = this.handlePlay.bind(this);
-    this.handlePause = this.handlePause.bind(this);
+    this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handleSkip = this.handleSkip.bind(this);
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
 
@@ -11214,6 +11215,8 @@ var Player = function () {
       this.$trackTitle = (0, _jquery2.default)('#player-track-title');
       this.$duration = (0, _jquery2.default)('#player-duration');
       this.$currentTime = (0, _jquery2.default)('#player-current-time');
+      this.$playPause = (0, _jquery2.default)('#player-play-pause');
+      this.$skip = (0, _jquery2.default)('#player-skip');
 
       this.initSC();
     }
@@ -11254,10 +11257,13 @@ var Player = function () {
   }, {
     key: 'handleStream',
     value: function handleStream(player) {
-      console.log('streaming');
       this.player = player;
+      this.enablePlayPause();
       this.setDuration();
       this.setTrackTitle();
+      if (this.skipped) {
+        this.handlePlayPause();
+      }
     }
   }, {
     key: 'setDuration',
@@ -11268,21 +11274,48 @@ var Player = function () {
   }, {
     key: 'bindControls',
     value: function bindControls() {
-      (0, _jquery2.default)('#player-play').on('click', this.handlePlay);
-      (0, _jquery2.default)('#player-pause').on('click', this.handlePause);
+      this.$playPause.on('click', this.handlePlayPause);
+      this.$skip.on('click', this.handleSkip);
     }
   }, {
-    key: 'handlePlay',
-    value: function handlePlay() {
-      this.player.play().then(this.setCurrentTime).catch(function (e) {
-        console.error('Playback rejected', e);
-      });
+    key: 'enablePlayPause',
+    value: function enablePlayPause() {
+      this.$playPause.prop('disabled', false);
     }
   }, {
-    key: 'handlePause',
-    value: function handlePause() {
+    key: 'disablePlayPause',
+    value: function disablePlayPause() {
+      this.$playPause.prop('disabled', true);
+    }
+  }, {
+    key: 'handlePlayPause',
+    value: function handlePlayPause() {
+      if (this.player.isPlaying()) {
+        this.player.pause();
+        clearInterval(this.timeUpdater);
+      } else {
+        this.player.play().then(this.setCurrentTime).catch(function (e) {
+          console.error('Playback rejected', e);
+        });
+      }
+      this.skipped = false;
+    }
+  }, {
+    key: 'handleSkip',
+    value: function handleSkip() {
+      this.skipped = true;
+      this.killPlayer();
+      this.currentTrack += 1;
+      this.createPlayer();
+    }
+  }, {
+    key: 'killPlayer',
+    value: function killPlayer() {
       this.player.pause();
-      clearInterval(this.timeUpdater);
+      this.player.kill();
+      this.$trackTitle.text('&hellip;');
+      this.$duration.text('0:00');
+      this.$currentTime.text('0:00');
     }
   }, {
     key: 'setTrackTitle',

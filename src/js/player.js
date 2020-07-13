@@ -1,5 +1,6 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
 /* global document, WP, SC */
+// https://developers.soundcloud.com/docs/api/sdks#javascript
 
 import $ from 'jquery';
 
@@ -13,8 +14,8 @@ class Player {
     this.onReady = this.onReady.bind(this);
     this.handlePlaylist = this.handlePlaylist.bind(this);
     this.handleStream = this.handleStream.bind(this);
-    this.handlePlay = this.handlePlay.bind(this);
-    this.handlePause = this.handlePause.bind(this);
+    this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handleSkip = this.handleSkip.bind(this);
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
 
@@ -25,6 +26,8 @@ class Player {
     this.$trackTitle = $('#player-track-title');
     this.$duration = $('#player-duration');
     this.$currentTime = $('#player-current-time');
+    this.$playPause = $('#player-play-pause');
+    this.$skip = $('#player-skip');
 
     this.initSC();
   }
@@ -64,10 +67,13 @@ class Player {
   }
 
   handleStream(player) {
-    console.log('streaming');
     this.player = player;
+    this.enablePlayPause();
     this.setDuration();
     this.setTrackTitle();
+    if (this.skipped) {
+      this.handlePlayPause();
+    }
   }
 
   setDuration() {
@@ -76,21 +82,45 @@ class Player {
   }
 
   bindControls() {
-    $('#player-play').on('click', this.handlePlay);
-    $('#player-pause').on('click', this.handlePause);
+    this.$playPause.on('click', this.handlePlayPause);
+    this.$skip.on('click', this.handleSkip);
   }
 
-  handlePlay() {
-    this.player.play()
-      .then(this.setCurrentTime)
-      .catch(function(e){
-        console.error('Playback rejected', e);
-      });
+  enablePlayPause() {
+    this.$playPause.prop('disabled', false);
   }
 
-  handlePause() {
+  disablePlayPause() {
+    this.$playPause.prop('disabled', true);
+  }
+
+  handlePlayPause() {
+    if (this.player.isPlaying()) {
+      this.player.pause();
+      clearInterval(this.timeUpdater);
+    } else {
+      this.player.play()
+        .then(this.setCurrentTime)
+        .catch(function(e){
+          console.error('Playback rejected', e);
+        });
+    }
+    this.skipped = false;
+  }
+
+  handleSkip() {
+    this.skipped = true;
+    this.killPlayer();
+    this.currentTrack += 1;
+    this.createPlayer();
+  }
+
+  killPlayer() {
     this.player.pause();
-    clearInterval(this.timeUpdater);
+    this.player.kill();
+    this.$trackTitle.text('&hellip;');
+    this.$duration.text('0:00');
+    this.$currentTime.text('0:00');
   }
 
   setTrackTitle() {
