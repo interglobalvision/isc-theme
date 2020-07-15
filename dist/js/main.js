@@ -11261,7 +11261,7 @@ var Player = function () {
       this.enablePlayPause();
       this.setDuration();
       this.setTrackTitle();
-      if (this.skipped) {
+      if (this.isPlaying) {
         this.handlePlayPause();
       }
     }
@@ -11290,30 +11290,44 @@ var Player = function () {
   }, {
     key: 'handlePlayPause',
     value: function handlePlayPause() {
+      this.$playPause.children('.player-control-icon').toggleClass('hide');
+
       if (this.player.isPlaying()) {
-        this.player.pause();
-        clearInterval(this.timeUpdater);
+        this.pausePlayer();
       } else {
-        this.player.play().then(this.setCurrentTime).catch(function (e) {
-          console.error('Playback rejected', e);
-        });
+        this.playPlayer();
       }
-      this.skipped = false;
+    }
+  }, {
+    key: 'playPlayer',
+    value: function playPlayer() {
+      this.isPlaying = true;
+      this.player.play().then(this.setCurrentTime).catch(function (e) {
+        console.error('Playback rejected', e);
+      });
+    }
+  }, {
+    key: 'pausePlayer',
+    value: function pausePlayer() {
+      this.isPlaying = false;
+      this.player.pause();
+      clearInterval(this.timeUpdater);
     }
   }, {
     key: 'handleSkip',
     value: function handleSkip() {
-      this.skipped = true;
       this.killPlayer();
-      this.currentTrack += 1;
+      this.currentTrack = this.currentTrack === this.tracks.length - 1 ? 0 : this.currentTrack + 1;
       this.createPlayer();
     }
   }, {
     key: 'killPlayer',
     value: function killPlayer() {
-      this.player.pause();
+      if (this.isPlaying) {
+        this.handlePlayPause();
+      }
       this.player.kill();
-      this.$trackTitle.text('&hellip;');
+      this.$trackTitle.html('&hellip;');
       this.$duration.text('0:00');
       this.$currentTime.text('0:00');
     }
