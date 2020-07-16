@@ -8,6 +8,9 @@ function add_menu_icons_styles(){
 #menu-posts-album .dashicons-admin-post:before {
     content: '\f514';
 }
+#menu-posts-track .dashicons-admin-post:before {
+    content: '\f492';
+}
 </style>
 
 <?php
@@ -68,4 +71,58 @@ function register_cpt_album() {
   );
 
   register_post_type( 'album', $args );
+}
+
+add_action( 'init', 'register_cpt_track' );
+
+function register_cpt_track() {
+
+  $labels = array(
+    'name' => _x( 'Tracks', 'igv' ),
+    'singular_name' => _x( 'Track', 'igv' ),
+    'add_new' => _x( 'Add New', 'igv' ),
+    'add_new_item' => _x( 'Add New Track', 'igv' ),
+    'edit_item' => _x( 'Edit Track', 'igv' ),
+    'new_item' => _x( 'New Track', 'igv' ),
+    'view_item' => _x( 'View Track', 'igv' ),
+    'search_items' => _x( 'Search Tracks', 'igv' ),
+    'not_found' => _x( 'No tracks found', 'igv' ),
+    'not_found_in_trash' => _x( 'No tracks found in Trash', 'igv' ),
+    'parent_item_colon' => _x( 'Parent Track:', 'igv' ),
+    'menu_name' => _x( 'Tracks', 'igv' ),
+  );
+
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => false,
+
+    'supports' => array( 'title', 'thumbnail' ),
+
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+
+    'show_in_nav_menus' => true,
+    'publicly_queryable' => true,
+    'exclude_from_search' => false,
+    'has_archive' => 'collection',
+    'query_var' => true,
+    'can_export' => true,
+    'rewrite' => true,
+    'capability_type' => 'post',
+
+    'show_in_rest'        => true,
+    /*'template'          => array(
+      array( 'core/heading', array(
+        'level' => '5', 'content' => 'Some List' ) ),
+      array( 'core/list' ),
+      array( 'core/heading', array(
+        'level' => '5', 'content' => 'Some Text' ) ),
+      array( 'core/paragraph' )
+    ),*/
+		//'template_lock'     => 'all',
+  );
+
+  register_post_type( 'track', $args );
 }

@@ -4,6 +4,7 @@
 // Import dependencies
 import $ from 'jquery';
 import lazySizes from 'lazysizes';
+import Swiper from 'swiper';
 import Player from './player';
 
 // Import style
@@ -12,6 +13,7 @@ import '../styl/site.styl';
 class Site {
   constructor() {
     this.mobileThreshold = 601;
+    this.swiperInstance = false;
 
     $(window).resize(this.onResize.bind(this));
 
@@ -27,6 +29,7 @@ class Site {
     this.bindLinks();
     this.bindFilters();
     this.bindBack();
+    this.setupSwiper();
 
     //this.count();
     //this.thetime = 1;
@@ -40,16 +43,28 @@ class Site {
     }, 1000);
   }
 
-  bindLinks() {
+  bindLinks(selector = 'a') {
     const _this = this;
 
-    $('a').off().on('click', function(e) {
-      console.log('link');
+    $(selector).off().on('click', function(e) {
       const href = $(this).attr('href');
       const target = e.currentTarget;
 
+      if ($(target).hasClass('filter-option')) {
+        return;
+      }
+
+      if ($(target).closest('.swiper-slide').length) {
+        return false;
+      }
+
       if (!href.startsWith(WP.siteUrl)) {
         window.location = href;
+      }
+
+      if (_this.swiperInstance) {
+        _this.swiperInstance.destroy();
+        _this.swiperInstance = false;
       }
 
       const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
@@ -134,6 +149,7 @@ class Site {
         $('#posts').html(posts);
         _this.bindLinks();
         _this.bindFilters();
+        _this.setupSwiper();
         _this.pushState(data, url, 'filter', url.searchParams.toString());
         $('body').removeClass('filtering');
       }
@@ -152,12 +168,32 @@ class Site {
         $('#main-content').html(content);
         _this.bindLinks();
         _this.bindFilters();
+        _this.setupSwiper();
         if (!isPop) {
           _this.pushState(data, href, context);
         }
         $('body').removeClass('loading');
       }
     });
+  }
+
+  setupSwiper() {
+    if ($('.swiper-container').length) {
+      const _this = this;
+      const swiperArgs = {
+        slidesPerView: 'auto',
+        loop: true,
+        loopedSlides: 3,
+        spaceBetween: $(window).width() * 0.2,
+        centeredSlides: true,
+        slideToClickedSlide: true,
+        on: {
+          init: function() {_this.bindLinks('.swiper-slide a')},
+          loopFix: function() {_this.bindLinks('.swiper-slide a')},
+        }
+      };
+      this.swiperInstance = new Swiper ('.swiper-container', swiperArgs);
+    }
   }
 
   fixWidows() {

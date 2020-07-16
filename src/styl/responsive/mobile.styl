@@ -93,6 +93,24 @@ body
       overflow: scroll
       border-color: $color-black
 
+#playlist
+  position: fixed
+  width: 100vw
+  height: 100vh
+  background: $color-black
+  color: $color-white
+  bottom: -50%
+  left: 0
+  z-index: 400
+  transition: transform 0.7s ease-in-out, opacity 0.4s ease-in-out
+  opacity: 0
+  pointer-events: none
+  will-change: transform, opacity
+  &.show
+    transform: translateY(-50%)
+    opacity: 1
+    pointer-events: auto
+
 #player
   position: fixed
   width: 100%
@@ -102,10 +120,23 @@ body
   left: 0
   z-index: 500
 
+.player-thumb-holder
+  width: 50px
+  height: 50px
+  img
+    width: 50px
+    height: 50px
+
+#player-thumb
+  opacity: 0
+  &.show
+    opacity: 1
+
 .player-control
-  width: 70px
+  min-width: 50px
   height: 50px
   position: relative
+  padding: 1em
 
 .player-control-icon
   pointer-events: none
@@ -121,3 +152,6 @@ body
   font-size: $font-size-basic
   &.hide
     visibility: hidden
+
+.album-featured-slide
+  width: 30vw

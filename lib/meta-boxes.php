@@ -39,11 +39,13 @@ function igv_cmb_metaboxes() {
    * Reference: https://github.com/WebDevStudios/CMB2/blob/master/example-functions.php
    */
 
+  // ALBUM
+
   $album_metabox = new_cmb2_box( array(
-		'id'            => 'album_metabox',
-		'title'         => __( 'Options', 'cmb2' ),
-		'object_types'  => array( 'album', ), // Post type
-	) );
+    'title'         => __( 'Settings', 'cmb2' ),
+    'id'            => 'album_metabox',
+    'object_types'  => array( 'album', ), // Post type
+  ) );
 
 	$album_metabox->add_field( array(
 		'name'       => __( 'Artist', 'cmb2' ),
@@ -63,6 +65,64 @@ function igv_cmb_metaboxes() {
 		'type'       => 'file',
     'repeatable' => true,
 	) );
+
+  // TRACK
+
+  $track_metabox = new_cmb2_box( array(
+    'title'         => __( 'Settings', 'cmb2' ),
+    'id'            => 'track_metabox',
+    'object_types'  => array( 'track', ), // Post type
+  ) );
+
+  $track_metabox->add_field( array(
+		'name'       => __( 'Soundcloud URL', 'cmb2' ),
+		'id'         => $prefix . 'track_soundcloud',
+		'type'       => 'text_url',
+	) );
+
+  $track_metabox->add_field( array(
+    'name'      	=> __( 'Related Album', 'cmb2' ),
+    'id'        	=> $prefix . 'track_album',
+    'type'      	=> 'post_search_ajax',
+    // Optional :
+    'limit'      	=> 1,
+    'query_args'	=> array(
+      'post_type'			=> array( 'album' ),
+      'post_status'		=> array( 'publish' ),
+      'posts_per_page'	=> -1
+    )
+  ) );
+
+  // HOME
+
+  $home_page = get_page_by_path('home');
+
+  if (!empty($home_page)) {
+    $home_metabox = new_cmb2_box( array(
+  		'id'            => 'home_metabox',
+  		'title'         => __( 'Settings', 'cmb2' ),
+  		'object_types'  => array( 'page', ), // Post type
+      'show_on'      => array(
+        'key' => 'id',
+        'value' => array( $home_page->ID )
+      ),
+  	) );
+
+    $home_metabox->add_field( array(
+  		'name'      	=> __( 'Featured Albums', 'cmb2' ),
+  		'id'        	=> $prefix . 'featured_albums',
+  		'type'    => 'custom_attached_posts',
+  		'column'  => true, // Output in the admin post-listing as a custom column. https://github.com/CMB2/CMB2/wiki/Field-Parameters#column
+  		'options' => array(
+  			'show_thumbnails' => true, // Show thumbnails on the left
+  			'filter_boxes'    => true, // Show a text box for filtering the results
+  			'query_args'      => array(
+  				'posts_per_page' => 10,
+  				'post_type'      => 'album',
+  			), // override the get_posts args
+  		),
+  	) );
+  }
 
 }
 ?>

@@ -22,3 +22,13 @@ function create_custom_pages() {
   }
 }
 add_filter( 'after_setup_theme', 'create_custom_pages' );
+
+function igv_disable_gutenberg_for_post_type( $is_enabled, $post_type ) {
+  if ( 'post' !== $post_type ) {  // disable for pages, change 'page' to you CPT slug
+    return false;
+  }
+
+  return $is_enabled;
+}
+
+add_filter( 'use_block_editor_for_post_type', 'igv_disable_gutenberg_for_post_type', 10, 2 );

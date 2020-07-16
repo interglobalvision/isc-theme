@@ -10,13 +10,31 @@ function scripts_and_styles_method() {
   $is_admin = current_user_can('administrator') ? 1 : 0;
   $options = get_site_option('_igv_site_options');
 
+  $player_options = get_site_option('_igv_player_options');
+  $playlist = array();
+  if (!empty($player_options['player_playlist'])) {
+    foreach($player_options['player_playlist'] as $track_id) {
+      $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
+      if (!empty($soundcloudUrl)) {
+        array_push($playlist, [
+          'title' => get_the_title($track_id),
+          'thumbUrl' => get_the_post_thumbnail_url($track_id),
+          'soundcloudUrl' => $soundcloudUrl
+        ]);
+      }
+    }
+  } else {
+    $playlist = false;
+  }
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
     'postsPerPage' => get_query_var('posts_per_page'),
     'playerClientId' => $options['player_client_id'],
-    'playerPlaylistUrl' => $options['player_playlist_url']
+    'playerPlaylist' => json_encode($playlist),
+    //'playerPlaylistUrl' => $options['player_playlist_url']
   );
 
   wp_register_script('soundcloud', $soundcloudSdk);
@@ -53,6 +71,7 @@ function cmb_initialize_cmb_meta_boxes() {
   if (!class_exists( 'cmb2_bootstrap_202' ) ) {
     require_once 'vendor/cmb2/cmb2/init.php';
     require_once 'vendor/alexis-magina/cmb2-field-post-search-ajax/cmb-field-post-search-ajax.php';
+    //require_once 'vendor/webdevstudios/cmb2-attached-posts/cmb2-attached-posts-field.php';
   }
 }
 add_action( 'init', 'cmb_initialize_cmb_meta_boxes', 11 );

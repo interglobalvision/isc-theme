@@ -3,7 +3,7 @@ add_action( 'cmb2_admin_init', 'igv_register_theme_options_metabox' );
 
 function igv_register_theme_options_metabox() {
   $prefix = '_igv_';
-/*
+
   $player_options = new_cmb2_box( array(
     'id'           => $prefix . 'player_options_page',
     'title'        => esc_html__( 'Audio Player', 'cmb2' ),
@@ -20,18 +20,52 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $player_options->add_field( array(
-    'name'    => esc_html__( 'THE TITLE', 'cmb2' ),
-    'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
-    'id'      => 'title',
+    'name'    => esc_html__( 'Audio Player', 'cmb2' ),
+    'id'      => $prefix . 'player_title',
     'type'    => 'title',
   ) );
 
   $player_options->add_field( array(
-    'name'    => esc_html__( 'Site Background Color', 'cmb2' ),
-    'desc'    => esc_html__( 'field description (optional)', 'cmb2' ),
-    'id'      => 'bg_color',
-    'type'    => 'colorpicker',
-    'default' => '#ffffff',
+    'name'    => esc_html__( 'Soundcloud Client ID', 'cmb2' ),
+    'id'      => 'player_client_id',
+    'type'    => 'text',
+  ) );
+
+  $player_options->add_field( array(
+		'name'    => __( 'Playlist', 'cmb2' ),
+		'desc'    => __( 'Drag tracks from the left column to the right column to add them to the playlist.<br />You may rearrange the order of the posts in the right column by dragging and dropping.', 'cmb2' ),
+		'id'      => 'player_playlist',
+		'type'    => 'custom_attached_posts',
+		'column'  => true, // Output in the admin post-listing as a custom column. https://github.com/CMB2/CMB2/wiki/Field-Parameters#column
+		'options' => array(
+			'show_thumbnails' => true, // Show thumbnails on the left
+			'filter_boxes'    => true, // Show a text box for filtering the results
+			'query_args'      => array(
+				'posts_per_page' => 10,
+				'post_type'      => 'track',
+			), // override the get_posts args
+		),
+	) );
+/*
+  $player_options->add_field( array(
+    'name'    => esc_html__( 'Soundcloud Playlist URL', 'cmb2' ),
+    'id'      => 'player_playlist_url',
+    'type'    => 'text',
+  ) );
+*/
+/*
+  $player_options->add_field( array(
+    'name'      	=> __( 'Playlist', 'cmb2' ),
+    'id'        	=> 'player_tracks',
+    'type'      	=> 'post_search_ajax',
+    // Optional :
+    'limit' => 100,
+    'sortable' 	 	=> true,
+    'query_args'	=> array(
+      'post_type'			=> array( 'track' ),
+      'post_status'		=> array( 'publish' ),
+      'posts_per_page'	=> -1
+    )
   ) );
 */
   // Site options for general data
@@ -52,26 +86,6 @@ function igv_register_theme_options_metabox() {
     // 'admin_menu_hook' => 'network_admin_menu', // 'network_admin_menu' to add network-level options page.
     // 'display_cb'      => false, // Override the options-page form output (CMB2_Hookup::options_page_output()).
     // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
-  ) );
-
-  // Audio Player
-
-  $site_options->add_field( array(
-    'name'    => esc_html__( 'Audio Player', 'cmb2' ),
-    'id'      => $prefix . 'player_title',
-    'type'    => 'title',
-  ) );
-
-  $site_options->add_field( array(
-    'name'    => esc_html__( 'Soundcloud Client ID', 'cmb2' ),
-    'id'      => 'player_client_id',
-    'type'    => 'text',
-  ) );
-
-  $site_options->add_field( array(
-    'name'    => esc_html__( 'Soundcloud Playlist URL', 'cmb2' ),
-    'id'      => 'player_playlist_url',
-    'type'    => 'text',
   ) );
 
   // Social Media variables
