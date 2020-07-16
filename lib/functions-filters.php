@@ -50,25 +50,33 @@ function set_post_query_args($query){
   if($query->is_main_query() && $query->is_home()){
     $latest_post = get_posts(array('numberposts' => 1));
     $query->set('post__not_in', array($latest_post[0]->ID)); //exclude queries by post ID
-    $query->set('posts_per_page', 6);
+
+    $ppp = 6;
+    $offset = -4;
+
+    if (!$query->is_paged()) {
+      $query->set('posts_per_page',$offset + $ppp);
+    } else {
+      $offset = $offset + ( ($query->query_vars['paged']-1) * $ppp );
+      $query->set('posts_per_page',$ppp);
+      $query->set('offset',$offset);
+    }
   }
 }
 add_action('pre_get_posts','set_post_query_args');
 
+function homepage_offset_pagination( $found_posts, $query ) {
+  if($query->is_main_query() && $query->is_home()){
+    $offset = -4;
+    $found_posts = $found_posts + $offset;
+  }
+  return $found_posts;
+}
+add_filter( 'found_posts', 'homepage_offset_pagination', 10, 2 );
+
 function set_album_query_args($query){
   if($query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);
-
-    /*if (isset($_GET['style'])) {
-      $taxquery = array(
-        array(
-          'taxonomy' => 'style',
-          'field' => 'slug',
-          'terms' => array($_GET['style']),
-          'operator'=> 'IN'
-        )
-      );
-    }*/
   }
 }
 add_action('pre_get_posts','set_album_query_args');

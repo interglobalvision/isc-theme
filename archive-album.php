@@ -7,15 +7,15 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
-  <section>
+  <section class="padding-top-basic padding-bottom-basic">
     <div class="container">
       <?php get_template_part('partials/collection-filter'); ?>
     </div>
   </section>
 
-  <section class="border-square">
+  <section class="border-square background-almond padding-top-basic padding-bottom-basic">
     <div class="container">
-      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
+      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>">
 <?php
 if (have_posts()) {
   while (have_posts()) {

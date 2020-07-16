@@ -42,7 +42,7 @@ if ($current_page === 1) {
   <section class="border-square">
 
     <div class="container">
-      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
+      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>">
 
       <?php
       if (have_posts()) {
