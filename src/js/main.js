@@ -14,6 +14,7 @@ class Site {
   constructor() {
     this.mobileThreshold = 601;
     this.swiperInstance = false;
+    this.currentArchivePage = 1;
 
     $(window).resize(this.onResize.bind(this));
 
@@ -25,6 +26,9 @@ class Site {
   }
 
   onReady() {
+    this.$posts = $('#posts');
+    this.$loadMore = $('#load-more');
+
     lazySizes.init();
     this.bindLinks();
     this.bindFilters();
@@ -122,8 +126,8 @@ class Site {
         case 'filter':
           this.filterResults(href);
           break;
-        case 'paginate':
-          this.paginateResults(href);
+        case 'load-more':
+          this.loadMore(href);
           break;
         default:
           this.replaceContent(href, context);
@@ -156,6 +160,41 @@ class Site {
     });
   }
 
+  loadMore(href) {
+    const _this = this;
+    const url = new URL(href);
+    const maxPages = parseInt(this.$posts.attr('data-max-pages'));
+    const nextPage = parseInt(url.searchParams.get('paged'));
+
+    $('body').addClass('loading-more');
+
+    $.ajax({
+      url,
+      success: function(data){
+        const posts = $(data).find('#posts')[0].innerHTML;
+        
+        $('#posts').append(posts);
+
+        _this.bindLinks();
+        _this.bindFilters();
+        _this.setupSwiper();
+
+        _this.currentArchivePage = nextPage;
+
+        if (_this.currentArchivePage === maxPages) {
+          // hide load more button
+          _this.$loadMore.addClass('hide');
+        } else {
+          // iterate load more page url
+          url.searchParams.set('paged', _this.currentArchivePage + 1);
+          _this.$loadMore.attr('href', url.href);
+        }
+
+        $('body').removeClass('loading-more');
+      }
+    });
+  }
+
   replaceContent(href, context, isPop) {
     const _this = this;
 
@@ -165,13 +204,17 @@ class Site {
       url: href,
       success: function(data){
         const content = $(data).find('#main-content')[0].innerHTML;
+
         $('#main-content').html(content);
+
         _this.bindLinks();
         _this.bindFilters();
         _this.setupSwiper();
+
         if (!isPop) {
           _this.pushState(data, href, context);
         }
+
         $('body').removeClass('loading');
       }
     });

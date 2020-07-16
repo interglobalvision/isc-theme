@@ -58,7 +58,7 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   will-change: opacity
 
 body
-  &.loading, &.filtering
+  &.loading, &.filtering, &.loading-more
     #loader
       opacity: 1
   &.loading
@@ -128,9 +128,9 @@ body
     height: 50px
 
 #player-thumb
-  opacity: 0
+  visibility: hidden
   &.show
-    opacity: 1
+    visibility: visible
 
 .player-control
   min-width: 50px
@@ -155,3 +155,8 @@ body
 
 .album-featured-slide
   width: 30vw
+
+#load-more
+  &.hide
+    visibility: hidden
+    pointer-events: none

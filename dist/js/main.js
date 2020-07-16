@@ -10705,6 +10705,7 @@ var Site = function () {
 
     this.mobileThreshold = 601;
     this.swiperInstance = false;
+    this.currentArchivePage = 1;
 
     (0, _jquery2.default)(window).resize(this.onResize.bind(this));
 
@@ -10717,6 +10718,9 @@ var Site = function () {
   }, {
     key: 'onReady',
     value: function onReady() {
+      this.$posts = (0, _jquery2.default)('#posts');
+      this.$loadMore = (0, _jquery2.default)('#load-more');
+
       _lazysizes2.default.init();
       this.bindLinks();
       this.bindFilters();
@@ -10825,8 +10829,8 @@ var Site = function () {
           case 'filter':
             this.filterResults(href);
             break;
-          case 'paginate':
-            this.paginateResults(href);
+          case 'load-more':
+            this.loadMore(href);
             break;
           default:
             this.replaceContent(href, context);
@@ -10860,6 +10864,42 @@ var Site = function () {
       });
     }
   }, {
+    key: 'loadMore',
+    value: function loadMore(href) {
+      var _this = this;
+      var url = new URL(href);
+      var maxPages = parseInt(this.$posts.attr('data-max-pages'));
+      var nextPage = parseInt(url.searchParams.get('paged'));
+
+      (0, _jquery2.default)('body').addClass('loading-more');
+
+      _jquery2.default.ajax({
+        url: url,
+        success: function success(data) {
+          var posts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
+
+          (0, _jquery2.default)('#posts').append(posts);
+
+          _this.bindLinks();
+          _this.bindFilters();
+          _this.setupSwiper();
+
+          _this.currentArchivePage = nextPage;
+
+          if (_this.currentArchivePage === maxPages) {
+            // hide load more button
+            _this.$loadMore.addClass('hide');
+          } else {
+            // iterate load more page url
+            url.searchParams.set('paged', _this.currentArchivePage + 1);
+            _this.$loadMore.attr('href', url.href);
+          }
+
+          (0, _jquery2.default)('body').removeClass('loading-more');
+        }
+      });
+    }
+  }, {
     key: 'replaceContent',
     value: function replaceContent(href, context, isPop) {
       var _this = this;
@@ -10870,13 +10910,17 @@ var Site = function () {
         url: href,
         success: function success(data) {
           var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
+
           (0, _jquery2.default)('#main-content').html(content);
+
           _this.bindLinks();
           _this.bindFilters();
           _this.setupSwiper();
+
           if (!isPop) {
             _this.pushState(data, href, context);
           }
+
           (0, _jquery2.default)('body').removeClass('loading');
         }
       });

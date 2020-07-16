@@ -29,6 +29,7 @@ function igv_register_theme_options_metabox() {
     'name'    => esc_html__( 'Soundcloud Client ID', 'cmb2' ),
     'id'      => 'player_client_id',
     'type'    => 'text',
+    'default' => '0a48e71510bb97b2148c3802bddc8802',
   ) );
 
   $player_options->add_field( array(

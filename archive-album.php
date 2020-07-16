@@ -1,5 +1,9 @@
 <?php
 get_header();
+
+global $wp_query;
+$max_pages = $wp_query->max_num_pages;
+$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
@@ -8,7 +12,7 @@ get_header();
 
       <?php get_template_part('partials/collection-filter'); ?>
 
-      <div id="posts" class="grid-row" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
+      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
 <?php
 if (have_posts()) {
   while (have_posts()) {

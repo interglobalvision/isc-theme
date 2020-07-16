@@ -1,12 +1,15 @@
 <?php
 get_header();
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+
+global $wp_query;
+$max_pages = $wp_query->max_num_pages;
+$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
 
 <?php
-if(1 == $paged) {
+if ($current_page === 1) {
   $args = array(
     'post_type' => array('post'),
     'posts_per_page' => 1,
@@ -39,7 +42,7 @@ if(1 == $paged) {
   <section class="border-square">
 
     <div class="container">
-      <div id="posts" class="grid-row" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
+      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
 
       <?php
       if (have_posts()) {
@@ -51,9 +54,21 @@ if(1 == $paged) {
       ?>
 
       </div>
-    </div>
 
-    <?php get_template_part('partials/pagination'); ?>
+      <?php
+        if ($max_pages > $current_page) {
+          $post_type_archive = get_post_type_archive_link('post');
+          $load_more_url = add_query_arg( array(
+            'paged' => $current_page + 1,
+          ), $post_type_archive);
+      ?>
+      <div class="grid-row justify-end">
+        <div class="grid-item">
+          <a id="load-more" data-context="load-more" data-max-pages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
+        </div>
+      </div>
+      <?php } ?>
+    </div>
 
   </section>
 
