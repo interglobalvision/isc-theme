@@ -39,7 +39,7 @@ if ($current_page === 1) {
 }
 ?>
 
-  <section class="border-square">
+  <section class="border-square background-almond padding-top-basic">
 
     <div class="container">
       <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>">

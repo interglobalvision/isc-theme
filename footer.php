@@ -1,7 +1,7 @@
 <?php
 $options = get_site_option('_igv_site_options');
 ?>
-  <footer id="footer">
+  <footer id="footer" class="background-white padding-top-basic padding-bottom-large">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12">

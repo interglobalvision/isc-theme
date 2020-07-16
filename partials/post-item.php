@@ -1,4 +1,4 @@
-<article <?php post_class('grid-item no-gutter item-s-12 item-m-6 grid-row'); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class('grid-item no-gutter item-s-12 item-m-6 grid-row margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
   <div class="grid-item no-gutter item-s-12 grid-row">
     <div class="grid-item item-s-auto flex-grow offset-l-3">
       <span>Author</span>
