@@ -188,8 +188,12 @@ class Site {
         centeredSlides: true,
         slideToClickedSlide: true,
         on: {
-          init: function() {_this.bindLinks('.swiper-slide a')},
-          loopFix: function() {_this.bindLinks('.swiper-slide a')},
+          init: function() {
+            _this.bindLinks('.swiper-slide a');
+          },
+          loopFix: function() {
+            _this.bindLinks('.swiper-slide a');
+          },
         }
       };
       this.swiperInstance = new Swiper ('.swiper-container', swiperArgs);

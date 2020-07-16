@@ -5,13 +5,13 @@ if (!empty($featured_albums)) {
 ?>
 <section>
   <div class="swiper-container">
-    <div class="swiper-wrapper">
+    <div class="swiper-wrapper align-items-center">
     <?php
       foreach ($featured_albums as $album_id) {
     ?>
       <article <?php post_class('swiper-slide album-featured-slide'); ?> id="album-featured-<?php echo $album_id; ?>">
         <a href="<?php echo get_the_permalink($album_id); ?>">
-          <?php echo get_the_post_thumbnail($album_id, 'medium-large'); ?>
+          <?php echo get_the_post_thumbnail($album_id); ?>
         </a>
       </article>
     <?php
