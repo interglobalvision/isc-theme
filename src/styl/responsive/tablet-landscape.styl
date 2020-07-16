@@ -1,6 +1,6 @@
 @media screen and (min-width: 1024px)
 
-  $gutter = 24px
+  $gutter = 30px
 
   $margin-micro = ($gutter / 3)
   $margin-tiny = ($gutter / 2)
@@ -20,3 +20,8 @@
   .desktop-only
     display: initial !important
 
+  .border-square
+    border-top-width: $margin-tiny
+    border-bottom-width: $margin-tiny
+    &:after, &:before
+      width: $margin-tiny

@@ -6,7 +6,7 @@ $styles = get_the_terms($post->ID, 'style');
 <article <?php post_class('grid-item item-s-12 item-m-4 grid-row'); ?> id="album-<?php the_ID(); ?>">
   <div class="grid-item no-gutter item-s-6">
     <a href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('full'); ?>
+      <?php the_post_thumbnail('album-item'); ?>
     </a>
   </div>
   <div class="grid-item no-gutter item-s-6 grid-column justify-between">

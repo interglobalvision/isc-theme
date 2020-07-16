@@ -3,7 +3,7 @@ $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
 
 if (!empty($featured_albums)) {
 ?>
-<section>
+<section class="padding-top-mid padding-bottom-mid">
   <div class="swiper-container">
     <div class="swiper-wrapper align-items-center">
     <?php

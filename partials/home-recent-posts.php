@@ -11,7 +11,7 @@ $query = new WP_Query($args);
 
 if ($query->have_posts()) {
 ?>
-<section>
+<section class="border-square border-top-muck border-sides-orange background-almond padding-top-basic padding-bottom-basic">
   <div class="container">
     <div class="grid-row">
 <?php

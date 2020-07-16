@@ -10780,7 +10780,19 @@ var Site = function () {
 
       if ((0, _jquery2.default)('.filter').length) {
         (0, _jquery2.default)('.filter-trigger').off().on('click', function () {
-          (0, _jquery2.default)(this).closest('.filter').addClass('show');
+          var $filter = (0, _jquery2.default)(this).closest('.filter');
+
+          if ($filter.hasClass('show')) {
+            $filter.removeClass('show');
+
+            _this.unbindClickOutsideFilter();
+          } else {
+            (0, _jquery2.default)('.filter.show').removeClass('show');
+
+            $filter.addClass('show');
+
+            _this.bindClickOutsideFilter();
+          }
         });
 
         (0, _jquery2.default)('.filter-option').off().on('click', function () {
@@ -10788,14 +10800,34 @@ var Site = function () {
           var $filter = (0, _jquery2.default)(this).closest('.filter');
           var href = (0, _jquery2.default)(this).attr('href');
 
+          (0, _jquery2.default)(this).siblings('.active').removeClass('active');
+          (0, _jquery2.default)(this).addClass('active');
+
           $filter.find('.filter-value').text(filterText);
           $filter.removeClass('show');
+
+          _this.unbindClickOutsideFilter();
 
           _this.handleRequest(href, 'filter');
 
           return false;
         });
       }
+    }
+  }, {
+    key: 'bindClickOutsideFilter',
+    value: function bindClickOutsideFilter() {
+      (0, _jquery2.default)(document).off('click.outsideFilter').on('click.outsideFilter', function (e) {
+        var $filter = (0, _jquery2.default)('.filter');
+        if (!$filter.is(e.target) && $filter.has(e.target).length === 0) {
+          $filter.removeClass('show');
+        }
+      });
+    }
+  }, {
+    key: 'unbindClickOutsideFilter',
+    value: function unbindClickOutsideFilter() {
+      (0, _jquery2.default)(document).off('click.outsideFilter');
     }
   }, {
     key: 'pushState',

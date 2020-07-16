@@ -83,7 +83,19 @@ class Site {
 
     if ($('.filter').length) {
       $('.filter-trigger').off().on('click', function() {
-        $(this).closest('.filter').addClass('show');
+        const $filter = $(this).closest('.filter');
+
+        if ($filter.hasClass('show')) {
+          $filter.removeClass('show');
+
+          _this.unbindClickOutsideFilter();
+        } else {
+          $('.filter.show').removeClass('show');
+
+          $filter.addClass('show');
+
+          _this.bindClickOutsideFilter();
+        }
       });
 
       $('.filter-option').off().on('click', function() {
@@ -91,14 +103,32 @@ class Site {
         const $filter = $(this).closest('.filter');
         const href = $(this).attr('href');
 
+        $(this).siblings('.active').removeClass('active');
+        $(this).addClass('active');
+
         $filter.find('.filter-value').text(filterText);
         $filter.removeClass('show');
+
+        _this.unbindClickOutsideFilter();
 
         _this.handleRequest(href, 'filter');
 
         return false;
       });
     }
+  }
+
+  bindClickOutsideFilter() {
+    $(document).off('click.outsideFilter').on('click.outsideFilter', function(e) {
+      const $filter = $('.filter');
+      if (!$filter.is(e.target) && $filter.has(e.target).length === 0) {
+        $filter.removeClass('show');
+      }
+    });
+  }
+
+  unbindClickOutsideFilter() {
+    $(document).off('click.outsideFilter');
   }
 
   pushState(data, url, context, filter) {
@@ -172,7 +202,7 @@ class Site {
       url,
       success: function(data){
         const posts = $(data).find('#posts')[0].innerHTML;
-        
+
         $('#posts').append(posts);
 
         _this.bindLinks();
