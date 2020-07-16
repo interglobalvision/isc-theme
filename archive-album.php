@@ -9,9 +9,12 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 <main id="main-content">
   <section>
     <div class="container">
-
       <?php get_template_part('partials/collection-filter'); ?>
+    </div>
+  </section>
 
+  <section class="border-square">
+    <div class="container">
       <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>" data-per-page="<?php echo get_query_var('posts_per_page'); ?>">
 <?php
 if (have_posts()) {
@@ -34,40 +37,19 @@ if (have_posts()) {
 ?>
 
         <article <?php post_class('grid-item item-s-6 item-m-4 item-l-3'); ?> id="album-<?php the_ID(); ?>" data-filter="<?php echo $filter; ?>">
-
           <a href="<?php the_permalink() ?>">
             <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
             <div><?php the_post_thumbnail('full'); ?></div>
-            <?php echo !empty($artist) ? '<div><span>' . $artist . '</span></div>' : ''; ?>
-            <?php echo !empty($title) ? '<div><span>' . $title . '</span></div>' : ''; ?>
           </a>
-          <?php if ($styles) { ?>
-            <div>
-            <?php
-              foreach($styles as $key => $value) {
-                echo '<span>' . $value->name . '</span>';
-                echo $key + 1 !== count($styles) ? ', ' : '';
-              }
-            ?>
-            </div>
-          <?php } ?>
         </article>
 
 <?php
   }
 }
 ?>
-
       </div>
-
-      <?php get_template_part('partials/pagination'); ?>
-
     </div>
   </section>
-
-
-
-
 
 </main>
 
