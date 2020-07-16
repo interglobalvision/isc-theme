@@ -4,12 +4,12 @@ $title = get_post_meta($post->ID, '_igv_album_title', true);
 $styles = get_the_terms($post->ID, 'style');
 ?>
 <article <?php post_class('grid-item item-s-12 item-m-4 grid-row'); ?> id="album-<?php the_ID(); ?>">
-  <div class="grid-item no-gutter item-s-6">
+  <div class="grid-item no-gutter">
     <a href="<?php the_permalink(); ?>">
-      <?php the_post_thumbnail('album-item'); ?>
+      <?php the_post_thumbnail('album-item', ['class' => 'recent-album-thumb']); ?>
     </a>
   </div>
-  <div class="grid-item no-gutter item-s-6 grid-column justify-between">
+  <div class="grid-item no-gutter grid-column justify-between">
     <div>
       <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
       <div><a href="<?php the_permalink(); ?>">Artist</a></div>

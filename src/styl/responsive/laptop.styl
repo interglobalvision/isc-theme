@@ -16,3 +16,13 @@
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
   font-sizes($font-size-basic)
+
+  .border-square
+    border-top-width: $margin-tiny
+    border-bottom-width: $margin-tiny
+    &:after, &:before
+      width: $margin-tiny
+
+  .recent-album-thumb
+    margin-right: $margin-tiny
+    width: 175px
