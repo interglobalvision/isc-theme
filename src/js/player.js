@@ -175,6 +175,10 @@ class Player {
 
   killPlayer() {
     if (this.isPlaying) {
+      // pause the player
+      // without changing isPlaying state
+      // this is important to resume playing
+      // after new player is created
       this.handlePlayPause();
     }
     this.player.kill();
@@ -190,9 +194,11 @@ class Player {
 
   setTrackThumb() {
     if (this.playlist[this.trackIndex].thumbUrl) {
+      // track has thumb
       this.$playerThumb.attr('src', this.playlist[this.trackIndex].thumbUrl);
       this.$playerThumb.addClass('show');
     } else {
+      // track doesn't have thumb
       this.$playerThumb.removeAttr('src');
       this.$playerThumb.removeClass('show');
     }
