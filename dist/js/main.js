@@ -10762,11 +10762,6 @@ var Site = function () {
           window.location = href;
         }
 
-        if (_this.swiperInstance) {
-          _this.swiperInstance.destroy();
-          _this.swiperInstance = false;
-        }
-
         var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
         _this.handleRequest(href, context);
 
@@ -10937,24 +10932,37 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('body').addClass('loading');
+      (0, _jquery2.default)('#main-content').animate({
+        opacity: 0
+      }, 200, 'swing', function () {
+        _jquery2.default.ajax({
+          url: href,
+          success: function success(data) {
+            var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
 
-      _jquery2.default.ajax({
-        url: href,
-        success: function success(data) {
-          var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
+            (0, _jquery2.default)(window).scrollTop(0);
 
-          (0, _jquery2.default)('#main-content').html(content);
+            if (_this.swiperInstance) {
+              _this.swiperInstance.destroy();
+              _this.swiperInstance = false;
+            }
 
-          _this.bindLinks();
-          _this.bindFilters();
-          _this.setupSwiper();
+            (0, _jquery2.default)('#main-content').html(content);
 
-          if (!isPop) {
-            _this.pushState(data, href, context);
+            _this.bindLinks();
+            _this.bindFilters();
+            _this.setupSwiper();
+
+            if (!isPop) {
+              _this.pushState(data, href, context);
+            }
+
+            (0, _jquery2.default)('body').removeClass('loading');
+            (0, _jquery2.default)('#main-content').animate({
+              opacity: 1
+            }, 200);
           }
-
-          (0, _jquery2.default)('body').removeClass('loading');
-        }
+        });
       });
     }
   }, {
@@ -22467,6 +22475,10 @@ var Player = function () {
     key: 'killPlayer',
     value: function killPlayer() {
       if (this.isPlaying) {
+        // pause the player
+        // without changing isPlaying state
+        // this is important to resume playing
+        // after new player is created
         this.handlePlayPause();
       }
       this.player.kill();
@@ -22484,9 +22496,11 @@ var Player = function () {
     key: 'setTrackThumb',
     value: function setTrackThumb() {
       if (this.playlist[this.trackIndex].thumbUrl) {
+        // track has thumb
         this.$playerThumb.attr('src', this.playlist[this.trackIndex].thumbUrl);
         this.$playerThumb.addClass('show');
       } else {
+        // track doesn't have thumb
         this.$playerThumb.removeAttr('src');
         this.$playerThumb.removeClass('show');
       }
