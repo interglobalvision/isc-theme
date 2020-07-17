@@ -6,6 +6,7 @@ $options = get_site_option('_igv_site_options');
       <div class="grid-row">
         <div class="grid-item item-s-12">
           <div class="not-mobile">
+            <span>Logo</span>
           </div>
         </div>
       <?php if (!empty($options['mailchimp_action'])) { ?>
