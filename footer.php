@@ -4,28 +4,40 @@ $options = get_site_option('_igv_site_options');
   <footer id="footer" class="background-white padding-top-basic padding-bottom-large">
     <div class="container">
       <div class="grid-row">
-        <div class="grid-item item-s-12">
-          <div class="not-mobile">
-            <span>Logo</span>
+        <div class="grid-item item-s-12 item-l-4 no-gutter grid-column">
+          <div class="grid-item">
+            <div class="not-mobile">
+              <span>Logo</span>
+            </div>
+          </div>
+        <?php if (!empty($options['mailchimp_action'])) { ?>
+          <div class="grid-item">
+            <?php get_template_part('partials/mailchimp'); ?>
+          </div>
+        <?php } ?>
+        </div>
+        <div class="grid-item item-s-12 item-l-4 no-gutter grid-column">
+        <?php if (!empty($options['contact_address'])) { ?>
+          <div class="grid-item">
+            <?php echo apply_filters('the_content', $options['contact_address']); ?>
+          </div>
+        <?php } if (!empty($options['footer_text'])) { ?>
+          <div class="grid-item">
+            <?php echo apply_filters('the_content', $options['footer_text']); ?>
+          </div>
+        <?php } ?>
+        </div>
+        <div class="grid-item item-s-12 item-l-4 no-gutter grid-column">
+        <?php if (!empty($options['hours'])) { ?>
+          <div class="grid-item">
+            <?php echo apply_filters('the_content', $options['hours']); ?>
+          </div>
+        <?php } ?>
+          <div class="grid-item no-gutter grid-row">
+            <div class="grid-item">Social Media</div>
+            <div class="grid-item">Social Media</div>
           </div>
         </div>
-      <?php if (!empty($options['mailchimp_action'])) { ?>
-        <div class="grid-item">
-          <?php get_template_part('partials/mailchimp'); ?>
-        </div>
-      <?php } if (!empty($options['contact_address'])) { ?>
-        <div class="grid-item">
-          Address
-        </div>
-      <?php } if (!empty($options['footer_text'])) { ?>
-        <div class="grid-item">
-          Footer text
-        </div>
-      <?php } if (!empty($options['hours'])) { ?>
-        <div class="grid-item">
-          Hours
-        </div>
-      <?php } ?>
       </div>
     </div>
   </footer>

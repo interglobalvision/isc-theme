@@ -89,13 +89,34 @@ function igv_register_theme_options_metabox() {
     // 'save_button'     => esc_html__( 'Save Theme Options', 'cmb2' ), // The text for the options-page save button. Defaults to 'Save'.
   ) );
 
-  // Social Media variables
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Footer', 'cmb2' ),
+    'id'      => $prefix . 'footer_title',
+    'type'    => 'title',
+  ) );
 
   $site_options->add_field( array(
-    'name'    => esc_html__( 'Social Media', 'cmb2' ),
-    'desc'    => esc_html__( 'Urls and accounts for different social media platforms. For use in menus and metadata', 'cmb2' ),
-    'id'      => $prefix . 'socialmedia_title',
-    'type'    => 'title',
+    'name'    => esc_html__( 'Mailchimp Action', 'cmb2' ),
+    'id'      => 'mailchimp_action',
+    'type'    => 'text',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Address', 'cmb2' ),
+    'id'      => 'contact_address',
+    'type'    => 'textarea_small',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Footer Text', 'cmb2' ),
+    'id'      => 'footer_text',
+    'type'    => 'textarea_small',
+  ) );
+
+  $site_options->add_field( array(
+    'name'    => esc_html__( 'Hours', 'cmb2' ),
+    'id'      => 'hours',
+    'type'    => 'textarea_small',
   ) );
 
   $site_options->add_field( array(
