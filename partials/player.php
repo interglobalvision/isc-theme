@@ -27,55 +27,59 @@ if (!empty($playlist)) {
 <div id="player" class="padding-bottom-tiny padding-top-tiny">
   <div class="container">
     <div class="grid-row justify-between align-items-center">
-      <div class="grid-item">
-        <div class="player-thumb-holder">
-          <img id="player-thumb"/>
+      <div class="grid-row justify-between align-items-center grid-item item-s-12 item-m-auto flex-grow no-gutter">
+        <div class="grid-item">
+          <div class="player-thumb-holder">
+            <img id="player-thumb"/>
+          </div>
+        </div>
+
+        <div class="grid-item flex-grow">
+          <div>
+            <span>ISCHiFi—DIGITAL AUDIO PLAYER</span>
+          </div>
+          <div>
+            <span id="player-track-title">&hellip;</span>
+          </div>
+        </div>
+
+        <div  class="grid-item">
+          <span id="player-current-time">0:00</span>/<span id="player-duration">0:00</span>
         </div>
       </div>
-      <div class="grid-item flex-grow">
-        <div>
-          <span>ISCHiFi—DIGITAL AUDIO PLAYER</span>
+      <div class="grid-row justify-between align-items-center grid-item item-s-12 item-m-auto no-gutter">
+        <div class="grid-item">
+          <button class="player-skip player-control" data-skip="prev">
+            <div class="player-control-icon">
+              <span><<</span>
+            </div>
+          </button>
         </div>
-        <div>
-          <span id="player-track-title">&hellip;</span>
+
+        <div class="grid-item">
+          <button id="player-play-pause" class="player-control" disabled>
+            <div class="player-control-icon">
+              <span>></span>
+            </div>
+            <div class="player-control-icon hide">
+              <span>||</span>
+            </div>
+          </button>
         </div>
-      </div>
 
-      <div  class="grid-item">
-        <span id="player-current-time">0:00</span>/<span id="player-duration">0:00</span>
-      </div>
+        <div class="grid-item">
+          <button class="player-skip player-control" data-skip="next">
+            <div class="player-control-icon">
+              <span>>></span>
+            </div>
+          </button>
+        </div>
 
-      <div class="grid-item">
-        <button class="player-skip player-control" data-skip="prev">
-          <div class="player-control-icon">
-            <span><<</span>
-          </div>
-        </button>
-      </div>
-
-      <div class="grid-item">
-        <button id="player-play-pause" class="player-control" disabled>
-          <div class="player-control-icon">
-            <span>></span>
-          </div>
-          <div class="player-control-icon hide">
-            <span>||</span>
-          </div>
-        </button>
-      </div>
-
-      <div class="grid-item">
-        <button class="player-skip player-control" data-skip="next">
-          <div class="player-control-icon">
-            <span>>></span>
-          </div>
-        </button>
-      </div>
-
-      <div  class="grid-item">
-        <button class="player-control playlist-toggle">
-          <span class="font-size-tiny">Playlist</span>
-        </button>
+        <div  class="grid-item">
+          <button class="player-control playlist-toggle">
+            <span class="font-size-tiny">Playlist</span>
+          </button>
+        </div>
       </div>
     </div>
   </div>
