@@ -177,10 +177,11 @@ class Player {
   insertAlbumTrack(target) {
     const trackData = $(target).data();
     const $playlistTrack = $('.playlist-item[data-id="' + trackData.id + '"]');
+    console.log(trackData.id);
 
     if ($playlistTrack.length) {
       // track is in playlist
-      
+
       this.trackIndex = $playlistTrack.index();
 
     } else {
@@ -199,6 +200,7 @@ class Player {
 
       $newPlaylistItem.find('.playlist-item-title').text(albumTrack.title);
       $newPlaylistItem.find('.playlist-item-thumb').attr('src', albumTrack.thumbUrl);
+      $newPlaylistItem.attr('data-id', trackData.id);
 
       $newPlaylistItem.insertAfter($currentPlaylistItem);
 

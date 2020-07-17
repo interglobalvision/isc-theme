@@ -15,10 +15,18 @@ function scripts_and_styles_method() {
   if (!empty($player_options['player_playlist'])) {
     foreach($player_options['player_playlist'] as $track_id) {
       $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
+      $related_album = get_post_meta($track_id, '_igv_track_album', true);
+      $thumb_url = get_the_post_thumbnail_url($track_id);
+
       if (!empty($soundcloudUrl)) {
+
+        if (!has_post_thumbnail($track_id) && !empty($related_album)) {
+          $thumb_url = get_the_post_thumbnail_url($related_album);
+        }
+
         array_push($playlist, [
           'title' => get_the_title($track_id),
-          'thumbUrl' => get_the_post_thumbnail_url($track_id),
+          'thumbUrl' => $thumb_url,
           'soundcloudUrl' => $soundcloudUrl
         ]);
       }

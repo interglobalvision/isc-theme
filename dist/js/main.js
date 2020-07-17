@@ -10727,6 +10727,8 @@ var Site = function () {
       this.bindBack();
       this.setupSwiper();
 
+      this.audioPlayer = new _player2.default();
+
       //this.count();
       //this.thetime = 1;
     }
@@ -10951,7 +10953,7 @@ var Site = function () {
           _this.setupSwiper();
 
           //bind album stream button
-          (0, _jquery2.default)('.album-stream').on('click', audioPlayer.handleSkip);
+          (0, _jquery2.default)('.album-stream').on('click', _this.audioPlayer.handleSkip);
 
           if (!isPop) {
             _this.pushState(data, href, context);
@@ -11001,7 +11003,6 @@ var Site = function () {
 }();
 
 new Site();
-var audioPlayer = new _player2.default();
 
 /***/ }),
 /* 7 */
@@ -22473,6 +22474,7 @@ var Player = function () {
     value: function insertAlbumTrack(target) {
       var trackData = (0, _jquery2.default)(target).data();
       var $playlistTrack = (0, _jquery2.default)('.playlist-item[data-id="' + trackData.id + '"]');
+      console.log(trackData.id);
 
       if ($playlistTrack.length) {
         // track is in playlist
@@ -22494,6 +22496,7 @@ var Player = function () {
 
         $newPlaylistItem.find('.playlist-item-title').text(albumTrack.title);
         $newPlaylistItem.find('.playlist-item-thumb').attr('src', albumTrack.thumbUrl);
+        $newPlaylistItem.attr('data-id', trackData.id);
 
         $newPlaylistItem.insertAfter($currentPlaylistItem);
 

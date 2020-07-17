@@ -35,6 +35,8 @@ class Site {
     this.bindBack();
     this.setupSwiper();
 
+    this.audioPlayer = new Player();
+
     //this.count();
     //this.thetime = 1;
   }
@@ -243,7 +245,7 @@ class Site {
         _this.setupSwiper();
 
         //bind album stream button
-        $('.album-stream').on('click', audioPlayer.handleSkip);
+        $('.album-stream').on('click', _this.audioPlayer.handleSkip);
 
         if (!isPop) {
           _this.pushState(data, href, context);
@@ -288,4 +290,3 @@ class Site {
 }
 
 new Site();
-const audioPlayer = new Player();
