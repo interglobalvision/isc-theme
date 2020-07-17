@@ -224,7 +224,7 @@ class Site {
     const _this = this;
 
     $('body').addClass('loading');
-    $('#main-content').animate({
+    $('#main-content, #footer').animate({
       opacity: 0
     }, 200, 'swing', function() {
       $.ajax({
@@ -233,7 +233,7 @@ class Site {
           const content = $(data).find('#main-content')[0].innerHTML;
 
           $(window).scrollTop(0);
-          
+
           if (_this.swiperInstance) {
             _this.swiperInstance.destroy();
             _this.swiperInstance = false;
@@ -250,9 +250,9 @@ class Site {
           }
 
           $('body').removeClass('loading');
-          $('#main-content').animate({
+          $('#main-content, footer').animate({
             opacity: 1
-          }, 200);
+          }, 200, 'swing', function() {console.log('done')});
         }
       });
     });

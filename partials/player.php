@@ -6,22 +6,22 @@ if (!empty($playlist)) {
 ?>
 
 <div id="playlist">
-  <div class="container padding-top-tiny">
+  <ul id="playlist-items" class="container padding-top-tiny">
   <?php foreach($playlist as $track_index => $track_id) { ?>
-    <div class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro" data-track-index="<?php echo $track_index; ?>">
+    <li class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro" data-index="<?php echo $track_index; ?>" data-id="<?php echo $track_id; ?>">
       <div class="grid-item">
         <div class="player-thumb-holder">
-          <?php echo get_the_post_thumbnail($track_id) ? get_the_post_thumbnail($track_id) : ''; ?>
+          <?php echo has_post_thumbnail($track_id) ? '<img src="' . get_the_post_thumbnail_url($track_id) . '" class="playlist-item-thumb" />' : ''; ?>
         </div>
       </div>
       <div class="grid-item flex-grow">
         <div>
-          <span><?php echo get_the_title($track_id); ?></span>
+          <span class="playlist-item-title"><?php echo get_the_title($track_id); ?></span>
         </div>
       </div>
-    </div>
+    </li>
   <?php } ?>
-  </div>
+  </ul>
 </div>
 
 <div id="player" class="padding-bottom-tiny padding-top-tiny">

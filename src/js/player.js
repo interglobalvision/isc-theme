@@ -42,6 +42,7 @@ class Player {
   initSC() {
     if (WP.playerClientId && WP.playerPlaylist) {
       this.playlist = JSON.parse(WP.playerPlaylist);
+      console.log(this.playlist);
       SC.initialize({
         client_id: WP.playerClientId
       });
@@ -155,22 +156,56 @@ class Player {
     if (e === undefined) {
       // track finished
       this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
+    } else if ($(e.currentTarget).hasClass('album-stream')) {
+      this.insertAlbumTrack(e.currentTarget);
+    } else if ($(e.currentTarget).hasClass('playlist-item')) {
+      // playlist click
+      this.trackIndex = parseInt($(e.currentTarget).index());
     } else {
-      if ($(e.currentTarget).hasClass('playlist-item')) {
-        // playlist click
-        this.trackIndex = parseInt($(e.currentTarget).attr('data-track-index'));
+      if ($(e.currentTarget).attr('data-skip') === 'prev') {
+        // skip prev
+        this.trackIndex = this.trackIndex === 0 ? this.playlist.length - 1 : this.trackIndex - 1;
       } else {
-        if ($(e.currentTarget).attr('data-skip') === 'prev') {
-          // skip prev
-          this.trackIndex = this.trackIndex === 0 ? this.playlist.length - 1 : this.trackIndex - 1;
-        } else {
-          // skip next / default
-          this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
-        }
+        // skip next / default
+        this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
       }
     }
 
     this.getTrack();
+  }
+
+  insertAlbumTrack(target) {
+    const trackData = $(target).data();
+    const $playlistTrack = $('.playlist-item[data-id="' + trackData.id + '"]');
+
+    if ($playlistTrack.length) {
+      // track is in playlist
+
+      this.trackIndex = $playlistTrack.index();
+
+    } else {
+      // create track in playlist
+
+      const albumTrack = {
+        title: trackData.title,
+        thumbUrl: trackData.thumb,
+        soundcloudUrl: trackData.soundcloud
+      };
+
+      const $currentPlaylistItem = $('.playlist-item').eq(this.trackIndex);
+      let $newPlaylistItem = $currentPlaylistItem.clone(true, true);
+
+      this.trackIndex++;
+
+      $newPlaylistItem.find('.playlist-item-title').text(albumTrack.title);
+      $newPlaylistItem.find('.playlist-item-thumb').attr('src', albumTrack.thumbUrl);
+
+      $newPlaylistItem.insertAfter($currentPlaylistItem);
+
+      this.playlist.splice(this.trackIndex, 0, albumTrack);
+
+      this.isPlaying = true
+    }
   }
 
   killPlayer() {

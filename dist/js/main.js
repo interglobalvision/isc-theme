@@ -10932,7 +10932,7 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('body').addClass('loading');
-      (0, _jquery2.default)('#main-content').animate({
+      (0, _jquery2.default)('#main-content, #footer').animate({
         opacity: 0
       }, 200, 'swing', function () {
         _jquery2.default.ajax({
@@ -10958,9 +10958,11 @@ var Site = function () {
             }
 
             (0, _jquery2.default)('body').removeClass('loading');
-            (0, _jquery2.default)('#main-content').animate({
+            (0, _jquery2.default)('#main-content, footer').animate({
               opacity: 1
-            }, 200);
+            }, 200, 'swing', function () {
+              console.log('done');
+            });
           }
         });
       });
@@ -22334,6 +22336,7 @@ var Player = function () {
     value: function initSC() {
       if (WP.playerClientId && WP.playerPlaylist) {
         this.playlist = JSON.parse(WP.playerPlaylist);
+        console.log(this.playlist);
         SC.initialize({
           client_id: WP.playerClientId
         });
@@ -22454,22 +22457,56 @@ var Player = function () {
       if (e === undefined) {
         // track finished
         this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
+      } else if ((0, _jquery2.default)(e.currentTarget).hasClass('album-stream')) {
+        this.insertAlbumTrack(e.currentTarget);
+      } else if ((0, _jquery2.default)(e.currentTarget).hasClass('playlist-item')) {
+        // playlist click
+        this.trackIndex = parseInt((0, _jquery2.default)(e.currentTarget).index());
       } else {
-        if ((0, _jquery2.default)(e.currentTarget).hasClass('playlist-item')) {
-          // playlist click
-          this.trackIndex = parseInt((0, _jquery2.default)(e.currentTarget).attr('data-track-index'));
+        if ((0, _jquery2.default)(e.currentTarget).attr('data-skip') === 'prev') {
+          // skip prev
+          this.trackIndex = this.trackIndex === 0 ? this.playlist.length - 1 : this.trackIndex - 1;
         } else {
-          if ((0, _jquery2.default)(e.currentTarget).attr('data-skip') === 'prev') {
-            // skip prev
-            this.trackIndex = this.trackIndex === 0 ? this.playlist.length - 1 : this.trackIndex - 1;
-          } else {
-            // skip next / default
-            this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
-          }
+          // skip next / default
+          this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
         }
       }
 
       this.getTrack();
+    }
+  }, {
+    key: 'insertAlbumTrack',
+    value: function insertAlbumTrack(target) {
+      var trackData = (0, _jquery2.default)(target).data();
+      var $playlistTrack = (0, _jquery2.default)('.playlist-item[data-id="' + trackData.id + '"]');
+
+      if ($playlistTrack.length) {
+        // track is in playlist
+
+        this.trackIndex = $playlistTrack.index();
+      } else {
+        // create track in playlist
+
+        var albumTrack = {
+          title: trackData.title,
+          thumbUrl: trackData.thumb,
+          soundcloudUrl: trackData.soundcloud
+        };
+
+        var $currentPlaylistItem = (0, _jquery2.default)('.playlist-item').eq(this.trackIndex);
+        var $newPlaylistItem = $currentPlaylistItem.clone(true, true);
+
+        this.trackIndex++;
+
+        $newPlaylistItem.find('.playlist-item-title').text(albumTrack.title);
+        $newPlaylistItem.find('.playlist-item-thumb').attr('src', albumTrack.thumbUrl);
+
+        $newPlaylistItem.insertAfter($currentPlaylistItem);
+
+        this.playlist.splice(this.trackIndex, 0, albumTrack);
+
+        this.isPlaying = true;
+      }
     }
   }, {
     key: 'killPlayer',
