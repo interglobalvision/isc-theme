@@ -1,10 +1,9 @@
 <?php
 get_header();
-$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
-  <section class="border-square">
+  <section class="border-box">
 
     <div class="container">
       <div class="grid-row">
@@ -26,7 +25,6 @@ $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
     </div>
 
   </section>
-
 </main>
 
 <?php

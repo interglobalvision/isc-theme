@@ -10,7 +10,7 @@ $query = new WP_Query($args);
 
 if ($query->have_posts()) {
 ?>
-<section class="padding-top-basic padding-bottom-basic border-square background-almond">
+<section class="padding-top-basic padding-bottom-basic border-box background-almond">
   <div class="container">
     <div class="grid-row">
 <?php
