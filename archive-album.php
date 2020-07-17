@@ -13,7 +13,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
     </div>
   </section>
 
-  <section class="border-square background-almond padding-top-basic padding-bottom-basic">
+  <section class="border-box background-almond padding-top-basic padding-bottom-basic">
     <div class="container">
       <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>">
 <?php
