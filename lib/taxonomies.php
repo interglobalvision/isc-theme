@@ -84,5 +84,59 @@ function create_album_taxonomies() {
 	);
 
 	register_taxonomy( 'year', array( 'album' ), $args );
+
+  // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Labels', 'taxonomy general name', 'igv' ),
+		'singular_name'     => _x( 'Label', 'taxonomy singular name', 'igv' ),
+		'search_items'      => __( 'Search Labels', 'igv' ),
+		'all_items'         => __( 'All Labels', 'igv' ),
+		'parent_item'       => __( 'Parent Label', 'igv' ),
+		'parent_item_colon' => __( 'Parent Label:', 'igv' ),
+		'edit_item'         => __( 'Edit Label', 'igv' ),
+		'update_item'       => __( 'Update Label', 'igv' ),
+		'add_new_item'      => __( 'Add New Label', 'igv' ),
+		'new_item_name'     => __( 'New Label Name', 'igv' ),
+		'menu_name'         => __( 'Labels', 'igv' ),
+	);
+
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'label' ),
+    'show_in_rest'      => true,
+	);
+
+	register_taxonomy( 'label', array( 'album' ), $args );
+
+  // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Countries', 'taxonomy general name', 'igv' ),
+		'singular_name'     => _x( 'Country', 'taxonomy singular name', 'igv' ),
+		'search_items'      => __( 'Search Countries', 'igv' ),
+		'all_items'         => __( 'All Countries', 'igv' ),
+		'parent_item'       => __( 'Parent Country', 'igv' ),
+		'parent_item_colon' => __( 'Parent Country:', 'igv' ),
+		'edit_item'         => __( 'Edit Country', 'igv' ),
+		'update_item'       => __( 'Update Country', 'igv' ),
+		'add_new_item'      => __( 'Add New Country', 'igv' ),
+		'new_item_name'     => __( 'New Country Name', 'igv' ),
+		'menu_name'         => __( 'Countries', 'igv' ),
+	);
+
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'country' ),
+    'show_in_rest'      => true,
+	);
+
+	register_taxonomy( 'country', array( 'album' ), $args );
 }
 ?>

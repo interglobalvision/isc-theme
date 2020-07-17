@@ -58,6 +58,8 @@ function register_cpt_album() {
     'rewrite' => true,
     'capability_type' => 'post',
 
+    'taxonomies' => array('post_tag'),
+
     'show_in_rest'        => true,
     /*'template'          => array(
       array( 'core/heading', array(

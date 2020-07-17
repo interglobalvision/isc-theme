@@ -47,6 +47,12 @@ function igv_cmb_metaboxes() {
     'object_types'  => array( 'album', ), // Post type
   ) );
 
+  $album_metabox->add_field( array(
+		'name'       => __( 'Images', 'cmb2' ),
+		'id'         => $prefix . 'album_images',
+		'type'       => 'file_list',
+	) );
+
 	$album_metabox->add_field( array(
 		'name'       => __( 'Artist', 'cmb2' ),
 		'id'         => $prefix . 'album_artist',
@@ -60,11 +66,47 @@ function igv_cmb_metaboxes() {
 	) );
 
   $album_metabox->add_field( array(
-		'name'       => __( 'Images', 'cmb2' ),
-		'id'         => $prefix . 'album_images',
-		'type'       => 'file',
-    'repeatable' => true,
+		'name'       => __( 'Catalog Number', 'cmb2' ),
+		'id'         => $prefix . 'album_catalog_num',
+		'type'       => 'text',
 	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Release Date', 'cmb2' ),
+		'id'         => $prefix . 'album_release_date',
+		'type'       => 'text',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Tracklist', 'cmb2' ),
+		'id'         => $prefix . 'album_tracklist',
+		'type'       => 'textarea',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Credits', 'cmb2' ),
+		'id'         => $prefix . 'album_credits',
+		'type'       => 'textarea',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Tidal URL', 'cmb2' ),
+		'id'         => $prefix . 'album_tidal_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Apple Music URL', 'cmb2' ),
+		'id'         => $prefix . 'album_apple_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Spotify URL', 'cmb2' ),
+		'id'         => $prefix . 'album_spotify_url',
+		'type'       => 'text_url',
+	) );
+
 
   // TRACK
 
