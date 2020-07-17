@@ -33,7 +33,7 @@ class Player {
     this.$playPause = $('#player-play-pause');
     this.$skip = $('.player-skip');
     this.$playlist = $('#playlist');
-    this.$playlistToggle = $('.playlist-toggle');
+    this.$playlistToggle = $('#playlist-toggle');
     this.$playerThumb = $('#player-thumb');
 
     this.initSC();

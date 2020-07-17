@@ -7,7 +7,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
-  <section class="padding-top-basic padding-bottom-basic">
+  <section class="padding-top-basic">
     <div class="container">
       <?php get_template_part('partials/collection-filter'); ?>
     </div>

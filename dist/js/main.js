@@ -22321,7 +22321,7 @@ var Player = function () {
       this.$playPause = (0, _jquery2.default)('#player-play-pause');
       this.$skip = (0, _jquery2.default)('.player-skip');
       this.$playlist = (0, _jquery2.default)('#playlist');
-      this.$playlistToggle = (0, _jquery2.default)('.playlist-toggle');
+      this.$playlistToggle = (0, _jquery2.default)('#playlist-toggle');
       this.$playerThumb = (0, _jquery2.default)('#player-thumb');
 
       this.initSC();

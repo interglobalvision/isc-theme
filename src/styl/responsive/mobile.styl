@@ -166,11 +166,26 @@ body
   &.show
     visibility: visible
 
+#player-name-holder
+  padding-bottom: .3em
+  margin-bottom: .3em
+  border-bottom: 1px solid $color-white
+
 .player-control
   min-width: 50px
   height: 50px
   position: relative
   padding: 1em
+  appearance: none
+  background-color: transparent
+  color: $color-white
+  border: none
+
+#player-play-pause, #playlist-toggle
+  border: 1px solid $color-white
+
+#playlist-toggle
+  border-radius: 1em
 
 .player-control-icon
   pointer-events: none

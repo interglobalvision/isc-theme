@@ -43,7 +43,7 @@ if (!empty($playlist)) {
         </div>
 
         <div class="grid-item flex-grow">
-          <div>
+          <div id="player-name-holder">
             <span>ISCHiFi—DIGITAL AUDIO PLAYER</span>
           </div>
           <div>
@@ -84,8 +84,8 @@ if (!empty($playlist)) {
         </div>
 
         <div  class="grid-item">
-          <button class="player-control playlist-toggle">
-            <span class="font-size-tiny">Playlist</span>
+          <button class="player-control" id="playlist-toggle">
+            <span>Playlist</span>
           </button>
         </div>
       </div>
