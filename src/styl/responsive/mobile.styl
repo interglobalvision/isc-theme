@@ -67,7 +67,8 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 #main-content,
 #posts,
-#loader
+#loader,
+#footer
   //transition: opacity 200ms ease-in-out
   will-change: opacity
 
@@ -76,12 +77,12 @@ body
     #loader
       opacity: 1
   &.loading
-    #main-content
-      //opacity: 0
+    #main-content, #footer
+      opacity: 0
       pointer-events: none
   &.filtering
     #posts
-      //opacity: 0
+      opacity: 0
       pointer-events: none
 
 .filter-trigger

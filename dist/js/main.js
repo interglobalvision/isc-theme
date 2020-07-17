@@ -10932,39 +10932,33 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('body').addClass('loading');
-      (0, _jquery2.default)('#main-content, #footer').animate({
-        opacity: 0
-      }, 200, 'swing', function () {
-        _jquery2.default.ajax({
-          url: href,
-          success: function success(data) {
-            var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
+      _jquery2.default.ajax({
+        url: href,
+        success: function success(data) {
+          var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
 
-            (0, _jquery2.default)(window).scrollTop(0);
+          (0, _jquery2.default)(window).scrollTop(0);
 
-            if (_this.swiperInstance) {
-              _this.swiperInstance.destroy();
-              _this.swiperInstance = false;
-            }
-
-            (0, _jquery2.default)('#main-content').html(content);
-
-            _this.bindLinks();
-            _this.bindFilters();
-            _this.setupSwiper();
-
-            if (!isPop) {
-              _this.pushState(data, href, context);
-            }
-
-            (0, _jquery2.default)('body').removeClass('loading');
-            (0, _jquery2.default)('#main-content, footer').animate({
-              opacity: 1
-            }, 200, 'swing', function () {
-              console.log('done');
-            });
+          if (_this.swiperInstance) {
+            _this.swiperInstance.destroy();
+            _this.swiperInstance = false;
           }
-        });
+
+          (0, _jquery2.default)('#main-content').html(content);
+
+          _this.bindLinks();
+          _this.bindFilters();
+          _this.setupSwiper();
+
+          //bind album stream button
+          (0, _jquery2.default)('.album-stream').on('click', audioPlayer.handleSkip);
+
+          if (!isPop) {
+            _this.pushState(data, href, context);
+          }
+
+          (0, _jquery2.default)('body').removeClass('loading');
+        }
       });
     }
   }, {
@@ -11007,7 +11001,7 @@ var Site = function () {
 }();
 
 new Site();
-new _player2.default();
+var audioPlayer = new _player2.default();
 
 /***/ }),
 /* 7 */
@@ -22504,9 +22498,9 @@ var Player = function () {
         $newPlaylistItem.insertAfter($currentPlaylistItem);
 
         this.playlist.splice(this.trackIndex, 0, albumTrack);
-
-        this.isPlaying = true;
       }
+
+      this.isPlaying = true;
     }
   }, {
     key: 'killPlayer',

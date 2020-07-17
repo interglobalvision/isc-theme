@@ -180,7 +180,7 @@ class Player {
 
     if ($playlistTrack.length) {
       // track is in playlist
-
+      
       this.trackIndex = $playlistTrack.index();
 
     } else {
@@ -203,9 +203,9 @@ class Player {
       $newPlaylistItem.insertAfter($currentPlaylistItem);
 
       this.playlist.splice(this.trackIndex, 0, albumTrack);
-
-      this.isPlaying = true
     }
+
+    this.isPlaying = true;
   }
 
   killPlayer() {
