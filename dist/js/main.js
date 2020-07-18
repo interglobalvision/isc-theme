@@ -10978,6 +10978,8 @@ var Site = function () {
           spaceBetween: (0, _jquery2.default)(window).width() * 0.2,
           centeredSlides: true,
           slideToClickedSlide: true,
+          preventClicks: true,
+          preventClicksPropagation: true,
           on: {
             init: function init() {
               _this.bindLinks('.swiper-slide a');

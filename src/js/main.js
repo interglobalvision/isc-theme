@@ -269,6 +269,8 @@ class Site {
         spaceBetween: $(window).width() * 0.2,
         centeredSlides: true,
         slideToClickedSlide: true,
+        preventClicks: true,
+        preventClicksPropagation: true,
         on: {
           init: function() {
             _this.bindLinks('.swiper-slide a');
