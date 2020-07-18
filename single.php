@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section>
+  <section class="padding-top-basic padding-bottom-large">
     <div class="container">
       <div class="grid-row">
 
@@ -12,24 +12,26 @@ get_header();
         while (have_posts()) {
           the_post();
       ?>
-        <header id="post-header" class="item-s-12 grid-row">
-          <div id="post-title-holder" class="grid-item item-s-12 item-l-6">
+        <header id="post-header" class="item-s-12 grid-row margin-bottom-tiny">
+          <div id="post-title-holder" class="grid-item item-s-12 item-l-6 margin-bottom-small">
             <h1>Title</h1>
           </div>
-          <div id="post-details-holder" class="item-s-12 item-l-6 grid-row">
+          <div id="post-details-holder" class="item-s-12 item-l-6 grid-row margin-bottom-small">
             <div class="grid-item item-s-8 item-l-6 offset-l-2">
               Author
             </div>
             <div class="grid-item item-s-4">
-              Date
+              <?php echo get_the_date(); ?>
             </div>
           </div>
         </header>
-        <div class="grid-item item-s-12">
+        <div class="grid-item item-s-12 margin-bottom-basic">
           <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
         </div>
-        <div class="grid-item item-s-12">
-          <?php the_content(); ?>
+        <div class="grid-item item-s-12 grid-row justify-center">
+          <div id="post-content-holder">
+            <?php the_content(); ?>
+          </div>
         </div>
       <?php
         }
