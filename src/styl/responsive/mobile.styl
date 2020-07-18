@@ -61,6 +61,8 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   align-items: center
   width: 100vw
   height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
   top: 0
   left: 0
   position: fixed
@@ -131,6 +133,8 @@ body
   position: fixed
   width: 100vw
   height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
   background: $color-black
   color: $color-white
   bottom: -20%
@@ -147,7 +151,7 @@ body
 
 #player
   position: fixed
-  width: 100%
+  width: 100vw
   background: $color-black
   color: $color-white
   bottom: 0
@@ -213,3 +217,14 @@ body
   &.hide
     visibility: hidden
     pointer-events: none
+
+#search-panel
+  position: fixed
+  top: 0
+  right: 0
+  width: 70vw
+  height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
+  background: $color-grey-light
+  overflow: scroll
