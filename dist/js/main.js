@@ -10718,9 +10718,6 @@ var Site = function () {
   }, {
     key: 'onReady',
     value: function onReady() {
-      this.$posts = (0, _jquery2.default)('#posts');
-      this.$loadMore = (0, _jquery2.default)('#load-more');
-
       _lazysizes2.default.init();
       this.bindLinks();
       this.bindFilters();
@@ -10871,6 +10868,7 @@ var Site = function () {
     key: 'filterResults',
     value: function filterResults(href) {
       var _this = this;
+      var $posts = (0, _jquery2.default)('#posts');
       var url = new URL(window.location.href);
       var newUrl = new URL(href);
       newUrl.searchParams.forEach(function (value, key) {
@@ -10882,8 +10880,8 @@ var Site = function () {
       _jquery2.default.ajax({
         url: url,
         success: function success(data) {
-          var posts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
-          (0, _jquery2.default)('#posts').html(posts);
+          var newPosts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
+          $posts.html(newPosts);
           _this.bindLinks();
           _this.bindFilters();
           _this.setupSwiper();
@@ -10897,7 +10895,9 @@ var Site = function () {
     value: function loadMore(href) {
       var _this = this;
       var url = new URL(href);
-      var maxPages = parseInt(this.$posts.attr('data-max-pages'));
+      var $posts = (0, _jquery2.default)('#posts');
+      var $loadMore = (0, _jquery2.default)('#load-more');
+      var maxPages = parseInt($posts.attr('data-max-pages'));
       var nextPage = parseInt(url.searchParams.get('paged'));
 
       (0, _jquery2.default)('body').addClass('loading-more');
@@ -10905,9 +10905,9 @@ var Site = function () {
       _jquery2.default.ajax({
         url: url,
         success: function success(data) {
-          var posts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
+          var newPosts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
 
-          (0, _jquery2.default)('#posts').append(posts);
+          $posts.append(newPosts);
 
           _this.bindLinks();
           _this.bindFilters();
@@ -10916,12 +10916,15 @@ var Site = function () {
           _this.currentArchivePage = nextPage;
 
           if (_this.currentArchivePage === maxPages) {
+            console.log('isMax');
             // hide load more button
-            _this.$loadMore.addClass('hide');
+            $loadMore.addClass('hide');
           } else {
+            console.log('iterating');
             // iterate load more page url
             url.searchParams.set('paged', _this.currentArchivePage + 1);
-            _this.$loadMore.attr('href', url.href);
+            console.log(url.href);
+            $loadMore.attr('href', url.href);
           }
 
           (0, _jquery2.default)('body').removeClass('loading-more');

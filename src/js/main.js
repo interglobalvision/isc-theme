@@ -26,9 +26,6 @@ class Site {
   }
 
   onReady() {
-    this.$posts = $('#posts');
-    this.$loadMore = $('#load-more');
-
     lazySizes.init();
     this.bindLinks();
     this.bindFilters();
@@ -165,6 +162,7 @@ class Site {
 
   filterResults(href) {
     const _this = this;
+    const $posts = $('#posts');
     const url = new URL(window.location.href);
     const newUrl = new URL(href);
     newUrl.searchParams.forEach(function(value, key) {
@@ -176,8 +174,8 @@ class Site {
     $.ajax({
       url,
       success: function(data){
-        const posts = $(data).find('#posts')[0].innerHTML;
-        $('#posts').html(posts);
+        const newPosts = $(data).find('#posts')[0].innerHTML;
+        $posts.html(newPosts);
         _this.bindLinks();
         _this.bindFilters();
         _this.setupSwiper();
@@ -190,7 +188,9 @@ class Site {
   loadMore(href) {
     const _this = this;
     const url = new URL(href);
-    const maxPages = parseInt(this.$posts.attr('data-max-pages'));
+    const $posts = $('#posts');
+    const $loadMore = $('#load-more');
+    const maxPages = parseInt($posts.attr('data-max-pages'));
     const nextPage = parseInt(url.searchParams.get('paged'));
 
     $('body').addClass('loading-more');
@@ -198,9 +198,9 @@ class Site {
     $.ajax({
       url,
       success: function(data){
-        const posts = $(data).find('#posts')[0].innerHTML;
+        const newPosts = $(data).find('#posts')[0].innerHTML;
 
-        $('#posts').append(posts);
+        $posts.append(newPosts);
 
         _this.bindLinks();
         _this.bindFilters();
@@ -209,12 +209,15 @@ class Site {
         _this.currentArchivePage = nextPage;
 
         if (_this.currentArchivePage === maxPages) {
+          console.log('isMax');
           // hide load more button
-          _this.$loadMore.addClass('hide');
+          $loadMore.addClass('hide');
         } else {
+          console.log('iterating');
           // iterate load more page url
           url.searchParams.set('paged', _this.currentArchivePage + 1);
-          _this.$loadMore.attr('href', url.href);
+          console.log(url.href);
+          $loadMore.attr('href', url.href);
         }
 
         $('body').removeClass('loading-more');
