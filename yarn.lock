@@ -2393,10 +2393,10 @@ globby@^6.1.0:
     pify "^2.0.0"
     pinkie-promise "^2.0.0"
 
-globie-styl-library@1.0.9:
-  version "1.0.9"
-  resolved "https://registry.yarnpkg.com/globie-styl-library/-/globie-styl-library-1.0.9.tgz#131afce9cd5f11d34333911b4ac94f6b1e1f15b8"
-  integrity sha512-udPr1eNQplBn+eEHsy8yDabqw7CPmCU+mYaC9zSeWSNYRXjxVU81902GsiXHLWdLnLVi0dB3QFfxJ87Wz7b/yA==
+globie-styl-library@1.0.10:
+  version "1.0.10"
+  resolved "https://registry.yarnpkg.com/globie-styl-library/-/globie-styl-library-1.0.10.tgz#6964b1ead19d97346d6a6ae044836f6ced5244fe"
+  integrity sha512-JLjcfwwxhm4sVh4UVhPm6dC1MydqAi5NYb2ZO0BAWjjr25TO7BDJ4yddXE/96EiVmPdzHG4SOXhf1hLO2EyFpg==
 
 glogg@^1.0.0:
   version "1.0.0"
