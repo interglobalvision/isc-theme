@@ -10707,6 +10707,8 @@ var Site = function () {
     this.swiperInstance = false;
     this.currentArchivePage = 1;
 
+    this.handleSearchToggle = this.handleSearchToggle.bind(this);
+
     (0, _jquery2.default)(window).resize(this.onResize.bind(this));
 
     (0, _jquery2.default)(document).ready(this.onReady.bind(this));
@@ -10723,6 +10725,7 @@ var Site = function () {
       this.bindFilters();
       this.bindBack();
       this.setupSwiper();
+      this.bindSearchToggle();
 
       this.audioPlayer = new _player2.default();
 
@@ -10746,26 +10749,38 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)(selector).off().on('click', function (e) {
-        var href = (0, _jquery2.default)(this).attr('href');
         var target = e.currentTarget;
 
-        if ((0, _jquery2.default)(target).hasClass('filter-option')) {
+        if ((0, _jquery2.default)(target).hasClass('search-toggle')) {
+          _this.handleSearchToggle(e);
+          return false;
+        } else if ((0, _jquery2.default)(target).hasClass('filter-option')) {
           return;
-        }
+        } else if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+          return false;
+        } else {
+          var href = (0, _jquery2.default)(this).attr('href');
 
-        if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+          if (!href.startsWith(WP.siteUrl)) {
+            window.location = href;
+          }
+
+          var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
+          _this.handleRequest(href, context);
+
           return false;
         }
-
-        if (!href.startsWith(WP.siteUrl)) {
-          window.location = href;
-        }
-
-        var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
-        _this.handleRequest(href, context);
-
-        return false;
       });
+    }
+  }, {
+    key: 'bindSearchToggle',
+    value: function bindSearchToggle() {
+      (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
+    }
+  }, {
+    key: 'handleSearchToggle',
+    value: function handleSearchToggle(e) {
+      (0, _jquery2.default)('body').toggleClass('search-open');
     }
   }, {
     key: 'bindFilters',

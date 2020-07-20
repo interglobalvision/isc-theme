@@ -1,3 +1,4 @@
+<div id="search-toggle-overlay"></div>
 <div id="search-panel">
   <?php get_search_form(); ?>
   <section>

@@ -16,6 +16,8 @@ class Site {
     this.swiperInstance = false;
     this.currentArchivePage = 1;
 
+    this.handleSearchToggle = this.handleSearchToggle.bind(this);
+
     $(window).resize(this.onResize.bind(this));
 
     $(document).ready(this.onReady.bind(this));
@@ -31,6 +33,7 @@ class Site {
     this.bindFilters();
     this.bindBack();
     this.setupSwiper();
+    this.bindSearchToggle();
 
     this.audioPlayer = new Player();
 
@@ -50,26 +53,36 @@ class Site {
     const _this = this;
 
     $(selector).off().on('click', function(e) {
-      const href = $(this).attr('href');
       const target = e.currentTarget;
 
-      if ($(target).hasClass('filter-option')) {
+      if ($(target).hasClass('search-toggle')) {
+        _this.handleSearchToggle(e);
+        return false;
+      } else if ($(target).hasClass('filter-option')) {
         return;
-      }
+      } else if ($(target).closest('.swiper-slide').length) {
+        return false;
+      } else {
+        const href = $(this).attr('href');
 
-      if ($(target).closest('.swiper-slide').length) {
+        if (!href.startsWith(WP.siteUrl)) {
+          window.location = href;
+        }
+
+        const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
+        _this.handleRequest(href, context);
+
         return false;
       }
-
-      if (!href.startsWith(WP.siteUrl)) {
-        window.location = href;
-      }
-
-      const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
-      _this.handleRequest(href, context);
-
-      return false;
     });
+  }
+
+  bindSearchToggle() {
+    $('#search-toggle-overlay').on('click', this.handleSearchToggle);
+  }
+
+  handleSearchToggle(e) {
+    $('body').toggleClass('search-open');
   }
 
   bindFilters() {

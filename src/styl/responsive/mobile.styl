@@ -87,7 +87,8 @@ body
       opacity: 0
       pointer-events: none
 
-.filter-trigger
+.filter-trigger, input
+  appearance: none
   background: $color-white
   border: 1px solid $color-black
   border-radius: 1em
@@ -217,14 +218,3 @@ body
   &.hide
     visibility: hidden
     pointer-events: none
-
-#search-panel
-  position: fixed
-  top: 0
-  right: 0
-  width: 70vw
-  height: 100vh
-  height: -moz-available
-  height: -webkit-fill-available
-  background: $color-grey-light
-  overflow: scroll

@@ -40,7 +40,7 @@ get_template_part('partials/seo');
             <a href="<?php echo home_url('features'); ?>">Features</a>
           </div>
           <div class="grid-item">
-            Search
+            <a class="search-toggle" href="#">Search</a>
           </div>
         </nav>
       <div>
