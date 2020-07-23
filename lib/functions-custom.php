@@ -1,3 +1,18 @@
 <?php
 
 // Custom functions (like special queries, etc)
+
+function custom_filter($args) {
+?>
+<div class="filter-wrapper">
+  <div class="filter <?php echo !empty($args['filter_class']) ? $args['filter_class'] : ''; ?>">
+    <div class="filter-trigger text-align-center <?php echo !empty($args['trigger_class']) ? $args['trigger_class'] : ''; ?>">
+      <span class="filter-value <?php echo !empty($args['value_class']) ? $args['value_class'] : ''; ?>"><?php $args['initial_value']() ?></span>
+    </div>
+    <div class="filter-options grid-column text-align-center <?php echo !empty($args['options_class']) ? $args['options_class'] : ''; ?>">
+      <?php $args['filter_options'](); ?>
+    </div>
+  </div>
+</div>
+<?php
+}
