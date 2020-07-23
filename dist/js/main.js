@@ -22440,8 +22440,10 @@ var Player = function () {
   }, {
     key: 'createPlayer',
     value: function createPlayer() {
+      var _this = this;
       SC.stream('/tracks/' + this.currentTrack.id).then(this.handleStream).catch(function (e) {
         console.error('Stream error', e);
+        _this.setTrackTitle('Error');
       });
     }
   }, {
@@ -22611,7 +22613,10 @@ var Player = function () {
   }, {
     key: 'setTrackTitle',
     value: function setTrackTitle() {
-      this.$trackTitle.text(this.playlist[this.trackIndex].title);
+      var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+
+      var trackTitle = title ? title : this.playlist[this.trackIndex].title;
+      this.$trackTitle.text(trackTitle);
     }
   }, {
     key: 'setCurrentTime',

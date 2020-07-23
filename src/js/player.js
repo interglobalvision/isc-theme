@@ -81,10 +81,12 @@ class Player {
   }
 
   createPlayer() {
+    const _this = this;
     SC.stream('/tracks/' + this.currentTrack.id)
       .then(this.handleStream)
       .catch(function(e) {
         console.error('Stream error', e);
+        _this.setTrackTitle('Error');
       });
   }
 
@@ -241,8 +243,9 @@ class Player {
     }
   }
 
-  setTrackTitle() {
-    this.$trackTitle.text(this.playlist[this.trackIndex].title);
+  setTrackTitle(title = false) {
+    const trackTitle = title ? title : this.playlist[this.trackIndex].title;
+    this.$trackTitle.text(trackTitle);
   }
 
   setCurrentTime() {
