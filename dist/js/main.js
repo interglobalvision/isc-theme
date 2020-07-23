@@ -22425,13 +22425,18 @@ var Player = function () {
     */
 
   }, {
+    key: 'handleError',
+    value: function handleError(errorMsg, event) {
+      console.error(errorMsg, event);
+      _this.setTrackTitle(errorMsg);
+      _this.isPlaying = false;
+    }
+  }, {
     key: 'getTrack',
     value: function getTrack() {
+      var _this = this;
       SC.resolve(this.playlist[this.trackIndex].soundcloudUrl).then(this.handleTrack).catch(function (e) {
-        var errorMsg = 'Playlist error';
-        console.error(errorMsg, e);
-        _this.setTrackTitle(errorMsg);
-        _this.isPlaying = false;
+        _this.handleError('Playlist error', e);
       });
     }
   }, {
@@ -22445,11 +22450,7 @@ var Player = function () {
     value: function createPlayer() {
       var _this = this;
       SC.stream('/tracks/' + this.currentTrack.id).then(this.handleStream).catch(function (e) {
-        console.log(this);
-        var errorMsg = 'Stream error';
-        console.error(errorMsg, e);
-        /*_this.setTrackTitle(errorMsg);
-        _this.isPlaying = false;*/
+        _this.handleError('Stream error', e);
       });
     }
   }, {
@@ -22511,11 +22512,9 @@ var Player = function () {
   }, {
     key: 'playPlayer',
     value: function playPlayer() {
+      var _this = this;
       this.player.play().then(this.setCurrentTime).catch(function (e) {
-        var errorMsg = 'Playback rejected';
-        console.error(errorMsg, e);
-        _this.setTrackTitle(errorMsg);
-        _this.isPlaying = false;
+        _this.handleError('Playback rejected', e);
       });
     }
   }, {
@@ -22554,7 +22553,6 @@ var Player = function () {
     value: function insertAlbumTrack(target) {
       var trackData = (0, _jquery2.default)(target).data();
       var $playlistTrack = (0, _jquery2.default)('.playlist-item[data-id="' + trackData.id + '"]');
-      console.log(trackData.id);
 
       if ($playlistTrack.length) {
         // track is in playlist

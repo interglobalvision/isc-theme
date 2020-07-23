@@ -67,14 +67,18 @@ class Player {
   }
   */
 
+  handleError(errorMsg, event) {
+    console.error(errorMsg, event);
+    _this.setTrackTitle(errorMsg);
+    _this.isPlaying = false;
+  }
+
   getTrack() {
+    const _this = this;
     SC.resolve(this.playlist[this.trackIndex].soundcloudUrl)
     .then(this.handleTrack)
     .catch(function(e) {
-      const errorMsg = 'Playlist error'
-      console.error(errorMsg, e);
-      _this.setTrackTitle(errorMsg);
-      _this.isPlaying = false;
+      _this.handleError('Playlist error', e);
     });
   }
 
@@ -88,11 +92,7 @@ class Player {
     SC.stream('/tracks/' + this.currentTrack.id)
       .then(this.handleStream)
       .catch(function(e) {
-        console.log(this);
-        const errorMsg = 'Stream error';
-        console.error(errorMsg, e);
-        /*_this.setTrackTitle(errorMsg);
-        _this.isPlaying = false;*/
+        _this.handleError('Stream error', e);
       });
   }
 
@@ -146,13 +146,11 @@ class Player {
   }
 
   playPlayer() {
+    const _this = this;
     this.player.play()
       .then(this.setCurrentTime)
       .catch(function(e){
-        const errorMsg = 'Playback rejected';
-        console.error(errorMsg, e);
-        _this.setTrackTitle(errorMsg);
-        _this.isPlaying = false;
+        _this.handleError('Playback rejected', e);
       });
   }
 
@@ -188,7 +186,6 @@ class Player {
   insertAlbumTrack(target) {
     const trackData = $(target).data();
     const $playlistTrack = $('.playlist-item[data-id="' + trackData.id + '"]');
-    console.log(trackData.id);
 
     if ($playlistTrack.length) {
       // track is in playlist
