@@ -71,7 +71,10 @@ class Player {
     SC.resolve(this.playlist[this.trackIndex].soundcloudUrl)
     .then(this.handleTrack)
     .catch(function(e) {
-      console.error('Playlist error', e);
+      const errorMsg = 'Playlist error'
+      console.error(errorMsg, e);
+      _this.setTrackTitle(errorMsg);
+      _this.isPlaying = false;
     });
   }
 
@@ -85,8 +88,11 @@ class Player {
     SC.stream('/tracks/' + this.currentTrack.id)
       .then(this.handleStream)
       .catch(function(e) {
-        console.error('Stream error', e);
-        _this.setTrackTitle('Error');
+        console.log(this);
+        const errorMsg = 'Stream error';
+        console.error(errorMsg, e);
+        /*_this.setTrackTitle(errorMsg);
+        _this.isPlaying = false;*/
       });
   }
 
@@ -143,7 +149,10 @@ class Player {
     this.player.play()
       .then(this.setCurrentTime)
       .catch(function(e){
-        console.error('Playback rejected', e);
+        const errorMsg = 'Playback rejected';
+        console.error(errorMsg, e);
+        _this.setTrackTitle(errorMsg);
+        _this.isPlaying = false;
       });
   }
 

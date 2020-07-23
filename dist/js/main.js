@@ -22428,7 +22428,10 @@ var Player = function () {
     key: 'getTrack',
     value: function getTrack() {
       SC.resolve(this.playlist[this.trackIndex].soundcloudUrl).then(this.handleTrack).catch(function (e) {
-        console.error('Playlist error', e);
+        var errorMsg = 'Playlist error';
+        console.error(errorMsg, e);
+        _this.setTrackTitle(errorMsg);
+        _this.isPlaying = false;
       });
     }
   }, {
@@ -22442,8 +22445,11 @@ var Player = function () {
     value: function createPlayer() {
       var _this = this;
       SC.stream('/tracks/' + this.currentTrack.id).then(this.handleStream).catch(function (e) {
-        console.error('Stream error', e);
-        _this.setTrackTitle('Error');
+        console.log(this);
+        var errorMsg = 'Stream error';
+        console.error(errorMsg, e);
+        /*_this.setTrackTitle(errorMsg);
+        _this.isPlaying = false;*/
       });
     }
   }, {
@@ -22506,7 +22512,10 @@ var Player = function () {
     key: 'playPlayer',
     value: function playPlayer() {
       this.player.play().then(this.setCurrentTime).catch(function (e) {
-        console.error('Playback rejected', e);
+        var errorMsg = 'Playback rejected';
+        console.error(errorMsg, e);
+        _this.setTrackTitle(errorMsg);
+        _this.isPlaying = false;
       });
     }
   }, {
