@@ -1,5 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP */
+/* global document, WP, URLSearchParams */
 
 // Import dependencies
 import $ from 'jquery';
@@ -16,6 +16,9 @@ class Site {
     this.swiperInstance = false;
     this.currentArchivePage = 1;
 
+    this.handleSearchToggle = this.handleSearchToggle.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+
     $(window).resize(this.onResize.bind(this));
 
     $(document).ready(this.onReady.bind(this));
@@ -28,9 +31,10 @@ class Site {
   onReady() {
     lazySizes.init();
     this.bindLinks();
-    this.bindFilters();
+    this.bindFilterToggle();
     this.bindBack();
     this.setupSwiper();
+    this.bindSearchEvents();
 
     this.audioPlayer = new Player();
 
@@ -50,33 +54,78 @@ class Site {
     const _this = this;
 
     $(selector).off().on('click', function(e) {
-      const href = $(this).attr('href');
       const target = e.currentTarget;
+      const href = $(this).attr('href');
 
-      if ($(target).hasClass('filter-option')) {
-        return;
+      if (href) {
+        if (!href.includes(WP.siteUrl)) {
+          return;
+        }
       }
 
-      if ($(target).closest('.swiper-slide').length) {
+      if ($(target).hasClass('search-toggle')) {
+        _this.handleSearchToggle(e);
+        return false;
+      } else if ($(target).hasClass('filter-option')) {
+        return;
+      } else if ($(target).closest('.swiper-slide').length) {
+        return false;
+      } else {
+        if (!href.startsWith(WP.siteUrl)) {
+          window.location = href;
+        }
+
+        const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
+        _this.handleRequest(href, context);
+
         return false;
       }
-
-      if (!href.startsWith(WP.siteUrl)) {
-        window.location = href;
-      }
-
-      const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
-      _this.handleRequest(href, context);
-
-      return false;
     });
   }
 
-  bindFilters() {
+  bindSearchEvents() {
+    this.$searchPanel = $('#search-panel');
+    this.$searchForm = $('#search-form');
+    this.$searchField = $('#search-field');
+
+    if (this.$searchPanel.length) {
+      this.$searchForm.on('submit', this.handleSearchSubmit);
+      $('#search-toggle-overlay').on('click', this.handleSearchToggle);
+    }
+  }
+
+  handleSearchToggle() {
+    $('body').toggleClass('search-open');
+  }
+
+  handleSearchSubmit() {
+    this.searchUrl = new URL(WP.siteUrl);
+    this.searchQuery = this.$searchField.val();
+    this.searchPage = 1;
+
+    const searchSortQuery = $('.search-sort-option.active').attr('data-query');
+    const sortParams = new URLSearchParams(searchSortQuery);
+
+    this.searchUrl.searchParams.set('s', this.searchQuery);
+
+    sortParams.forEach(function(value, key) {
+      this.searchUrl.searchParams.set(key, value);
+    });
+
+    //replaceSearchResults(this.searchUrl.href);
+
+    return false;
+  }
+
+  handleSearch() {
+
+  }
+
+  bindFilterToggle() {
     const _this = this;
 
     if ($('.filter').length) {
-      $('.filter-trigger').off().on('click', function() {
+      $('.filter-trigger').off('click.toggleFilter').on('click.toggleFilter', function() {
         const $filter = $(this).closest('.filter');
 
         if ($filter.hasClass('show')) {
@@ -84,15 +133,17 @@ class Site {
 
           _this.unbindClickOutsideFilter();
         } else {
-          $('.filter.show').removeClass('show');
+          $filter.siblings('.show').removeClass('show');
 
           $filter.addClass('show');
 
           _this.bindClickOutsideFilter();
         }
+
+        return false;
       });
 
-      $('.filter-option').off().on('click', function() {
+      $('.filter-option').off('click.updateFilter').on('click.updateFilter', function() {
         const filterText = $(this).text();
         const $filter = $(this).closest('.filter');
         const href = $(this).attr('href');
@@ -105,7 +156,12 @@ class Site {
 
         _this.unbindClickOutsideFilter();
 
-        _this.handleRequest(href, 'filter');
+        if ($filter.hasClass('collection-filter')) {
+          _this.handleRequest(href, 'filter');
+        } else {
+          console.log('filter');
+          //_this.updateSearchSort(href, 'filter');
+        }
 
         return false;
       });
@@ -123,6 +179,13 @@ class Site {
 
   unbindClickOutsideFilter() {
     $(document).off('click.outsideFilter');
+  }
+
+  bindUpdateFilter() {
+    const _this = this;
+
+    //if ($('.filter').length) {
+
   }
 
   pushState(data, url, context, filter) {
@@ -177,7 +240,7 @@ class Site {
         const newPosts = $(data).find('#posts')[0].innerHTML;
         $posts.html(newPosts);
         _this.bindLinks();
-        _this.bindFilters();
+        _this.bindFilterToggle();
         _this.setupSwiper();
         _this.pushState(data, url, 'filter', url.searchParams.toString());
         $('body').removeClass('filtering');
@@ -185,10 +248,10 @@ class Site {
     });
   }
 
-  loadMore(href) {
+  loadMore(href, postsSelector = '#posts') {
     const _this = this;
     const url = new URL(href);
-    const $posts = $('#posts');
+    const $posts = $(postsSelector);
     const $loadMore = $('#load-more');
     const maxPages = parseInt($posts.attr('data-max-pages'));
     const nextPage = parseInt(url.searchParams.get('paged'));
@@ -198,25 +261,22 @@ class Site {
     $.ajax({
       url,
       success: function(data){
-        const newPosts = $(data).find('#posts')[0].innerHTML;
+        const newPosts = $(data).find(postsSelector)[0].innerHTML;
 
         $posts.append(newPosts);
 
         _this.bindLinks();
-        _this.bindFilters();
+        _this.bindFilterToggle();
         _this.setupSwiper();
 
         _this.currentArchivePage = nextPage;
 
         if (_this.currentArchivePage === maxPages) {
-          console.log('isMax');
           // hide load more button
           $loadMore.addClass('hide');
         } else {
-          console.log('iterating');
           // iterate load more page url
           url.searchParams.set('paged', _this.currentArchivePage + 1);
-          console.log(url.href);
           $loadMore.attr('href', url.href);
         }
 
@@ -244,7 +304,7 @@ class Site {
         $('#main-content').html(content);
 
         _this.bindLinks();
-        _this.bindFilters();
+        _this.bindFilterToggle();
         _this.setupSwiper();
 
         //bind album stream button

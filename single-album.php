@@ -27,7 +27,7 @@ if (have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
-          <?php the_post_thumbnail('full'); ?>
+          <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
         </div>
         <div class="grid-item item-s-12 item-m-6 offset-m-1 grid-row no-gutter align-content-start margin-bottom-basic">
           <header class="grid-item item-s-12 margin-bottom-small">
@@ -85,7 +85,7 @@ if (have_posts()) {
   <section class="margin-bottom-large">
     <div class="container">
       <div class="grid-row">
-        <div id="album-content-holder" class="grid-item item-s-12 item-m-5 margin-bottom-small">
+        <div id="album-content-holder" class="grid-item item-s-12 item-m-5 margin-bottom-small align-content-start">
           <?php the_content(); ?>
           <?php if (!empty($tags)) { ?>
           <div>
@@ -99,7 +99,7 @@ if (have_posts()) {
           <?php } ?>
         </div>
 
-        <div id="album-tracklist-credits-holder" class="grid-row grid-item item-s-12 item-m-6 offset-m-1 margin-bottom-small">
+        <div id="album-tracklist-credits-holder" class="grid-row grid-item item-s-12 item-m-6 offset-m-1 margin-bottom-small align-content-start">
         <?php if (!empty($tracklist)) { ?>
           <div>
             <div>

@@ -61,6 +61,8 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   align-items: center
   width: 100vw
   height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
   top: 0
   left: 0
   position: fixed
@@ -85,7 +87,8 @@ body
       opacity: 0
       pointer-events: none
 
-.filter-trigger
+.filter-trigger, input
+  appearance: none
   background: $color-white
   border: 1px solid $color-black
   border-radius: 1em
@@ -110,6 +113,7 @@ body
   will-change: transform, opacity
   transform: translateY(-30%)
   margin-top: 0.5em
+  pointer-events: none
 
 .filter
   position: relative
@@ -118,8 +122,10 @@ body
       opacity: 1
       transform: translateY(0%)
       overflow: scroll
+      pointer-events: auto
 
 .filter-option
+  cursor: pointer
   &:hover
     text-decoration: underline
   &.active
@@ -131,6 +137,8 @@ body
   position: fixed
   width: 100vw
   height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
   background: $color-black
   color: $color-white
   bottom: -20%
@@ -147,12 +155,15 @@ body
 
 #player
   position: fixed
-  width: 100%
+  width: 100vw
   background: $color-black
   color: $color-white
   bottom: 0
   left: 0
   z-index: 500
+  &.player-error
+    #player-track-title
+      font-family: $font-mono
 
 .player-thumb-holder
   width: 50px

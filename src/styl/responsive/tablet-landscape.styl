@@ -17,6 +17,8 @@
 
   font-sizes($font-size-basic)
 
+  $player-height = 82px
+
   .desktop-only
     display: initial !important
 
@@ -35,3 +37,37 @@
 
   #post-title-holder
     order: 2
+
+  #search-panel
+    position: fixed
+    top: 0
+    right: 0
+    width: 70vw
+    height: calc('100vh - ' + $player-height)
+    background: $color-grey-light
+    overflow: scroll
+    transform: translateX(10%)
+    opacity: 0
+    pointer-events: none
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out
+    z-index: 300
+    #search-form-holder
+      padding-left: $margin-tiny
+      padding-right: $margin-tiny
+
+  #search-toggle-overlay
+    width: 100vh
+    height: 100vh
+    top: 0
+    left: 0
+    position: fixed
+    pointer-events: none
+
+  body
+    &.search-open
+      #search-panel
+        transform: translateX(0)
+        opacity: 1
+        pointer-events: auto
+      #search-toggle-overlay
+        pointer-events: auto

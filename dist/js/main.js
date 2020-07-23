@@ -10669,7 +10669,7 @@ exports.getSupport = getSupport;
 
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP */
+/* global document, WP, URLSearchParams */
 
 // Import dependencies
 
@@ -10707,6 +10707,9 @@ var Site = function () {
     this.swiperInstance = false;
     this.currentArchivePage = 1;
 
+    this.handleSearchToggle = this.handleSearchToggle.bind(this);
+    this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+
     (0, _jquery2.default)(window).resize(this.onResize.bind(this));
 
     (0, _jquery2.default)(document).ready(this.onReady.bind(this));
@@ -10720,9 +10723,10 @@ var Site = function () {
     value: function onReady() {
       _lazysizes2.default.init();
       this.bindLinks();
-      this.bindFilters();
+      this.bindFilterToggle();
       this.bindBack();
       this.setupSwiper();
+      this.bindSearchEvents();
 
       this.audioPlayer = new _player2.default();
 
@@ -10746,34 +10750,81 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)(selector).off().on('click', function (e) {
-        var href = (0, _jquery2.default)(this).attr('href');
         var target = e.currentTarget;
+        var href = (0, _jquery2.default)(this).attr('href');
 
-        if ((0, _jquery2.default)(target).hasClass('filter-option')) {
-          return;
+        if (href) {
+          if (!href.includes(WP.siteUrl)) {
+            return;
+          }
         }
 
-        if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+        if ((0, _jquery2.default)(target).hasClass('search-toggle')) {
+          _this.handleSearchToggle(e);
+          return false;
+        } else if ((0, _jquery2.default)(target).hasClass('filter-option')) {
+          return;
+        } else if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+          return false;
+        } else {
+          if (!href.startsWith(WP.siteUrl)) {
+            window.location = href;
+          }
+
+          var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
+          _this.handleRequest(href, context);
+
           return false;
         }
-
-        if (!href.startsWith(WP.siteUrl)) {
-          window.location = href;
-        }
-
-        var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
-        _this.handleRequest(href, context);
-
-        return false;
       });
     }
   }, {
-    key: 'bindFilters',
-    value: function bindFilters() {
+    key: 'bindSearchEvents',
+    value: function bindSearchEvents() {
+      this.$searchPanel = (0, _jquery2.default)('#search-panel');
+      this.$searchForm = (0, _jquery2.default)('#search-form');
+      this.$searchField = (0, _jquery2.default)('#search-field');
+
+      if (this.$searchPanel.length) {
+        this.$searchForm.on('submit', this.handleSearchSubmit);
+        (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
+      }
+    }
+  }, {
+    key: 'handleSearchToggle',
+    value: function handleSearchToggle() {
+      (0, _jquery2.default)('body').toggleClass('search-open');
+    }
+  }, {
+    key: 'handleSearchSubmit',
+    value: function handleSearchSubmit() {
+      this.searchUrl = new URL(WP.siteUrl);
+      this.searchQuery = this.$searchField.val();
+      this.searchPage = 1;
+
+      var searchSortQuery = (0, _jquery2.default)('.search-sort-option.active').attr('data-query');
+      var sortParams = new URLSearchParams(searchSortQuery);
+
+      this.searchUrl.searchParams.set('s', this.searchQuery);
+
+      sortParams.forEach(function (value, key) {
+        this.searchUrl.searchParams.set(key, value);
+      });
+
+      //replaceSearchResults(this.searchUrl.href);
+
+      return false;
+    }
+  }, {
+    key: 'handleSearch',
+    value: function handleSearch() {}
+  }, {
+    key: 'bindFilterToggle',
+    value: function bindFilterToggle() {
       var _this = this;
 
       if ((0, _jquery2.default)('.filter').length) {
-        (0, _jquery2.default)('.filter-trigger').off().on('click', function () {
+        (0, _jquery2.default)('.filter-trigger').off('click.toggleFilter').on('click.toggleFilter', function () {
           var $filter = (0, _jquery2.default)(this).closest('.filter');
 
           if ($filter.hasClass('show')) {
@@ -10781,15 +10832,17 @@ var Site = function () {
 
             _this.unbindClickOutsideFilter();
           } else {
-            (0, _jquery2.default)('.filter.show').removeClass('show');
+            $filter.siblings('.show').removeClass('show');
 
             $filter.addClass('show');
 
             _this.bindClickOutsideFilter();
           }
+
+          return false;
         });
 
-        (0, _jquery2.default)('.filter-option').off().on('click', function () {
+        (0, _jquery2.default)('.filter-option').off('click.updateFilter').on('click.updateFilter', function () {
           var filterText = (0, _jquery2.default)(this).text();
           var $filter = (0, _jquery2.default)(this).closest('.filter');
           var href = (0, _jquery2.default)(this).attr('href');
@@ -10802,7 +10855,12 @@ var Site = function () {
 
           _this.unbindClickOutsideFilter();
 
-          _this.handleRequest(href, 'filter');
+          if ($filter.hasClass('collection-filter')) {
+            _this.handleRequest(href, 'filter');
+          } else {
+            console.log('filter');
+            //_this.updateSearchSort(href, 'filter');
+          }
 
           return false;
         });
@@ -10822,6 +10880,13 @@ var Site = function () {
     key: 'unbindClickOutsideFilter',
     value: function unbindClickOutsideFilter() {
       (0, _jquery2.default)(document).off('click.outsideFilter');
+    }
+  }, {
+    key: 'bindUpdateFilter',
+    value: function bindUpdateFilter() {
+      var _this = this;
+
+      //if ($('.filter').length) {
     }
   }, {
     key: 'pushState',
@@ -10883,7 +10948,7 @@ var Site = function () {
           var newPosts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
           $posts.html(newPosts);
           _this.bindLinks();
-          _this.bindFilters();
+          _this.bindFilterToggle();
           _this.setupSwiper();
           _this.pushState(data, url, 'filter', url.searchParams.toString());
           (0, _jquery2.default)('body').removeClass('filtering');
@@ -10893,9 +10958,11 @@ var Site = function () {
   }, {
     key: 'loadMore',
     value: function loadMore(href) {
+      var postsSelector = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '#posts';
+
       var _this = this;
       var url = new URL(href);
-      var $posts = (0, _jquery2.default)('#posts');
+      var $posts = (0, _jquery2.default)(postsSelector);
       var $loadMore = (0, _jquery2.default)('#load-more');
       var maxPages = parseInt($posts.attr('data-max-pages'));
       var nextPage = parseInt(url.searchParams.get('paged'));
@@ -10905,25 +10972,22 @@ var Site = function () {
       _jquery2.default.ajax({
         url: url,
         success: function success(data) {
-          var newPosts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
+          var newPosts = (0, _jquery2.default)(data).find(postsSelector)[0].innerHTML;
 
           $posts.append(newPosts);
 
           _this.bindLinks();
-          _this.bindFilters();
+          _this.bindFilterToggle();
           _this.setupSwiper();
 
           _this.currentArchivePage = nextPage;
 
           if (_this.currentArchivePage === maxPages) {
-            console.log('isMax');
             // hide load more button
             $loadMore.addClass('hide');
           } else {
-            console.log('iterating');
             // iterate load more page url
             url.searchParams.set('paged', _this.currentArchivePage + 1);
-            console.log(url.href);
             $loadMore.attr('href', url.href);
           }
 
@@ -10952,7 +11016,7 @@ var Site = function () {
           (0, _jquery2.default)('#main-content').html(content);
 
           _this.bindLinks();
-          _this.bindFilters();
+          _this.bindFilterToggle();
           _this.setupSwiper();
 
           //bind album stream button
@@ -22320,6 +22384,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'onReady',
     value: function onReady() {
+      this.$player = (0, _jquery2.default)('#player');
       this.$trackTitle = (0, _jquery2.default)('#player-track-title');
       this.$duration = (0, _jquery2.default)('#player-duration');
       this.$currentTime = (0, _jquery2.default)('#player-current-time');
@@ -22334,7 +22399,7 @@ var Player = function () {
   }, {
     key: 'initSC',
     value: function initSC() {
-      if (WP.playerClientId && WP.playerPlaylist) {
+      if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
         this.playlist = JSON.parse(WP.playerPlaylist);
         console.log(this.playlist);
         SC.initialize({
@@ -22361,10 +22426,30 @@ var Player = function () {
     */
 
   }, {
+    key: 'handleError',
+    value: function handleError(errorMsg, event) {
+      console.error(errorMsg, event);
+      this.isPlaying = false;
+      this.hasError = true;
+      this.$player.addClass('player-error');
+      this.$trackTitle.text(this.playlist[this.trackIndex].title);
+    }
+  }, {
+    key: 'clearError',
+    value: function clearError() {
+      if (this.hasError) {
+        this.hasError = false;
+        this.$player.removeClass('player-error');
+        this.$trackTitle.html('&hellip;');
+      }
+    }
+  }, {
     key: 'getTrack',
     value: function getTrack() {
+      var _this = this;
+      this.clearError();
       SC.resolve(this.playlist[this.trackIndex].soundcloudUrl).then(this.handleTrack).catch(function (e) {
-        console.error('Playlist error', e);
+        _this.handleError('Playlist error', e);
       });
     }
   }, {
@@ -22376,8 +22461,9 @@ var Player = function () {
   }, {
     key: 'createPlayer',
     value: function createPlayer() {
+      var _this = this;
       SC.stream('/tracks/' + this.currentTrack.id).then(this.handleStream).catch(function (e) {
-        console.error('Stream error', e);
+        _this.handleError('Stream error', e);
       });
     }
   }, {
@@ -22439,8 +22525,9 @@ var Player = function () {
   }, {
     key: 'playPlayer',
     value: function playPlayer() {
+      var _this = this;
       this.player.play().then(this.setCurrentTime).catch(function (e) {
-        console.error('Playback rejected', e);
+        _this.handleError('Playback rejected', e);
       });
     }
   }, {
@@ -22479,7 +22566,6 @@ var Player = function () {
     value: function insertAlbumTrack(target) {
       var trackData = (0, _jquery2.default)(target).data();
       var $playlistTrack = (0, _jquery2.default)('.playlist-item[data-id="' + trackData.id + '"]');
-      console.log(trackData.id);
 
       if ($playlistTrack.length) {
         // track is in playlist
