@@ -55,6 +55,13 @@ class Site {
 
     $(selector).off().on('click', function(e) {
       const target = e.currentTarget;
+      const href = $(this).attr('href');
+
+      if (href) {
+        if (!href.includes(WP.siteUrl)) {
+          return;
+        }
+      }
 
       if ($(target).hasClass('search-toggle')) {
         _this.handleSearchToggle(e);
@@ -64,8 +71,6 @@ class Site {
       } else if ($(target).closest('.swiper-slide').length) {
         return false;
       } else {
-        const href = $(this).attr('href');
-
         if (!href.startsWith(WP.siteUrl)) {
           window.location = href;
         }

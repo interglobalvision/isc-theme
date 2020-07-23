@@ -10751,6 +10751,13 @@ var Site = function () {
 
       (0, _jquery2.default)(selector).off().on('click', function (e) {
         var target = e.currentTarget;
+        var href = (0, _jquery2.default)(this).attr('href');
+
+        if (href) {
+          if (!href.includes(WP.siteUrl)) {
+            return;
+          }
+        }
 
         if ((0, _jquery2.default)(target).hasClass('search-toggle')) {
           _this.handleSearchToggle(e);
@@ -10760,8 +10767,6 @@ var Site = function () {
         } else if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
           return false;
         } else {
-          var href = (0, _jquery2.default)(this).attr('href');
-
           if (!href.startsWith(WP.siteUrl)) {
             window.location = href;
           }
