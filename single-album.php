@@ -27,7 +27,7 @@ if (have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
-          <?php the_post_thumbnail('full', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
+          <?php the_post_thumbnail('gallery', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
         </div>
         <div class="grid-item item-s-12 item-m-6 offset-m-1 grid-row no-gutter align-content-start margin-bottom-basic">
           <header class="grid-item item-s-12 margin-bottom-small">
