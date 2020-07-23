@@ -22384,6 +22384,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'onReady',
     value: function onReady() {
+      this.$player = (0, _jquery2.default)('#player');
       this.$trackTitle = (0, _jquery2.default)('#player-track-title');
       this.$duration = (0, _jquery2.default)('#player-duration');
       this.$currentTime = (0, _jquery2.default)('#player-current-time');
@@ -22398,7 +22399,7 @@ var Player = function () {
   }, {
     key: 'initSC',
     value: function initSC() {
-      if (WP.playerClientId && WP.playerPlaylist) {
+      if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
         this.playlist = JSON.parse(WP.playerPlaylist);
         console.log(this.playlist);
         SC.initialize({
@@ -22428,13 +22429,25 @@ var Player = function () {
     key: 'handleError',
     value: function handleError(errorMsg, event) {
       console.error(errorMsg, event);
-      _this.setTrackTitle(errorMsg);
-      _this.isPlaying = false;
+      this.isPlaying = false;
+      this.hasError = true;
+      this.$player.addClass('player-error');
+      this.$trackTitle.text(this.playlist[this.trackIndex].title);
+    }
+  }, {
+    key: 'clearError',
+    value: function clearError() {
+      if (this.hasError) {
+        this.hasError = false;
+        this.$player.removeClass('player-error');
+        this.$trackTitle.html('&hellip;');
+      }
     }
   }, {
     key: 'getTrack',
     value: function getTrack() {
       var _this = this;
+      this.clearError();
       SC.resolve(this.playlist[this.trackIndex].soundcloudUrl).then(this.handleTrack).catch(function (e) {
         _this.handleError('Playlist error', e);
       });
@@ -22620,10 +22633,7 @@ var Player = function () {
   }, {
     key: 'setTrackTitle',
     value: function setTrackTitle() {
-      var title = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
-
-      var trackTitle = title ? title : this.playlist[this.trackIndex].title;
-      this.$trackTitle.text(trackTitle);
+      this.$trackTitle.text(this.playlist[this.trackIndex].title);
     }
   }, {
     key: 'setCurrentTime',

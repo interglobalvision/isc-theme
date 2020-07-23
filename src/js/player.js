@@ -27,6 +27,7 @@ class Player {
   }
 
   onReady() {
+    this.$player = $('#player');
     this.$trackTitle = $('#player-track-title');
     this.$duration = $('#player-duration');
     this.$currentTime = $('#player-current-time');
@@ -40,7 +41,7 @@ class Player {
   }
 
   initSC() {
-    if (WP.playerClientId && WP.playerPlaylist) {
+    if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
       this.playlist = JSON.parse(WP.playerPlaylist);
       console.log(this.playlist);
       SC.initialize({
@@ -69,12 +70,23 @@ class Player {
 
   handleError(errorMsg, event) {
     console.error(errorMsg, event);
-    _this.setTrackTitle(errorMsg);
-    _this.isPlaying = false;
+    this.isPlaying = false;
+    this.hasError = true;
+    this.$player.addClass('player-error');
+    this.$trackTitle.text(this.playlist[this.trackIndex].title);
+  }
+
+  clearError() {
+    if (this.hasError) {
+      this.hasError = false;
+      this.$player.removeClass('player-error');
+      this.$trackTitle.html('&hellip;');
+    }
   }
 
   getTrack() {
     const _this = this;
+    this.clearError();
     SC.resolve(this.playlist[this.trackIndex].soundcloudUrl)
     .then(this.handleTrack)
     .catch(function(e) {
@@ -249,9 +261,8 @@ class Player {
     }
   }
 
-  setTrackTitle(title = false) {
-    const trackTitle = title ? title : this.playlist[this.trackIndex].title;
-    this.$trackTitle.text(trackTitle);
+  setTrackTitle() {
+    this.$trackTitle.text(this.playlist[this.trackIndex].title);
   }
 
   setCurrentTime() {
