@@ -19,7 +19,7 @@ if (!empty($playlist)) {
     <li class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro" data-id="<?php echo $track_id; ?>">
       <div class="grid-item">
         <div class="player-thumb-holder">
-          <?php echo $thumb_url ? '<img src="' . $thumb_url . '" class="playlist-item-thumb" />' : ''; ?>
+          <?php echo $thumb_url ? '<img src="' . $thumb_url . '" class="playlist-item-thumb" alt="' . get_the_title() . ' album cover" data-no-lazysizes="true" />' : ''; ?>
         </div>
       </div>
       <div class="grid-item flex-grow">
