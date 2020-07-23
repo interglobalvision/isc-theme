@@ -47,7 +47,9 @@ $options = get_site_option('_igv_site_options');
 <div id="loader">LOADING</div>
 
 <?php
-get_template_part('partials/search-panel');
+if (!is_search()) {
+  get_template_part('partials/search-panel');
+}
 get_template_part('partials/player');
 get_template_part('partials/scripts');
 get_template_part('partials/schema-org');
