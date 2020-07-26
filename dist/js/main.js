@@ -10753,12 +10753,6 @@ var Site = function () {
         var target = e.currentTarget;
         var href = (0, _jquery2.default)(this).attr('href');
 
-        if (href) {
-          if (!href.includes(WP.siteUrl)) {
-            return;
-          }
-        }
-
         if ((0, _jquery2.default)(target).hasClass('search-toggle')) {
           _this.handleSearchToggle(e);
           return false;
@@ -10768,7 +10762,7 @@ var Site = function () {
           return false;
         } else {
           if (!href.startsWith(WP.siteUrl)) {
-            window.location = href;
+            return;
           }
 
           var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
@@ -10785,10 +10779,8 @@ var Site = function () {
       this.$searchForm = (0, _jquery2.default)('#search-form');
       this.$searchField = (0, _jquery2.default)('#search-field');
 
-      if (this.$searchPanel.length) {
-        this.$searchForm.on('submit', this.handleSearchSubmit);
-        (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
-      }
+      this.$searchForm.on('submit', this.handleSearchSubmit);
+      (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
     }
   }, {
     key: 'handleSearchToggle',
@@ -10798,6 +10790,7 @@ var Site = function () {
   }, {
     key: 'handleSearchSubmit',
     value: function handleSearchSubmit() {
+      var _this = this;
       this.searchUrl = new URL(WP.siteUrl);
       this.searchQuery = this.$searchField.val();
       this.searchPage = 1;
@@ -10808,16 +10801,45 @@ var Site = function () {
       this.searchUrl.searchParams.set('s', this.searchQuery);
 
       sortParams.forEach(function (value, key) {
-        this.searchUrl.searchParams.set(key, value);
+        _this.searchUrl.searchParams.set(key, value);
       });
 
-      //replaceSearchResults(this.searchUrl.href);
+      this.currentSearchPage = 1;
+
+      this.getSearchResults();
 
       return false;
     }
   }, {
-    key: 'handleSearch',
-    value: function handleSearch() {}
+    key: 'getSearchResults',
+    value: function getSearchResults() {
+      var _this = this;
+      _jquery2.default.ajax({
+        url: this.searchUrl.href,
+        success: function success(data) {
+          var $loadMore = (0, _jquery2.default)('#search-load-more');
+          var $resultsWrapper = (0, _jquery2.default)('#search-results');
+          var $newResultsWrapper = (0, _jquery2.default)(data).find('#search-results');
+          var maxPages = $newResultsWrapper.data('maxpages');
+          var newResults = $newResultsWrapper.html();
+
+          $resultsWrapper.append(newResults);
+          _this.bindLinks('#search-results a');
+
+          if (_this.currentSearchPage === maxPages) {
+            // hide load more button
+            $loadMore.addClass('hide');
+          } else {
+            // iterate load more page url and show load more button
+            _this.currentSearchPage++;
+            _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
+            $loadMore.attr('href', _this.searchUrl.href).removeClass('hide');
+          }
+
+          //$('body').removeClass('loading-more');
+        }
+      });
+    }
   }, {
     key: 'bindFilterToggle',
     value: function bindFilterToggle() {
@@ -10923,6 +10945,9 @@ var Site = function () {
           case 'load-more':
             this.loadMore(href);
             break;
+          case 'search-load-more':
+            this.getSearchResults();
+            break;
           default:
             this.replaceContent(href, context);
             break;
@@ -10964,7 +10989,7 @@ var Site = function () {
       var url = new URL(href);
       var $posts = (0, _jquery2.default)(postsSelector);
       var $loadMore = (0, _jquery2.default)('#load-more');
-      var maxPages = parseInt($posts.attr('data-max-pages'));
+      var maxPages = parseInt($posts.attr('data-maxpages'));
       var nextPage = parseInt(url.searchParams.get('paged'));
 
       (0, _jquery2.default)('body').addClass('loading-more');
@@ -22401,7 +22426,6 @@ var Player = function () {
     value: function initSC() {
       if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
         this.playlist = JSON.parse(WP.playerPlaylist);
-        console.log(this.playlist);
         SC.initialize({
           client_id: WP.playerClientId
         });

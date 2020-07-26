@@ -57,12 +57,6 @@ class Site {
       const target = e.currentTarget;
       const href = $(this).attr('href');
 
-      if (href) {
-        if (!href.includes(WP.siteUrl)) {
-          return;
-        }
-      }
-
       if ($(target).hasClass('search-toggle')) {
         _this.handleSearchToggle(e);
         return false;
@@ -72,7 +66,7 @@ class Site {
         return false;
       } else {
         if (!href.startsWith(WP.siteUrl)) {
-          window.location = href;
+          return;
         }
 
         const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
@@ -88,10 +82,8 @@ class Site {
     this.$searchForm = $('#search-form');
     this.$searchField = $('#search-field');
 
-    if (this.$searchPanel.length) {
-      this.$searchForm.on('submit', this.handleSearchSubmit);
-      $('#search-toggle-overlay').on('click', this.handleSearchToggle);
-    }
+    this.$searchForm.on('submit', this.handleSearchSubmit);
+    $('#search-toggle-overlay').on('click', this.handleSearchToggle);
   }
 
   handleSearchToggle() {
@@ -99,6 +91,7 @@ class Site {
   }
 
   handleSearchSubmit() {
+    const _this = this;
     this.searchUrl = new URL(WP.siteUrl);
     this.searchQuery = this.$searchField.val();
     this.searchPage = 1;
@@ -109,16 +102,43 @@ class Site {
     this.searchUrl.searchParams.set('s', this.searchQuery);
 
     sortParams.forEach(function(value, key) {
-      this.searchUrl.searchParams.set(key, value);
+      _this.searchUrl.searchParams.set(key, value);
     });
 
-    //replaceSearchResults(this.searchUrl.href);
+    this.currentSearchPage = 1;
+
+    this.getSearchResults();
 
     return false;
   }
 
-  handleSearch() {
+  getSearchResults() {
+    const _this = this;
+    $.ajax({
+      url: this.searchUrl.href,
+      success: function(data){
+        const $loadMore = $('#search-load-more');
+        const $resultsWrapper = $('#search-results');
+        const $newResultsWrapper = $(data).find('#search-results');
+        const maxPages = $newResultsWrapper.data('maxpages');
+        const newResults = $newResultsWrapper.html();
 
+        $resultsWrapper.append(newResults);
+        _this.bindLinks('#search-results a');
+
+        if (_this.currentSearchPage === maxPages) {
+          // hide load more button
+          $loadMore.addClass('hide');
+        } else {
+          // iterate load more page url and show load more button
+          _this.currentSearchPage++;
+          _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
+          $loadMore.attr('href', _this.searchUrl.href).removeClass('hide');
+        }
+
+        //$('body').removeClass('loading-more');
+      }
+    });
   }
 
   bindFilterToggle() {
@@ -216,6 +236,9 @@ class Site {
         case 'load-more':
           this.loadMore(href);
           break;
+        case 'search-load-more':
+          this.getSearchResults();
+          break;
         default:
           this.replaceContent(href, context);
           break;
@@ -253,7 +276,7 @@ class Site {
     const url = new URL(href);
     const $posts = $(postsSelector);
     const $loadMore = $('#load-more');
-    const maxPages = parseInt($posts.attr('data-max-pages'));
+    const maxPages = parseInt($posts.attr('data-maxpages'));
     const nextPage = parseInt(url.searchParams.get('paged'));
 
     $('body').addClass('loading-more');
