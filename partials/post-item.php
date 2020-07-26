@@ -23,7 +23,7 @@
   </div>
   <div class="grid-item flex-grow grid-row align-content-end">
     <div class="offset-s-9">
-      <a href="<?php the_permalink(); ?>">-></a>
+      <a href="<?php the_permalink(); ?>"><img class="icon-clickthru" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/clickthru.png" /></a>
     </div>
   </div>
 </article>
