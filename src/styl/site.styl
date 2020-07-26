@@ -22,9 +22,9 @@ normalize()
 // FONTS
 @import 'fonts/fonts'
 
-$font-sans = font-stack('Helvetica')
-$font-serif = font-stack('Georgia')
-$font-mono = font-stack('Courier');
+$font-sans = 'ROM', font-stack('Arial')
+$font-cond = 'ROM Condensed', font-stack('Arial Narrow')
+$font-mono = 'ROM Mono', font-stack('Courier New');
 
 // ******************************************************
 
@@ -52,8 +52,11 @@ body
 .font-sans
   font-family: $font-sans
 
-.font-serif
-  font-family: $font-serif
+.font-cond
+  font-family: $font-cond
+
+.font-mono
+  font-family: $font-mono
 
 .font-larger
   font-size: $font-size-larger
