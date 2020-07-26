@@ -41,7 +41,7 @@ if (have_posts()) {
               <span class="font-sans font-size-large"><?php echo $title; ?></span>
             </div>
           <?php } if (!empty($styles)) { ?>
-            <div>
+            <div class="margin-top-tiny">
               <span class="font-cond margin-right-micro">Style: </span><?php
                 foreach($styles as $key => $value) {
                   echo '<span>' . $value->name . '</span>';
@@ -54,7 +54,7 @@ if (have_posts()) {
 
           <div id="album-details" class="grid-item item-s-12 item-m-10 offset-m-2 margin-bottom-basic">
           <?php if (!empty($labels)) { ?>
-            <div>
+            <div class="margin-bottom-micro">
               <span class="font-cond margin-right-micro">Label: </span><?php
                 foreach($labels as $key => $value) {
                   echo '<span>' . $value->name . '</span>';
@@ -63,11 +63,11 @@ if (have_posts()) {
               ?>
             </div>
           <?php } if (!empty($catalog_num)) { ?>
-            <div>
+            <div class="margin-bottom-micro">
               <span class="font-cond margin-right-micro">Catalog Number: </span><span><?php echo $catalog_num; ?></span>
             </div>
           <?php } if (!empty($years)) { ?>
-            <div>
+            <div class="margin-bottom-micro">
               <span class="font-cond margin-right-micro">Released: </span><?php
                 foreach($years as $key => $value) {
                   echo '<span>' . $value->name . '</span>';

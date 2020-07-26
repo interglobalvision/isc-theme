@@ -1,5 +1,5 @@
 <article <?php post_class('grid-item no-gutter item-s-12 item-m-6 grid-column margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
-  <div class="grid-row">
+  <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-auto flex-grow offset-l-3">
       <span>Author</span>
     </div>
@@ -7,10 +7,10 @@
       <?php echo get_the_date(); ?>
     </div>
   </div>
-  <div class="grid-item margin-bottom-small">
+  <div class="grid-item margin-bottom-tiny">
     <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('full'); ?></a>
   </div>
-  <div class="grid-row">
+  <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-3">
       <span class="font-uppercase">Feature</span>
     </div>
