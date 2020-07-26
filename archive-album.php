@@ -36,7 +36,7 @@ if (have_posts()) {
     ));
 ?>
 
-        <article <?php post_class('grid-item item-s-6 item-m-4 item-l-3'); ?> id="album-<?php the_ID(); ?>" data-filter="<?php echo $filter; ?>">
+        <article <?php post_class('grid-item item-s-6 item-m-4 item-l-3 margin-bottom-basic'); ?> id="album-<?php the_ID(); ?>" data-filter="<?php echo $filter; ?>">
           <a href="<?php the_permalink() ?>">
             <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
             <div><?php the_post_thumbnail('album-item'); ?></div>

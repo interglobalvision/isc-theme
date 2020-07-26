@@ -29,11 +29,11 @@ $options = get_site_option('_igv_site_options');
         </div>
         <div class="grid-item item-s-12 item-l-4 no-gutter grid-column">
         <?php if (!empty($options['hours'])) { ?>
-          <div class="grid-item">
+          <div class="grid-item margin-bottom-basic">
             <?php echo apply_filters('the_content', $options['hours']); ?>
           </div>
         <?php } ?>
-          <div id="social-holder" class="grid-item no-gutter grid-row margin-top-basic">
+          <div id="social-holder" class="grid-item no-gutter grid-row">
             <div class="grid-item">Social Media</div>
             <div class="grid-item">Social Media</div>
             <div>&nbsp;</div>
