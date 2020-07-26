@@ -10,7 +10,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
   <section class="padding-top-basic padding-bottom-large">
     <div class="container">
       <?php get_search_form(); ?>
-      <div id="search-results" data-max-pages="<?php echo $max_pages; ?>" class="grid-row">
+      <div id="search-results" data-maxpages="<?php echo $max_pages; ?>" class="grid-row">
         <?php
         if (have_posts()) {
           while (have_posts()) {

@@ -42,7 +42,7 @@ if ($current_page === 1) {
   <section class="border-box background-almond padding-top-basic">
 
     <div class="container">
-      <div id="posts" class="grid-row" data-max-pages="<?php echo $max_pages; ?>">
+      <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
 
       <?php
       if (have_posts()) {
@@ -64,7 +64,7 @@ if ($current_page === 1) {
       ?>
       <div class="grid-row justify-end">
         <div class="grid-item">
-          <a id="load-more" data-context="load-more" data-max-pages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
+          <a id="load-more" class="load-more-button" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
         </div>
       </div>
       <?php } ?>
