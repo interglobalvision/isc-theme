@@ -69,6 +69,10 @@ class Site {
           return;
         }
 
+        if ($(target).closest('.search-result').length) {
+          $('body').removeClass('search-open');
+        }
+
         const context = $(target).attr('data-context') !== undefined ? $(target).attr('data-context') : 'content';
         _this.handleRequest(href, context);
 
@@ -81,17 +85,36 @@ class Site {
     this.$searchPanel = $('#search-panel');
     this.$searchForm = $('#search-form');
     this.$searchField = $('#search-field');
+    this.$searchResults = $('#search-results');
+    this.$searchLoadMore = $('#search-load-more');
 
     this.$searchForm.on('submit', this.handleSearchSubmit);
     $('#search-toggle-overlay').on('click', this.handleSearchToggle);
+    this.$searchField.on('click', this.handleSearchInput);
+  }
+
+  handleSearchInput() {
+    $(this).select();
   }
 
   handleSearchToggle() {
-    $('body').toggleClass('search-open');
+    if ($('body').hasClass('search-open')) {
+      $('body').removeClass('search-open');
+    } else {
+      this.$searchPanel.scrollTop(0);
+      $('body').addClass('search-open');
+    }
   }
 
   handleSearchSubmit() {
     const _this = this;
+
+    this.searchQuery = this.$searchField.val();
+
+    if (!this.searchQuery.length) {
+      return;
+    }
+
     this.searchUrl = new URL(WP.siteUrl);
     this.searchQuery = this.$searchField.val();
     this.searchPage = 1;
@@ -105,6 +128,9 @@ class Site {
       _this.searchUrl.searchParams.set(key, value);
     });
 
+    this.$searchLoadMore.addClass('hide');
+    this.$searchResults.html('');
+
     this.currentSearchPage = 1;
 
     this.getSearchResults();
@@ -117,23 +143,25 @@ class Site {
     $.ajax({
       url: this.searchUrl.href,
       success: function(data){
-        const $loadMore = $('#search-load-more');
-        const $resultsWrapper = $('#search-results');
-        const $newResultsWrapper = $(data).find('#search-results');
-        const maxPages = $newResultsWrapper.data('maxpages');
-        const newResults = $newResultsWrapper.html();
+        const $newResults = $(data).find('#search-results');
+        const maxPages = $newResults.data('maxpages');
+        const results = $newResults.html();
 
-        $resultsWrapper.append(newResults);
+        if (maxPages === 0) {
+          return;
+        }
+
+        _this.$searchResults.append(results);
         _this.bindLinks('#search-results a');
 
         if (_this.currentSearchPage === maxPages) {
           // hide load more button
-          $loadMore.addClass('hide');
+          _this.$searchLoadMore.addClass('hide');
         } else {
           // iterate load more page url and show load more button
           _this.currentSearchPage++;
           _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
-          $loadMore.attr('href', _this.searchUrl.href).removeClass('hide');
+          _this.$searchLoadMore.attr('href', _this.searchUrl.href).removeClass('hide');
         }
 
         //$('body').removeClass('loading-more');
@@ -179,8 +207,7 @@ class Site {
         if ($filter.hasClass('collection-filter')) {
           _this.handleRequest(href, 'filter');
         } else {
-          console.log('filter');
-          //_this.updateSearchSort(href, 'filter');
+          _this.handleSearchSubmit();
         }
 
         return false;

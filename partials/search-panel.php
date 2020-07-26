@@ -1,5 +1,5 @@
 <div id="search-toggle-overlay"></div>
-<div id="search-panel">
+<div id="search-panel" class="padding-left-basic padding-right-basic padding-top-mid">
   <?php get_search_form(); ?>
   <section>
     <div id="search-results" class="grid-row">

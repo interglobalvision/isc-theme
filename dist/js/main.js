@@ -10765,6 +10765,10 @@ var Site = function () {
             return;
           }
 
+          if ((0, _jquery2.default)(target).closest('.search-result').length) {
+            (0, _jquery2.default)('body').removeClass('search-open');
+          }
+
           var context = (0, _jquery2.default)(target).attr('data-context') !== undefined ? (0, _jquery2.default)(target).attr('data-context') : 'content';
           _this.handleRequest(href, context);
 
@@ -10778,19 +10782,39 @@ var Site = function () {
       this.$searchPanel = (0, _jquery2.default)('#search-panel');
       this.$searchForm = (0, _jquery2.default)('#search-form');
       this.$searchField = (0, _jquery2.default)('#search-field');
+      this.$searchResults = (0, _jquery2.default)('#search-results');
+      this.$searchLoadMore = (0, _jquery2.default)('#search-load-more');
 
       this.$searchForm.on('submit', this.handleSearchSubmit);
       (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
+      this.$searchField.on('click', this.handleSearchInput);
+    }
+  }, {
+    key: 'handleSearchInput',
+    value: function handleSearchInput() {
+      (0, _jquery2.default)(this).select();
     }
   }, {
     key: 'handleSearchToggle',
     value: function handleSearchToggle() {
-      (0, _jquery2.default)('body').toggleClass('search-open');
+      if ((0, _jquery2.default)('body').hasClass('search-open')) {
+        (0, _jquery2.default)('body').removeClass('search-open');
+      } else {
+        this.$searchPanel.scrollTop(0);
+        (0, _jquery2.default)('body').addClass('search-open');
+      }
     }
   }, {
     key: 'handleSearchSubmit',
     value: function handleSearchSubmit() {
       var _this = this;
+
+      this.searchQuery = this.$searchField.val();
+
+      if (!this.searchQuery.length) {
+        return;
+      }
+
       this.searchUrl = new URL(WP.siteUrl);
       this.searchQuery = this.$searchField.val();
       this.searchPage = 1;
@@ -10803,6 +10827,9 @@ var Site = function () {
       sortParams.forEach(function (value, key) {
         _this.searchUrl.searchParams.set(key, value);
       });
+
+      this.$searchLoadMore.addClass('hide');
+      this.$searchResults.html('');
 
       this.currentSearchPage = 1;
 
@@ -10817,23 +10844,25 @@ var Site = function () {
       _jquery2.default.ajax({
         url: this.searchUrl.href,
         success: function success(data) {
-          var $loadMore = (0, _jquery2.default)('#search-load-more');
-          var $resultsWrapper = (0, _jquery2.default)('#search-results');
-          var $newResultsWrapper = (0, _jquery2.default)(data).find('#search-results');
-          var maxPages = $newResultsWrapper.data('maxpages');
-          var newResults = $newResultsWrapper.html();
+          var $newResults = (0, _jquery2.default)(data).find('#search-results');
+          var maxPages = $newResults.data('maxpages');
+          var results = $newResults.html();
 
-          $resultsWrapper.append(newResults);
+          if (maxPages === 0) {
+            return;
+          }
+
+          _this.$searchResults.append(results);
           _this.bindLinks('#search-results a');
 
           if (_this.currentSearchPage === maxPages) {
             // hide load more button
-            $loadMore.addClass('hide');
+            _this.$searchLoadMore.addClass('hide');
           } else {
             // iterate load more page url and show load more button
             _this.currentSearchPage++;
             _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
-            $loadMore.attr('href', _this.searchUrl.href).removeClass('hide');
+            _this.$searchLoadMore.attr('href', _this.searchUrl.href).removeClass('hide');
           }
 
           //$('body').removeClass('loading-more');
@@ -10880,8 +10909,7 @@ var Site = function () {
           if ($filter.hasClass('collection-filter')) {
             _this.handleRequest(href, 'filter');
           } else {
-            console.log('filter');
-            //_this.updateSearchSort(href, 'filter');
+            _this.handleSearchSubmit();
           }
 
           return false;
