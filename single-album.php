@@ -23,7 +23,7 @@ if (have_posts()) {
     $the_content = get_the_content();
     $album_id = $post->ID;
 ?>
-  <section class="padding-top-basic">
+  <section class="padding-top-basic font-mono">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
@@ -34,15 +34,15 @@ if (have_posts()) {
             <h1 class="u-visuallyhidden"><?php the_title(); ?></h1>
           <?php if (!empty($artist)) { ?>
             <div>
-              <span><?php echo $artist; ?></span>
+              <span class="font-cond font-size-large"><?php echo $artist; ?></span>
             </div>
           <?php } if (!empty($title)) { ?>
             <div>
-              <span><?php echo $title; ?></span>
+              <span class="font-sans font-size-large"><?php echo $title; ?></span>
             </div>
           <?php } if (!empty($styles)) { ?>
             <div>
-              <span>Style: </span><?php
+              <span class="font-cond margin-right-micro">Style: </span><?php
                 foreach($styles as $key => $value) {
                   echo '<span>' . $value->name . '</span>';
                   echo $key + 1 !== count($styles) ? ', ' : '';
@@ -55,7 +55,7 @@ if (have_posts()) {
           <div id="album-details" class="grid-item item-s-12 item-m-10 offset-m-2 margin-bottom-basic">
           <?php if (!empty($labels)) { ?>
             <div>
-              <span>Label: </span><?php
+              <span class="font-cond margin-right-micro">Label: </span><?php
                 foreach($labels as $key => $value) {
                   echo '<span>' . $value->name . '</span>';
                   echo $key + 1 !== count($labels) ? ', ' : '';
@@ -64,11 +64,11 @@ if (have_posts()) {
             </div>
           <?php } if (!empty($catalog_num)) { ?>
             <div>
-              <span>Catalog Number: <?php echo $catalog_num; ?></span>
+              <span class="font-cond margin-right-micro">Catalog Number: </span><span><?php echo $catalog_num; ?></span>
             </div>
           <?php } if (!empty($years)) { ?>
             <div>
-              <span>Released: </span><?php
+              <span class="font-cond margin-right-micro">Released: </span><?php
                 foreach($years as $key => $value) {
                   echo '<span>' . $value->name . '</span>';
                   echo $key + 1 !== count($years) ? ', ' : '';
@@ -82,13 +82,13 @@ if (have_posts()) {
       </div>
     </div>
   </section>
-  <section class="margin-bottom-large">
+  <section class="margin-bottom-large font-mono">
     <div class="container">
       <div class="grid-row">
         <div id="album-content-holder" class="grid-item item-s-12 item-m-5 margin-bottom-small align-content-start">
-          <?php the_content(); ?>
+          <div class="font-color-grey"><?php the_content(); ?></div>
           <?php if (!empty($tags)) { ?>
-          <div>
+          <div class="margin-top-small">
             <span>Tags: </span><?php
               foreach($tags as $key => $value) {
                 echo '<span>' . $value->name . '</span>';
@@ -101,8 +101,8 @@ if (have_posts()) {
 
         <div id="album-tracklist-credits-holder" class="grid-row grid-item item-s-12 item-m-6 offset-m-1 margin-bottom-small align-content-start">
         <?php if (!empty($tracklist)) { ?>
-          <div>
-            <div>
+          <div class="margin-bottom-tiny">
+            <div class="margin-bottom-tiny">
               <span>Tracklist:</span>
             </div>
             <div>
@@ -110,8 +110,8 @@ if (have_posts()) {
             </div>
           </div>
         <?php } if (!empty($credits)) { ?>
-          <div>
-            <div>
+          <div class="margin-bottom-tiny">
+            <div class="margin-bottom-tiny">
               <span>Credits:</span>
             </div>
             <div>

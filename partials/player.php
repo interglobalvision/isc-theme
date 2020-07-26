@@ -85,7 +85,7 @@ if (!empty($playlist)) {
 
         <div  class="grid-item">
           <button class="player-control" id="playlist-toggle">
-            <span>Playlist</span>
+            <span class="font-size-tiny">Playlist</span>
           </button>
         </div>
       </div>
