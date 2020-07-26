@@ -62,7 +62,7 @@ if ($current_page === 1) {
             'paged' => $current_page + 1,
           ), $post_type_archive);
       ?>
-      <div class="grid-row justify-end">
+      <div class="grid-row justify-center">
         <div class="grid-item">
           <a id="load-more" class="load-more-button" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
         </div>
