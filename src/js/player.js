@@ -43,7 +43,6 @@ class Player {
   initSC() {
     if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
       this.playlist = JSON.parse(WP.playerPlaylist);
-      console.log(this.playlist);
       SC.initialize({
         client_id: WP.playerClientId
       });
