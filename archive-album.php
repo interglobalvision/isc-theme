@@ -56,7 +56,7 @@ if (have_posts()) {
       ?>
       <div class="grid-row justify-center">
         <div class="grid-item">
-          <a id="load-more" class="load-more-button <?php echo $max_pages > $current_page ? '' : 'hide'; ?>" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
+          <a id="load-more" class="load-more-button <?php echo $max_pages > $current_page ? '' : 'hide'; ?>" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load More</a>
         </div>
       </div>
     </div>
