@@ -30,7 +30,7 @@ get_template_part('partials/seo');
     <div class="container">
       <div class="grid-row margin-top-tiny">
         <div class="grid-item flex-grow margin-bottom-tiny">
-          <h1 class="font-bold"><a href="<?php echo home_url(); ?>"><?php bloginfo('name'); ?></a></h1>
+          <h1 class="font-bold"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
         </div>
         <nav class="grid-row font-cond">
           <div class="grid-item margin-bottom-tiny">
