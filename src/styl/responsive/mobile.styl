@@ -191,13 +191,6 @@ body
   background-color: transparent
   color: $color-white
   border: none
-  line-height: .8em
-
-#player-play-pause, #playlist-toggle
-  border: 1px solid $color-white
-
-#playlist-toggle
-  border-radius: 1em
 
 .player-control-icon
   pointer-events: none
@@ -213,6 +206,21 @@ body
   font-size: $font-size-basic
   &.hide
     visibility: hidden
+
+.player-skip
+  .player-control-icon
+    max-width: 50%
+
+#playlist-toggle
+  border: 1px solid $color-white
+  border-radius: 3em
+  span
+    margin-top: .5em
+  img
+    max-height: 100%
+    width: auto
+    max-width: unset
+    margin-left: .5em
 
 .album-featured-slide
   width: 30vw

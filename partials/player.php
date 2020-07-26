@@ -59,7 +59,7 @@ if (!empty($playlist)) {
         <div class="grid-item">
           <button class="player-skip player-control" data-skip="prev">
             <div class="player-control-icon">
-              <span><<</span>
+              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-prev.png" />
             </div>
           </button>
         </div>
@@ -67,7 +67,7 @@ if (!empty($playlist)) {
         <div class="grid-item">
           <button id="player-play-pause" class="player-control" disabled>
             <div class="player-control-icon">
-              <span>></span>
+              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-play.png" />
             </div>
             <div class="player-control-icon hide">
               <span>||</span>
@@ -78,14 +78,15 @@ if (!empty($playlist)) {
         <div class="grid-item">
           <button class="player-skip player-control" data-skip="next">
             <div class="player-control-icon">
-              <span>>></span>
+              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-next.png" />
             </div>
           </button>
         </div>
 
         <div  class="grid-item">
-          <button class="player-control" id="playlist-toggle">
-            <span class="font-size-tiny">Playlist</span>
+          <button class="player-control grid-row align-items-center" id="playlist-toggle">
+            <span class="font-size-tiny">View Playlist</span>
+            <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-playlist.png" />
           </button>
         </div>
       </div>
