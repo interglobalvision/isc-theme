@@ -19,7 +19,7 @@ $styles = get_the_terms($post->ID, 'style');
     <div class="font-uppercase">
     <?php
       foreach($styles as $key => $value) {
-        echo '<span>' . $value->name . '</span>';
+        echo '<span><a href="' . get_post_type_archive_link('album') . '?style=' . $value->slug . '">' . $value->name . '</a></span>';
         echo $key + 1 !== count($styles) ? ', ' : '';
       }
     ?>
