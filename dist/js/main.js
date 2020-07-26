@@ -10988,6 +10988,9 @@ var Site = function () {
       var _this = this;
       var $posts = (0, _jquery2.default)('#posts');
       var url = new URL(window.location.href);
+
+      var $loadMore = (0, _jquery2.default)('#load-more');
+
       var newUrl = new URL(href);
       newUrl.searchParams.forEach(function (value, key) {
         url.searchParams.set(key, value);
@@ -10998,12 +11001,30 @@ var Site = function () {
       _jquery2.default.ajax({
         url: url,
         success: function success(data) {
-          var newPosts = (0, _jquery2.default)(data).find('#posts')[0].innerHTML;
-          $posts.html(newPosts);
+          var $newPosts = (0, _jquery2.default)(data).find('#posts');
+          var posts = $newPosts.html();
+          var maxPages = parseInt($newPosts.attr('data-maxpages'));
+
+          $posts.html(posts);
+
           _this.bindLinks();
           _this.bindFilterToggle();
           _this.setupSwiper();
+
           _this.pushState(data, url, 'filter', url.searchParams.toString());
+
+          _this.currentArchivePage = 1;
+
+          if (maxPages === 1) {
+            // hide load more button
+            $loadMore.addClass('hide');
+          } else {
+            // iterate load more page url
+            url.searchParams.set('paged', 2);
+            $loadMore.attr('href', url.href);
+            $loadMore.removeClass('hide');
+          }
+
           (0, _jquery2.default)('body').removeClass('filtering');
         }
       });

@@ -47,7 +47,7 @@ function add_lazysize_on_srcset($attr) {
 add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset');
 
 function igv_set_post_query_args($query){
-  if($query->is_main_query() && $query->is_home()){
+  if(!is_admin() && $query->is_main_query() && $query->is_home()){
     $latest_post = get_posts(array('numberposts' => 1));
     $query->set('post__not_in', array($latest_post[0]->ID)); //exclude queries by post ID
 
@@ -66,7 +66,7 @@ function igv_set_post_query_args($query){
 add_action('pre_get_posts','igv_set_post_query_args');
 
 function igv_homepage_offset_pagination( $found_posts, $query ) {
-  if($query->is_main_query() && $query->is_home()){
+  if(!is_admin() && $query->is_main_query() && $query->is_home()){
     $offset = -4;
     $found_posts = $found_posts + $offset;
   }
@@ -75,14 +75,14 @@ function igv_homepage_offset_pagination( $found_posts, $query ) {
 add_filter( 'found_posts', 'igv_homepage_offset_pagination', 10, 2 );
 
 function igv_set_album_query_args($query){
-  if($query->is_main_query() && is_post_type_archive('album')){
+  if(!is_admin() && $query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);
   }
 }
 add_action('pre_get_posts','igv_set_album_query_args');
 
 function igv_set_search_query_args($query) {
-  if ($query->is_search) {
+  if (!is_admin() && $query->is_search) {
     $query->set('post_type',array('post','album'));
     $query->set('posts_per_page', 10);
   }

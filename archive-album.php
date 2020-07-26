@@ -48,6 +48,17 @@ if (have_posts()) {
 }
 ?>
       </div>
+      <?php
+        $post_type_archive = get_post_type_archive_link('album');
+        $load_more_url = add_query_arg( array(
+          'paged' => $current_page + 1,
+        ), $post_type_archive);
+      ?>
+      <div class="grid-row justify-end">
+        <div class="grid-item">
+          <a id="load-more" class="load-more-button <?php echo $max_pages > $current_page ? '' : 'hide'; ?>" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load more</a>
+        </div>
+      </div>
     </div>
   </section>
 

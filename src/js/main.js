@@ -277,6 +277,9 @@ class Site {
     const _this = this;
     const $posts = $('#posts');
     const url = new URL(window.location.href);
+
+    const $loadMore = $('#load-more');
+
     const newUrl = new URL(href);
     newUrl.searchParams.forEach(function(value, key) {
       url.searchParams.set(key, value);
@@ -287,12 +290,30 @@ class Site {
     $.ajax({
       url,
       success: function(data){
-        const newPosts = $(data).find('#posts')[0].innerHTML;
-        $posts.html(newPosts);
+        const $newPosts = $(data).find('#posts');
+        const posts = $newPosts.html();
+        const maxPages = parseInt($newPosts.attr('data-maxpages'));
+
+        $posts.html(posts);
+
         _this.bindLinks();
         _this.bindFilterToggle();
         _this.setupSwiper();
+
         _this.pushState(data, url, 'filter', url.searchParams.toString());
+
+        _this.currentArchivePage = 1;
+
+        if (maxPages === 1) {
+          // hide load more button
+          $loadMore.addClass('hide');
+        } else {
+          // iterate load more page url
+          url.searchParams.set('paged', 2);
+          $loadMore.attr('href', url.href);
+          $loadMore.removeClass('hide');
+        }
+
         $('body').removeClass('filtering');
       }
     });
