@@ -45,7 +45,7 @@ $options = get_site_option('_igv_site_options');
 
 </section>
 
-<div id="loader">LOADING</div>
+<div id="loader"><img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/loading.png" /></div>
 
 <?php
 if (!is_search()) {

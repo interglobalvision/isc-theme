@@ -66,6 +66,15 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
   top: 0
   left: 0
   position: fixed
+  img
+    width: 50px
+    animation: rotate 3s linear infinite
+
+@keyframes rotate
+  from
+    transform: rotate(0deg)
+  to
+    transform: rotate(360deg)
 
 #main-content,
 #posts,
@@ -247,6 +256,13 @@ body
 
 input
   cursor: default
+
+button
+  appearance: none
+  background: none
+  border: none
+  padding: 0
+  font-family: $font-sans
 
 .simple-input
   border: none
