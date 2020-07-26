@@ -70,7 +70,7 @@ if (!empty($playlist)) {
               <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-play.png" />
             </div>
             <div class="player-control-icon hide">
-              <span>||</span>
+              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-pause.png" />
             </div>
           </button>
         </div>
