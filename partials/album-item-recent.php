@@ -12,11 +12,11 @@ $styles = get_the_terms($post->ID, 'style');
   <div class="grid-item no-gutter grid-column justify-between">
     <div>
       <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
-      <div><a href="<?php the_permalink(); ?>">Artist</a></div>
-      <div><a href="<?php the_permalink(); ?>">Title</a></div>
+      <div class="font-size-mid font-cond"><a href="<?php the_permalink(); ?>"><?php echo !empty($artist) ? $artist : ''; ?></a></div>
+      <div><a href="<?php the_permalink(); ?>"><?php echo !empty($title) ? $title : ''; ?></a></div>
     </div>
   <?php if ($styles) { ?>
-    <div>
+    <div class="font-uppercase">
     <?php
       foreach($styles as $key => $value) {
         echo '<span>' . $value->name . '</span>';

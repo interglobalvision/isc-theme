@@ -7,18 +7,18 @@
       <?php echo get_the_date(); ?>
     </div>
   </div>
-  <div class="grid-item">
+  <div class="grid-item margin-bottom-small">
     <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('full'); ?></a>
   </div>
   <div class="grid-row">
     <div class="grid-item item-s-3">
-      <span>FEATURE</span>
+      <span class="font-uppercase">Feature</span>
     </div>
     <div class="grid-item item-s-9">
-      <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+      <h2 class="font-cond font-size-large"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
     </div>
   </div>
-  <div class="grid-item">
+  <div class="grid-item font-mono font-color-grey">
     <?php the_excerpt(); ?>
   </div>
   <div class="grid-item flex-grow grid-row align-content-end">
