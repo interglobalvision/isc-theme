@@ -14,7 +14,7 @@ get_header();
       ?>
         <header id="post-header" class="item-s-12 grid-row margin-bottom-tiny">
           <div id="post-title-holder" class="grid-item item-s-12 item-l-6 margin-bottom-small">
-            <h1>Title</h1>
+            <h1 class="font-size-extra font-cond"><?php the_title(); ?></h1>
           </div>
           <div id="post-details-holder" class="item-s-12 item-l-6 grid-row margin-bottom-small">
             <div class="grid-item item-s-8 item-l-6 offset-l-2">
