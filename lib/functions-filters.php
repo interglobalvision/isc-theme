@@ -81,10 +81,11 @@ function igv_set_album_query_args($query){
 }
 add_action('pre_get_posts','igv_set_album_query_args');
 
-function igv_search_filter($query) {
+function igv_set_search_query_args($query) {
   if ($query->is_search) {
-    //$query->set('post_type',array('post','album'));
+    $query->set('post_type',array('post','album'));
+    $query->set('posts_per_page', 10);
   }
   return $query;
 }
-add_filter('pre_get_posts','igv_search_filter');
+add_filter('pre_get_posts','igv_set_search_query_args');
