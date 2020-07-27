@@ -58,6 +58,8 @@ class Site {
       const target = e.currentTarget;
       const href = $(this).attr('href');
 
+      $(this).blur();
+
       if ($(target).hasClass('search-toggle')) {
         _this.handleSearchToggle(e);
         return false;

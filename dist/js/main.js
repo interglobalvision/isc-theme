@@ -10757,6 +10757,8 @@ var Site = function () {
         var target = e.currentTarget;
         var href = (0, _jquery2.default)(this).attr('href');
 
+        (0, _jquery2.default)(this).blur();
+
         if ((0, _jquery2.default)(target).hasClass('search-toggle')) {
           _this.handleSearchToggle(e);
           return false;
