@@ -9,4 +9,4 @@
     <button type="submit"><span>Subscribe</span></button>
   </div>
 </form>
-<div id="mailchimp-response">&nbsp;</div>
+<div><span id="mailchimp-response" class="font-size-small">&nbsp;</span></div>

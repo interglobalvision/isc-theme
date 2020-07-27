@@ -84,7 +84,7 @@ class Mailchimp {
       this.$reply.removeClass('error').addClass('valid');
       this.$email.removeClass('error').addClass('valid');
 
-      this.$email.val('');
+      this.$email.val('').blur();
 
     } else {
       // Set class .error on form elements
@@ -133,7 +133,7 @@ class Mailchimp {
       this.$reply.removeClass('error').addClass('valid');
       this.$email.removeClass('error').addClass('valid');
 
-      this.$email.val('');
+      this.$email.val('').blur();
     }
 
     // Show message
