@@ -157,10 +157,18 @@ body
   opacity: 0
   pointer-events: none
   will-change: transform, opacity
-  &.show
-    transform: translateY(-20%)
-    opacity: 1
-    pointer-events: auto
+
+body
+  &.playlist-open
+    position: fixed
+    width: 100%
+    height: 100%
+    left: 0px
+    overflow: hidden
+    #playlist
+      transform: translateY(-20%)
+      opacity: 1
+      pointer-events: auto
 
 #player
   position: fixed

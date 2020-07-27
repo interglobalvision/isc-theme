@@ -99,10 +99,12 @@ class Site {
 
   handleSearchToggle() {
     if ($('body').hasClass('search-open')) {
-      $('body').removeClass('search-open');
+      $('body').removeClass('search-open').css('top', 'auto');
+      $(window).scrollTop(this.windowScrollTop);
     } else {
+      this.windowScrollTop = $(window).scrollTop();
       this.$searchPanel.scrollTop(0);
-      $('body').addClass('search-open');
+      $('body').addClass('search-open').css('top', this.windowScrollTop * -1);
     }
   }
 
@@ -140,6 +142,8 @@ class Site {
 
   getSearchResults() {
     const _this = this;
+    const initialScrollTop = this.$searchPanel.scrollTop();
+
     $.ajax({
       url: this.searchUrl.href,
       success: function(data){
@@ -152,6 +156,9 @@ class Site {
         }
 
         _this.$searchResults.append(results);
+
+        _this.$searchPanel.scrollTop(initialScrollTop);
+
         _this.bindLinks('#search-results a');
 
         if (_this.currentSearchPage === maxPages) {
@@ -326,6 +333,7 @@ class Site {
     const $loadMore = $('#load-more');
     const maxPages = parseInt($posts.attr('data-maxpages'));
     const nextPage = parseInt(url.searchParams.get('paged'));
+    const initialScrollTop = $(window).scrollTop();
 
     $('body').addClass('loading-more');
 
@@ -335,6 +343,8 @@ class Site {
         const newPosts = $(data).find(postsSelector)[0].innerHTML;
 
         $posts.append(newPosts);
+
+        $(window).scrollTop(initialScrollTop);
 
         _this.bindLinks();
         _this.bindFilterToggle();

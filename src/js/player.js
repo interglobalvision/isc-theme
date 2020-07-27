@@ -245,7 +245,14 @@ class Player {
   }
 
   togglePlaylist() {
-    this.$playlist.toggleClass('show');
+    if ($('body').hasClass('playlist-open')) {
+      $('body').removeClass('playlist-open').css('top', 'auto');
+      $(window).scrollTop(this.windowScrollTop);
+    } else {
+      this.windowScrollTop = $(window).scrollTop();
+      this.$playlist.scrollTop(0);
+      $('body').addClass('playlist-open').css('top', this.windowScrollTop * -1);
+    }
   }
 
   setTrackThumb() {

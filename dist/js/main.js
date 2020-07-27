@@ -10798,10 +10798,12 @@ var Site = function () {
     key: 'handleSearchToggle',
     value: function handleSearchToggle() {
       if ((0, _jquery2.default)('body').hasClass('search-open')) {
-        (0, _jquery2.default)('body').removeClass('search-open');
+        (0, _jquery2.default)('body').removeClass('search-open').css('top', 'auto');
+        (0, _jquery2.default)(window).scrollTop(this.windowScrollTop);
       } else {
+        this.windowScrollTop = (0, _jquery2.default)(window).scrollTop();
         this.$searchPanel.scrollTop(0);
-        (0, _jquery2.default)('body').addClass('search-open');
+        (0, _jquery2.default)('body').addClass('search-open').css('top', this.windowScrollTop * -1);
       }
     }
   }, {
@@ -10841,6 +10843,8 @@ var Site = function () {
     key: 'getSearchResults',
     value: function getSearchResults() {
       var _this = this;
+      var initialScrollTop = this.$searchPanel.scrollTop();
+
       _jquery2.default.ajax({
         url: this.searchUrl.href,
         success: function success(data) {
@@ -10853,6 +10857,9 @@ var Site = function () {
           }
 
           _this.$searchResults.append(results);
+
+          _this.$searchPanel.scrollTop(initialScrollTop);
+
           _this.bindLinks('#search-results a');
 
           if (_this.currentSearchPage === maxPages) {
@@ -11040,6 +11047,7 @@ var Site = function () {
       var $loadMore = (0, _jquery2.default)('#load-more');
       var maxPages = parseInt($posts.attr('data-maxpages'));
       var nextPage = parseInt(url.searchParams.get('paged'));
+      var initialScrollTop = (0, _jquery2.default)(window).scrollTop();
 
       (0, _jquery2.default)('body').addClass('loading-more');
 
@@ -11049,6 +11057,8 @@ var Site = function () {
           var newPosts = (0, _jquery2.default)(data).find(postsSelector)[0].innerHTML;
 
           $posts.append(newPosts);
+
+          (0, _jquery2.default)(window).scrollTop(initialScrollTop);
 
           _this.bindLinks();
           _this.bindFilterToggle();
@@ -22688,7 +22698,14 @@ var Player = function () {
   }, {
     key: 'togglePlaylist',
     value: function togglePlaylist() {
-      this.$playlist.toggleClass('show');
+      if ((0, _jquery2.default)('body').hasClass('playlist-open')) {
+        (0, _jquery2.default)('body').removeClass('playlist-open').css('top', 'auto');
+        (0, _jquery2.default)(window).scrollTop(this.windowScrollTop);
+      } else {
+        this.windowScrollTop = (0, _jquery2.default)(window).scrollTop();
+        this.$playlist.scrollTop(0);
+        (0, _jquery2.default)('body').addClass('playlist-open').css('top', this.windowScrollTop * -1);
+      }
     }
   }, {
     key: 'setTrackThumb',
