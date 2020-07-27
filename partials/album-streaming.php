@@ -26,7 +26,9 @@ if (!empty($related_track)) {
       data-title="<?php echo $title; ?>"
       data-thumb="<?php echo !empty($thumb_url) ? $thumb_url : get_the_post_thumbnail_url($post->ID); ?>"
       data-soundcloud="<?php echo $soundcloud_url; ?>"
-      data-id="<?php echo $track_id; ?>">HiFi</div>
+      data-id="<?php echo $track_id; ?>">
+        <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-hifi.png" />
+      </div>
   </div>
 <?php
   }
@@ -34,19 +36,19 @@ if (!empty($related_track)) {
 ?>
   <div class="grid-item">
     <a class="stream-button player-skip album-stream u-pointer" href="<?php echo $tidal_url; ?>">
-      Tidal
+      <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-tidal.png" />
     </a>
   </div>
 <?php } if (!empty($apple_url)) { ?>
   <div class="grid-item">
     <a class="stream-button player-skip album-stream u-pointer" href="<?php echo $apple_url; ?>">
-      Apple Music
+      <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-apple.png" />
     </a>
   </div>
 <?php } if (!empty($spotify_url)) { ?>
   <div class="grid-item">
     <a class="stream-button player-skip album-stream u-pointer" href="<?php echo $spotify_url; ?>">
-      Spotify
+      <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-spotify.png" />
     </a>
   </div>
 <?php } ?>
