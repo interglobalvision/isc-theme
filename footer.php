@@ -7,7 +7,7 @@ $options = get_site_option('_igv_site_options');
         <div class="grid-item item-s-12 item-l-4 no-gutter grid-column justify-between">
           <div class="grid-item">
             <div class="not-mobile">
-              <span class="font-bold">Logo</span>
+              <span class="font-bold">ISCHiFi</span>
             </div>
           </div>
         <?php if (!empty($options['mailchimp_action'])) { ?>
