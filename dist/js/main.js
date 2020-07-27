@@ -10798,12 +10798,14 @@ var Site = function () {
     key: 'handleSearchToggle',
     value: function handleSearchToggle() {
       if ((0, _jquery2.default)('body').hasClass('search-open')) {
+        this.$searchField.blur();
         (0, _jquery2.default)('body').removeClass('search-open').css('top', 'auto');
         (0, _jquery2.default)(window).scrollTop(this.windowScrollTop);
       } else {
         this.windowScrollTop = (0, _jquery2.default)(window).scrollTop();
         this.$searchPanel.scrollTop(0);
         (0, _jquery2.default)('body').addClass('search-open').css('top', this.windowScrollTop * -1);
+        this.$searchField.focus();
       }
     }
   }, {

@@ -32,7 +32,11 @@ get_template_part('partials/seo');
         <div class="grid-item flex-grow margin-bottom-tiny">
           <h1 class="font-bold"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
         </div>
-        <nav class="grid-row font-cond">
+      <div>
+    </div>
+    <nav id="main-nav" class="padding-top-tiny">
+      <div class="container">
+        <div class="grid-row font-cond justify-end">
           <div class="grid-item margin-bottom-tiny">
             <a href="<?php echo home_url('collection'); ?>">Collection</a>
           </div>
@@ -42,7 +46,7 @@ get_template_part('partials/seo');
           <div class="grid-item">
             <a class="search-toggle" href="#">Search</a>
           </div>
-        </nav>
-      <div>
-    </div>
+        </div>
+      </div>
+    </nav>
   </header>

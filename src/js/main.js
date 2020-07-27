@@ -99,12 +99,14 @@ class Site {
 
   handleSearchToggle() {
     if ($('body').hasClass('search-open')) {
+      this.$searchField.blur();
       $('body').removeClass('search-open').css('top', 'auto');
       $(window).scrollTop(this.windowScrollTop);
     } else {
       this.windowScrollTop = $(window).scrollTop();
       this.$searchPanel.scrollTop(0);
       $('body').addClass('search-open').css('top', this.windowScrollTop * -1);
+      this.$searchField.focus();
     }
   }
 

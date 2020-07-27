@@ -137,7 +137,7 @@ $query = new WP_Query($args);
 
 if ($query->have_posts()) {
 ?>
-  <section class="padding-top-basic padding-bottom-basic border-box">
+  <section class="padding-top-basic border-box">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 margin-bottom-small">
@@ -147,7 +147,7 @@ if ($query->have_posts()) {
         while ($query->have_posts()) {
           $query->the_post();
       ?>
-        <article <?php post_class('grid-item item-s-6 item-m-3'); ?> id="album-<?php the_ID(); ?>">
+        <article <?php post_class('grid-item item-s-6 item-m-3 margin-bottom-basic'); ?> id="album-<?php the_ID(); ?>">
           <a href="<?php the_permalink() ?>">
             <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
             <div><?php the_post_thumbnail('full'); ?></div>

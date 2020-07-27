@@ -20,6 +20,10 @@ space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-m
 
 font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
 
+*:focus
+  outline: none
+  box-shadow: 0 0 3px 2px $color-grey
+
 .not-mobile
   display: none !important
 
@@ -98,7 +102,7 @@ body
 
 .filter-trigger, input
   appearance: none
-  background-color: $color-white
+  background-color: transparent
   border: 1px solid $color-black
   border-radius: 1em
   padding: 1em
@@ -267,7 +271,9 @@ body
     pointer-events: none
 
 input
-  cursor: default
+  cursor: unset
+  &:focus
+    box-shadow: none
 
 button
   appearance: none
