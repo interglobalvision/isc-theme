@@ -141,7 +141,7 @@ if ($query->have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 margin-bottom-small">
-          <span>Suggested Records</span>
+          <span class="font-size-small font-color-grey">Suggested Records</span>
         </div>
       <?php
         while ($query->have_posts()) {

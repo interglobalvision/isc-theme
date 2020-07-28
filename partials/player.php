@@ -17,17 +17,17 @@ get_template_part('partials/playlist');
           </div>
         </div>
 
-        <div class="grid-item flex-grow">
+        <div class="grid-item flex-grow font-size-small">
           <div id="player-name-holder">
-            <span>ISCHiFi—DIGITAL AUDIO PLAYER</span>
+            <span>ISCHiFi</span><span> — DIGITAL AUDIO PLAYER</span>
           </div>
           <div>
-            <span id="player-track-title">&hellip;</span>
+            <span id="player-track-title" class="font-mono">&hellip;</span>
           </div>
         </div>
 
-        <div  class="grid-item">
-          <span id="player-current-time">0:00</span>/<span id="player-duration">0:00</span>
+        <div class="grid-item font-size-small font-mono">
+          <span id="player-current-time">0:00</span><span> / </span><span id="player-duration">0:00</span>
         </div>
       </div>
       <div class="grid-row justify-between align-items-center grid-item item-s-12 item-m-auto no-gutter">

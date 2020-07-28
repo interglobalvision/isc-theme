@@ -1,13 +1,13 @@
 <?php
 $options = get_site_option('_igv_site_options');
 ?>
-  <footer id="footer" class="background-white padding-top-basic padding-bottom-large">
+  <footer id="footer" class="background-white padding-top-basic padding-bottom-large font-size-small">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-l-4 no-gutter grid-column justify-between">
           <div class="grid-item">
             <div class="not-mobile">
-              <div class="margin-bottom-tiny"><span class="font-bold">ISCHiFi</span></div>
+              <div class="margin-bottom-tiny"><span class="font-bold font-size-basic">ISCHiFi</span></div>
               <div><?php get_template_part('assets/logo.svg'); ?></div>
             </div>
           </div>

@@ -1,7 +1,7 @@
 <div class="grid-row">
   <div class="grid-item no-gutter item-s-12 item-m-7 item-l-6 offset-l-2 grid-row margin-bottom-basic">
     <div class="grid-item item-s-3 item-m-auto">
-      <span>STYLE</span>
+      <span class="font-uppercase font-size-tiny">Style</span>
     </div>
     <div class="grid-item flex-grow">
       <?php
@@ -34,7 +34,7 @@
   </div>
   <div class="grid-item no-gutter item-s-12 item-m-5 item-l-3 offset-l-1 grid-row margin-bottom-basic">
     <div class="grid-item item-s-3 item-m-auto">
-      <span>SORT BY</span>
+      <span class="font-uppercase font-size-tiny">Sort By</span>
     </div>
     <div class="grid-item flex-grow">
       <?php

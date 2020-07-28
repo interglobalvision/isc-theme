@@ -6,7 +6,7 @@
           <?php guest_authors($post->ID); ?>
         </div>
         <div class="grid-item">
-          <?php echo get_the_date(); ?>
+          <time datetime="<?php echo get_the_date('Y-m-d'); ?>" class="font-size-small"><?php echo get_the_date(); ?></time>
         </div>
       </div>
       <div class="grid-item item-s-12">
@@ -38,7 +38,7 @@
               <?php guest_authors($post->ID); ?>
             </div>
             <div class="grid-item">
-              <?php echo get_the_date(); ?>
+              <time datetime="<?php echo get_the_date('Y-m-d'); ?>" class="font-size-small"><?php echo get_the_date(); ?></time>
             </div>
           </div>
         </div>

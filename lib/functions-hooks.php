@@ -32,3 +32,28 @@ function igv_disable_gutenberg_for_post_type( $is_enabled, $post_type ) {
 }
 
 add_filter( 'use_block_editor_for_post_type', 'igv_disable_gutenberg_for_post_type', 10, 2 );
+
+add_action( 'after_setup_theme', 'igv_setup' );
+function igv_setup() {
+  add_theme_support( 'align-wide' );
+}
+
+function igv_allowed_block_types( $allowed_blocks, $post ) {
+  $allowed_blocks = array(
+    'core/paragraph',
+    'core/heading',
+    'core/list',
+    'core/audio',
+    'core/image',
+    'core/gallery',
+    'core/quote',
+    'core/pullquote',
+    'core-embed/youtube',
+    'core-embed/vimeo',
+    'core-embed/soundcloud',
+    'core/video'
+  );
+
+	return $allowed_blocks;
+}
+//add_filter( 'allowed_block_types', 'igv_allowed_block_types', 10, 2 );

@@ -4,7 +4,7 @@
       <?php guest_authors($post->ID); ?>
     </div>
     <div class="grid-item">
-      <?php echo get_the_date(); ?>
+      <time datetime="<?php echo get_the_date('Y-m-d'); ?>" class="font-size-small"><?php echo get_the_date(); ?></time>
     </div>
   </div>
   <div class="grid-item margin-bottom-tiny">
@@ -12,7 +12,7 @@
   </div>
   <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-3">
-      <span class="font-uppercase post-item-type">Feature</span>
+      <span class="font-uppercase post-item-type font-size-small">Feature</span>
     </div>
     <div class="grid-item item-s-9">
       <h2 class="font-cond font-size-large"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>

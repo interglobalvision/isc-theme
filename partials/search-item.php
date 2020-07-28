@@ -1,3 +1,6 @@
+<?php
+$post_type = get_post_type();
+?>
 <article <?php post_class('grid-item item-s-12 item-m-6 grid-row flex-nowrap search-result margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
   <div>
     <a href="<?php the_permalink(); ?>">
@@ -7,8 +10,8 @@
   <div class="flex-grow">
     <a href="<?php the_permalink(); ?>">
       <div>
-        <span class="font-uppercase"><?php
-          switch (get_post_type()) {
+        <span class="font-uppercase font-size-small"><?php
+          switch ($post_type) {
             case 'post':
               echo 'Feature';
               break;
@@ -21,7 +24,26 @@
         ?></span>
       </div>
       <div>
-        <?php the_title(); ?>
+        <span class="font-cond font-size-mid">
+          <?php
+            if ($post_type === 'album') {
+              $artist = get_post_meta($post->ID, '_igv_album_artist', true);
+              echo !empty($artist) ? '<span>' . $artist . '</span>' : '';
+            } else {
+              the_title();
+            }
+          ?>
+        </span>
+      </div>
+      <div>
+        <?php
+          if ($post_type === 'album') {
+            $title = get_post_meta($post->ID, '_igv_album_title', true);
+            echo !empty($title) ? $title : get_the_title();
+          } else {
+            guest_authors($post->ID);
+          }
+        ?>
       </div>
     </a>
   </div>

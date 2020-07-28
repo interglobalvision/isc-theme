@@ -9,13 +9,19 @@
   $margin-mid = ($gutter * 3.5)
   $margin-large = ($gutter * 5)
 
+  $font-size-extra = 60px
+  $font-size-large = 36px
+  $font-size-mid = 24px
   $font-size-basic = 16px
+  $font-size-small = 13px
+  $font-size-tiny = 9px
+
 
   grid-maker(1130px, $gutter, l)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
-  font-sizes($font-size-basic)
+  font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
 
   .border-box
     border-top-width: $margin-tiny
@@ -24,7 +30,6 @@
       width: $margin-tiny
 
   .recent-album-thumb
-    margin-right: $margin-tiny
     width: 175px
 
   #search-panel
@@ -39,3 +44,20 @@
   #loader
     img
       width: 80px
+
+  .alignwide
+    margin-left: calc(unquote('(-100% / 60) * 10')) !important
+    margin-right: calc(unquote('(-100% / 60) * 10')) !important
+    max-width: calc(unquote('(100% / 60) * 80'))
+    text-align: center
+
+  .alignfull
+    margin-left: calc(unquote('(-100% / 60) * 20')) !important
+    margin-right: calc(unquote('(-100% / 60) * 20')) !important
+    max-width: calc(unquote('(100% / 60) * 100'))
+    text-align: center
+
+  #post-content
+    width: 60%
+    figcaption
+      font-size: $font-size-small
