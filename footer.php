@@ -28,7 +28,7 @@ $options = get_site_option('_igv_site_options');
           </div>
         <?php } ?>
         </div>
-        <div class="grid-item item-s-12 item-l-4 no-gutter grid-column">
+        <div class="grid-item item-s-12 item-l-4 no-gutter grid-column justify-between">
         <?php if (!empty($options['hours'])) { ?>
           <div class="grid-item margin-bottom-basic">
             <?php echo apply_filters('the_content', $options['hours']); ?>

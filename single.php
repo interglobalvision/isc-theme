@@ -25,7 +25,7 @@ get_header();
             </div>
           </div>
         </header>
-        <div class="grid-item item-s-12 margin-bottom-basic">
+        <div class="grid-item item-s-12 margin-bottom-basic text-align-center">
           <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
         </div>
         <div class="grid-item item-s-12 grid-row justify-center">
