@@ -8,7 +8,7 @@
     </div>
   </div>
   <div class="grid-item margin-bottom-tiny">
-    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('full'); ?></a>
+    <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-item'); ?></a>
   </div>
   <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-3">
