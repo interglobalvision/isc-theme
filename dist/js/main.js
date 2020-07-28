@@ -10731,6 +10731,7 @@ var Site = function () {
       this.bindBack();
       this.setupSwiper();
       this.bindSearchEvents();
+      this.setFooterHeight();
 
       this.audioPlayer = new _player2.default();
 
@@ -10745,6 +10746,15 @@ var Site = function () {
         _this.thetime++;
         (0, _jquery2.default)('#counter').html(_this.thetime);
       }, 1000);
+    }
+  }, {
+    key: 'setFooterHeight',
+    value: function setFooterHeight() {
+      var headerHeight = (0, _jquery2.default)('#header').outerHeight();
+      var contentHeight = (0, _jquery2.default)('#main-content').outerHeight();
+      var windowHeight = (0, _jquery2.default)(window).outerHeight();
+
+      (0, _jquery2.default)('#footer').css('min-height', windowHeight - (headerHeight + contentHeight) + 'px');
     }
   }, {
     key: 'bindLinks',

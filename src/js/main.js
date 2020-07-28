@@ -36,6 +36,7 @@ class Site {
     this.bindBack();
     this.setupSwiper();
     this.bindSearchEvents();
+    this.setFooterHeight();
 
     this.audioPlayer = new Player();
 
@@ -49,6 +50,14 @@ class Site {
       _this.thetime++;
       $('#counter').html(_this.thetime);
     }, 1000);
+  }
+
+  setFooterHeight() {
+    const headerHeight = $('#header').outerHeight();
+    const contentHeight = $('#main-content').outerHeight();
+    const windowHeight = $(window).outerHeight();
+
+    $('#footer').css('min-height', (windowHeight - (headerHeight + contentHeight)) + 'px');
   }
 
   bindLinks(selector = 'a') {

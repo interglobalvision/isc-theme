@@ -28,7 +28,7 @@ get_template_part('partials/seo');
 <section id="main-container">
   <header id="header">
     <div class="container">
-      <div class="grid-row margin-top-tiny">
+      <div class="grid-row padding-top-tiny">
         <div class="grid-item flex-grow margin-bottom-tiny">
           <h1 class="font-bold"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
         </div>
