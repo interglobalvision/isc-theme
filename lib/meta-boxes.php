@@ -107,6 +107,23 @@ function igv_cmb_metaboxes() {
 		'type'       => 'text_url',
 	) );
 
+  $album_metabox->add_field( array(
+		'name'       => __( 'YouTube URL', 'cmb2' ),
+		'id'         => $prefix . 'album_youtube_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Bandcamp URL', 'cmb2' ),
+		'id'         => $prefix . 'album_bandcamp_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Soundcloud URL', 'cmb2' ),
+		'id'         => $prefix . 'album_soundcloud_url',
+		'type'       => 'text_url',
+	) );
 
   // TRACK
 
