@@ -7,12 +7,12 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-basic = 12px
-$font-size-extra = 48px
+$font-size-extra = 60px
 $font-size-large = 36px
 $font-size-mid = 24px
-$font-size-small = 18px
-$font-size-tiny = 8px
+$font-size-basic = 16px
+$font-size-small = 13px
+$font-size-tiny = 9px
 
 grid-maker(96%, $gutter, s)
 
@@ -317,6 +317,12 @@ hr
   margin: 0
   margin-top: 3em
   margin-bottom: 3em
+
+.wp-block-pullquote
+  padding: 0
+  p
+    font-size: $font-size-large
+    color: $color-grey
 
 #post-content
   width: 100%

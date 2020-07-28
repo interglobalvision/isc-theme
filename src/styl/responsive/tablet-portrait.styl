@@ -9,13 +9,9 @@
   $margin-mid = ($gutter * 3.5)
   $margin-large = ($gutter * 5)
 
-  $font-size-basic = 14px
-
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
   grid-maker(96%, $gutter, m)
-
-  font-sizes($font-size-basic)
 
   .mobile-only
     display: none !important
@@ -40,7 +36,12 @@
     img
       width: 60px
 
-  .alignwide
+  .wp-block-pullquote
+    p
+      font-size: $font-size-large
+
+  .alignwide,
+  .wp-block-pullquote
     margin-left: calc(unquote('(-100% / 80) * 5')) !important
     margin-right: calc(unquote('(-100% / 80) * 5')) !important
     max-width: calc(unquote('(100% / 80) * 90'))
