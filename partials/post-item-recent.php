@@ -3,7 +3,7 @@
     <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('recent-post'); ?></a>
   </div>
   <div class="grid-item item-s-12">
-    <h2 class="font-size-large font-cond margin-bottom-tiny"><?php the_title(); ?></h2>
+    <h2 class="font-size-large font-cond margin-bottom-tiny"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
   </div>
   <div class="grid-item no-gutter item-s-12">
     <div class="grid-item item-s-12">
