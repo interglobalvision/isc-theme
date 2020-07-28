@@ -8,7 +8,7 @@ $options = get_site_option('_igv_site_options');
           <div class="grid-item">
             <div class="not-mobile">
               <div class="margin-bottom-tiny"><span class="font-bold font-size-basic">ISCHiFi</span></div>
-              <div><?php get_template_part('assets/logo.svg'); ?></div>
+              <div class="margin-bottom-tiny"><?php get_template_part('assets/logo.svg'); ?></div>
             </div>
           </div>
         <?php if (!empty($options['mailchimp_action'])) { ?>
