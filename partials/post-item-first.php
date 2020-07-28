@@ -3,10 +3,10 @@
     <div class="grid-row">
       <div class="grid-item no-gutter item-s-12 grid-row">
         <div class="grid-item item-s-auto flex-grow offset-l-3">
-          <span>Author</span>
+          <?php guest_authors($post->ID); ?>
         </div>
         <div class="grid-item">
-          <?php the_date(); ?>
+          <?php echo get_the_date(); ?>
         </div>
       </div>
       <div class="grid-item item-s-12">
@@ -16,9 +16,9 @@
         <span>FEATURE</span>
       </div>
       <div class="grid-item item-s-9">
-        <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
+        <h2 class="font-cond font-size-extra"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
       </div>
-      <div class="grid-item item-s-12">
+      <div class="grid-item item-s-12 font-mono">
         <?php the_excerpt(); ?>
       </div>
       <div class="grid-item offset-s-9">
@@ -28,19 +28,21 @@
   </div>
   <div class="not-mobile">
     <div class="grid-row">
-      <div class="grid-item item-s-6">
-        <div class="grid-item item-s-12">
-          <h2><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-        </div>
+      <div class="no-gutter grid-item item-s-6 grid-row align-content-between">
         <div class="grid-item no-gutter item-s-12 grid-row">
-          <div class="grid-item item-s-auto flex-grow offset-l-3">
-            <span>Author</span>
+          <div class="grid-item item-s-12 margin-bottom-small">
+            <h2 class="font-cond font-size-extra"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
           </div>
-          <div class="grid-item">
-            <?php the_date(); ?>
+          <div class="grid-item no-gutter item-s-12 grid-row margin-bottom-small">
+            <div class="grid-item item-s-auto flex-grow offset-l-3">
+              <?php guest_authors($post->ID); ?>
+            </div>
+            <div class="grid-item">
+              <?php echo get_the_date(); ?>
+            </div>
           </div>
         </div>
-        <div class="grid-item item-s-12">
+        <div class="grid-item item-s-12 font-mono">
           <?php the_excerpt(); ?>
         </div>
       </div>

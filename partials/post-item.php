@@ -1,7 +1,7 @@
 <article <?php post_class('grid-item no-gutter item-s-12 item-m-6 grid-column margin-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
   <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-auto flex-grow offset-l-3">
-      <span>Author</span>
+      <?php guest_authors($post->ID); ?>
     </div>
     <div class="grid-item">
       <?php echo get_the_date(); ?>

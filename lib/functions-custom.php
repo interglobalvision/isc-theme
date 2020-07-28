@@ -16,3 +16,13 @@ function custom_filter($args) {
 </div>
 <?php
 }
+
+function guest_authors($post_id) {
+  $authors = get_the_terms($post_id, 'guest_author');
+  if ($authors) {
+    foreach($authors as $key => $value) {
+      echo '<span><a href="' . get_post_type_archive_link('post') . '?guest_author=' . $value->slug . '">' . $value->name . '</a></span>';
+      echo $key + 1 !== count($authors) ? ', ' : '';
+    }
+  }
+}

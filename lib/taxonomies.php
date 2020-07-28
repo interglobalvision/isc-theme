@@ -138,5 +138,32 @@ function create_album_taxonomies() {
 	);
 
 	register_taxonomy( 'country', array( 'album' ), $args );
+
+  // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Authors', 'taxonomy general name', 'igv' ),
+		'singular_name'     => _x( 'Author', 'taxonomy singular name', 'igv' ),
+		'search_items'      => __( 'Search Authors', 'igv' ),
+		'all_items'         => __( 'All Authors', 'igv' ),
+		'parent_item'       => __( 'Parent Author', 'igv' ),
+		'parent_item_colon' => __( 'Parent Author:', 'igv' ),
+		'edit_item'         => __( 'Edit Author', 'igv' ),
+		'update_item'       => __( 'Update Author', 'igv' ),
+		'add_new_item'      => __( 'Add New Author', 'igv' ),
+		'new_item_name'     => __( 'New Author Name', 'igv' ),
+		'menu_name'         => __( 'Authors', 'igv' ),
+	);
+
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'feature-author' ),
+    'show_in_rest'      => true,
+	);
+
+	register_taxonomy( 'guest_author', array( 'post' ), $args );
 }
 ?>
