@@ -12,7 +12,7 @@
   </div>
   <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-3">
-      <span class="font-uppercase">Feature</span>
+      <span class="font-uppercase post-item-type">Feature</span>
     </div>
     <div class="grid-item item-s-9">
       <h2 class="font-cond font-size-large"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
