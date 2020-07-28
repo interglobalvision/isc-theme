@@ -45,6 +45,10 @@ if (have_posts()) {
 
 <?php
   }
+} else {
+?>
+        <div class="grid-item"><span>There's nothing here!</span></div>
+<?php
 }
 ?>
       </div>
