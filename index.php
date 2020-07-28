@@ -9,7 +9,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 <main id="main-content">
 
 <?php
-if ($current_page === 1) {
+if (is_home() && $current_page === 1) {
   $args = array(
     'post_type' => array('post'),
     'posts_per_page' => 1,
@@ -39,7 +39,7 @@ if ($current_page === 1) {
 }
 ?>
 
-  <section class="border-box background-almond padding-top-basic">
+  <section class="border-box background-almond padding-top-basic padding-bottom-basic">
 
     <div class="container">
       <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
@@ -50,6 +50,10 @@ if ($current_page === 1) {
           the_post();
           get_template_part('partials/post-item');
         }
+      } else {
+      ?>
+        <div class="grid-item"><span>There's nothing here!</span></div>
+      <?php
       }
       ?>
 
