@@ -18,7 +18,7 @@ get_header();
           </div>
           <div id="post-details-holder" class="item-s-12 item-l-6 grid-row margin-bottom-small">
             <div class="grid-item item-s-8 item-l-6 offset-l-2">
-              Author
+              <?php guest_authors($post->ID); ?>
             </div>
             <div class="grid-item item-s-4">
               <?php echo get_the_date(); ?>
