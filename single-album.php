@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="padding-top-mid">
+<main id="main-content">
 <?php
 if (have_posts()) {
   while (have_posts()) {
@@ -25,7 +25,7 @@ if (have_posts()) {
     $the_content = get_the_content();
     $album_id = $post->ID;
 ?>
-  <section class="font-mono">
+  <section class="font-mono padding-top-mid">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">

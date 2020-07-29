@@ -6,8 +6,8 @@ $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
-<main id="main-content" class="padding-top-mid">
-  <section class="padding-bottom-large">
+<main id="main-content">
+  <section class="padding-top-mid padding-bottom-large">
     <div class="container">
       <?php get_search_form(); ?>
       <div id="search-results" data-maxpages="<?php echo $max_pages; ?>" class="grid-row">

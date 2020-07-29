@@ -2,8 +2,8 @@
 get_header();
 ?>
 
-<main id="main-content" class="padding-top-mid">
-  <section class="padding-bottom-large">
+<main id="main-content">
+  <section class="padding-bottom-large padding-top-mid">
     <div class="container">
       <div class="grid-row">
 

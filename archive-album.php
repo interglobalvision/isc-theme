@@ -6,8 +6,8 @@ $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
-<main id="main-content" class="padding-top-mid">
-  <section>
+<main id="main-content">
+  <section class="padding-top-mid">
     <div class="container">
       <?php get_template_part('partials/collection-filter'); ?>
     </div>

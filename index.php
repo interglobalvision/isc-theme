@@ -6,7 +6,7 @@ $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
-<main id="main-content" class="padding-top-mid">
+<main id="main-content">
 
 <?php
 if (is_home() && $current_page === 1) {
@@ -20,7 +20,7 @@ if (is_home() && $current_page === 1) {
   if ($query->have_posts()) {
 ?>
 
-  <section id="recent-post">
+  <section id="recent-post" class="padding-top-mid">
     <div class="container">
       <div class="grid-row">
       <?php
@@ -39,7 +39,7 @@ if (is_home() && $current_page === 1) {
 }
 ?>
 
-  <section class="border-box background-almond padding-top-basic padding-bottom-basic">
+  <section class="border-box background-almond padding-bottom-basic <?php echo (!is_home() && $current_page !== 1) ? 'padding-top-mid' : 'padding-top-basic'; ?>">
 
     <div class="container">
       <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
