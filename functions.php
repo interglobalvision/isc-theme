@@ -16,6 +16,7 @@ function scripts_and_styles_method() {
     foreach($player_options['player_playlist'] as $track_id) {
       $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
+      $related_album_url = !empty($related_album) ? get_the_permalink($related_album) : false;
       $thumb_url = get_the_post_thumbnail_url($track_id, 'thumbnail');
 
       if (!empty($soundcloudUrl)) {
@@ -27,7 +28,8 @@ function scripts_and_styles_method() {
         array_push($playlist, [
           'title' => get_the_title($track_id),
           'thumbUrl' => $thumb_url,
-          'soundcloudUrl' => $soundcloudUrl
+          'soundcloudUrl' => $soundcloudUrl,
+          'relatedAlbumUrl' => $related_album_url
         ]);
       }
     }
@@ -41,7 +43,7 @@ function scripts_and_styles_method() {
     'isAdmin' => $is_admin,
     'mailchimp' => $options['mailchimp_action'],
     'postsPerPage' => get_query_var('posts_per_page'),
-    'playerClientId' => $options['player_client_id'],
+    'playerClientId' => $player_options['player_client_id'],
     'playerPlaylist' => json_encode($playlist),
     //'playerPlaylistUrl' => $options['player_playlist_url']
   );

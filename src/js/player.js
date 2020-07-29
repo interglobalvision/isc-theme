@@ -29,14 +29,15 @@ class Player {
   onReady() {
     this.$mainContainer = $('#main-container');
     this.$player = $('#player');
-    this.$trackTitle = $('#player-track-title');
-    this.$duration = $('#player-duration');
-    this.$currentTime = $('#player-current-time');
-    this.$playPause = $('#player-play-pause');
+    this.$trackTitle = $('.player-track-title');
+    this.$duration = $('.player-duration');
+    this.$currentTime = $('.player-current-time');
+    this.$playPause = $('.player-play-pause');
     this.$skip = $('.player-skip');
     this.$playlist = $('#playlist');
-    this.$playlistToggle = $('#playlist-toggle');
-    this.$playerThumb = $('#player-thumb');
+    this.$playlistToggle = $('.playlist-toggle');
+    this.$playerThumb = $('.player-thumb');
+    this.$playerTrackInfo = $('.player-track-info');
 
     this.initSC();
   }
@@ -73,7 +74,7 @@ class Player {
     this.isPlaying = false;
     this.hasError = true;
     this.$player.addClass('player-error');
-    this.$trackTitle.text(this.playlist[this.trackIndex].title);
+    this.$trackTitle.text(errorMsg);
   }
 
   clearError() {
@@ -115,6 +116,7 @@ class Player {
     this.setDuration();
     this.setTrackTitle();
     this.setTrackThumb();
+    this.updateInfoLink();
     if (this.isPlaying) {
       this.handlePlayPause();
     }
@@ -131,12 +133,19 @@ class Player {
 
   bindControls() {
     const _this = this;
-    this.$playPause.on('click', function() {
+    this.$playPause.on('click', function(e) {
+      $(this).blur();
       _this.isPlaying = !_this.isPlaying;
       _this.handlePlayPause();
     });
-    this.$skip.on('click', this.handleSkip);
-    this.$playlistToggle.on('click', this.togglePlaylist);
+    this.$skip.on('click', function(e) {
+      $(this).blur();
+      _this.handleSkip(e);
+    });
+    this.$playlistToggle.on('click', function(e) {
+      $(this).blur();
+      _this.togglePlaylist(e);
+    });
   }
 
   enablePlayPause() {
@@ -273,6 +282,16 @@ class Player {
 
   setTrackTitle() {
     this.$trackTitle.text(this.playlist[this.trackIndex].title);
+  }
+
+  updateInfoLink() {
+    if (this.playlist[this.trackIndex].relatedAlbumUrl) {
+      this.$playerTrackInfo.attr('href', this.playlist[this.trackIndex].relatedAlbumUrl)
+        .removeClass('disabled');
+    } else {
+      this.$playerTrackInfo.removeAttr('href')
+        .addClass('disabled');
+    }
   }
 
   setCurrentTime() {

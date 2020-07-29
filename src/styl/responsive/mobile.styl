@@ -7,8 +7,8 @@ $margin-basic = ($gutter * 2)
 $margin-mid = ($gutter * 3.5)
 $margin-large = ($gutter * 5)
 
-$font-size-extra = 60px
-$font-size-large = 36px
+$font-size-extra = 36px
+$font-size-large = 32px
 $font-size-mid = 24px
 $font-size-basic = 16px
 $font-size-small = 13px
@@ -203,38 +203,43 @@ body
   left: 0
   z-index: 500
   &.player-error
-    #player-track-title
+    .player-track-title
       font-family: $font-mono
 
-.player-thumb-holder
-  width: 50px
-  height: 50px
-  img
-    width: 50px
-    height: 50px
+.player-track-details
+  border-bottom: 1px solid $color-white
+  padding-bottom: 10px
+  margin-bottom: 10px
 
-#player-thumb
+.player-thumb-holder
+  width: 25px
+  height: 25px
+  img
+    width: 25px
+    height: 25px
+
+.player-thumb
   visibility: hidden
   &.show
     visibility: visible
 
-#player-name-holder
+.player-name-holder
   padding-bottom: .3em
   margin-bottom: .3em
   border-bottom: 1px solid $color-white
 
 .player-control
-  min-width: 3em
-  height: 3em
+  min-width: 30px
+  height: 30px
   position: relative
-  padding: 1em
+  padding: 10px
   appearance: none
   background-color: transparent
   color: $color-white
   border: none
+  cursor: pointer
 
 .player-control-icon
-  pointer-events: none
   position: absolute
   width: 100%
   height: 100%
@@ -247,20 +252,21 @@ body
   font-size: $font-size-basic
   &.hide
     visibility: hidden
-
-.player-skip
-  .player-control-icon
-    img
-      max-width: 50%
-
-#playlist-toggle
-  border: 1px solid $color-white
-  border-radius: 3em
   img
-    max-height: 100%
-    width: auto
-    max-width: unset
-    margin-left: .5em
+    max-width: 50%
+
+.player-play-pause
+  img
+    max-width: 100%
+
+.playlist-toggle
+  img
+    margin-top: -.2em
+
+.player-track-info
+  &.disabled
+    pointer-events: none
+    opacity: .5
 
 .album-featured-slide
   width: 30vw

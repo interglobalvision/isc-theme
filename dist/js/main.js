@@ -22501,14 +22501,15 @@ var Player = function () {
     value: function onReady() {
       this.$mainContainer = (0, _jquery2.default)('#main-container');
       this.$player = (0, _jquery2.default)('#player');
-      this.$trackTitle = (0, _jquery2.default)('#player-track-title');
-      this.$duration = (0, _jquery2.default)('#player-duration');
-      this.$currentTime = (0, _jquery2.default)('#player-current-time');
-      this.$playPause = (0, _jquery2.default)('#player-play-pause');
+      this.$trackTitle = (0, _jquery2.default)('.player-track-title');
+      this.$duration = (0, _jquery2.default)('.player-duration');
+      this.$currentTime = (0, _jquery2.default)('.player-current-time');
+      this.$playPause = (0, _jquery2.default)('.player-play-pause');
       this.$skip = (0, _jquery2.default)('.player-skip');
       this.$playlist = (0, _jquery2.default)('#playlist');
-      this.$playlistToggle = (0, _jquery2.default)('#playlist-toggle');
-      this.$playerThumb = (0, _jquery2.default)('#player-thumb');
+      this.$playlistToggle = (0, _jquery2.default)('.playlist-toggle');
+      this.$playerThumb = (0, _jquery2.default)('.player-thumb');
+      this.$playerTrackInfo = (0, _jquery2.default)('.player-track-info');
 
       this.initSC();
     }
@@ -22547,7 +22548,7 @@ var Player = function () {
       this.isPlaying = false;
       this.hasError = true;
       this.$player.addClass('player-error');
-      this.$trackTitle.text(this.playlist[this.trackIndex].title);
+      this.$trackTitle.text(errorMsg);
     }
   }, {
     key: 'clearError',
@@ -22590,6 +22591,7 @@ var Player = function () {
       this.setDuration();
       this.setTrackTitle();
       this.setTrackThumb();
+      this.updateInfoLink();
       if (this.isPlaying) {
         this.handlePlayPause();
       }
@@ -22609,12 +22611,19 @@ var Player = function () {
     key: 'bindControls',
     value: function bindControls() {
       var _this = this;
-      this.$playPause.on('click', function () {
+      this.$playPause.on('click', function (e) {
+        (0, _jquery2.default)(this).blur();
         _this.isPlaying = !_this.isPlaying;
         _this.handlePlayPause();
       });
-      this.$skip.on('click', this.handleSkip);
-      this.$playlistToggle.on('click', this.togglePlaylist);
+      this.$skip.on('click', function (e) {
+        (0, _jquery2.default)(this).blur();
+        _this.handleSkip(e);
+      });
+      this.$playlistToggle.on('click', function (e) {
+        (0, _jquery2.default)(this).blur();
+        _this.togglePlaylist(e);
+      });
     }
   }, {
     key: 'enablePlayPause',
@@ -22758,6 +22767,15 @@ var Player = function () {
       this.$trackTitle.text(this.playlist[this.trackIndex].title);
     }
   }, {
+    key: 'updateInfoLink',
+    value: function updateInfoLink() {
+      if (this.playlist[this.trackIndex].relatedAlbumUrl) {
+        this.$playerTrackInfo.attr('href', this.playlist[this.trackIndex].relatedAlbumUrl).removeClass('disabled');
+      } else {
+        this.$playerTrackInfo.removeAttr('href').addClass('disabled');
+      }
+    }
+  }, {
     key: 'setCurrentTime',
     value: function setCurrentTime() {
       this.timeUpdater = setInterval(this.updateCurrentTime, 500);
@@ -22823,14 +22841,14 @@ var Mailchimp = function () {
   _createClass(Mailchimp, [{
     key: 'onReady',
     value: function onReady() {
-      this.$form = (0, _jquery2.default)('#mailchimp-form');
+      this.$form = (0, _jquery2.default)('.mailchimp-form');
 
       if (WP.mailchimp === null) {
         (0, _jquery2.default)('#mailchimp-form').remove();
         console.error('mailchimp action null');
       } else if (this.$form.length && WP.mailchimp !== null) {
-        this.$email = (0, _jquery2.default)('#mailchimp-email');
-        this.$reply = (0, _jquery2.default)('#mailchimp-response');
+        this.$email = this.$form.find('.mailchimp-email');
+        this.$reply = this.$form.closest('.mailchimp-response');
 
         // Bind form submit event
         this.$form.submit(this.submitForm);

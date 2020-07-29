@@ -18,14 +18,14 @@ class Mailchimp {
   }
 
   onReady() {
-    this.$form = $('#mailchimp-form');
+    this.$form = $('.mailchimp-form');
 
     if (WP.mailchimp === null) {
       $('#mailchimp-form').remove();
       console.error('mailchimp action null');
     } else if (this.$form.length && WP.mailchimp !== null) {
-      this.$email = $('#mailchimp-email');
-      this.$reply = $('#mailchimp-response');
+      this.$email = this.$form.find('.mailchimp-email');
+      this.$reply = this.$form.closest('.mailchimp-response');
 
       // Bind form submit event
       this.$form.submit(this.submitForm);
