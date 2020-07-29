@@ -4,7 +4,7 @@ $title = get_post_meta($post->ID, '_igv_album_title', true);
 $styles = get_the_terms($post->ID, 'style');
 ?>
 <article <?php post_class('album-item-recent grid-item item-s-12 item-m-4 grid-row margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
-  <div class="grid-item no-gutter item-m-12 item-l-auto margin-right-tiny">
+  <div class="grid-item no-gutter item-m-12 item-l-7 margin-right-tiny">
     <a href="<?php the_permalink(); ?>">
       <?php the_post_thumbnail('album-item', ['class' => 'recent-album-thumb']); ?>
     </a>
