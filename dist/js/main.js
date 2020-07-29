@@ -22746,12 +22746,10 @@ var Player = function () {
     value: function setTrackThumb() {
       if (this.playlist[this.trackIndex].thumbUrl) {
         // track has thumb
-        this.$playerThumb.attr('src', this.playlist[this.trackIndex].thumbUrl);
-        this.$playerThumb.addClass('show');
+        this.$playerThumb.removeAttr('src').attr('src', this.playlist[this.trackIndex].thumbUrl).addClass('show');
       } else {
         // track doesn't have thumb
-        this.$playerThumb.removeAttr('src');
-        this.$playerThumb.removeClass('show');
+        this.$playerThumb.removeAttr('src').removeClass('show');
       }
     }
   }, {
