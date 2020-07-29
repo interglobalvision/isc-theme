@@ -121,13 +121,13 @@ class Site {
   handleSearchToggle() {
     if ($('body').hasClass('search-open')) {
       this.$searchField.blur();
-      $('body').removeClass('search-open')
+      $('body').removeClass('search-open');
       this.$mainContainer.css('top', 'auto');
       $(window).scrollTop(this.windowScrollTop);
     } else {
       this.windowScrollTop = $(window).scrollTop();
       this.$searchPanel.scrollTop(0);
-      $('body').addClass('search-open')
+      $('body').addClass('search-open');
       this.$mainContainer.css('top', this.windowScrollTop * -1);
       this.$searchField.focus();
     }

@@ -61,15 +61,18 @@ $options = get_site_option('_igv_site_options');
     </div>
   </footer>
 
+  <?php
+  if (!is_search()) {
+    get_template_part('partials/search-panel');
+  }
+  get_template_part('partials/player');
+  ?>
+
 </section>
 
 <div id="loader"><img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/loading.png" /></div>
 
 <?php
-if (!is_search()) {
-  get_template_part('partials/search-panel');
-}
-get_template_part('partials/player');
 get_template_part('partials/scripts');
 get_template_part('partials/schema-org');
 ?>

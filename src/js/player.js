@@ -27,6 +27,7 @@ class Player {
   }
 
   onReady() {
+    this.$mainContainer = $('#main-container');
     this.$player = $('#player');
     this.$trackTitle = $('#player-track-title');
     this.$duration = $('#player-duration');
@@ -246,12 +247,14 @@ class Player {
 
   togglePlaylist() {
     if ($('body').hasClass('playlist-open')) {
-      $('body').removeClass('playlist-open').css('top', 'auto');
+      $('body').removeClass('playlist-open');
+      this.$mainContainer.css('top', 'auto');
       $(window).scrollTop(this.windowScrollTop);
     } else {
       this.windowScrollTop = $(window).scrollTop();
       this.$playlist.scrollTop(0);
-      $('body').addClass('playlist-open').css('top', this.windowScrollTop * -1);
+      $('body').addClass('playlist-open');
+      this.$mainContainer.css('top', this.windowScrollTop * -1);
     }
   }
 

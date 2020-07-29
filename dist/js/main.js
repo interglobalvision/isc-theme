@@ -22499,6 +22499,7 @@ var Player = function () {
   _createClass(Player, [{
     key: 'onReady',
     value: function onReady() {
+      this.$mainContainer = (0, _jquery2.default)('#main-container');
       this.$player = (0, _jquery2.default)('#player');
       this.$trackTitle = (0, _jquery2.default)('#player-track-title');
       this.$duration = (0, _jquery2.default)('#player-duration');
@@ -22730,12 +22731,14 @@ var Player = function () {
     key: 'togglePlaylist',
     value: function togglePlaylist() {
       if ((0, _jquery2.default)('body').hasClass('playlist-open')) {
-        (0, _jquery2.default)('body').removeClass('playlist-open').css('top', 'auto');
+        (0, _jquery2.default)('body').removeClass('playlist-open');
+        this.$mainContainer.css('top', 'auto');
         (0, _jquery2.default)(window).scrollTop(this.windowScrollTop);
       } else {
         this.windowScrollTop = (0, _jquery2.default)(window).scrollTop();
         this.$playlist.scrollTop(0);
-        (0, _jquery2.default)('body').addClass('playlist-open').css('top', this.windowScrollTop * -1);
+        (0, _jquery2.default)('body').addClass('playlist-open');
+        this.$mainContainer.css('top', this.windowScrollTop * -1);
       }
     }
   }, {
