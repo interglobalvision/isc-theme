@@ -10725,6 +10725,8 @@ var Site = function () {
   }, {
     key: 'onReady',
     value: function onReady() {
+      this.$mainContainer = (0, _jquery2.default)('#main-container');
+
       _lazysizes2.default.init();
       this.bindLinks();
       this.bindFilterToggle();
@@ -10732,6 +10734,7 @@ var Site = function () {
       this.setupSwiper();
       this.bindSearchEvents();
       this.setFooterHeight();
+      this.bindOverlayGallery();
 
       this.audioPlayer = new _player2.default();
 
@@ -10755,6 +10758,13 @@ var Site = function () {
       var windowHeight = (0, _jquery2.default)(window).outerHeight();
 
       (0, _jquery2.default)('#footer').css('min-height', windowHeight - (headerHeight + contentHeight) + 'px');
+    }
+  }, {
+    key: 'bindOverlayGallery',
+    value: function bindOverlayGallery() {
+      (0, _jquery2.default)('.toggle-gallery').on('click', function () {
+        (0, _jquery2.default)('body').toggleClass('gallery-open');
+      });
     }
   }, {
     key: 'bindLinks',
@@ -10815,12 +10825,14 @@ var Site = function () {
     value: function handleSearchToggle() {
       if ((0, _jquery2.default)('body').hasClass('search-open')) {
         this.$searchField.blur();
-        (0, _jquery2.default)('body').removeClass('search-open').css('top', 'auto');
+        (0, _jquery2.default)('body').removeClass('search-open');
+        this.$mainContainer.css('top', 'auto');
         (0, _jquery2.default)(window).scrollTop(this.windowScrollTop);
       } else {
         this.windowScrollTop = (0, _jquery2.default)(window).scrollTop();
         this.$searchPanel.scrollTop(0);
-        (0, _jquery2.default)('body').addClass('search-open').css('top', this.windowScrollTop * -1);
+        (0, _jquery2.default)('body').addClass('search-open');
+        this.$mainContainer.css('top', this.windowScrollTop * -1);
         this.$searchField.focus();
       }
     }

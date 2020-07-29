@@ -30,6 +30,8 @@ class Site {
   }
 
   onReady() {
+    this.$mainContainer = $('#main-container');
+
     lazySizes.init();
     this.bindLinks();
     this.bindFilterToggle();
@@ -37,6 +39,7 @@ class Site {
     this.setupSwiper();
     this.bindSearchEvents();
     this.setFooterHeight();
+    this.bindOverlayGallery();
 
     this.audioPlayer = new Player();
 
@@ -58,6 +61,12 @@ class Site {
     const windowHeight = $(window).outerHeight();
 
     $('#footer').css('min-height', (windowHeight - (headerHeight + contentHeight)) + 'px');
+  }
+
+  bindOverlayGallery() {
+    $('.toggle-gallery').on('click', function() {
+      $('body').toggleClass('gallery-open');
+    });
   }
 
   bindLinks(selector = 'a') {
@@ -112,12 +121,14 @@ class Site {
   handleSearchToggle() {
     if ($('body').hasClass('search-open')) {
       this.$searchField.blur();
-      $('body').removeClass('search-open').css('top', 'auto');
+      $('body').removeClass('search-open')
+      this.$mainContainer.css('top', 'auto');
       $(window).scrollTop(this.windowScrollTop);
     } else {
       this.windowScrollTop = $(window).scrollTop();
       this.$searchPanel.scrollTop(0);
-      $('body').addClass('search-open').css('top', this.windowScrollTop * -1);
+      $('body').addClass('search-open')
+      this.$mainContainer.css('top', this.windowScrollTop * -1);
       this.$searchField.focus();
     }
   }

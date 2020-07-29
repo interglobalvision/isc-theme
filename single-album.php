@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main id="main-content" class="padding-top-mid">
 <?php
 if (have_posts()) {
   while (have_posts()) {
@@ -20,14 +20,18 @@ if (have_posts()) {
     $countries = get_the_terms($post->ID, 'country');
     $tags = get_the_terms($post->ID, 'post_tag');
 
+    $images = get_post_meta($post->ID, '_igv_album_images', true);
+
     $the_content = get_the_content();
     $album_id = $post->ID;
 ?>
-  <section class="padding-top-basic font-mono">
+  <section class="font-mono">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
-          <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover')); ?>
+          <div class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
+            <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover')); ?>
+          </div>
         </div>
         <div class="grid-item item-s-12 item-m-6 offset-m-1 grid-row no-gutter align-content-start margin-bottom-basic">
           <header class="grid-item item-s-12 margin-bottom-small">
@@ -164,6 +168,8 @@ if ($query->have_posts()) {
 wp_reset_postdata();
 ?>
 </main>
+
+<?php get_template_part('partials/overlay-gallery'); ?>
 
 <?php
 get_footer();
