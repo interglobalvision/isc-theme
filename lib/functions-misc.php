@@ -20,7 +20,7 @@ function new_add_post_thumbnail_column($cols) {
 add_action('manage_posts_custom_column', 'new_display_post_thumbnail_column', 5, 2);
 function new_display_post_thumbnail_column($col, $id) {
   if ($col === 'new_post_thumb' && function_exists('the_post_thumbnail')) {
-    echo the_post_thumbnail( 'admin-thumb' );
+    echo the_post_thumbnail('thumbnail');
   }
 }
 

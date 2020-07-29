@@ -16,7 +16,7 @@ function scripts_and_styles_method() {
     foreach($player_options['player_playlist'] as $track_id) {
       $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
-      $thumb_url = get_the_post_thumbnail_url($track_id);
+      $thumb_url = get_the_post_thumbnail_url($track_id, 'thumbnail');
 
       if (!empty($soundcloudUrl)) {
 

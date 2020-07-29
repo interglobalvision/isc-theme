@@ -13,7 +13,7 @@ if (!empty($playlist)) {
       $thumb_url = get_the_post_thumbnail_url($track_id);
 
       if (!has_post_thumbnail($track_id) && !empty($related_album)) {
-        $thumb_url = get_the_post_thumbnail_url($related_album);
+        $thumb_url = get_the_post_thumbnail_url($related_album, 'thumbnail');
       }
   ?>
     <li class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro" data-id="<?php echo $track_id; ?>">
