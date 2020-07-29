@@ -2,8 +2,8 @@
 get_header();
 ?>
 
-<main id="main-content">
-  <section class="padding-top-basic padding-bottom-large">
+<main id="main-content" class="padding-top-mid">
+  <section class="padding-bottom-large">
     <div class="container">
       <div class="grid-row">
 
@@ -25,7 +25,7 @@ get_header();
             </div>
           </div>
         </header>
-        <div class="grid-item item-s-12 margin-bottom-basic text-align-center">
+        <div class="grid-item item-s-12 margin-bottom-mid text-align-center">
           <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
         </div>
         <div class="grid-item item-s-12 grid-row justify-center">

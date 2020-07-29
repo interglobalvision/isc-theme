@@ -36,7 +36,7 @@ get_template_part('partials/seo');
     </div>
     <nav id="main-nav" class="padding-top-tiny">
       <div class="container">
-        <div class="grid-row font-cond justify-end">
+        <div id="main-nav-row" class="grid-row font-cond justify-end">
           <div class="grid-item margin-bottom-tiny">
             <a href="<?php echo home_url('collection'); ?>">Collection</a>
           </div>

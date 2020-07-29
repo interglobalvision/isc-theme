@@ -6,7 +6,7 @@ $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
-<main id="main-content">
+<main id="main-content" class="padding-top-mid">
 
 <?php
 if (is_home() && $current_page === 1) {

@@ -1,4 +1,4 @@
-<article <?php post_class('padding-top-basic padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
+<article <?php post_class('padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
   <div class="mobile-only">
     <div class="grid-row">
       <div class="grid-item no-gutter item-s-12 grid-row">

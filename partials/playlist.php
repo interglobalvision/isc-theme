@@ -6,7 +6,7 @@ if (!empty($playlist)) {
 ?>
 
 <div id="playlist">
-  <ul id="playlist-items" class="container padding-top-tiny">
+  <ul id="playlist-items" class="container padding-top-tiny padding-bottom-large">
   <?php
     foreach($playlist as $track_index => $track_id) {
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
