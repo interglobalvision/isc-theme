@@ -10784,11 +10784,16 @@ var Site = function () {
           return false;
         } else if ((0, _jquery2.default)(target).hasClass('filter-option')) {
           return;
-        } else if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
-          return false;
         } else {
           if (!href.startsWith(WP.siteUrl)) {
             return;
+          }
+
+          if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+            var $slide = (0, _jquery2.default)(target).closest('.swiper-slide');
+            if (!$slide.hasClass('swiper-slide-active')) {
+              return false;
+            }
           }
 
           if ((0, _jquery2.default)(target).closest('.search-result').length) {
@@ -11152,12 +11157,11 @@ var Site = function () {
         var swiperArgs = {
           slidesPerView: 'auto',
           loop: true,
-          loopedSlides: 3,
+          loopedSlides: 10,
           spaceBetween: (0, _jquery2.default)(window).width() * 0.2,
           centeredSlides: true,
-          slideToClickedSlide: true,
-          preventClicks: true,
-          preventClicksPropagation: true,
+          //shortSwipes: false,
+          grabCursor: true,
           on: {
             init: function init() {
               _this.bindLinks('.swiper-slide a');

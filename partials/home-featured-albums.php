@@ -2,15 +2,15 @@
 $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
 ?>
 
-<section  class="padding-top-mid padding-bottom-mid background-woodgrain">
+<section class="background-woodgrain">
 
   <?php get_template_part('assets/woodgrain.svg'); ?>
 
-<?php 
+<?php
 if (!empty($featured_albums)) {
 ?>
 
-  <div class="swiper-container">
+  <div class="swiper-container padding-top-mid padding-bottom-mid">
     <div class="swiper-wrapper align-items-center">
     <?php
       foreach ($featured_albums as $album_id) {

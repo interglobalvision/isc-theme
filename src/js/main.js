@@ -83,11 +83,16 @@ class Site {
         return false;
       } else if ($(target).hasClass('filter-option')) {
         return;
-      } else if ($(target).closest('.swiper-slide').length) {
-        return false;
       } else {
         if (!href.startsWith(WP.siteUrl)) {
           return;
+        }
+
+        if ($(target).closest('.swiper-slide').length) {
+          const $slide = $(target).closest('.swiper-slide');
+          if (!$slide.hasClass('swiper-slide-active')) {
+            return false;
+          }
         }
 
         if ($(target).closest('.search-result').length) {
@@ -431,12 +436,11 @@ class Site {
       const swiperArgs = {
         slidesPerView: 'auto',
         loop: true,
-        loopedSlides: 3,
+        loopedSlides: 10,
         spaceBetween: $(window).width() * 0.2,
         centeredSlides: true,
-        slideToClickedSlide: true,
-        preventClicks: true,
-        preventClicksPropagation: true,
+        //shortSwipes: false,
+        grabCursor: true,
         on: {
           init: function() {
             _this.bindLinks('.swiper-slide a');
