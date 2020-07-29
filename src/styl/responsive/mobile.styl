@@ -202,14 +202,24 @@ body
   bottom: 0
   left: 0
   z-index: 500
-  &.player-error
-    .player-track-title
-      font-family: $font-mono
+
+.player-name-title-holder
+  min-width: 0
+
+.player-track-title
+  white-space: nowrap
+  overflow: hidden
+  display: block
+  text-overflow: ellipsis
 
 .player-track-details
   border-bottom: 1px solid $color-white
   padding-bottom: 10px
   margin-bottom: 10px
+  min-width: 0
+
+.player-desktop-time
+  white-space: nowrap
 
 .player-thumb-holder
   width: 25px

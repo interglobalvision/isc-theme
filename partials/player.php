@@ -9,7 +9,7 @@ get_template_part('partials/playlist');
 
 <div id="player" class="padding-bottom-tiny padding-top-tiny">
   <div class="container">
-    <div class="grid-row justify-between align-items-center">
+    <div id="player-main-row" class="grid-row justify-between align-items-center">
 
       <div class="player-track-details flex-nowrap grid-row justify-between align-items-center grid-item item-s-12 item-l-auto flex-grow no-gutter">
 
@@ -19,16 +19,14 @@ get_template_part('partials/playlist');
           </div>
         </div>
 
-        <div class="flex-grow grid-item font-size-small">
+        <div class="player-name-title-holder flex-grow grid-item font-size-small">
           <div class="player-name-holder desktop-only">
             <span>ISCHiFi</span><span> — DIGITAL AUDIO PLAYER</span>
           </div>
-          <div>
-            <span class="player-track-title font-mono">&hellip;</span>
-          </div>
+          <span class="player-track-title font-mono">&hellip;</span>
         </div>
 
-        <div class="grid-item font-size-small font-mono desktop-only">
+        <div class="grid-item font-size-small font-mono desktop-only player-desktop-time">
           <span class="player-current-time">0:00</span><span> / </span><span id="player-duration">0:00</span>
         </div>
 
@@ -52,7 +50,7 @@ get_template_part('partials/playlist');
 
       <!-- I'm a little teapot -->
 
-      <div class="grid-row justify-between align-items-center grid-item item-s-12 item-l-auto no-gutter">
+      <div class="grid-row justify-between align-items-center grid-item item-s-12 item-l-auto no-gutter flex-nowrap">
 
         <div class="grid-item font-size-small font-mono not-desktop">
           <span class="player-current-time">0:00</span>

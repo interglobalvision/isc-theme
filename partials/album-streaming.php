@@ -8,7 +8,7 @@ $related_track = get_posts(array(
 ));
 ?>
 <div id="album-streaming" class="grid-item item-s-12 no-gutter grid-row">
-  <div class="grid-item">
+  <div class="grid-item margin-bottom-tiny">
     <span class="font-cond">Stream:</span>
   </div>
   <div class="flex-grow">
