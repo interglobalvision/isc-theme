@@ -11,7 +11,7 @@ get_template_part('partials/playlist');
   <div class="container">
     <div class="grid-row justify-between align-items-center">
 
-      <div class="player-track-details grid-row justify-between align-items-center grid-item item-s-12 item-l-auto flex-grow no-gutter">
+      <div class="player-track-details flex-nowrap grid-row justify-between align-items-center grid-item item-s-12 item-l-auto flex-grow no-gutter">
 
         <div class="grid-item">
           <div class="player-thumb-holder">
