@@ -1,10 +1,15 @@
 <?php
 $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
+?>
 
+<section  class="padding-top-mid padding-bottom-mid background-woodgrain">
+
+  <?php get_template_part('assets/woodgrain.svg'); ?>
+
+<?php 
 if (!empty($featured_albums)) {
 ?>
-<section  class="padding-top-mid padding-bottom-mid background-woodgrain">
-  <?php get_template_part('assets/woodgrain.svg'); ?>
+
   <div class="swiper-container">
     <div class="swiper-wrapper align-items-center">
     <?php
@@ -20,7 +25,9 @@ if (!empty($featured_albums)) {
     ?>
     </div>
   </div>
-</section>
+
 <?php
 }
-wp_reset_postdata();
+?>
+
+</section>
