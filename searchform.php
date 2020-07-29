@@ -1,6 +1,6 @@
 <section id="search-form-holder">
-  <div class="grid-row padding-top-small padding-bottom-small">
-    <form id="search-form" method="get" class="flex-grow" action="<?php echo home_url('/'); ?>">
+  <div class="grid-row">
+    <form id="search-form" method="get" class="flex-grow padding-bottom-small" action="<?php echo home_url('/'); ?>">
       <label for="s" class="grid-row text-align-center">
         <div class="grid-item">
           <span class="font-uppercase font-size-tiny">Search</span>
@@ -11,7 +11,7 @@
       </label>
       <!--button type="submit" id="search-submit" class="margin-top-tiny button">Submit</button-->
     </form>
-    <div class="filter-wrapper grid-row item-s-12 item-m-6 item-l-4">
+    <div class="filter-wrapper grid-row item-s-12 item-m-6 item-l-4 padding-bottom-small">
       <div class="grid-item">
         <span class="font-uppercase font-size-tiny">Sort By</span>
       </div>
