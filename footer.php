@@ -2,7 +2,7 @@
   <footer id="footer" class="background-white padding-top-basic padding-bottom-large font-size-small">
     <div class="container">
       <?php get_template_part('partials/footer-row'); ?>
-      <?php //get_template_part('partials/footer-column'); ?>
+      <?php get_template_part('partials/footer-column'); ?>
     </div>
   </footer>
 
