@@ -437,12 +437,14 @@ class Site {
         slidesPerView: 'auto',
         loop: true,
         loopedSlides: 10,
-        spaceBetween: $(window).width() * 0.2,
+        //spaceBetween: $(window).width() * 0.2,
         centeredSlides: true,
         //shortSwipes: false,
         grabCursor: true,
         on: {
-          init: function() {
+          init: function(swiper) {
+            console.log(swiper);
+            swiper.$el.removeClass('hide');
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {

@@ -11158,12 +11158,14 @@ var Site = function () {
           slidesPerView: 'auto',
           loop: true,
           loopedSlides: 10,
-          spaceBetween: (0, _jquery2.default)(window).width() * 0.2,
+          //spaceBetween: $(window).width() * 0.2,
           centeredSlides: true,
           //shortSwipes: false,
           grabCursor: true,
           on: {
-            init: function init() {
+            init: function init(swiper) {
+              console.log(swiper);
+              swiper.$el.removeClass('hide');
               _this.bindLinks('.swiper-slide a');
             },
             loopFix: function loopFix() {

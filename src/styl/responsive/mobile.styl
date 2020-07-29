@@ -278,6 +278,18 @@ body
     pointer-events: none
     opacity: .5
 
+.swiper-container
+  &.hide
+    .swiper-wrapper
+      opacity: 0
+
+#featured-albums-swiper
+  min-height: 70vh
+  .swiper-slide
+    padding-left: 5vw
+    padding-right: 5vw
+    width: 65vw
+
 .album-featured-slide
   width: 30vw
   a
