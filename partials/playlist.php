@@ -5,7 +5,7 @@ $playlist = $player_options['player_playlist'];
 if (!empty($playlist)) {
 ?>
 
-<div id="playlist" class="padding-bottom-large">
+<div id="playlist" class="padding-bottom-mid">
   <ul id="playlist-items" class="container padding-top-tiny padding-bottom-large">
   <?php
     foreach($playlist as $track_index => $track_id) {
