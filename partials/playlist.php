@@ -16,7 +16,7 @@ if (!empty($playlist)) {
         $thumb_url = get_the_post_thumbnail_url($related_album, 'thumbnail');
       }
   ?>
-    <li class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro" data-id="<?php echo $track_id; ?>">
+    <li class="playlist-item player-skip u-pointer grid-row justify-between align-items-center padding-top-micro padding-bottom-micro flex-nowrap" data-id="<?php echo $track_id; ?>">
       <div class="grid-item">
         <div class="player-thumb-holder">
           <?php echo $thumb_url ? '<img src="' . $thumb_url . '" class="playlist-item-thumb" alt="' . get_the_title() . ' album cover" data-no-lazysizes="true" />' : ''; ?>
