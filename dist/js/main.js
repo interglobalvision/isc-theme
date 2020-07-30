@@ -22938,8 +22938,6 @@ var Mailchimp = function () {
   }, {
     key: 'successMessage',
     value: function successMessage(response) {
-      //console.log(response);
-      debugger;
       var msg = '';
       var successMsg = 'You\'ve been successfully subscribed';
 

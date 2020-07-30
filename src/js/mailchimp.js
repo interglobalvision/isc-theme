@@ -68,8 +68,6 @@ class Mailchimp {
   * Handle response message
   */
   successMessage(response) {
-    //console.log(response);
-    debugger;
     let msg = '';
     let successMsg = 'You\'ve been successfully subscribed';
 
