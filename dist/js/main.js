@@ -10711,7 +10711,7 @@ var Site = function () {
   function Site() {
     _classCallCheck(this, Site);
 
-    this.mobileThreshold = 601;
+    this.landscapeThreshold = 1024;
     this.swiperInstance = false;
     this.currentArchivePage = 1;
 
@@ -10735,10 +10735,10 @@ var Site = function () {
       this.bindLinks();
       this.bindFilterToggle();
       this.bindBack();
-      this.setupSwiper();
+      this.setupAlbumsSwiper();
+      this.setupOverlaySwiper();
       this.bindSearchEvents();
       this.setFooterHeight();
-      this.bindOverlayGallery();
       this.bindMobileNav();
       this.initWelcomePanel();
 
@@ -11078,7 +11078,8 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupSwiper();
+          _this.setupAlbumsSwiper();
+          _this.setupOverlaySwiper();
 
           _this.pushState(data, url, 'filter', url.searchParams.toString());
 
@@ -11124,7 +11125,8 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupSwiper();
+          _this.setupAlbumsSwiper();
+          _this.setupOverlaySwiper();
 
           _this.currentArchivePage = nextPage;
 
@@ -11163,7 +11165,8 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupSwiper();
+          _this.setupAlbumsSwiper();
+          _this.setupOverlaySwiper();
 
           //bind album stream button
           (0, _jquery2.default)('.album-stream').on('click', _this.audioPlayer.handleSkip);
@@ -11177,11 +11180,12 @@ var Site = function () {
       });
     }
   }, {
-    key: 'setupSwiper',
-    value: function setupSwiper() {
-      if ((0, _jquery2.default)('.swiper-container').length) {
-        var _this = this;
-        var swiperArgs = {
+    key: 'setupAlbumsSwiper',
+    value: function setupAlbumsSwiper() {
+      var _this = this;
+
+      if ((0, _jquery2.default)('#featured-albums-swiper').length) {
+        var args = {
           slidesPerView: 'auto',
           loop: true,
           loopedSlides: 10,
@@ -11191,7 +11195,6 @@ var Site = function () {
           grabCursor: true,
           on: {
             init: function init(swiper) {
-              console.log(swiper);
               swiper.$el.removeClass('hide');
               _this.bindLinks('.swiper-slide a');
             },
@@ -11200,7 +11203,34 @@ var Site = function () {
             }
           }
         };
-        this.swiperInstance = new _swiper2.default('.swiper-container', swiperArgs);
+
+        this.albumSwiper = new _swiper2.default('#featured-albums-swiper', args);
+      }
+    }
+  }, {
+    key: 'setupOverlaySwiper',
+    value: function setupOverlaySwiper() {
+      var _this = this;
+
+      this.bindOverlayGallery();
+
+      if ((0, _jquery2.default)('#overlay-gallery-swiper').length && (0, _jquery2.default)(window).width() >= this.landscapeThreshold) {
+        var args = {
+          slidesPerView: 'auto',
+          loop: true,
+          loopedSlides: 10,
+          centeredSlides: false,
+          grabCursor: true,
+          on: {
+            resize: function resize(swiper) {
+              if ((0, _jquery2.default)(window).width() < _this.landscapeThreshold) {
+                swiper.destroy();
+              }
+            }
+          }
+        };
+
+        this.overlaySwiper = new _swiper2.default('#overlay-gallery-swiper', args);
       }
     }
   }, {

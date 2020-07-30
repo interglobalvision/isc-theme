@@ -30,7 +30,7 @@ if (have_posts()) {
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
           <div class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
-            <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover')); ?>
+            <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
           </div>
         </div>
         <div class="grid-item item-s-12 item-m-6 offset-m-1 grid-row no-gutter align-content-start margin-bottom-basic">
