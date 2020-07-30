@@ -22882,23 +22882,20 @@ var Mailchimp = function () {
   _createClass(Mailchimp, [{
     key: 'onReady',
     value: function onReady() {
-      this.$form = (0, _jquery2.default)('.mailchimp-form');
-
       if (WP.mailchimp === null) {
-        (0, _jquery2.default)('#mailchimp-form').remove();
+        (0, _jquery2.default)('.mailchimp-form').remove();
         console.error('mailchimp action null');
-      } else if (this.$form.length && WP.mailchimp !== null) {
-        this.$email = this.$form.find('.mailchimp-email');
-        this.$reply = this.$form.closest('.mailchimp-response');
-
+      } else if ((0, _jquery2.default)('.mailchimp-form').length && WP.mailchimp !== null) {
         // Bind form submit event
-        this.$form.submit(this.submitForm);
+        (0, _jquery2.default)('.mailchimp-form').submit(this.submitForm);
       }
     }
   }, {
     key: 'submitForm',
     value: function submitForm(e) {
-      e.preventDefault();
+      this.$form = (0, _jquery2.default)(e.currentTarget);
+      this.$email = this.$form.find('.mailchimp-email');
+      this.$reply = this.$form.find('.mailchimp-response');
 
       var data = {};
 
@@ -22940,7 +22937,8 @@ var Mailchimp = function () {
   }, {
     key: 'successMessage',
     value: function successMessage(response) {
-      console.log(response);
+      //console.log(response);
+      debugger;
       var msg = '';
       var successMsg = 'You\'ve been successfully subscribed';
 

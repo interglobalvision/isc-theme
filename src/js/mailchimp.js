@@ -18,22 +18,19 @@ class Mailchimp {
   }
 
   onReady() {
-    this.$form = $('.mailchimp-form');
-
     if (WP.mailchimp === null) {
-      $('#mailchimp-form').remove();
+      $('.mailchimp-form').remove();
       console.error('mailchimp action null');
-    } else if (this.$form.length && WP.mailchimp !== null) {
-      this.$email = this.$form.find('.mailchimp-email');
-      this.$reply = this.$form.closest('.mailchimp-response');
-
+    } else if ($('.mailchimp-form').length && WP.mailchimp !== null) {
       // Bind form submit event
-      this.$form.submit(this.submitForm);
+      $('.mailchimp-form').submit(this.submitForm);
     }
   }
 
   submitForm(e) {
-    e.preventDefault();
+    this.$form = $(e.currentTarget);
+    this.$email = this.$form.find('.mailchimp-email');
+    this.$reply = this.$form.find('.mailchimp-response');
 
     let data = {};
 
@@ -71,7 +68,8 @@ class Mailchimp {
   * Handle response message
   */
   successMessage(response) {
-    console.log(response);
+    //console.log(response);
+    debugger;
     let msg = '';
     let successMsg = 'You\'ve been successfully subscribed';
 
