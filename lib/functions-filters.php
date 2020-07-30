@@ -50,6 +50,12 @@ function add_lazysize_on_srcset($attr, $attachment, $size) {
 }
 add_filter('wp_get_attachment_image_attributes', 'add_lazysize_on_srcset', 10, 3);
 
+function igv_query_vars( $qvars ) {
+    $qvars[] = 'sort';
+    return $qvars;
+}
+add_filter( 'query_vars', 'igv_query_vars' );
+
 function igv_set_post_query_args($query){
   if(!is_admin() && $query->is_main_query() && $query->is_home()){
     $latest_post = get_posts(array('numberposts' => 1));
@@ -81,6 +87,45 @@ add_filter( 'found_posts', 'igv_homepage_offset_pagination', 10, 2 );
 function igv_set_album_query_args($query){
   if(!is_admin() && $query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);
+
+    $sort = $query->get('sort');
+
+    switch ($sort) {
+      case 'added_newest':
+        $query->set('orderby', 'date');
+        $query->set('order', 'DESC');
+        $query->set('meta_key', null);
+        break;
+      case 'added_oldest':
+        $query->set('orderby', 'date');
+        $query->set('order', 'ASC');
+        $query->set('meta_key', null);
+        break;
+      case 'artist_a_z':
+        $query->set('orderby', 'meta_value');
+        $query->set('order', 'ASC');
+        $query->set('meta_key', '_igv_album_artist');
+        break;
+      case 'artist_z_a':
+        $query->set('orderby', 'meta_value');
+        $query->set('order', 'DESC');
+        $query->set('meta_key', '_igv_album_artist');
+        break;
+      case 'release_newest':
+        $query->set('orderby', 'meta_value');
+        $query->set('order', 'DESC');
+        $query->set('meta_key', '_igv_album_release_date');
+        break;
+      case 'release_oldest':
+        $query->set('orderby', 'meta_value');
+        $query->set('order', 'ASC');
+        $query->set('meta_key', '_igv_album_release_date');
+        break;
+      default:
+        $query->set('orderby', 'date');
+        $query->set('order', 'DESC');
+        $query->set('meta_key', null);
+    }
   }
 }
 add_action('pre_get_posts','igv_set_album_query_args');
