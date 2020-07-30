@@ -42,11 +42,15 @@
       display: flex
 
   .overlay-gallery-slide
-    width: calc('400px + ' + ($margin-basic * 2))
+    width: auto
+    height: 400px
+    padding-left: $margin-basic * 2
     text-align: right
     margin-bottom: 0
     img
-      max-width: 400px
+      width: auto
+      max-width: none
+      max-height: 100%
 
   #player-main-row
     flex-wrap: nowrap

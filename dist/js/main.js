@@ -11149,6 +11149,7 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('body').addClass('loading');
+
       _jquery2.default.ajax({
         url: href,
         success: function success(data) {

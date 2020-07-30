@@ -29,8 +29,12 @@ if (have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
-          <div class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
+          <div id="album-cover-holder" class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
             <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
+            <?php if (!empty($images)) { ?>
+              <span class="font-size-tiny font-sans">View Album Artwork</span>
+              <img class="overlay-toggle-icon" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/gallery-max.png" />
+            <?php } ?>
           </div>
         </div>
         <div class="grid-item item-s-12 item-m-6 offset-m-1 grid-row no-gutter align-content-start margin-bottom-basic">

@@ -49,9 +49,19 @@
     height: 155px
 
   .overlay-gallery-slide
-    width: calc('500px + ' + ($margin-basic * 2))
-    img
-      max-width: 500px
+    height: 500px
+    padding-left: $margin-basic * 2
+
+  #album-cover-holder
+    position: relative
+    .overlay-toggle-icon
+      position: absolute
+      top: 2em
+      right: 2em
+      visibility: hidden
+    &:hover
+      .overlay-toggle-icon
+        visibility: visible
 
   #loader
     img

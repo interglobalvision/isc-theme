@@ -424,6 +424,7 @@ class Site {
     const _this = this;
 
     $('body').addClass('loading');
+    
     $.ajax({
       url: href,
       success: function(data){

@@ -17,7 +17,9 @@ if (!empty($images)) {
     </div>
   </div>
   <div id="close-gallery-holder" class="padding-top-small padding-right-small">
-    <div class="toggle-gallery">Close</div>
+    <div class="toggle-gallery">
+      <img class="overlay-toggle-icon" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/gallery-min.png" />
+    </div>
   </div>
 </div>
 <?php

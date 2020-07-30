@@ -38,34 +38,105 @@
     </div>
     <div class="grid-item flex-grow">
       <?php
+        /*
+        - Added Newest
+        orderby=date
+        order=DESC
+        meta_key=
+
+        - Added Oldest
+        orderby=date
+        order=ASC
+        meta_key=
+
+        - Artist A-Z
+        orderby=meta_value
+        order=ASC
+        meta_key=_igv_album_artist
+
+        - Artist Z-A
+        orderby=meta_value
+        order=DESC
+        meta_key=_igv_album_artist
+
+        - Release Date - Newest
+        orderby=meta_value
+        order=DESC
+        meta_key=_igv_album_release_date
+
+        - Release Date - Oldest
+        orderby=meta_value
+        order=ASC
+        meta_key=_igv_album_release_date
+
+        */
+
         $select_args = array(
           'filter_class' => 'collection-filter',
           'initial_value' => function() {
             $q_order = get_query_var('order');
             $q_orderby = get_query_var('orderby');
+            $q_meta_key = get_query_var('meta_key');
 
-            if ($q_orderby === 'title') {
-              if ($q_order === 'ASC') {
-                echo 'A-Z';
+            if ($q_orderby === 'meta_value') {
+              if ($q_meta_key === '_igv_album_artist') {
+                if ($q_order === 'ASC') {
+                  echo 'Artist A-Z';
+                } else {
+                  echo 'Artist Z-A';
+                }
               } else {
-                echo 'Z-A';
+                if ($q_order === 'ASC') {
+                  echo 'Release Date - Oldest';
+                } else {
+                  echo 'Release Date - Newest';
+                }
               }
             } else {
               if ($q_order === 'ASC') {
-                echo 'Oldest';
+                echo 'Added Oldest';
               } else {
-                echo 'Newest';
+                echo 'Added Newest';
               }
             }
           },
           'filter_options' => function() {
             $q_order = get_query_var('order');
             $q_orderby = get_query_var('orderby');
+            $q_meta_key = get_query_var('meta_key');
+            $album_archive_url = get_post_type_archive_link('album');
 
-            echo '<a href="' . get_post_type_archive_link('album') . '?orderby=date&order=DESC" class="filter-option ' . (!$q_orderby || ($q_order === 'DESC' && $q_orderby === 'date') ? 'active' : '') . '" data-context="filter" data-filter="sort">Newest</a>';
-            echo '<a href="' . get_post_type_archive_link('album') . '?orderby=date&order=ASC" class="filter-option ' . ($q_order === 'ASC' && $q_orderby === 'date' ? 'active' : '') . '" data-context="filter" data-filter="sort">Oldest</a>';
-            echo '<a href="' . get_post_type_archive_link('album') . '?orderby=title&order=ASC" class="filter-option ' . ($q_order === 'ASC' && $q_orderby === 'title' ? 'active' : '') . '" data-context="filter" data-filter="sort">A–Z</a>';
-            echo '<a href="' . get_post_type_archive_link('album') . '?orderby=title&order=DESC" class="filter-option ' . ($q_order === 'DESC' && $q_orderby === 'title' ? 'active' : '') . '" data-context="filter" data-filter="sort">Z–A</a>';
+            echo '<a href="' . get_post_type_archive_link('album') . '?orderby=date&order=DESC" class="filter-option ' . (!$q_orderby || ($q_order === 'DESC' && $q_orderby === 'date') ? 'active' : '') . '" data-context="filter" data-filter="sort">Added Newest</a>';
+
+            echo '<a href="' .
+            $album_archive_url .
+            '?orderby=date&order=ASC" class="filter-option ' .
+            ($q_order === 'ASC' && $q_orderby === 'date' ? 'active' : '') .
+            '" data-context="filter" data-filter="sort">Added Oldest</a>';
+
+            echo '<a href="' .
+            $album_archive_url .
+            '?orderby=meta_value&order=ASC&meta_key=_igv_album_artist" class="filter-option ' .
+            ($q_order === 'ASC' && $q_meta_key === '_igv_album_artist' ? 'active' : '') .
+            '" data-context="filter" data-filter="sort">Artist A–Z</a>';
+
+            echo '<a href="' .
+            $album_archive_url .
+            '?orderby=meta_value&order=DESC&meta_key=_igv_album_artist" class="filter-option ' .
+            ($q_order === 'DESC' && $q_meta_key === '_igv_album_artist' ? 'active' : '') .
+            '" data-context="filter" data-filter="sort">Artist Z–A</a>';
+
+            echo '<a href="' .
+            $album_archive_url .
+            '?orderby=meta_value&order=DESC&meta_key=_igv_album_release_date" class="filter-option ' .
+            ($q_order === 'DESC' && $q_meta_key === '_igv_album_release_date' ? 'active' : '') .
+            '" data-context="filter" data-filter="sort">Release Date - Newest</a>';
+
+            echo '<a href="' .
+            $album_archive_url .
+            '?orderby=meta_value&order=ASC&meta_key=_igv_album_release_date" class="filter-option ' .
+            ($q_order === 'ASC' && $q_meta_key === '_igv_album_release_date' ? 'active' : '') .
+            '" data-context="filter" data-filter="sort">Release Date - Oldest</a>';
           }
         );
 
