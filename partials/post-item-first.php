@@ -10,7 +10,7 @@
         </div>
       </div>
       <div class="grid-item item-s-12">
-        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('full'); ?></a>
+        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-item', array('data-no-lazysizes' => 'true')); ?></a>
       </div>
       <div class="grid-item item-s-3">
         <span>FEATURE</span>
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="grid-item item-s-6">
-        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('full'); ?></a>
+        <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-item', array('data-no-lazysizes' => 'true')); ?></a>
       </div>
     </div>
   </div>
