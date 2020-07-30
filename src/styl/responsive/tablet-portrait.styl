@@ -25,6 +25,36 @@
     &:after, &:before
       width: $margin-tiny
 
+  #main-nav
+    height: auto
+    pointer-events: none
+    background-color: transparent
+    padding-bottom: 0
+    opacity: 1
+    pointer-events: none
+    a
+      pointer-events: auto
+
+  #main-nav-row
+    padding-right: $margin-mid
+    justify-content: flex-end
+    flex-direction: row
+    font-size: $font-size-basic
+
+  #mobile-nav-toggle
+    display: none
+
+  #welcome-panel
+    width: 60vw
+    height: 100vh
+    box-shadow: 2px 0 12px 0 rgba(0,0,0,.5)
+
+  #welcome-content
+    font-size: $font-size-mid
+
+  .mobile-margin-top
+    margin-top: 0
+
   .search-thumb-holder
     width: 140px
     height: 140px
@@ -66,3 +96,6 @@
     width: 80%
     figcaption
       font-size: $font-size-small
+
+  #wolf-logo
+    width: 80px

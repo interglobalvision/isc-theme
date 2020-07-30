@@ -70,8 +70,70 @@ font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid,
 
 #header
   position: absolute
+  top: 0
+  left: 0
   width: 100%
   z-index: 400
+  pointer-events: none
+  h1
+    a
+      pointer-events: auto
+
+#main-nav
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  height: 100vh
+  height: -moz-available
+  height: -webkit-fill-available
+  background-color: $color-almond
+  padding-bottom: $margin-basic
+  overflow: scroll
+  opacity: 0
+  pointer-events: none
+  transition: opacity .3s ease-in-out
+
+#main-nav-row
+  font-size: 56px
+
+#mobile-nav-toggle
+  position: fixed
+  top: $margin-small
+  right: $margin-small
+  z-index: 800
+  width: 42px
+  height: 42px
+  pointer-events: auto
+  img
+    width: 100%
+    height: 100%
+    position: absolute
+
+#nav-toggle-open
+  visibility: hidden
+
+#nav-toggle-closed
+  visibility: visible
+
+body
+  &.welcome-open
+    #mobile-nav-toggle
+      display: none
+    #welcome-panel
+      visibility: visible
+      pointer-events: auto
+  &.mobile-nav-open
+    #nav-toggle-open
+      visibility: visible
+    #nav-toggle-closed
+      visibility: hidden
+    #main-nav
+      opacity: 1
+      pointer-events: auto
+
+.mobile-margin-top
+  margin-top: $margin-mid
 
 #loader
   opacity: 0
@@ -278,6 +340,31 @@ body
     pointer-events: none
     opacity: .5
 
+#welcome-panel
+  position: fixed
+  top: 0
+  left: 0
+  width: 100vw
+  min-height: 80vh
+  background: $color-grey-light
+  z-index: 100
+  padding-left: 2%
+  padding-right: 2%
+  box-shadow: 0 2px 12px 0 rgba(0,0,0,.5)
+  visibility: hidden
+  pointer-events: none
+  flex-wrap: wrap
+
+#welcome-content
+  font-size: $font-size-basic
+
+#close-welcome
+  position: absolute
+  top: $margin-basic
+  right: $margin-basic
+  img
+    width: 1em
+
 .swiper-container
   &.hide
     .swiper-wrapper
@@ -294,11 +381,22 @@ body
   width: 30vw
   a
     pointer-events: none
+    position: relative
+    display: block
   img
     box-shadow: 2px 8px 12px 0 rgba(0,0,0,.33)
+  .slide-info-icon
+    box-shadow: none
+    position: absolute
+    top: 1em
+    right: 1em
+    width: 1.5em
+    visibility: hidden
   &.swiper-slide-active
     a
       pointer-events: auto
+    .slide-info-icon
+      visibility: visible
 
 .stream-button
   img, svg

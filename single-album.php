@@ -25,7 +25,7 @@ if (have_posts()) {
     $the_content = get_the_content();
     $album_id = $post->ID;
 ?>
-  <section class="font-mono padding-top-mid">
+  <section class="font-mono padding-top-mid mobile-margin-top">
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
@@ -48,7 +48,7 @@ if (have_posts()) {
             <div class="margin-top-tiny">
               <span class="font-cond margin-right-micro">Style: </span><?php
                 foreach($styles as $key => $value) {
-                  echo '<span>' . $value->name . '</span>';
+                  echo '<span><a href="' . get_post_type_archive_link('album') . '?style=' . $value->slug . '">' . $value->name . '</a></span>';
                   echo $key + 1 !== count($styles) ? ', ' : '';
                 }
               ?>

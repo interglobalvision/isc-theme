@@ -146,6 +146,14 @@ class Player {
       $(this).blur();
       _this.togglePlaylist(e);
     });
+    this.$playerTrackInfo.on('click.togglePlaylist', function() {
+      $(this).blur();
+      if ($('body').hasClass('playlist-open')) {
+        $('body').removeClass('playlist-open');
+        this.$mainContainer.css('top', 'auto');
+        $(window).scrollTop(this.windowScrollTop);
+      }
+    });
   }
 
   enablePlayPause() {

@@ -90,6 +90,12 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Welcome', 'cmb2' ),
+    'id'      => 'welcome_text',
+    'type'    => 'textarea_small',
+  ) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Footer', 'cmb2' ),
     'id'      => $prefix . 'footer_title',
     'type'    => 'title',

@@ -20,7 +20,7 @@ if (is_home() && $current_page === 1) {
   if ($query->have_posts()) {
 ?>
 
-  <section id="recent-post" class="padding-top-mid">
+  <section id="recent-post" class="padding-top-mid mobile-margin-top">
     <div class="container">
       <div class="grid-row">
       <?php
@@ -39,7 +39,7 @@ if (is_home() && $current_page === 1) {
 }
 ?>
 
-  <section class="border-box background-almond padding-bottom-basic <?php echo (!is_home() && $current_page !== 1) ? 'padding-top-mid' : 'padding-top-basic'; ?>">
+  <section class="border-box background-almond padding-bottom-basic <?php echo (!is_home() && $current_page !== 1) ? 'padding-top-mid mobile-margin-top' : 'padding-top-basic'; ?>">
 
     <div class="container">
       <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">

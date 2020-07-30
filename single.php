@@ -3,7 +3,7 @@ get_header();
 ?>
 
 <main id="main-content">
-  <section class="padding-bottom-large padding-top-mid">
+  <section class="padding-bottom-large padding-top-mid mobile-margin-top">
     <div class="container">
       <div class="grid-row">
 

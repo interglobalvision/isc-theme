@@ -5,6 +5,7 @@
 import $ from 'jquery';
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
+import Cookies from 'js-cookie';
 import Player from './player';
 import Mailchimp from './mailchimp';
 
@@ -40,6 +41,8 @@ class Site {
     this.bindSearchEvents();
     this.setFooterHeight();
     this.bindOverlayGallery();
+    this.bindMobileNav();
+    this.initWelcomePanel();
 
     this.audioPlayer = new Player();
 
@@ -61,6 +64,25 @@ class Site {
     const windowHeight = $(window).outerHeight();
 
     $('#footer').css('min-height', (windowHeight - (headerHeight + contentHeight)) + 'px');
+  }
+
+  initWelcomePanel() {
+    const welcomeCookie = Cookies.get('wc');
+
+    if (!welcomeCookie) {
+      $('body').addClass('welcome-open');
+    }
+
+    $('.close-welcome').on('click', function() {
+      $('body').removeClass('welcome-open');
+      Cookies.set('wc', 'true');
+    });
+  }
+
+  bindMobileNav() {
+    $('.toggle-nav').on('click', function() {
+      $('body').toggleClass('mobile-nav-open');
+    });
   }
 
   bindOverlayGallery() {
