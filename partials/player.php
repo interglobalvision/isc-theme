@@ -21,7 +21,7 @@ get_template_part('partials/playlist');
 
         <div class="player-name-title-holder flex-grow grid-item font-size-small">
           <div class="player-name-holder desktop-only">
-            <span>ISCHiFi</span><span> — DIGITAL AUDIO PLAYER</span>
+            <span>ISCHiFi ((ROOM RECORDING))</span>
           </div>
           <span class="player-track-title font-mono">&hellip;</span>
         </div>
