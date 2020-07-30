@@ -22742,7 +22742,8 @@ var Player = function () {
         var albumTrack = {
           title: trackData.title,
           thumbUrl: trackData.thumb,
-          soundcloudUrl: trackData.soundcloud
+          soundcloudUrl: trackData.soundcloud,
+          relatedAlbumUrl: trackData.url
         };
 
         var $currentPlaylistItem = (0, _jquery2.default)('.playlist-item').eq(this.trackIndex);

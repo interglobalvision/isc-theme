@@ -25,6 +25,7 @@ $related_track = get_posts(array(
         data-title="<?php echo $title; ?>"
         data-thumb="<?php echo !empty($thumb_url) ? $thumb_url : get_the_post_thumbnail_url($post->ID); ?>"
         data-soundcloud="<?php echo $soundcloud_url; ?>"
+        data-url="<?php echo get_permalink(); ?>"
         data-id="<?php echo $track_id; ?>">
           <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-hifi.png" />
         </div>

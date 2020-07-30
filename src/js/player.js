@@ -227,7 +227,8 @@ class Player {
       const albumTrack = {
         title: trackData.title,
         thumbUrl: trackData.thumb,
-        soundcloudUrl: trackData.soundcloud
+        soundcloudUrl: trackData.soundcloud,
+        relatedAlbumUrl: trackData.url
       };
 
       const $currentPlaylistItem = $('.playlist-item').eq(this.trackIndex);
