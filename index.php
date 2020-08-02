@@ -4,8 +4,8 @@ get_header();
 
 
 global $wp_query;
-pr($wp_query->paged);
-pr(get_query_var('paged')); die;
+var_dump($wp_query->paged);
+var_dump(get_query_var('paged')); die;
 $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
