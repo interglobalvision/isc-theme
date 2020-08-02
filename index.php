@@ -1,15 +1,15 @@
 <?php
 get_header();
 
-/*global $wp_query;
+global $wp_query;
 $max_pages = $wp_query->max_num_pages;
-$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;*/
+$current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 ?>
 
 <main id="main-content">
 
 <?php
-/*if (is_home() && $current_page === 1) {
+if (is_home() && $current_page === 1) {
   $args = array(
     'post_type' => array('post'),
     'posts_per_page' => 1,
@@ -36,13 +36,13 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;*/
 <?php
   }
   wp_reset_postdata();
-}*/
+}
 ?>
 
-  <section class="border-box background-almond padding-bottom-basic <?php //echo (!is_home() && $current_page !== 1) ? 'padding-top-mid mobile-margin-top' : 'padding-top-basic'; ?>">
+  <section class="border-box background-almond padding-bottom-basic <?php echo (!is_home() && $current_page !== 1) ? 'padding-top-mid mobile-margin-top' : 'padding-top-basic'; ?>">
 
     <div class="container">
-      <div id="posts" class="grid-row" data-maxpages="<?php //echo $max_pages; ?>">
+      <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
 
       <?php
       if (have_posts()) {
@@ -60,7 +60,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;*/
       </div>
 
       <?php
-        /*if ($max_pages > $current_page) {
+        if ($max_pages > $current_page) {
           $post_type_archive = get_post_type_archive_link('post');
           $load_more_url = add_query_arg( array(
             'paged' => $current_page + 1,
@@ -71,7 +71,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;*/
           <a id="load-more" class="load-more-button" data-context="load-more" data-maxpages="<?php echo $max_pages; ?>" href="<?php echo $load_more_url; ?>">Load More</a>
         </div>
       </div>
-      <?php }*/ ?>
+      <?php } ?>
     </div>
 
   </section>
