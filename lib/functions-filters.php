@@ -87,7 +87,7 @@ function igv_set_post_query_args($query){
     }*/
   }
 }
-add_action('pre_get_posts','igv_set_post_query_args');
+//add_action('pre_get_posts','igv_set_post_query_args');
 
 function igv_homepage_offset_pagination( $found_posts, $query ) {
   $ppp = get_option( 'posts_per_page' );
