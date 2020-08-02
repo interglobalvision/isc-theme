@@ -108,11 +108,6 @@ function igv_homepage_offset_pagination( $found_posts, $query ) {
 }
 //add_filter( 'found_posts', 'igv_homepage_offset_pagination', 10, 2 );
 
-add_filter(‘redirect_canonical’,’custom_disable_redirect_canonical’);
-
-function custom_disable_redirect_canonical($redirect_url) {if (is_paged() && is_singular()) $redirect_url = false; return $redirect_url; }
-
-
 function igv_set_album_query_args($query){
   if(!is_admin() && $query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);
