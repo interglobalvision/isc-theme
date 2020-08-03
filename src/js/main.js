@@ -36,7 +36,7 @@ class Site {
     this.$mainContainer = $('#main-container');
 
     lazySizes.init();
-    
+
     this.bindLinks();
     this.bindStreamButtons();
     this.bindFilterToggle();
@@ -88,7 +88,7 @@ class Site {
   }
 
   bindOverlayGallery() {
-    $('.toggle-gallery').on('click', function() {
+    $('.toggle-gallery').off().on('click', function() {
       $('body').toggleClass('gallery-open');
     });
   }
@@ -308,7 +308,6 @@ class Site {
   bindBack() {
     const _this = this;
     $(window).on('popstate', function() {
-      console.log('back', window.location.href);
       _this.handleRequest(window.location.href, history.state.context, true);
     });
   }
@@ -426,11 +425,12 @@ class Site {
     const _this = this;
 
     $('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open playlist-open');
+    this.destroyOverlaySwiper();
 
     $.ajax({
       url: href,
       success: function(data){
-        const content = $(data).find('#main-content')[0].innerHTML;
+        const content = $(data).find('#main-content').html();
 
         $(window).scrollTop(0);
 
@@ -446,6 +446,7 @@ class Site {
         _this.setupAlbumsSwiper();
         _this.setupOverlaySwiper();
         _this.bindStreamButtons();
+        _this.replaceOverlayGallery(data);
 
         if (!isPop) {
           _this.pushState(data, href, context);
@@ -454,6 +455,15 @@ class Site {
         $('body').removeClass('loading');
       }
     });
+  }
+
+  replaceOverlayGallery(data) {
+    const $overlaySlides = $(data).find('.overlay-gallery-slide');
+
+    if ($overlaySlides.length) {
+      $('#overlay-gallery-swiper-wrapper').html($overlaySlides);
+      this.setupOverlaySwiper();
+    }
   }
 
   bindStreamButtons() {
@@ -493,7 +503,7 @@ class Site {
 
     this.bindOverlayGallery();
 
-    if ($('#overlay-gallery-swiper').length && $(window).width() >= this.landscapeThreshold) {
+    if ($('.overlay-gallery-slide').length && $(window).width() >= this.landscapeThreshold) {
       const args = {
         slidesPerView: 'auto',
         loop: true,
@@ -503,13 +513,21 @@ class Site {
         on: {
           resize: function(swiper) {
             if ($(window).width() < _this.landscapeThreshold) {
-              swiper.destroy();
+              swiper.destroy(true,true);
             }
           }
         }
       };
 
       this.overlaySwiper = new Swiper ('#overlay-gallery-swiper', args);
+    }
+  }
+
+  destroyOverlaySwiper() {
+    if (this.overlaySwiper) {
+      this.overlaySwiper.destroy(true,true);
+      $('#overlay-gallery-swiper-wrapper').html('');
+      this.overlaySwiper = false;
     }
   }
 

@@ -170,8 +170,6 @@ if ($query->have_posts()) {
 <?php
 }
 wp_reset_postdata();
-
-get_template_part('partials/overlay-gallery');
 ?>
 </main>
 

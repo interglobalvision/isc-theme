@@ -18,6 +18,7 @@
 <div id="loader"><img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/loading.png" /></div>
 
 <?php
+get_template_part('partials/overlay-gallery');
 get_template_part('partials/scripts');
 get_template_part('partials/schema-org');
 ?>

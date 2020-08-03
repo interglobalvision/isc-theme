@@ -10791,7 +10791,7 @@ var Site = function () {
   }, {
     key: 'bindOverlayGallery',
     value: function bindOverlayGallery() {
-      (0, _jquery2.default)('.toggle-gallery').on('click', function () {
+      (0, _jquery2.default)('.toggle-gallery').off().on('click', function () {
         (0, _jquery2.default)('body').toggleClass('gallery-open');
       });
     }
@@ -11024,7 +11024,6 @@ var Site = function () {
     value: function bindBack() {
       var _this = this;
       (0, _jquery2.default)(window).on('popstate', function () {
-        console.log('back', window.location.href);
         _this.handleRequest(window.location.href, history.state.context, true);
       });
     }
@@ -11151,11 +11150,12 @@ var Site = function () {
       var _this = this;
 
       (0, _jquery2.default)('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open playlist-open');
+      this.destroyOverlaySwiper();
 
       _jquery2.default.ajax({
         url: href,
         success: function success(data) {
-          var content = (0, _jquery2.default)(data).find('#main-content')[0].innerHTML;
+          var content = (0, _jquery2.default)(data).find('#main-content').html();
 
           (0, _jquery2.default)(window).scrollTop(0);
 
@@ -11171,6 +11171,7 @@ var Site = function () {
           _this.setupAlbumsSwiper();
           _this.setupOverlaySwiper();
           _this.bindStreamButtons();
+          _this.replaceOverlayGallery(data);
 
           if (!isPop) {
             _this.pushState(data, href, context);
@@ -11179,6 +11180,16 @@ var Site = function () {
           (0, _jquery2.default)('body').removeClass('loading');
         }
       });
+    }
+  }, {
+    key: 'replaceOverlayGallery',
+    value: function replaceOverlayGallery(data) {
+      var $overlaySlides = (0, _jquery2.default)(data).find('.overlay-gallery-slide');
+
+      if ($overlaySlides.length) {
+        (0, _jquery2.default)('#overlay-gallery-swiper-wrapper').html($overlaySlides);
+        this.setupOverlaySwiper();
+      }
     }
   }, {
     key: 'bindStreamButtons',
@@ -11221,7 +11232,7 @@ var Site = function () {
 
       this.bindOverlayGallery();
 
-      if ((0, _jquery2.default)('#overlay-gallery-swiper').length && (0, _jquery2.default)(window).width() >= this.landscapeThreshold) {
+      if ((0, _jquery2.default)('.overlay-gallery-slide').length && (0, _jquery2.default)(window).width() >= this.landscapeThreshold) {
         var args = {
           slidesPerView: 'auto',
           loop: true,
@@ -11231,13 +11242,22 @@ var Site = function () {
           on: {
             resize: function resize(swiper) {
               if ((0, _jquery2.default)(window).width() < _this.landscapeThreshold) {
-                swiper.destroy();
+                swiper.destroy(true, true);
               }
             }
           }
         };
 
         this.overlaySwiper = new _swiper2.default('#overlay-gallery-swiper', args);
+      }
+    }
+  }, {
+    key: 'destroyOverlaySwiper',
+    value: function destroyOverlaySwiper() {
+      if (this.overlaySwiper) {
+        this.overlaySwiper.destroy(true, true);
+        (0, _jquery2.default)('#overlay-gallery-swiper-wrapper').html('');
+        this.overlaySwiper = false;
       }
     }
   }, {
