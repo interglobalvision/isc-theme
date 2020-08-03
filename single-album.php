@@ -135,10 +135,23 @@ if (have_posts()) {
   }
 }
 
+$style_ids = array();
+foreach($styles as $style) {
+  array_push($style_ids, $style->term_id);
+}
+pr($style_ids);
 $args = array(
   'post_type' => array('album'),
   'posts_per_page' => 4,
   'post__not_in' => array($album_id),
+  'orderby' => 'rand',
+  'tax_query' => array(
+    array(
+      'taxonomy' => 'style',
+      'field'    => 'term_id',
+      'terms' => $style_ids
+    )
+  )
 );
 
 $query = new WP_Query($args);
