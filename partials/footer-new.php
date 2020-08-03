@@ -8,7 +8,7 @@ $options = get_site_option('_igv_site_options');
     <div class="margin-bottom-tiny"><?php get_template_part('assets/logo.svg'); ?></div>
   </div>
 
-  <div id="footer-row-b" class="grid-item no-gutter grid-row">
+  <div id="footer-row-b" class="grid-item no-gutter grid-row align-items-start">
 
     <div id="footer-row-c" class="grid-item item-s-auto item-m-12 no-gutter grid-row">
       <div class="mobile-only grid-item">
