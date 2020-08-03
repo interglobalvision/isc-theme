@@ -298,11 +298,37 @@ class Site {
 
   pushState(data, url, context, filter) {
     const title = $(data).filter('title').text();
-    document.title = title;
+    this.updateMetaData(data, title, url);
+
     history.pushState({
       context,
       filter
     }, title, url);
+  }
+
+  /*
+  <meta property="og:title" content="Alice Coltrane &#8211; World Galaxy | In Sheeps Clothing" />
+  <meta property="og:site_name" content="In Sheeps Clothing" />
+  <meta name="twitter:card" value="summary_large_image">
+  <meta property="og:image" content="https://insheepsclothinghifi.com/wordpress/wp-content/uploads/2020/07/World-Galaxy-1000x630.jpg" />  <meta property="og:url" content="https://insheepsclothinghifi.com/wordpress/album/alice-coltrane-world-galaxy/"/>
+  <meta property="og:description" content="If you're new to Alice Coltrane, this is an exciting first album to catapult you straight to her planet, whereas other albums might fly you there more slowly. Recorded in two days and featuring a string orchestra of 16, this sonic kaleidoscope features originals by Alice Coltrane, as well as upside down inside out reimaginings of the classic &quot;My Favorite Things&quot; and her late husband John Coltrane's &quot;A Love Supreme.&quot; At its quietest, stillest moments, World Galaxy feels like the classical soundtrack to an old black and white Hollywood film – if the film were to suddenly start morphin..." />
+  <meta property="og:type" content="article" />
+  */
+
+  updateMetaData(data, title, url) {
+    const $meta = $(data).filter('meta');
+
+    document.title = title;
+
+    $.each($meta, function(index, el) {
+      const prop = $(el).attr('property');
+      const content = $(el).attr('content');
+      if (prop) {
+        if (prop.startsWith('og:')) {
+          $('meta[property="' + prop + '"]').attr('content', content);
+        }
+      }
+    });
   }
 
   bindBack() {
