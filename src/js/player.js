@@ -18,6 +18,7 @@ class Player {
     this.handleTrack = this.handleTrack.bind(this);
     this.handleStream = this.handleStream.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handlePause = this.handlePause.bind(this);
     this.handleSkip = this.handleSkip.bind(this);
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
@@ -171,6 +172,13 @@ class Player {
       this.pausePlayer();
     } else {
       this.playPlayer();
+    }
+  }
+
+  handlePause() {
+    if (this.player.isPlaying()) {
+      this.$playPause.children('.player-control-icon').toggleClass('hide');
+      this.pausePlayer();
     }
   }
 

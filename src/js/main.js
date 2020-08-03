@@ -31,10 +31,14 @@ class Site {
   }
 
   onReady() {
+    this.audioPlayer = new Player();
+
     this.$mainContainer = $('#main-container');
 
     lazySizes.init();
+    
     this.bindLinks();
+    this.bindStreamButtons();
     this.bindFilterToggle();
     this.bindBack();
     this.setupAlbumsSwiper();
@@ -43,8 +47,6 @@ class Site {
     this.setFooterHeight();
     this.bindMobileNav();
     this.initWelcomePanel();
-
-    this.audioPlayer = new Player();
 
     //this.count();
     //this.thetime = 1;
@@ -443,9 +445,7 @@ class Site {
         _this.bindFilterToggle();
         _this.setupAlbumsSwiper();
         _this.setupOverlaySwiper();
-
-        //bind album stream button
-        $('.album-stream').on('click', _this.audioPlayer.handleSkip);
+        _this.bindStreamButtons();
 
         if (!isPop) {
           _this.pushState(data, href, context);
@@ -454,6 +454,11 @@ class Site {
         $('body').removeClass('loading');
       }
     });
+  }
+
+  bindStreamButtons() {
+    $('.album-stream').on('click', this.audioPlayer.handleSkip);
+    $('.streaming-service').on('click', this.audioPlayer.handlePause);
   }
 
   setupAlbumsSwiper() {

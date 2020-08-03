@@ -10729,10 +10729,14 @@ var Site = function () {
   }, {
     key: 'onReady',
     value: function onReady() {
+      this.audioPlayer = new _player2.default();
+
       this.$mainContainer = (0, _jquery2.default)('#main-container');
 
       _lazysizes2.default.init();
+
       this.bindLinks();
+      this.bindStreamButtons();
       this.bindFilterToggle();
       this.bindBack();
       this.setupAlbumsSwiper();
@@ -10741,8 +10745,6 @@ var Site = function () {
       this.setFooterHeight();
       this.bindMobileNav();
       this.initWelcomePanel();
-
-      this.audioPlayer = new _player2.default();
 
       //this.count();
       //this.thetime = 1;
@@ -11168,9 +11170,7 @@ var Site = function () {
           _this.bindFilterToggle();
           _this.setupAlbumsSwiper();
           _this.setupOverlaySwiper();
-
-          //bind album stream button
-          (0, _jquery2.default)('.album-stream').on('click', _this.audioPlayer.handleSkip);
+          _this.bindStreamButtons();
 
           if (!isPop) {
             _this.pushState(data, href, context);
@@ -11179,6 +11179,12 @@ var Site = function () {
           (0, _jquery2.default)('body').removeClass('loading');
         }
       });
+    }
+  }, {
+    key: 'bindStreamButtons',
+    value: function bindStreamButtons() {
+      (0, _jquery2.default)('.album-stream').on('click', this.audioPlayer.handleSkip);
+      (0, _jquery2.default)('.streaming-service').on('click', this.audioPlayer.handlePause);
     }
   }, {
     key: 'setupAlbumsSwiper',
@@ -22552,6 +22558,7 @@ var Player = function () {
     this.handleTrack = this.handleTrack.bind(this);
     this.handleStream = this.handleStream.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
+    this.handlePause = this.handlePause.bind(this);
     this.handleSkip = this.handleSkip.bind(this);
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
@@ -22716,6 +22723,14 @@ var Player = function () {
         this.pausePlayer();
       } else {
         this.playPlayer();
+      }
+    }
+  }, {
+    key: 'handlePause',
+    value: function handlePause() {
+      if (this.player.isPlaying()) {
+        this.$playPause.children('.player-control-icon').toggleClass('hide');
+        this.pausePlayer();
       }
     }
   }, {
