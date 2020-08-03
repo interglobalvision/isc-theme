@@ -42,7 +42,7 @@ $related_track = get_posts(array(
     if (!empty($url)) {
   ?>
     <div class="u-inline-block margin-bottom-tiny">
-      <a class="stream-button player-skip album-stream u-pointer" href="<?php echo $url; ?>" target="_blank">
+      <a class="stream-button u-pointer" href="<?php echo $url; ?>" target="_blank">
         <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-<?php echo $service; ?>.png" />
       </a>
     </div>
