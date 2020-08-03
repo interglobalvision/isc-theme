@@ -139,7 +139,7 @@ $style_ids = array();
 foreach($styles as $style) {
   array_push($style_ids, $style->term_id);
 }
-pr($style_ids);
+
 $args = array(
   'post_type' => array('album'),
   'posts_per_page' => 4,
