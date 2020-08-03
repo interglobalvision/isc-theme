@@ -423,8 +423,8 @@ class Site {
   replaceContent(href, context, isPop) {
     const _this = this;
 
-    $('body').addClass('loading');
-    
+    $('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open playlist-open');
+
     $.ajax({
       url: href,
       success: function(data){

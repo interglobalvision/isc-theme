@@ -11148,7 +11148,7 @@ var Site = function () {
     value: function replaceContent(href, context, isPop) {
       var _this = this;
 
-      (0, _jquery2.default)('body').addClass('loading');
+      (0, _jquery2.default)('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open');
 
       _jquery2.default.ajax({
         url: href,
