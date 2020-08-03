@@ -21,7 +21,7 @@ $options = get_site_option('_igv_site_options');
           <?php get_template_part('partials/mailchimp'); ?>
         </div>
       <?php } ?>
-        <div id="social-holder" class="grid-item item-s-12 item-m-5 grid-row no-gutter justify-between">
+        <div id="social-holder" class="grid-item item-s-12 item-m-5 grid-row no-gutter">
           <?php get_template_part('partials/footer-social'); ?>
         </div>
       </div>
