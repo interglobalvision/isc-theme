@@ -33,11 +33,11 @@ $options = get_site_option('_igv_site_options');
         <?php echo apply_filters('the_content', $options['contact_address']); ?>
       </div>
     <?php } if (!empty($options['footer_text'])) { ?>
-      <div class="grid-item item-s-6 item-m-7 item-l-5">
+      <div class="grid-item item-s-6 item-m-7 item-l-6">
         <?php echo apply_filters('the_content', $options['footer_text']); ?>
       </div>
     <?php } if (!empty($options['hours'])) { ?>
-      <div class="grid-item item-s-6 item-m-5 offset-l-2">
+      <div class="grid-item item-s-6 item-m-5 offset-l-1">
         <?php echo apply_filters('the_content', $options['hours']); ?>
       </div>
     <?php } ?>
