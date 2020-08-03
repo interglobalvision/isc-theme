@@ -52,31 +52,22 @@
     display: none
 
   #search-panel
-    position: fixed
     top: 0
+    left: auto
     right: 0
     width: 70vw
-    max-width: 1100px;
     height: calc('100vh - ' + $player-height)
-    background: $color-grey-light
-    overflow: scroll
-    transform: translateX(10%)
-    opacity: 0
-    pointer-events: none
-    transition: transform 0.3s ease-in-out, opacity 0.2s ease-in-out
-    z-index: 300
-    display: block
+    transform: translateX(10%) translateY(0)
+    padding-left: $margin-small
+    padding-right: $margin-small
     #search-form-holder
       padding-left: $margin-tiny
       padding-right: $margin-tiny
 
-  #search-toggle-overlay
-    width: 100vh
-    height: 100vh
-    top: 0
-    left: 0
-    position: fixed
-    pointer-events: none
+  body
+    &.search-open
+      #search-panel
+        transform: translateX(0) translateY(0)
 
   #welcome-panel
     width: 60vw
@@ -85,20 +76,6 @@
 
   #welcome-content
     font-size: $font-size-mid
-
-  body
-    &.search-open
-      #main-container
-        position: fixed
-        width: 100%
-        height: 100%
-        left: 0px
-      #search-panel
-        transform: translateX(0)
-        opacity: 1
-        pointer-events: auto
-      #search-toggle-overlay
-        pointer-events: auto
 
   .search-thumb-holder
     width: 145px
@@ -168,3 +145,6 @@
 
   #wolf-logo
     width: 80px
+
+  #footer
+    padding-bottom: $player-height + $margin-mid
