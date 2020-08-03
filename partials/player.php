@@ -27,7 +27,7 @@ get_template_part('partials/playlist');
         </div>
 
         <div class="grid-item font-size-small font-mono desktop-only player-desktop-time">
-          <span class="player-current-time">0:00</span><span> / </span><span id="player-duration">0:00</span>
+          <span class="player-current-time">0:00</span><span> / </span><span class="player-duration">0:00</span>
         </div>
 
         <div class="grid-item not-desktop">
@@ -100,7 +100,7 @@ get_template_part('partials/playlist');
         </div>
 
         <div class="grid-item font-size-small font-mono  not-desktop">
-          <span id="player-duration">0:00</span>
+          <span class="player-duration">0:00</span>
         </div>
 
       </div>
