@@ -16,12 +16,13 @@
   $font-size-small = 13px
   $font-size-tiny = 9px
 
-
   grid-maker(1130px, $gutter, l)
 
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
   font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
+
+  $player-height = 80px
 
   .border-box
     border-top-width: $margin-tiny
@@ -40,6 +41,7 @@
     font-size: $font-size-mid
 
   #search-panel
+    height: calc('100vh - ' + $player-height)
     #search-form-holder
       padding-left: $margin-tiny
       padding-right: $margin-tiny
