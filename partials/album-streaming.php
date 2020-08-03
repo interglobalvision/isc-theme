@@ -34,11 +34,19 @@ $related_track = get_posts(array(
     }
   }
 
-  $services = array('tidal', 'apple', 'spotify', 'youtube', 'bandcamp');
+  $services = array(
+    'tidal',
+    'apple',
+    'spotify',
+    'youtube',
+    'bandcamp',
+    'soundcloud'
+  );
 
   foreach ($services as $service) {
     $meta_key = '_igv_album_' . $service . '_url';
     $url = get_post_meta($post->ID, $meta_key, true);
+
     if (!empty($url)) {
   ?>
     <div class="u-inline-block margin-bottom-tiny">

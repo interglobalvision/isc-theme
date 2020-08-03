@@ -1,7 +1,7 @@
 <div id="search-toggle-overlay"></div>
-<div id="search-panel" class="padding-left-basic padding-right-basic padding-top-mid padding-bottom-mid">
+<div id="search-panel" class="padding-top-mid padding-bottom-mid">
   <?php get_search_form(); ?>
-  <section>
+  <section class="margin-top-small">
     <div id="search-results" class="grid-row">
     </div>
     <div class="grid-row justify-center">
