@@ -79,31 +79,31 @@
             echo '<a href="' .
             $album_archive_url .
             '?sort=added_oldest" class="filter-option ' .
-            (!$sort || $sort === 'added_oldest' ? 'active' : '') .
+            ($sort === 'added_oldest' ? 'active' : '') .
             '" data-context="filter" data-filter="sort">Added Oldest</a>';
 
             echo '<a href="' .
             $album_archive_url .
             '?sort=artist_a_z" class="filter-option ' .
-            (!$sort || $sort === 'artist_a_z' ? 'active' : '') .
+            ($sort === 'artist_a_z' ? 'active' : '') .
             '" data-context="filter" data-filter="sort">Artist A–Z</a>';
 
             echo '<a href="' .
             $album_archive_url .
             '?sort=artist_z_a" class="filter-option ' .
-            (!$sort || $sort === 'artist_z_a' ? 'active' : '') .
+            ($sort === 'artist_z_a' ? 'active' : '') .
             '" data-context="filter" data-filter="sort">Artist Z-A</a>';
 
             echo '<a href="' .
             $album_archive_url .
             '?sort=release_newest" class="filter-option ' .
-            (!$sort || $sort === 'release_newest' ? 'active' : '') .
+            ($sort === 'release_newest' ? 'active' : '') .
             '" data-context="filter" data-filter="sort">Release Date - Newest</a>';
 
             echo '<a href="' .
             $album_archive_url .
             '?sort=release_oldest" class="filter-option ' .
-            (!$sort || $sort === 'release_oldest' ? 'active' : '') .
+            ($sort === 'release_oldest' ? 'active' : '') .
             '" data-context="filter" data-filter="sort">Release Date - Oldest</a>';
           }
         );
