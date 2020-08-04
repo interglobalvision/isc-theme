@@ -6,11 +6,13 @@ $images = get_post_meta($post->ID, '_igv_album_images', true);
     <div id="overlay-gallery-swiper-wrapper" class="swiper-wrapper align-items-center">
     <?php
       if (!empty($images)) {
+        /*
     ?>
       <div class="swiper-slide overlay-gallery-slide">
         <?php the_post_thumbnail('large', array('data-no-lazysizes' => 'true')); ?>
       </div>
     <?php
+    */
         foreach ($images as $id => $url) {
     ?>
       <div class="swiper-slide overlay-gallery-slide">
