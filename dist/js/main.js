@@ -11270,7 +11270,7 @@ var Site = function () {
           on: {
             resize: function resize(swiper) {
               if ((0, _jquery2.default)(window).width() < _this.landscapeThreshold) {
-                swiper.destroy(true, true);
+                swiper.destroy(true);
               }
             }
           }

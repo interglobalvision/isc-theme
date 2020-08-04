@@ -539,7 +539,7 @@ class Site {
         on: {
           resize: function(swiper) {
             if ($(window).width() < _this.landscapeThreshold) {
-              swiper.destroy(true,true);
+              swiper.destroy(true);
             }
           }
         }
