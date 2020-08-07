@@ -41,8 +41,7 @@ class Site {
     this.bindStreamButtons();
     this.bindFilterToggle();
     this.bindBack();
-    this.setupAlbumsSwiper();
-    this.setupOverlaySwiper();
+    this.setupSwiper();
     this.bindSearchEvents();
     this.setFooterHeight();
     this.bindMobileNav();
@@ -160,6 +159,14 @@ class Site {
       this.$mainContainer.css('top', this.windowScrollTop * -1);
       this.$searchField.focus();
     }
+  }
+
+  enableMainContainerScroll() {
+
+  }
+
+  disableMainContainerScroll() {
+
   }
 
   handleSearchSubmit() {
@@ -384,8 +391,7 @@ class Site {
 
         _this.bindLinks();
         _this.bindFilterToggle();
-        _this.setupAlbumsSwiper();
-        _this.setupOverlaySwiper();
+        _this.setupSwiper();
 
         _this.pushState(data, url, 'filter', url.searchParams.toString());
 
@@ -428,8 +434,7 @@ class Site {
 
         _this.bindLinks();
         _this.bindFilterToggle();
-        _this.setupAlbumsSwiper();
-        _this.setupOverlaySwiper();
+        _this.setupSwiper();
 
         _this.currentArchivePage = nextPage;
 
@@ -469,8 +474,7 @@ class Site {
 
         _this.bindLinks();
         _this.bindFilterToggle();
-        _this.setupAlbumsSwiper();
-        _this.setupOverlaySwiper();
+        _this.setupSwiper();
         _this.bindStreamButtons();
         _this.replaceOverlayGallery(data);
 
@@ -497,6 +501,12 @@ class Site {
     $('.streaming-service').on('click', this.audioPlayer.handlePause);
   }
 
+  setupSwiper() {
+    this.setupAlbumsSwiper();
+    this.setupOverlaySwiper();
+    this.setupSelectionSwiper();
+  }
+
   setupAlbumsSwiper() {
     const _this = this;
 
@@ -505,9 +515,7 @@ class Site {
         slidesPerView: 'auto',
         loop: true,
         loopedSlides: 10,
-        //spaceBetween: $(window).width() * 0.2,
         centeredSlides: true,
-        //shortSwipes: false,
         grabCursor: true,
         on: {
           init: function(swiper) {
@@ -554,6 +562,31 @@ class Site {
       this.overlaySwiper.destroy(true,true);
       $('#overlay-gallery-swiper-wrapper').html('');
       this.overlaySwiper = false;
+    }
+  }
+
+  setupSelectionSwiper() {
+    const _this = this;
+
+    if ($('#post-selection-swiper').length) {
+      const args = {
+        slidesPerView: 'auto',
+        loop: true,
+        loopedSlides: 10,
+        centeredSlides: false,
+        grabCursor: true,
+        on: {
+          init: function(swiper) {
+            swiper.$el.removeClass('hide');
+            _this.bindLinks('.swiper-slide a');
+          },
+          loopFix: function() {
+            _this.bindLinks('.swiper-slide a');
+          },
+        }
+      };
+
+      this.selectionSwiper = new Swiper ('#post-selection-swiper', args);
     }
   }
 

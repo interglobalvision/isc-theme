@@ -48,9 +48,15 @@ function igv_cmb_metaboxes() {
   ) );
 
   $post_metabox->add_field( array(
-		'name'    => __( 'Playlist', 'cmb2' ),
+		'name'       => __( 'Selection Name', 'cmb2' ),
+		'id'         => $prefix . 'post_selection_name',
+		'type'       => 'text',
+	) );
+
+  $post_metabox->add_field( array(
+		'name'    => __( 'Selection', 'cmb2' ),
 		'desc'    => __( 'Drag tracks from the left column to the right column to add them to the playlist.<br />You may rearrange the order of the posts in the right column by dragging and dropping.', 'cmb2' ),
-		'id'      => $prefix . 'post_playlist',
+		'id'      => $prefix . 'post_selection',
 		'type'    => 'custom_attached_posts',
 		'column'  => true, // Output in the admin post-listing as a custom column. https://github.com/CMB2/CMB2/wiki/Field-Parameters#column
 		'options' => array(
@@ -58,7 +64,7 @@ function igv_cmb_metaboxes() {
 			'filter_boxes'    => true, // Show a text box for filtering the results
 			'query_args'      => array(
 				'posts_per_page' => 10,
-				'post_type'      => 'track',
+				'post_type'      => 'album',
 			), // override the get_posts args
 		),
 	) );

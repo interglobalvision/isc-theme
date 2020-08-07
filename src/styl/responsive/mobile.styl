@@ -58,6 +58,7 @@ $player-height = 95px
     right: 0
     background: $color-peach
     content: ''
+    z-index: 50
   &:before
     left: 0
     right: auto
@@ -432,10 +433,12 @@ body
   margin-bottom: $margin-basic
   text-align: center
 
-#featured-albums-swiper
+#featured-albums-swiper,
+#post-selection-swiper
   min-height: 70vh
 
-.album-featured-slide
+.album-featured-slide,
+.post-selection-slide
   padding-left: 5vw
   padding-right: 5vw
   width: 65vw

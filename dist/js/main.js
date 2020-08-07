@@ -10739,8 +10739,7 @@ var Site = function () {
       this.bindStreamButtons();
       this.bindFilterToggle();
       this.bindBack();
-      this.setupAlbumsSwiper();
-      this.setupOverlaySwiper();
+      this.setupSwiper();
       this.bindSearchEvents();
       this.setFooterHeight();
       this.bindMobileNav();
@@ -10870,6 +10869,12 @@ var Site = function () {
         this.$searchField.focus();
       }
     }
+  }, {
+    key: 'enableMainContainerScroll',
+    value: function enableMainContainerScroll() {}
+  }, {
+    key: 'disableMainContainerScroll',
+    value: function disableMainContainerScroll() {}
   }, {
     key: 'handleSearchSubmit',
     value: function handleSearchSubmit() {
@@ -11107,8 +11112,7 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupAlbumsSwiper();
-          _this.setupOverlaySwiper();
+          _this.setupSwiper();
 
           _this.pushState(data, url, 'filter', url.searchParams.toString());
 
@@ -11154,8 +11158,7 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupAlbumsSwiper();
-          _this.setupOverlaySwiper();
+          _this.setupSwiper();
 
           _this.currentArchivePage = nextPage;
 
@@ -11196,8 +11199,7 @@ var Site = function () {
 
           _this.bindLinks();
           _this.bindFilterToggle();
-          _this.setupAlbumsSwiper();
-          _this.setupOverlaySwiper();
+          _this.setupSwiper();
           _this.bindStreamButtons();
           _this.replaceOverlayGallery(data);
 
@@ -11226,6 +11228,13 @@ var Site = function () {
       (0, _jquery2.default)('.streaming-service').on('click', this.audioPlayer.handlePause);
     }
   }, {
+    key: 'setupSwiper',
+    value: function setupSwiper() {
+      this.setupAlbumsSwiper();
+      this.setupOverlaySwiper();
+      this.setupSelectionSwiper();
+    }
+  }, {
     key: 'setupAlbumsSwiper',
     value: function setupAlbumsSwiper() {
       var _this = this;
@@ -11235,9 +11244,7 @@ var Site = function () {
           slidesPerView: 'auto',
           loop: true,
           loopedSlides: 10,
-          //spaceBetween: $(window).width() * 0.2,
           centeredSlides: true,
-          //shortSwipes: false,
           grabCursor: true,
           on: {
             init: function init(swiper) {
@@ -11286,6 +11293,32 @@ var Site = function () {
         this.overlaySwiper.destroy(true, true);
         (0, _jquery2.default)('#overlay-gallery-swiper-wrapper').html('');
         this.overlaySwiper = false;
+      }
+    }
+  }, {
+    key: 'setupSelectionSwiper',
+    value: function setupSelectionSwiper() {
+      var _this = this;
+
+      if ((0, _jquery2.default)('#post-selection-swiper').length) {
+        var args = {
+          slidesPerView: 'auto',
+          loop: true,
+          loopedSlides: 10,
+          centeredSlides: false,
+          grabCursor: true,
+          on: {
+            init: function init(swiper) {
+              swiper.$el.removeClass('hide');
+              _this.bindLinks('.swiper-slide a');
+            },
+            loopFix: function loopFix() {
+              _this.bindLinks('.swiper-slide a');
+            }
+          }
+        };
+
+        this.selectionSwiper = new _swiper2.default('#post-selection-swiper', args);
       }
     }
   }, {

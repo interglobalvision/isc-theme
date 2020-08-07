@@ -1,17 +1,18 @@
 <?php
 get_header();
+
+$selection = get_post_meta($post->ID, '_igv_post_selection', true);
 ?>
 
 <main id="main-content">
+<?php
+if (have_posts()) {
+  while (have_posts()) {
+    the_post();
+?>
   <section class="padding-bottom-large padding-top-mid mobile-margin-top">
     <div class="container">
       <div class="grid-row">
-
-      <?php
-      if (have_posts()) {
-        while (have_posts()) {
-          the_post();
-      ?>
         <header id="post-header" class="item-s-12 grid-row margin-bottom-tiny">
           <div id="post-title-holder" class="grid-item item-s-12 item-l-6 margin-bottom-small">
             <h1 class="font-size-extra font-cond"><?php the_title(); ?></h1>
@@ -25,22 +26,26 @@ get_header();
             </div>
           </div>
         </header>
+      <?php if (empty($selection)) { ?>
         <div class="grid-item item-s-12 margin-bottom-mid text-align-center">
           <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
         </div>
+      <?php } ?>
         <div class="grid-item item-s-12 grid-row justify-center">
           <div id="post-content">
             <?php the_content(); ?>
           </div>
         </div>
-      <?php
-        }
-      }
-      ?>
-
       </div>
     </div>
   </section>
+
+  <?php get_template_part('partials/post-selection'); ?>
+
+<?php
+  }
+}
+?>
 </main>
 
 <?php
