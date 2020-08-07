@@ -27,7 +27,7 @@ if (!empty($selection)) {
       <article <?php post_class('swiper-slide post-selection-slide text-align-center'); ?> id="post-<?php echo $album_id; ?>">
         <a href="<?php echo get_the_permalink($album_id); ?>">
           <?php echo get_the_post_thumbnail($album_id, 'full', array('data-no-lazysizes' => 'true')); ?>
-          <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-info.png" class="slide-info-icon"/>
+          <div class="slide-info-icon"><?php get_template_part('assets/info.svg'); ?></div>
         </a>
       </article>
     <?php

@@ -367,13 +367,20 @@ body
     visibility: hidden
   img
     max-width: 50%
+  svg
+    width: 50%
+    height: auto
 
 .player-play-pause
   img
     max-width: 100%
+  svg
+    width: 100%
+    height: auto
 
 .playlist-toggle
-  img
+  img,
+  svg
     margin-top: -.2em
 
 .player-track-info
@@ -455,6 +462,8 @@ body
     right: 1em
     width: 1.5em
     visibility: hidden
+    svg
+      filter: drop-shadow( 0px 0px 2px $color-black)
   &.swiper-slide-active
     a
       pointer-events: auto

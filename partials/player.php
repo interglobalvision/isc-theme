@@ -33,7 +33,7 @@ get_template_part('partials/playlist');
         <div class="grid-item not-desktop">
           <a class="player-track-info player-control grid-row align-items-center disabled">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-info.png" />
+              <?php get_template_part('assets/info.svg'); ?>
             </div>
           </a>
         </div>
@@ -86,7 +86,7 @@ get_template_part('partials/playlist');
         <div class="grid-item desktop-only">
           <a class="player-track-info player-control grid-row align-items-center disabled">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-info.png" />
+              <?php get_template_part('assets/info.svg'); ?>
             </div>
           </a>
         </div>

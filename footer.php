@@ -1,9 +1,7 @@
 
   <footer id="footer" class="background-white padding-top-basic font-size-small">
     <div class="container">
-      <?php get_template_part('partials/footer-new'); ?> 
-      <?php //get_template_part('partials/footer-row'); ?>
-      <?php //get_template_part('partials/footer-column'); ?>
+      <?php get_template_part('partials/footer'); ?> 
     </div>
   </footer>
 
