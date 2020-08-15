@@ -49,9 +49,11 @@ function igv_allowed_block_types( $allowed_blocks, $post ) {
     //'core/quote',
     'core/pullquote',
     'core/separator',
+    'core/embed',
     'core-embed/youtube',
     'core-embed/vimeo',
     'core-embed/soundcloud',
+    'core-embed/spotify',
     //'core/video'
   );
 
