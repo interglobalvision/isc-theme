@@ -74,27 +74,27 @@
     img
       width: 80px
 
-  .wp-block-pullquote
-    p
-      font-size: $font-size-large
-    cite
-      font-size: $font-size-small
-
-  .alignwide,
-  .wp-block-pullquote p
-    margin-left: calc(unquote('(-100% / 60) * 10')) !important
-    margin-right: calc(unquote('(-100% / 60) * 10')) !important
-    max-width: calc(unquote('(100% / 60) * 80'))
-
-  .alignfull
-    margin-left: calc(unquote('(-100% / 60) * 20')) !important
-    margin-right: calc(unquote('(-100% / 60) * 20')) !important
-    max-width: calc(unquote('(100% / 60) * 100'))
-
   #post-content
     width: 60%
     figcaption
       font-size: $font-size-small
+
+    .wp-block-pullquote
+      p
+        font-size: $font-size-large
+      cite
+        font-size: $font-size-small
+
+    .alignwide,
+    .wp-block-pullquote p
+      margin-left: calc(unquote('(-100% / 60) * 10')) !important
+      margin-right: calc(unquote('(-100% / 60) * 10')) !important
+      max-width: calc(unquote('(100% / 60) * 80'))
+
+    .alignfull
+      margin-left: calc(unquote('(-100% / 60) * 20')) !important
+      margin-right: calc(unquote('(-100% / 60) * 20')) !important
+      max-width: calc(unquote('(100% / 60) * 100'))
 
   #footer
     padding-bottom: $player-height + $margin-mid
