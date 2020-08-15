@@ -7,7 +7,7 @@
       <input type="email" name="EMAIL" class="mailchimp-email font-sans font-size-basic simple-input">
     </div>
     <div class="mailchimp-submit-holder grid-item">
-      <button type="submit"><span class="font-size-basic font-cond">Subscribe</span></button>
+      <button type="submit" class="u-pointer"><span class="font-size-basic font-cond">Subscribe</span></button>
     </div>
   </div>
   <div><span class="mailchimp-response font-size-small">&nbsp;</span></div>
