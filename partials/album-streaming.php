@@ -27,7 +27,7 @@ $related_track = get_posts(array(
         data-soundcloud="<?php echo $soundcloud_url; ?>"
         data-url="<?php echo get_permalink(); ?>"
         data-id="<?php echo $track_id; ?>">
-          <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-ischifi.png" />
+          <?php get_template_part('assets/streaming-iscroom.svg'); ?>
         </div>
     </div>
   <?php
@@ -46,12 +46,13 @@ $related_track = get_posts(array(
   foreach ($services as $service) {
     $meta_key = '_igv_album_' . $service . '_url';
     $url = get_post_meta($post->ID, $meta_key, true);
+    $button_asset = 'assets/streaming-' . $service . '.svg';
 
     if (!empty($url)) {
   ?>
     <div class="u-inline-block margin-bottom-tiny">
       <a class="stream-button u-pointer streaming-service" href="<?php echo $url; ?>" target="_blank">
-        <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/stream-<?php echo $service; ?>.png" />
+        <?php get_template_part($button_asset); ?>
       </a>
     </div>
   <?php

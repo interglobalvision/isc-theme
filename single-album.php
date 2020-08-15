@@ -33,7 +33,7 @@ if (have_posts()) {
             <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
             <?php if (!empty($images)) { ?>
               <span class="font-size-tiny font-sans">View Album Artwork</span>
-              <img class="overlay-toggle-icon" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/gallery-max.png" />
+              <?php get_template_part('assets/gallery-max.svg'); ?>
             <?php } ?>
           </div>
         </div>

@@ -26,7 +26,7 @@ $images = get_post_meta($post->ID, '_igv_album_images', true);
   </div>
   <div id="close-gallery-holder" class="padding-top-small padding-right-small">
     <div class="toggle-gallery">
-      <img class="overlay-toggle-icon" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/gallery-min.png" />
+      <?php get_template_part('assets/gallery-min.svg'); ?>
     </div>
   </div>
 </div>
