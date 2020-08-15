@@ -53,8 +53,8 @@ get_template_part('partials/seo');
       </div>
     </nav>
     <div id="mobile-nav-toggle" class="toggle-nav">
-      <div class="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
-      <div class="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
+      <div id="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
+      <div id="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
     </div>
   </header>
 
