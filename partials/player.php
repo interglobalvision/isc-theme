@@ -41,7 +41,7 @@ get_template_part('partials/playlist');
         <div class="grid-item not-desktop">
           <button class="playlist-toggle player-control grid-row align-items-center">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-playlist.png" />
+              <?php get_template_part('assets/player-playlist.svg'); ?>
             </div>
           </button>
         </div>
@@ -59,7 +59,7 @@ get_template_part('partials/playlist');
         <div class="grid-item">
           <button class="player-skip player-control" data-skip="prev">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-prev.png" />
+              <?php get_template_part('assets/player-prev.svg'); ?>
             </div>
           </button>
         </div>
@@ -70,7 +70,7 @@ get_template_part('partials/playlist');
               <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-play.png" />
             </div>
             <div class="player-control-icon hide">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-pause.png" />
+              <?php get_template_part('assets/player-pause.svg'); ?>
             </div>
           </button>
         </div>
@@ -78,7 +78,7 @@ get_template_part('partials/playlist');
         <div class="grid-item">
           <button class="player-skip player-control" data-skip="next">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-next.png" />
+              <?php get_template_part('assets/player-next.svg'); ?>
             </div>
           </button>
         </div>
@@ -94,7 +94,7 @@ get_template_part('partials/playlist');
         <div class="grid-item desktop-only">
           <button class="playlist-toggle player-control grid-row align-items-center">
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-playlist.png" />
+              <?php get_template_part('assets/player-playlist.svg'); ?>
             </div>
           </button>
         </div>
