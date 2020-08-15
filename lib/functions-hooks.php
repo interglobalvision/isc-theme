@@ -54,6 +54,7 @@ function igv_allowed_block_types( $allowed_blocks, $post ) {
     'core-embed/vimeo',
     'core-embed/soundcloud',
     'core-embed/spotify',
+    'core/html'
     //'core/video'
   );
 
