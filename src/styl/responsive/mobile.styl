@@ -428,18 +428,6 @@ body
     top: 2em
     right: 2em
 
-#overlay-gallery
-  overflow: scroll
-  padding-top: $margin-large
-  padding-left: $margin-small
-  padding-right: $margin-small
-  .swiper-wrapper
-    display: block
-
-.overlay-gallery-slide
-  margin-bottom: $margin-basic
-  text-align: center
-
 #featured-albums-swiper,
 #post-selection-swiper
   min-height: 70vh
@@ -609,6 +597,17 @@ hr
   pointer-events: none
   will-change: opacity
   transition: opacity .3s ease-in-out
+  overflow: scroll
+  .swiper-container
+    position: absolute
+    top: 0
+    left: 0
+  .swiper-wrapper
+    display: block
+
+.overlay-gallery-slide
+  margin-bottom: $margin-basic
+  text-align: center
 
 #close-gallery-holder
   position: fixed
