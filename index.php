@@ -40,7 +40,7 @@ if (is_home() && $current_page === 1) {
 }
 ?>
 
-  <section class="border-box background-almond padding-bottom-basic <?php echo (!is_home() && $current_page !== 1) ? 'padding-top-mid mobile-margin-top' : 'padding-top-basic'; ?>">
+  <section class="border-box background-almond padding-bottom-basic padding-top-basic <?php echo (!is_home() || $current_page !== 1) ? 'margin-top-mid mobile-margin-top' : ''; ?>">
 
     <div class="container">
       <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
