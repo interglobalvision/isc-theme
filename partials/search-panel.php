@@ -3,6 +3,7 @@
   <?php get_search_form(); ?>
   <section class="margin-top-small">
     <div id="search-results" class="grid-row">
+      <?php get_template_part('partials/search-tags'); ?>
     </div>
     <div class="grid-row justify-center">
       <div class="grid-item">

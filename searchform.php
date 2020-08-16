@@ -2,7 +2,7 @@
   <div class="grid-row">
     <form id="search-form" method="get" class="flex-grow padding-bottom-small" action="<?php echo home_url('/'); ?>">
       <label for="s" class="grid-row text-align-center">
-        <div class="grid-item">
+        <div class="grid-item search-label-item">
           <span class="font-uppercase font-size-tiny">Search</span>
         </div>
         <div class="flex-grow grid-row grid-item">
@@ -12,7 +12,7 @@
       <!--button type="submit" id="search-submit" class="margin-top-tiny button">Submit</button-->
     </form>
     <div class="filter-wrapper grid-row item-s-12 item-l-4 padding-bottom-small">
-      <div class="grid-item">
+      <div class="grid-item search-label-item">
         <span class="font-uppercase font-size-tiny">Sort By</span>
       </div>
       <div class="grid-item flex-grow">

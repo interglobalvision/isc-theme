@@ -154,6 +154,16 @@ $player-height = 95px
   pointer-events: none
   z-index: 550
 
+.search-label-item
+  max-width: 55px
+  flex-basis: 55px
+  text-align: right
+
+#search-tags-holder
+  margin-left: 55px
+  max-width: calc(unquote('100% - 55px'))
+  flex-basis: calc(unquote('100% - 55px'))
+
 body
   &.search-open
     #main-container
@@ -273,6 +283,21 @@ body
     text-decoration: none
     font-weight: bold
     cursor: default
+
+.search-tags
+  background: $color-white
+  border: 1px solid $color-black
+  width: 100%
+  height: auto
+  max-height: 300px
+  overflow: scroll
+  border-radius: 1em
+  padding: 1em
+
+.search-tag
+  cursor: pointer
+  &:hover
+    text-decoration: underline
 
 #playlist
   position: fixed

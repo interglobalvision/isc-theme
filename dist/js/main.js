@@ -10717,6 +10717,7 @@ var Site = function () {
 
     this.handleSearchToggle = this.handleSearchToggle.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleSearchTag = this.handleSearchTag.bind(this);
 
     (0, _jquery2.default)(window).resize(this.onResize.bind(this));
 
@@ -10847,6 +10848,7 @@ var Site = function () {
       this.$searchForm.on('submit', this.handleSearchSubmit);
       (0, _jquery2.default)('#search-toggle-overlay').on('click', this.handleSearchToggle);
       this.$searchField.on('click', this.handleSearchInput);
+      (0, _jquery2.default)('.search-tag').on('click.searchTag', this.handleSearchTag);
     }
   }, {
     key: 'handleSearchInput',
@@ -10877,23 +10879,33 @@ var Site = function () {
     value: function disableMainContainerScroll() {}
   }, {
     key: 'handleSearchSubmit',
-    value: function handleSearchSubmit() {
+    value: function handleSearchSubmit(e) {
+      var searchTag = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
       var _this = this;
 
       this.searchQuery = this.$searchField.val();
 
-      if (!this.searchQuery.length) {
+      if (!this.searchQuery.length && !searchTag) {
         return false;
       }
 
       this.searchUrl = new URL(WP.siteUrl);
-      this.searchQuery = this.$searchField.val();
+
       this.searchPage = 1;
 
       var searchSortQuery = (0, _jquery2.default)('.search-sort-option.active').attr('data-query');
       var sortParams = new URLSearchParams(searchSortQuery);
 
-      this.searchUrl.searchParams.set('s', this.searchQuery);
+      debugger;
+
+      if (searchTag) {
+        this.searchQuery = searchTag;
+        this.$searchField.val(searchTag);
+        this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);
+      } else {
+        this.searchUrl.searchParams.set('s', this.searchQuery);
+      }
 
       sortParams.forEach(function (value, key) {
         _this.searchUrl.searchParams.set(key, value);
@@ -10913,6 +10925,8 @@ var Site = function () {
     value: function getSearchResults() {
       var _this = this;
       var initialScrollTop = this.$searchPanel.scrollTop();
+
+      console.log(this.searchUrl.href);
 
       _jquery2.default.ajax({
         url: this.searchUrl.href,
@@ -10941,10 +10955,13 @@ var Site = function () {
             _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
             _this.$searchLoadMore.attr('href', _this.searchUrl.href).removeClass('hide');
           }
-
-          //$('body').removeClass('loading-more');
         }
       });
+    }
+  }, {
+    key: 'handleSearchTag',
+    value: function handleSearchTag(e) {
+      this.handleSearchSubmit(null, (0, _jquery2.default)(e.currentTarget).attr('data-tag'));
     }
   }, {
     key: 'bindFilterToggle',
@@ -10986,7 +11003,7 @@ var Site = function () {
           if ($filter.hasClass('collection-filter')) {
             _this.handleRequest(href, 'filter');
           } else {
-            _this.handleSearchSubmit();
+            _this.handleSearchSubmit(null, false);
           }
 
           return false;

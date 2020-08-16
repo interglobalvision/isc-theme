@@ -20,6 +20,7 @@ class Site {
 
     this.handleSearchToggle = this.handleSearchToggle.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
+    this.handleSearchTag = this.handleSearchTag.bind(this);
 
     $(window).resize(this.onResize.bind(this));
 
@@ -140,6 +141,7 @@ class Site {
     this.$searchForm.on('submit', this.handleSearchSubmit);
     $('#search-toggle-overlay').on('click', this.handleSearchToggle);
     this.$searchField.on('click', this.handleSearchInput);
+    $('.search-tag').on('click.searchTag', this.handleSearchTag);
   }
 
   handleSearchInput() {
@@ -169,23 +171,31 @@ class Site {
 
   }
 
-  handleSearchSubmit() {
+  handleSearchSubmit(e, searchTag = false) {
     const _this = this;
 
     this.searchQuery = this.$searchField.val();
 
-    if (!this.searchQuery.length) {
+    if (!this.searchQuery.length && !searchTag) {
       return false;
     }
 
     this.searchUrl = new URL(WP.siteUrl);
-    this.searchQuery = this.$searchField.val();
+
     this.searchPage = 1;
 
     const searchSortQuery = $('.search-sort-option.active').attr('data-query');
     const sortParams = new URLSearchParams(searchSortQuery);
 
-    this.searchUrl.searchParams.set('s', this.searchQuery);
+    debugger;
+
+    if (searchTag) {
+      this.searchQuery = searchTag;
+      this.$searchField.val(searchTag);
+      this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);
+    } else {
+      this.searchUrl.searchParams.set('s', this.searchQuery);
+    }
 
     sortParams.forEach(function(value, key) {
       _this.searchUrl.searchParams.set(key, value);
@@ -204,6 +214,8 @@ class Site {
   getSearchResults() {
     const _this = this;
     const initialScrollTop = this.$searchPanel.scrollTop();
+
+    console.log(this.searchUrl.href);
 
     $.ajax({
       url: this.searchUrl.href,
@@ -232,10 +244,12 @@ class Site {
           _this.searchUrl.searchParams.set('paged', _this.currentSearchPage);
           _this.$searchLoadMore.attr('href', _this.searchUrl.href).removeClass('hide');
         }
-
-        //$('body').removeClass('loading-more');
       }
     });
+  }
+
+  handleSearchTag(e) {
+    this.handleSearchSubmit(null, $(e.currentTarget).attr('data-tag'));
   }
 
   bindFilterToggle() {
@@ -276,7 +290,7 @@ class Site {
         if ($filter.hasClass('collection-filter')) {
           _this.handleRequest(href, 'filter');
         } else {
-          _this.handleSearchSubmit();
+          _this.handleSearchSubmit(null, false);
         }
 
         return false;
