@@ -10901,7 +10901,6 @@ var Site = function () {
 
       if (searchTag) {
         this.searchQuery = searchTag;
-        this.$searchField.val(searchTag);
         this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);
       } else {
         this.searchUrl.searchParams.set('s', this.searchQuery);
@@ -10961,6 +10960,7 @@ var Site = function () {
   }, {
     key: 'handleSearchTag',
     value: function handleSearchTag(e) {
+      this.$searchField.val((0, _jquery2.default)(e.currentTarget).attr('data-tagname'));
       this.handleSearchSubmit(null, (0, _jquery2.default)(e.currentTarget).attr('data-tag'));
     }
   }, {

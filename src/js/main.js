@@ -191,7 +191,6 @@ class Site {
 
     if (searchTag) {
       this.searchQuery = searchTag;
-      this.$searchField.val(searchTag);
       this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);
     } else {
       this.searchUrl.searchParams.set('s', this.searchQuery);
@@ -249,6 +248,7 @@ class Site {
   }
 
   handleSearchTag(e) {
+    this.$searchField.val($(e.currentTarget).attr('data-tagname'));
     this.handleSearchSubmit(null, $(e.currentTarget).attr('data-tag'));
   }
 

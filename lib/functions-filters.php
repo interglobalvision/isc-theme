@@ -162,3 +162,12 @@ function igv_set_search_query_args($query) {
   return $query;
 }
 add_filter('pre_get_posts','igv_set_search_query_args');
+
+function igv_set_tag_archive_query_args($query) {
+  if (!is_admin() && $query->is_tax()) {
+    $query->set('post_type',array('post','album'));
+    $query->set('posts_per_page', 10);
+  }
+  return $query;
+}
+add_filter('pre_get_posts','igv_set_tag_archive_query_args');
