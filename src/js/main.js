@@ -187,8 +187,6 @@ class Site {
     const searchSortQuery = $('.search-sort-option.active').attr('data-query');
     const sortParams = new URLSearchParams(searchSortQuery);
 
-    debugger;
-
     if (searchTag) {
       this.searchQuery = searchTag;
       this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);

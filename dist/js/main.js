@@ -10897,8 +10897,6 @@ var Site = function () {
       var searchSortQuery = (0, _jquery2.default)('.search-sort-option.active').attr('data-query');
       var sortParams = new URLSearchParams(searchSortQuery);
 
-      debugger;
-
       if (searchTag) {
         this.searchQuery = searchTag;
         this.searchUrl = new URL(WP.siteUrl + '/tag/' + this.searchQuery);
