@@ -175,7 +175,7 @@ class Site {
     this.searchQuery = this.$searchField.val();
 
     if (!this.searchQuery.length) {
-      return;
+      return false;
     }
 
     this.searchUrl = new URL(WP.siteUrl);
