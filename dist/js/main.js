@@ -10922,6 +10922,7 @@ var Site = function () {
           var results = $newResults.html();
 
           if (maxPages === 0) {
+            _this.$searchResults.html('<div class="grid-item item-s-12 text-align-center"><span>Sorry, this search returned no results</span></div>');
             return;
           }
 
