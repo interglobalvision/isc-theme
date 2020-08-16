@@ -64,10 +64,21 @@ get_template_part('partials/playlist');
           </button>
         </div>
 
-        <div class="grid-item">
+        <div class="grid-item not-desktop">
           <button class="player-play-pause player-control" disabled>
             <div class="player-control-icon">
-              <img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/player-play.png" />
+              <?php get_template_part('assets/player-play-mobile.svg'); ?>
+            </div>
+            <div class="player-control-icon hide">
+              <?php get_template_part('assets/player-pause-mobile.svg'); ?>
+            </div>
+          </button>
+        </div>
+
+        <div class="grid-item desktop-only">
+          <button class="player-play-pause player-control" disabled>
+            <div class="player-control-icon">
+              <?php get_template_part('assets/player-play.svg'); ?>
             </div>
             <div class="player-control-icon hide">
               <?php get_template_part('assets/player-pause.svg'); ?>
