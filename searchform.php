@@ -6,7 +6,7 @@
           <span class="font-uppercase font-size-tiny">Search</span>
         </div>
         <div class="flex-grow grid-row grid-item">
-          <input id="search-field" type="text" class="font-size-small flex-grow search-field text-align-center" name="s" placeholder="<?php echo is_search() ? get_search_query() : ''; ?>">
+          <input id="search-field" type="text" class="font-size-small flex-grow search-field text-align-center font-sans" name="s" placeholder="<?php echo is_search() ? get_search_query() : ''; ?>">
         </div>
       </label>
       <!--button type="submit" id="search-submit" class="margin-top-tiny button">Submit</button-->
