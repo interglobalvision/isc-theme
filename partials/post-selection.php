@@ -5,7 +5,7 @@ $selection_name = get_post_meta($post->ID, '_igv_post_selection_name', true);
 if (!empty($selection)) {
 ?>
 
-<section class="border-box background-woodgrain padding-top-basic padding-bottom-basic ">
+<section id="post-selection" class="border-box background-woodgrain padding-top-basic padding-bottom-basic">
 
   <?php get_template_part('assets/woodgrain.svg'); ?>
 
@@ -33,6 +33,14 @@ if (!empty($selection)) {
     <?php
       }
     ?>
+    </div>
+    <div class="swiper-pagination-holder margin-top-small">
+      <div class="container">
+        <div class="grid-row">
+          <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
+          <div class="grid-item u-pointer next-slide"><?php get_template_part('assets/arrow-right.svg'); ?></div>
+        </div>
+      </div>
     </div>
   </div>
 

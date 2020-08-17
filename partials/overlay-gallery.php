@@ -16,7 +16,7 @@ $images = get_post_meta($post->ID, '_igv_album_images', true);
       }
     ?>
     </div>
-    <div id="featured-albums-swiper-pagination" class="swiper-pagination-holder margin-top-small">
+    <div class="swiper-pagination-holder margin-top-small">
       <div class="container">
         <div class="grid-row justify-center">
           <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
