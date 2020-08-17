@@ -10,7 +10,7 @@ $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
 if (!empty($featured_albums)) {
 ?>
 
-  <div id="featured-albums-swiper" class="swiper-container padding-top-mid padding-bottom-mid grid-row align-items-center hide">
+  <div id="featured-albums-swiper" class="swiper-container padding-top-mid padding-bottom-basic grid-row align-items-center hide">
     <div class="swiper-wrapper align-items-center">
     <?php
       foreach ($featured_albums as $album_id) {
@@ -24,6 +24,14 @@ if (!empty($featured_albums)) {
     <?php
       }
     ?>
+    </div>
+    <div id="featured-albums-swiper-pagination" class="flex-grow margin-top-basic">
+      <div class="container">
+        <div class="grid-row justify-between">
+          <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
+          <div class="grid-item u-pointer next-slide"><?php get_template_part('assets/arrow-right.svg'); ?></div>
+        </div>
+      </div>
     </div>
   </div>
 

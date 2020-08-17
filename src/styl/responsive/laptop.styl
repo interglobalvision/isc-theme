@@ -61,6 +61,20 @@
     width: 155px
     height: 155px
 
+  #featured-albums-swiper
+    .next-slide,
+    .prev-slide
+      visibility: hidden
+      pointer-events: none
+    &.mouse-left
+      .prev-slide
+        visibility: visible
+        pointer-events: auto
+    &.mouse-right
+      .next-slide
+        visibility: visible
+        pointer-events: auto
+
   .overlay-gallery-slide
     height: 500px
     padding-left: $margin-basic * 2

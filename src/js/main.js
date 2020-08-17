@@ -29,12 +29,15 @@ class Site {
   }
 
   onResize() {
+    this.windowWidth = $(window).width();
   }
 
   onReady() {
     this.audioPlayer = new Player();
 
     this.$mainContainer = $('#main-container');
+
+    this.windowWidth = $(window).width();
 
     lazySizes.init();
 
@@ -530,9 +533,29 @@ class Site {
         loopedSlides: 10,
         centeredSlides: true,
         grabCursor: true,
+        mousewheel: {
+          forceToAxis: true,
+        },
+        navigation: {
+          nextEl: '.next-slide',
+          prevEl: '.prev-slide'
+        },
         on: {
           init: function(swiper) {
-            swiper.$el.removeClass('hide');
+            $('#featured-albums-swiper').on({
+              mousemove: function(e) {
+                if (event.pageX < _this.windowWidth / 2) {
+                  $(this).removeClass('mouse-right')
+                    .addClass('mouse-left');
+                } else {
+                  $(this).removeClass('mouse-left')
+                    .addClass('mouse-right');
+                }
+              },
+              mouseleave: function(e) {
+                $(this).removeClass('mouse-right mouse-left');
+              }
+            }).removeClass('hide');
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {
@@ -550,16 +573,16 @@ class Site {
 
     this.bindOverlayGallery();
 
-    if ($('.overlay-gallery-slide').length && $(window).width() >= this.landscapeThreshold) {
+    if ($('.overlay-gallery-slide').length && this.windowWidth >= this.landscapeThreshold) {
       const args = {
         slidesPerView: 'auto',
         loop: true,
         loopedSlides: 10,
         centeredSlides: false,
-        grabCursor: true,
+        //grabCursor: true,
         on: {
           resize: function(swiper) {
-            if ($(window).width() < _this.landscapeThreshold) {
+            if (_this.windowWidth < _this.landscapeThreshold) {
               swiper.destroy(true);
             }
           }
