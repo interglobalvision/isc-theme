@@ -10889,7 +10889,13 @@ var Site = function () {
           loop: true,
           loopedSlides: 10,
           centeredSlides: false,
-          //grabCursor: true,
+          mousewheel: {
+            forceToAxis: true
+          },
+          navigation: {
+            nextEl: '.next-slide',
+            prevEl: '.prev-slide'
+          },
           on: {
             resize: function resize(swiper) {
               if (_this.windowWidth < _this.landscapeThreshold) {
@@ -10922,7 +10928,13 @@ var Site = function () {
           loop: true,
           loopedSlides: 10,
           centeredSlides: false,
-          grabCursor: true,
+          mousewheel: {
+            forceToAxis: true
+          },
+          navigation: {
+            nextEl: '.next-slide',
+            prevEl: '.prev-slide'
+          },
           on: {
             init: function init(swiper) {
               swiper.$el.removeClass('hide');

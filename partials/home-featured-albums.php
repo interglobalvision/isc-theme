@@ -2,7 +2,7 @@
 $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
 ?>
 
-<section class="background-woodgrain">
+<section class="background-woodgrain padding-top-mid padding-bottom-basic">
 
   <?php get_template_part('assets/woodgrain.svg'); ?>
 
@@ -10,7 +10,7 @@ $featured_albums = get_post_meta($post->ID, '_igv_featured_albums', true);
 if (!empty($featured_albums)) {
 ?>
 
-  <div id="featured-albums-swiper" class="swiper-container padding-top-mid padding-bottom-basic grid-row align-items-center hide">
+  <div id="featured-albums-swiper" class="swiper-container grid-row align-items-center hide">
     <div class="swiper-wrapper align-items-center">
     <?php
       foreach ($featured_albums as $album_id) {
@@ -25,7 +25,7 @@ if (!empty($featured_albums)) {
       }
     ?>
     </div>
-    <div id="featured-albums-swiper-pagination" class="flex-grow margin-top-basic">
+    <div id="featured-albums-swiper-pagination" class="swiper-pagination-holder flex-grow margin-top-basic">
       <div class="container">
         <div class="grid-row justify-between">
           <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
