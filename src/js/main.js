@@ -118,7 +118,7 @@ class Site {
         if ($(target).closest('.swiper-slide').length) {
           const $swiperContainer = $(target).closest('.swiper-container');
           const $slide = $(target).closest('.swiper-slide');
-          if ($swiperContainer.id() !== 'post-selection-swiper') {
+          if ($swiperContainer.id() !== 'post-selection-swiper' && !$slide.hasClass('swiper-slide-active')) {
             return false;
           }
         }
@@ -557,6 +557,7 @@ class Site {
                 $(this).removeClass('mouse-right mouse-left');
               }
             }).removeClass('hide');
+
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {
