@@ -10401,8 +10401,9 @@ var Site = function () {
           }
 
           if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
+            var $swiperContainer = (0, _jquery2.default)(target).closest('.swiper-container');
             var $slide = (0, _jquery2.default)(target).closest('.swiper-slide');
-            if (!$slide.hasClass('swiper-slide-active')) {
+            if ($swiperContainer.id() !== 'post-selection-swiper') {
               return false;
             }
           }
@@ -10934,6 +10935,7 @@ var Site = function () {
             nextEl: '.next-slide',
             prevEl: '.prev-slide'
           },
+          slideToClickedSlide: false,
           on: {
             init: function init(swiper) {
               (0, _jquery2.default)('#post-selection-swiper').removeClass('hide');

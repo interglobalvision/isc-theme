@@ -116,8 +116,9 @@ class Site {
         }
 
         if ($(target).closest('.swiper-slide').length) {
+          const $swiperContainer = $(target).closest('.swiper-container');
           const $slide = $(target).closest('.swiper-slide');
-          if (!$slide.hasClass('swiper-slide-active')) {
+          if ($swiperContainer.id() !== 'post-selection-swiper') {
             return false;
           }
         }
@@ -622,6 +623,7 @@ class Site {
           nextEl: '.next-slide',
           prevEl: '.prev-slide'
         },
+        slideToClickedSlide: false,
         on: {
           init: function(swiper) {
             $('#post-selection-swiper').removeClass('hide');
