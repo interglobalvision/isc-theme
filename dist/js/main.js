@@ -10403,7 +10403,7 @@ var Site = function () {
           if ((0, _jquery2.default)(target).closest('.swiper-slide').length) {
             var $swiperContainer = (0, _jquery2.default)(target).closest('.swiper-container');
             var $slide = (0, _jquery2.default)(target).closest('.swiper-slide');
-            if ($swiperContainer.id() !== 'post-selection-swiper' && !$slide.hasClass('swiper-slide-active')) {
+            if ($swiperContainer.attr('id') !== 'post-selection-swiper' && !$slide.hasClass('swiper-slide-active')) {
               return false;
             }
           }
