@@ -10888,7 +10888,7 @@ var Site = function () {
           slidesPerView: 'auto',
           loop: true,
           loopedSlides: 10,
-          centeredSlides: false,
+          centeredSlides: true,
           mousewheel: {
             forceToAxis: true
           },
@@ -10898,8 +10898,8 @@ var Site = function () {
           },
           on: {
             resize: function resize(swiper) {
-              if (_this.windowWidth < _this.landscapeThreshold) {
-                swiper.destroy(true);
+              if (_this.windowWidth < _this.landscapeThreshold && this.overlaySwiper) {
+                this.overlaySwiper.destroy(true);
               }
             }
           }
@@ -10925,8 +10925,7 @@ var Site = function () {
       if ((0, _jquery2.default)('#post-selection-swiper').length) {
         var args = {
           slidesPerView: 'auto',
-          loop: true,
-          loopedSlides: 10,
+          loop: false,
           centeredSlides: false,
           mousewheel: {
             forceToAxis: true
@@ -10937,7 +10936,7 @@ var Site = function () {
           },
           on: {
             init: function init(swiper) {
-              swiper.$el.removeClass('hide');
+              (0, _jquery2.default)('#post-selection-swiper').removeClass('hide');
               _this.bindLinks('.swiper-slide a');
             },
             loopFix: function loopFix() {

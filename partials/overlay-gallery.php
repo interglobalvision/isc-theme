@@ -6,13 +6,6 @@ $images = get_post_meta($post->ID, '_igv_album_images', true);
     <div id="overlay-gallery-swiper-wrapper" class="swiper-wrapper align-items-center">
     <?php
       if (!empty($images)) {
-        /*
-    ?>
-      <div class="swiper-slide overlay-gallery-slide">
-        <?php the_post_thumbnail('large', array('data-no-lazysizes' => 'true')); ?>
-      </div>
-    <?php
-    */
         foreach ($images as $id => $url) {
     ?>
       <div class="swiper-slide overlay-gallery-slide">
@@ -22,6 +15,14 @@ $images = get_post_meta($post->ID, '_igv_album_images', true);
         }
       }
     ?>
+    </div>
+    <div id="featured-albums-swiper-pagination" class="swiper-pagination-holder margin-top-small">
+      <div class="container">
+        <div class="grid-row justify-center">
+          <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
+          <div class="grid-item u-pointer next-slide"><?php get_template_part('assets/arrow-right.svg'); ?></div>
+        </div>
+      </div>
     </div>
   </div>
   <div id="close-gallery-holder" class="padding-top-small padding-right-small">

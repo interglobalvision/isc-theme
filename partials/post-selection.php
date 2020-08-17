@@ -19,8 +19,8 @@ if (!empty($selection)) {
   </div>
 <?php } ?>
 
-  <div id="post-selection-swiper" class="swiper-container grid-row align-items-center hide">
-    <div class="swiper-wrapper align-items-center">
+  <div id="post-selection-swiper" class="swiper-container container grid-row align-items-center hide">
+    <div class="swiper-wrapper grid-item align-items-center">
     <?php
       foreach ($selection as $album_id) {
     ?>

@@ -79,9 +79,31 @@
         visibility: visible
         pointer-events: auto
 
+  .album-featured-slide
+    a
+      pointer-events: none
+    &.swiper-slide-active
+      a
+        pointer-events: auto
+      .slide-info-icon
+        visibility: visible
+
+  .post-selection-slide
+    padding-right: $margin-basic * 2
+    a
+      &:hover
+        .slide-info-icon
+          visibility: visible
+
+  .album-featured-slide,
+  .post-selection-slide
+    .slide-info-icon
+      visibility: hidden
+
   .overlay-gallery-slide
     height: 500px
-    padding-left: $margin-basic * 2
+    padding-left: $margin-basic
+    padding-right: $margin-basic
 
   .overlay-toggle-icon
     width: 2em

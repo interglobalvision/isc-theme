@@ -578,7 +578,7 @@ class Site {
         slidesPerView: 'auto',
         loop: true,
         loopedSlides: 10,
-        centeredSlides: false,
+        centeredSlides: true,
         mousewheel: {
           forceToAxis: true,
         },
@@ -588,8 +588,8 @@ class Site {
         },
         on: {
           resize: function(swiper) {
-            if (_this.windowWidth < _this.landscapeThreshold) {
-              swiper.destroy(true);
+            if (_this.windowWidth < _this.landscapeThreshold && this.overlaySwiper) {
+              this.overlaySwiper.destroy(true);
             }
           }
         }
@@ -613,8 +613,7 @@ class Site {
     if ($('#post-selection-swiper').length) {
       const args = {
         slidesPerView: 'auto',
-        loop: true,
-        loopedSlides: 10,
+        loop: false,
         centeredSlides: false,
         mousewheel: {
           forceToAxis: true,
@@ -625,7 +624,7 @@ class Site {
         },
         on: {
           init: function(swiper) {
-            swiper.$el.removeClass('hide');
+            $('#post-selection-swiper').removeClass('hide');
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {
