@@ -107,7 +107,7 @@ if (have_posts()) {
           <?php } ?>
         </div>
 
-        <div id="album-tracklist-credits-holder" class="grid-row grid-item item-s-12 item-m-6 offset-m-1 margin-bottom-small align-content-start">
+        <div id="album-tracklist-credits-holder" class="grid-column grid-item item-s-12 item-m-6 offset-m-1 margin-bottom-small align-content-start">
         <?php if (!empty($tracklist)) { ?>
           <div class="margin-bottom-tiny">
             <div class="margin-bottom-tiny">
