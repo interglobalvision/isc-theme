@@ -194,6 +194,18 @@ function igv_cmb_metaboxes() {
 	) );
 
   $product_metabox->add_field( array(
+		'name'       => __( 'Format', 'cmb2' ),
+		'id'         => $prefix . 'product_format',
+		'type'       => 'text',
+	) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Sample Embed', 'cmb2' ),
+		'id'         => $prefix . 'product_sample_embed',
+		'type'       => 'textarea_code',
+	) );
+
+  $product_metabox->add_field( array(
 		'name'       => __( 'Tracklist', 'cmb2' ),
 		'id'         => $prefix . 'product_tracklist',
 		'type'       => 'textarea',
