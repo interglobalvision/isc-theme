@@ -11,6 +11,10 @@ get_template_part('partials/home-featured-albums');
 get_template_part('partials/home-featured-posts');
 get_template_part('partials/home-recent-albums');
 get_template_part('partials/home-recent-posts');
+
+if (get_show_shop()) {
+  get_template_part('partials/home-recent-products');
+}
 ?>
 </main>
 
