@@ -48,12 +48,13 @@ function scripts_and_styles_method() {
     //'playerPlaylistUrl' => $options['player_playlist_url']
   );
 
-  wp_register_script('soundcloud', $soundcloudSdk);
-  wp_enqueue_script('soundcloud', $soundcloudSdk, '', '', true);
+  wp_enqueue_script('jquery');
 
-  wp_register_script('javascript-main', $javascriptMain);
+  wp_enqueue_script('soundcloud', $soundcloudSdk, array(), null, true);
+
+  wp_register_script('javascript-main', $javascriptMain, array(), null, true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
-  wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);
+  wp_enqueue_script('javascript-main');
 
   // Enqueue style
   wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css' );
@@ -99,6 +100,7 @@ get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/site-options' );
+get_template_part( 'lib/shopify' );
 
 // Add custom functions
 
