@@ -11,17 +11,12 @@ License URI:  https://www.gnu.org/licenses/gpl-2.0.html
 Text Domain:  igv
 */
 
-function gws_init() {
 
-  add_action( 'init', 'gws_register_post_types' );
+add_action( 'init', 'gws_register_post_types' );
 
-  add_action( 'wp_enqueue_scripts', 'gws_enqueue_scripts' );
+add_action( 'cmb2_admin_init', 'gws_register_settings' );
 
-  add_action( 'cmb2_admin_init', 'gws_register_settings' );
-
-  add_action( 'cmb2_init', 'gws_register_metaboxes' );
-
-}
+add_action( 'cmb2_init', 'gws_register_metaboxes' );
 
 function gws_register_post_types() {
   $archive_slug = gws_get_option('_gws_shopify_archive_slug') === false || empty(gws_get_option('_gws_shopify_archive_slug')) ? 'shop' : gws_get_option('_gws_shopify_archive_slug');
@@ -166,29 +161,6 @@ function gws_register_settings() {
 
 }
 
-function gws_enqueue_scripts() {
-  $shop_scripts = plugin_dir_url( __FILE__ ) . 'dist/js/main.js';
-
-  wp_register_script( 'gws_scripts', $shop_scripts );
-
-  $shopify_domain = gws_get_option('_gws_shopify_domain');
-  $shopify_token = gws_get_option('_gws_shopify_token');
-  $shopify_item_slug = gws_get_option('_gws_shopify_item_slug');
-  $shopify_currencies = gws_get_option('_gws_shopify_currencies');
-
-  $javascriptVars = array(
-    'domain' => !empty($shopify_domain) ? $shopify_domain : null,
-    'storefrontAccessToken' => !empty($shopify_token) ? $shopify_token : null,
-    'siteUrl' => home_url(),
-    'itemSlug' => !empty($shopify_item_slug) ? $shopify_item_slug : null,
-    'currencies' => !empty($shopify_currencies) ? $shopify_currencies : null,
-  );
-
-  wp_localize_script( 'gws_scripts', 'Shopify', $javascriptVars );
-  wp_enqueue_script( 'gws_scripts', $shop_scripts,'','',true);
-
-}
-
 function gws_get_option( $key = '', $default = false ) {
   if ( function_exists( 'cmb2_get_option' ) ) {
     // Use cmb2_get_option as it passes through some key filters.
@@ -204,7 +176,5 @@ function gws_get_option( $key = '', $default = false ) {
   }
   return $val;
 }
-
-gws_init();
 
 ?>
