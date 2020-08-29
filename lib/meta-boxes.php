@@ -155,6 +155,56 @@ function igv_cmb_metaboxes() {
 		'type'       => 'text_url',
 	) );
 
+  // PRODUCT
+
+  $product_metabox = new_cmb2_box( array(
+    'title'         => __( 'Settings', 'cmb2' ),
+    'id'            => 'product_metabox',
+    'object_types'  => array( 'product', ), // Post type
+  ) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Images', 'cmb2' ),
+		'id'         => $prefix . 'product_images',
+		'type'       => 'file_list',
+	) );
+
+	$product_metabox->add_field( array(
+		'name'       => __( 'Artist', 'cmb2' ),
+		'id'         => $prefix . 'product_artist',
+		'type'       => 'text',
+	) );
+
+	$product_metabox->add_field( array(
+		'name'       => __( 'Title', 'cmb2' ),
+		'id'         => $prefix . 'product_title',
+		'type'       => 'text',
+	) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Catalog Number', 'cmb2' ),
+		'id'         => $prefix . 'product_catalog_num',
+		'type'       => 'text',
+	) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Release Date', 'cmb2' ),
+		'id'         => $prefix . 'product_release_date',
+		'type'       => 'text',
+	) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Tracklist', 'cmb2' ),
+		'id'         => $prefix . 'product_tracklist',
+		'type'       => 'textarea',
+	) );
+
+  $product_metabox->add_field( array(
+		'name'       => __( 'Credits', 'cmb2' ),
+		'id'         => $prefix . 'product_credits',
+		'type'       => 'textarea',
+	) );
+
   // TRACK
 
   $track_metabox = new_cmb2_box( array(
