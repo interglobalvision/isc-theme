@@ -37,15 +37,26 @@ function scripts_and_styles_method() {
     $playlist = false;
   }
 
+  $shopify_domain = gws_get_option('_gws_shopify_domain');
+  $shopify_token = gws_get_option('_gws_shopify_token');
+  $shopify_item_slug = gws_get_option('_gws_shopify_item_slug');
+  $shopify_currencies = gws_get_option('_gws_shopify_currencies');
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
+    
     'mailchimp' => $options['mailchimp_action'],
     'postsPerPage' => get_query_var('posts_per_page'),
+
     'playerClientId' => $player_options['player_client_id'],
     'playerPlaylist' => json_encode($playlist),
-    //'playerPlaylistUrl' => $options['player_playlist_url']
+
+    'domain' => !empty($shopify_domain) ? $shopify_domain : null,
+    'storefrontAccessToken' => !empty($shopify_token) ? $shopify_token : null,
+    'itemSlug' => !empty($shopify_item_slug) ? $shopify_item_slug : null,
+    'currencies' => !empty($shopify_currencies) ? $shopify_currencies : null,
   );
 
   wp_enqueue_script('jquery');
