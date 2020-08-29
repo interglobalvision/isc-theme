@@ -90,6 +90,12 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $site_options->add_field( array(
+    'name'    => esc_html__( 'Hide Shop', 'cmb2' ),
+    'id'      => 'hide_shop',
+    'type'    => 'checkbox',
+  ) );
+
+  $site_options->add_field( array(
     'name'    => esc_html__( 'Welcome', 'cmb2' ),
     'id'      => 'welcome_text',
     'type'    => 'textarea_small',
