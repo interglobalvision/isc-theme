@@ -13,8 +13,8 @@ if (have_posts()) {
       <div id="cart-items" class="gws-cart-items">
         <div class="gws-cart-item margin-bottom-basic">
           <div class="grid-row">
-            <div class="grid-row item-s-4 item-m-2">
-              <div class="grid-item gws-cart-thumb"></div>
+            <div class="grid-row grid-item item-s-4 item-m-2">
+              <div class="gws-cart-thumb"></div>
             </div>
             <div class="grid-row item-s-8 item-m-10">
               <div class="grid-row item-s-12 item-m-6 margin-bottom-small align-content-start">
