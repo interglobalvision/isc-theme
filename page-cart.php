@@ -42,6 +42,29 @@ if (have_posts()) {
           </div>
         </div>
       </div>
+      <div>
+        <div class="grid-row margin-bottom-small">
+          <div class="grid-item item-s-4 item-m-2 offset-m-5">
+            <span class="font-cond">Shipping</span>
+          </div>
+          <div class="grid-item">
+            <span>Calculated at checkout</span>
+          </div>
+        </div>
+        <div class="grid-row margin-bottom-small">
+          <div class="grid-item item-s-4 item-m-2 offset-m-5">
+            <span class="font-cond">Subtotal</span>
+          </div>
+          <div class="grid-item">
+            <span>$</span><span id="gws-cart-subtotal"></span>
+          </div>
+        </div>
+        <div class="grid-row">
+          <div class="grid-item item-s-12 offset-m-7 item-l-3">
+            <a href="" class="gws-checkout-link shop-button">Proceed to Checkout</a>
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 <?php
