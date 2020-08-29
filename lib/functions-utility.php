@@ -74,3 +74,13 @@ function echo_post_meta($post_id, $field_id) {
     echo '';
   }
 }
+
+function get_show_shop() {
+  $options = get_site_option('_igv_site_options');
+  if (array_key_exists('show_shop', $options)) {
+    if ($options['show_shop']) {
+      return $options['show_shop'];
+    }
+  }
+  return false;
+}
