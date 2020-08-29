@@ -27,6 +27,9 @@
     &:after, &:before
       width: $margin-tiny
 
+  #header
+    position: absolute
+
   #main-nav
     height: auto
     pointer-events: none
@@ -175,3 +178,20 @@
 
   #footer
     padding-bottom: $player-height + $margin-mid
+
+
+  // SHOP
+
+  #product-image-holder
+    display: block
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: auto
+    pointer-events: none
+    .toggle-gallery
+      pointer-events: auto
+
+  #product-content-holder
+    min-height: 100vh

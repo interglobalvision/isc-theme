@@ -28,9 +28,17 @@ get_template_part('partials/seo');
 <section id="main-container">
   <header id="header">
     <div class="container">
-      <div class="grid-row padding-top-tiny">
+      <div class="grid-row padding-top-tiny align-items-center">
         <div class="grid-item flex-grow margin-bottom-tiny">
           <h1 class="font-bold font-size-large"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
+        </div>
+        <div class="grid-item mobile-only">
+          <a href="<?php echo home_url('cart'); ?>">C</a>
+          <span>(<span class="gws-cart-quantity">0</span>)</span>
+        </div>
+        <div id="mobile-nav-toggle" class="grid-item toggle-nav">
+          <div id="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
+          <div id="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
         </div>
       </div>
     </div>
@@ -52,10 +60,6 @@ get_template_part('partials/seo');
         </div>
       </div>
     </nav>
-    <div id="mobile-nav-toggle" class="toggle-nav">
-      <div id="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
-      <div id="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
-    </div>
   </header>
 
   <?php get_template_part('partials/welcome-panel'); ?>

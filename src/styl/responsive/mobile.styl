@@ -84,15 +84,14 @@ $player-height = 95px
       background: $color-orange
 
 #header
-  position: absolute
+  position: fixed
   top: 0
   left: 0
   width: 100%
   z-index: 400
   pointer-events: none
-  h1
-    a
-      pointer-events: auto
+  a
+    pointer-events: auto
 
 #main-nav
   position: fixed
@@ -108,22 +107,29 @@ $player-height = 95px
   opacity: 0
   pointer-events: none
   transition: opacity .3s ease-in-out
+  a
+    pointer-events: none
 
 #main-nav-row
   font-size: 56px
 
 #mobile-nav-toggle
-  position: fixed
-  top: $margin-small
-  right: $margin-small
+  position: relative
   z-index: 800
   width: 42px
   height: 42px
   pointer-events: auto
+  margin-right: $margin-tiny
+  margin-left: $margin-tiny
   div
     width: 100%
     height: 100%
+    top: 0
+    right: 0
     position: absolute
+    svg
+      width: 100%
+      height: 100%
 
 #nav-toggle-open
   visibility: hidden
@@ -194,6 +200,8 @@ body
     #main-nav
       opacity: 1
       pointer-events: auto
+      a
+        pointer-events: auto
 
 .mobile-margin-top
   margin-top: $margin-mid
@@ -451,7 +459,7 @@ body
 .overlay-toggle-icon
   width: 1.5em
 
-#album-cover-holder
+.album-cover-holder
   position: relative
   .overlay-toggle-icon
     position: absolute
@@ -627,8 +635,8 @@ hr
         width: 100%
         height: 100%
 
-  iframe
-    max-width: 100% !important
+iframe
+  max-width: 100% !important
 
 #overlay-gallery
   position: fixed
@@ -695,3 +703,15 @@ body
 
 .wolf-logo
   width: 90px
+
+// SHOP
+
+#product-image-holder
+  display: none
+
+.shop-button
+  background: $color-black
+  padding: 1em
+  width: 100%
+  border-radius: 2em
+  color: $color-white
