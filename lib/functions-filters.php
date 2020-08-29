@@ -156,7 +156,7 @@ add_action('pre_get_posts','igv_set_album_query_args');
 
 function igv_set_search_query_args($query) {
   if (!is_admin() && $query->is_search) {
-    $query->set('post_type',array('post','album'));
+    $query->set('post_type',array('post','album','product'));
     $query->set('posts_per_page', 10);
   }
   return $query;
@@ -165,7 +165,7 @@ add_filter('pre_get_posts','igv_set_search_query_args');
 
 function igv_set_tag_archive_query_args($query) {
   if (!is_admin() && $query->is_tag()) {
-    $query->set('post_type',array('post','album'));
+    $query->set('post_type',array('post','album','product'));
     $query->set('posts_per_page', 10);
   }
   return $query;
