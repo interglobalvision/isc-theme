@@ -11,6 +11,9 @@ function add_menu_icons_styles(){
 #menu-posts-track .dashicons-admin-post:before {
     content: '\f492';
 }
+#menu-posts-product .dashicons-admin-post:before {
+    content: '\f174';
+}
 </style>
 
 <?php
