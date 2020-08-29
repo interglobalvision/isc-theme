@@ -58,6 +58,7 @@ function create_album_taxonomies() {
 
 	register_taxonomy( 'style', array( 'album' ), $args );
 
+/* REMOVE THIS */
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
 		'name'              => _x( 'Years', 'taxonomy general name', 'igv' ),
@@ -84,6 +85,34 @@ function create_album_taxonomies() {
 	);
 
 	register_taxonomy( 'year', array( 'album' ), $args );
+/* REMOVE THIS */
+
+  // Add new taxonomy, make it hierarchical (like categories)
+	$labels = array(
+		'name'              => _x( 'Years New', 'taxonomy general name', 'igv' ),
+		'singular_name'     => _x( 'Year New', 'taxonomy singular name', 'igv' ),
+		'search_items'      => __( 'Search Years New', 'igv' ),
+		'all_items'         => __( 'All Years New', 'igv' ),
+		'parent_item'       => __( 'Parent Year New', 'igv' ),
+		'parent_item_colon' => __( 'Parent Year New:', 'igv' ),
+		'edit_item'         => __( 'Edit Year New', 'igv' ),
+		'update_item'       => __( 'Update Year New', 'igv' ),
+		'add_new_item'      => __( 'Add New Year New', 'igv' ),
+		'new_item_name'     => __( 'New Year Name New', 'igv' ),
+		'menu_name'         => __( 'Years New', 'igv' ),
+	);
+
+	$args = array(
+		'hierarchical'      => false,
+		'labels'            => $labels,
+		'show_ui'           => true,
+		'show_admin_column' => true,
+		'query_var'         => true,
+		'rewrite'           => array( 'slug' => 'album_year' ),
+    'show_in_rest'      => true,
+	);
+
+	register_taxonomy( 'album_year', array( 'album', 'product' ), $args );
 
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
