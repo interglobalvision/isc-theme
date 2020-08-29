@@ -11,15 +11,13 @@ $post_type = get_post_type();
     <a href="<?php the_permalink(); ?>">
       <div>
         <span class="font-uppercase font-size-small"><?php
-          switch ($post_type) {
-            case 'post':
-              echo 'Feature';
-              break;
-            case 'album':
-              echo 'Album';
-              break;
-            default:
-              echo ' ';
+          if ($post_type === 'album') {
+            echo 'Album';
+          } else if ($post_type === 'post') {
+            $category = get_the_category($post->ID);
+            echo $category[0]->slug === 'uncategorized' ? 'Feature' : $category[0]->name;
+          } else {
+            echo '';
           }
         ?></span>
       </div>

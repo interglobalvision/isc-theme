@@ -12,7 +12,10 @@
   </div>
   <div class="grid-row margin-bottom-tiny">
     <div class="grid-item item-s-3">
-      <span class="font-uppercase post-item-type font-size-small">Feature</span>
+      <span class="font-uppercase post-item-type font-size-small"><?php
+        $category = get_the_category($post->ID);
+        echo $category[0]->slug === 'uncategorized' ? 'Feature' : $category[0]->name;
+      ?></span>
     </div>
     <div class="grid-item item-s-9">
       <h2 class="font-cond font-size-large"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>

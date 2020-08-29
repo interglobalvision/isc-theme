@@ -13,7 +13,10 @@
         <a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('post-item-first', array('data-no-lazysizes' => 'true')); ?></a>
       </div>
       <div class="grid-item item-s-3">
-        <span>FEATURE</span>
+        <span class="font-uppercase"><?php
+          $category = get_the_category($post->ID);
+          echo $category[0]->slug === 'uncategorized' ? 'Feature' : $category[0]->name;
+        ?></span>
       </div>
       <div class="grid-item item-s-9">
         <h2 class="font-cond font-size-extra"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
