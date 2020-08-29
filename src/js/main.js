@@ -473,8 +473,6 @@ class Site {
     $.ajax({
       url: href,
       success: function(data){
-        $('body').removeClass('loading');
-
         const content = $(data).find('#main-content').html();
 
         $(window).scrollTop(0);
@@ -499,7 +497,7 @@ class Site {
           _this.pushState(data, href, context);
         }
 
-        //$('body').removeClass('loading');
+        $('body').removeClass('loading');
       }
     });
   }

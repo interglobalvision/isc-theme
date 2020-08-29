@@ -775,8 +775,6 @@ var Site = function () {
       $.ajax({
         url: href,
         success: function success(data) {
-          $('body').removeClass('loading');
-
           var content = $(data).find('#main-content').html();
 
           $(window).scrollTop(0);
@@ -801,7 +799,7 @@ var Site = function () {
             _this.pushState(data, href, context);
           }
 
-          //$('body').removeClass('loading');
+          $('body').removeClass('loading');
         }
       });
     }
@@ -11464,10 +11462,10 @@ var GWS = function () {
     key: 'onReady',
     value: function onReady() {
       // Check shopify api data
-      if (Shopify.domain !== null && Shopify.storefrontAccessToken !== null) {
-        var _Shopify = Shopify,
-            domain = _Shopify.domain,
-            storefrontAccessToken = _Shopify.storefrontAccessToken;
+      if (WP.domain !== null && WP.storefrontAccessToken !== null) {
+        var _WP = WP,
+            domain = _WP.domain,
+            storefrontAccessToken = _WP.storefrontAccessToken;
 
         // Init Shopify client
 
@@ -11504,13 +11502,13 @@ var GWS = function () {
     value: function buildCurrencySelect() {
       var _this = this;
 
-      if (this.$currencySelectHolder.length && Shopify.currencies !== null) {
+      if (this.$currencySelectHolder.length && WP.currencies !== null) {
         // add select element
         this.$currencySelectHolder.html('<select class="gws-currency-select"></select>');
         this.$currencySelect = $('.gws-currency-select');
 
         // add options to select element
-        Shopify.currencies.forEach(function (currency) {
+        WP.currencies.forEach(function (currency) {
           _this.$currencySelect.append('<option value="' + currency.code + '">' + currency.code + '</option>');
         });
 
@@ -11897,9 +11895,8 @@ var GWS = function () {
           webUrl = checkout.webUrl,
           paymentDue = checkout.paymentDue;
 
-      console.log(checkout);
-
       // Update cart items in header
+
       this.$cartCounter.html(lineItems.length);
 
       // Update page Cart content
@@ -11969,7 +11966,7 @@ var GWS = function () {
             $cartThumb.css('background-image', 'url(\'' + imageSrc + '\')');
           }
           if ($cartTitle) {
-            var path = Shopify.itemSlug ? Shopify.itemSlug + '/' : '?p=';
+            var path = WP.itemSlug ? WP.itemSlug + '/' : '?p=';
             var title = postId ? '<a href="' + WP.siteUrl + '/' + path + postId + '">' + item.title + '</a>' : item.title;
             $cartTitle.html(title);
           }
