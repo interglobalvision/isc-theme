@@ -453,7 +453,6 @@ class GWS {
 
   initCartSection() {
     if (this.$cart.length) {
-      debugger;
       // Get DOM elements
       this.cartItemHtml = this.$cartItem[0].outerHTML;
 
