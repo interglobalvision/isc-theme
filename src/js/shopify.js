@@ -23,6 +23,7 @@ class GWS {
     this.postIdAttr = 'data-gws-post-id';
     this.productInCartAttr = 'data-gws-in-cart';
 
+    this.cartItemClass = '.gws-cart-item';
     this.cartRemoveClass = '.gws-cart-remove';
     this.cartItemIdAttr = 'data-gws-cart-item-id';
     this.cartThumbClass = '.gws-cart-thumb';
@@ -56,7 +57,6 @@ class GWS {
     this.$currencySelectHolder = $('.gws-currency-select-holder');
     this.$cart = $('.gws-cart');
     this.$cartItemsContainer = $('.gws-cart-items');
-    this.cartItemClass = '.gws-cart-item';
     this.$cartItem = $(this.cartItemClass);
     this.$checkoutContainer = $('.gws-cart-checkout');
   }
@@ -74,11 +74,13 @@ class GWS {
 
       this.getShopElements();
 
-      this.setInitialCurrency();
+      //this.setInitialCurrency();
 
       this.initProducts();
 
       this.initCartSection();
+
+      this.initCheckout();
 
     } else {
       console.error('Shopify URL and/or token missing');
@@ -451,6 +453,7 @@ class GWS {
 
   initCartSection() {
     if (this.$cart.length) {
+      debugger;
       // Get DOM elements
       this.cartItemHtml = this.$cartItem[0].outerHTML;
 

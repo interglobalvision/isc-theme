@@ -365,6 +365,7 @@ var Site = function () {
       this.gws.getShopElements();
       this.gws.initProducts();
       this.gws.initCartSection();
+      this.gws.initCheckout();
     }
   }, {
     key: 'bindMobileNav',
@@ -11420,6 +11421,7 @@ var GWS = function () {
     this.postIdAttr = 'data-gws-post-id';
     this.productInCartAttr = 'data-gws-in-cart';
 
+    this.cartItemClass = '.gws-cart-item';
     this.cartRemoveClass = '.gws-cart-remove';
     this.cartItemIdAttr = 'data-gws-cart-item-id';
     this.cartThumbClass = '.gws-cart-thumb';
@@ -11454,7 +11456,6 @@ var GWS = function () {
       this.$currencySelectHolder = $('.gws-currency-select-holder');
       this.$cart = $('.gws-cart');
       this.$cartItemsContainer = $('.gws-cart-items');
-      this.cartItemClass = '.gws-cart-item';
       this.$cartItem = $(this.cartItemClass);
       this.$checkoutContainer = $('.gws-cart-checkout');
     }
@@ -11476,11 +11477,13 @@ var GWS = function () {
 
         this.getShopElements();
 
-        this.setInitialCurrency();
+        //this.setInitialCurrency();
 
         this.initProducts();
 
         this.initCartSection();
+
+        this.initCheckout();
       } else {
         console.error('Shopify URL and/or token missing');
       }
@@ -11873,6 +11876,7 @@ var GWS = function () {
     key: 'initCartSection',
     value: function initCartSection() {
       if (this.$cart.length) {
+        debugger;
         // Get DOM elements
         this.cartItemHtml = this.$cartItem[0].outerHTML;
 

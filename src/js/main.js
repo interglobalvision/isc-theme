@@ -89,6 +89,7 @@ class Site {
     this.gws.getShopElements();
     this.gws.initProducts();
     this.gws.initCartSection();
+    this.gws.initCheckout();
   }
 
   bindMobileNav() {
