@@ -1,13 +1,13 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP, URLSearchParams */
+/* global $, document, WP, URLSearchParams */
 
 // Import dependencies
-import $ from 'jquery';
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
 import Cookies from 'js-cookie';
 import Player from './player';
 import Mailchimp from './mailchimp';
+import GWS from './shopify';
 
 // Import style
 import '../styl/site.styl';
@@ -33,6 +33,7 @@ class Site {
   }
 
   onReady() {
+    this.gws = new GWS();
     this.audioPlayer = new Player();
 
     this.$mainContainer = $('#main-container');
@@ -82,6 +83,12 @@ class Site {
       $('body').removeClass('welcome-open');
       Cookies.set('wc', 'true');
     });
+  }
+
+  initShop() {
+    this.gws.getShopElements();
+    this.gws.initProducts();
+    this.gws.initCartSection();
   }
 
   bindMobileNav() {
@@ -313,13 +320,6 @@ class Site {
     $(document).off('click.outsideFilter');
   }
 
-  bindUpdateFilter() {
-    const _this = this;
-
-    //if ($('.filter').length) {
-
-  }
-
   pushState(data, url, context, filter) {
     const title = $(data).filter('title').text();
     this.updateMetaData(data, title, url);
@@ -329,15 +329,6 @@ class Site {
       filter
     }, title, url);
   }
-
-  /*
-  <meta property="og:title" content="Alice Coltrane &#8211; World Galaxy | In Sheeps Clothing" />
-  <meta property="og:site_name" content="In Sheeps Clothing" />
-  <meta name="twitter:card" value="summary_large_image">
-  <meta property="og:image" content="https://insheepsclothinghifi.com/wordpress/wp-content/uploads/2020/07/World-Galaxy-1000x630.jpg" />  <meta property="og:url" content="https://insheepsclothinghifi.com/wordpress/album/alice-coltrane-world-galaxy/"/>
-  <meta property="og:description" content="If you're new to Alice Coltrane, this is an exciting first album to catapult you straight to her planet, whereas other albums might fly you there more slowly. Recorded in two days and featuring a string orchestra of 16, this sonic kaleidoscope features originals by Alice Coltrane, as well as upside down inside out reimaginings of the classic &quot;My Favorite Things&quot; and her late husband John Coltrane's &quot;A Love Supreme.&quot; At its quietest, stillest moments, World Galaxy feels like the classical soundtrack to an old black and white Hollywood film – if the film were to suddenly start morphin..." />
-  <meta property="og:type" content="article" />
-  */
 
   updateMetaData(data, title, url) {
     const $meta = $(data).filter('meta');
@@ -410,6 +401,8 @@ class Site {
         _this.bindFilterToggle();
         _this.setupSwiper();
 
+        _this.initShop();
+
         _this.pushState(data, url, 'filter', url.searchParams.toString());
 
         _this.currentArchivePage = 1;
@@ -453,6 +446,8 @@ class Site {
         _this.bindFilterToggle();
         _this.setupSwiper();
 
+        _this.initShop();
+
         _this.currentArchivePage = nextPage;
 
         if (_this.currentArchivePage === maxPages) {
@@ -478,6 +473,8 @@ class Site {
     $.ajax({
       url: href,
       success: function(data){
+        $('body').removeClass('loading');
+
         const content = $(data).find('#main-content').html();
 
         $(window).scrollTop(0);
@@ -492,6 +489,9 @@ class Site {
         _this.bindLinks();
         _this.bindFilterToggle();
         _this.setupSwiper();
+
+        _this.initShop();
+
         _this.bindStreamButtons();
         _this.replaceOverlayGallery(data);
 
@@ -499,7 +499,7 @@ class Site {
           _this.pushState(data, href, context);
         }
 
-        $('body').removeClass('loading');
+        //$('body').removeClass('loading');
       }
     });
   }
