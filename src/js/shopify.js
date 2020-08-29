@@ -63,8 +63,8 @@ class GWS {
 
   onReady() {
     // Check shopify api data
-    if(Shopify.domain !== null && Shopify.storefrontAccessToken !== null) {
-      const { domain, storefrontAccessToken } = Shopify;
+    if(WP.domain !== null && WP.storefrontAccessToken !== null) {
+      const { domain, storefrontAccessToken } = WP;
 
       // Init Shopify client
       this.client = Client.buildClient({
@@ -95,13 +95,13 @@ class GWS {
    * Add currency select options
    */
   buildCurrencySelect() {
-    if (this.$currencySelectHolder.length && Shopify.currencies !== null) {
+    if (this.$currencySelectHolder.length && WP.currencies !== null) {
       // add select element
       this.$currencySelectHolder.html('<select class="gws-currency-select"></select>');
       this.$currencySelect = $('.gws-currency-select');
 
       // add options to select element
-      Shopify.currencies.forEach(currency => {
+      WP.currencies.forEach(currency => {
         this.$currencySelect.append('<option value="' + currency.code + '">' + currency.code + '</option>');
       });
 
@@ -467,7 +467,6 @@ class GWS {
    */
   updateCart(checkout) {
     const { lineItems, webUrl, paymentDue } = checkout;
-    console.log(checkout);
 
     // Update cart items in header
     this.$cartCounter.html(lineItems.length);
@@ -532,7 +531,7 @@ class GWS {
         // Fill item content if defined
         if ($cartThumb) {$cartThumb.css('background-image', 'url(\'' + imageSrc + '\')');}
         if ($cartTitle) {
-          const path = Shopify.itemSlug ? Shopify.itemSlug + '/' : '?p=';
+          const path = WP.itemSlug ? WP.itemSlug + '/' : '?p=';
           const title = postId ? `<a href="${WP.siteUrl}/${path}${postId}">${item.title}</a>` : item.title;
           $cartTitle.html(title);
         }
