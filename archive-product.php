@@ -1,7 +1,7 @@
 <?php
 get_header();
 ?>
-<main id="main-content" class="background-pistachio">
+<main id="main-content">
   <section class="padding-top-mid mobile-margin-top">
     <div class="container">
       <div class="grid-row">

@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content" class="background-pistachio">
+<main id="main-content">
 <?php
 if (have_posts()) {
   while (have_posts()) {
