@@ -2,7 +2,7 @@
 get_header();
 ?>
 
-<main id="main-content">
+<main id="main-content" class="background-pistachio">
 <?php
 if (have_posts()) {
   while (have_posts()) {
@@ -30,12 +30,20 @@ if (have_posts()) {
                   </div>
                 </div>
               </div>
-              <div class="item-s-12 item-m-6 grid-row align-content-start">
-                <div class="grid-item item-s-6 item-m-12 margin-bottom-small">
+              <div class="item-s-12 item-m-3 grid-row align-content-start">
+                <div class="mobile-only grid-item item-s-6 item-m-12 margin-bottom-small">
                   <span class="font-cond">Price</span>
                 </div>
                 <div class="grid-item item-s-6 item-m-12">
                   <span>$<span class="gws-cart-item-subtotal"></span></span>
+                </div>
+              </div>
+              <div class="item-s-12 item-m-3 grid-row align-content-start">
+                <div class="mobile-only grid-item item-s-6 item-m-12 margin-bottom-small">
+                  <span class="font-cond">Remove</span>
+                </div>
+                <div class="grid-item item-s-6 item-m-12">
+                  <span>X</span>
                 </div>
               </div>
             </div>
