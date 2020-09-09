@@ -323,6 +323,7 @@ var Site = function () {
       this.setFooterHeight();
       this.bindMobileNav();
       this.initWelcomePanel();
+      this.bindProductScroll();
 
       //this.count();
       //this.thetime = 1;
@@ -643,7 +644,8 @@ var Site = function () {
     value: function bindBack() {
       var _this = this;
       $(window).on('popstate', function () {
-        _this.handleRequest(window.location.href, history.state.context, true);
+        var context = history.state ? history.state.context : 'content';
+        _this.handleRequest(window.location.href, context, true);
       });
     }
   }, {
@@ -790,6 +792,7 @@ var Site = function () {
           _this.bindLinks();
           _this.bindFilterToggle();
           _this.setupSwiper();
+          _this.bindProductScroll();
 
           _this.initShop();
 
@@ -943,6 +946,26 @@ var Site = function () {
         };
 
         this.selectionSwiper = new _swiper2.default('#post-selection-swiper', args);
+      }
+    }
+  }, {
+    key: 'bindProductScroll',
+    value: function bindProductScroll() {
+      $(window).off('scroll.product-image');
+      if ($('#product-image-holder').length) {
+        var $contentHolder = $('#product-content-holder');
+        var $imageHolder = $('#product-image-holder');
+
+        $(window).on('scroll.product-image', function (e) {
+          var contentHeight = $contentHolder.outerHeight(true);
+          var imageHeight = $imageHolder.outerHeight(true);
+          var scrollTop = $(this).scrollTop();
+          if (scrollTop + imageHeight >= contentHeight) {
+            $imageHolder.addClass('bottom');
+          } else {
+            $imageHolder.removeClass('bottom');
+          }
+        });
       }
     }
   }, {

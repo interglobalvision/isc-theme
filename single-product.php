@@ -53,7 +53,7 @@ if (have_posts()) {
   >
     <div class="container">
       <div class="grid-row">
-        <div class="item-s-12 item-m-6 offset-m-6 grid-column">
+        <div class="item-s-12 item-m-6 offset-m-6 grid-column margin-bottom-small">
           <header class="grid-item margin-bottom-small">
             <h1 class="u-visuallyhidden"><?php the_title(); ?></h1>
           <?php if (!empty($artist)) { ?>

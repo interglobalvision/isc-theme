@@ -51,6 +51,7 @@ class Site {
     this.setFooterHeight();
     this.bindMobileNav();
     this.initWelcomePanel();
+    this.bindProductScroll();
 
     //this.count();
     //this.thetime = 1;
@@ -350,7 +351,8 @@ class Site {
   bindBack() {
     const _this = this;
     $(window).on('popstate', function() {
-      _this.handleRequest(window.location.href, history.state.context, true);
+      const context = history.state ? history.state.context : 'content';
+      _this.handleRequest(window.location.href, context, true);
     });
   }
 
@@ -488,6 +490,7 @@ class Site {
         _this.bindLinks();
         _this.bindFilterToggle();
         _this.setupSwiper();
+        _this.bindProductScroll();
 
         _this.initShop();
 
@@ -636,6 +639,25 @@ class Site {
       };
 
       this.selectionSwiper = new Swiper ('#post-selection-swiper', args);
+    }
+  }
+
+  bindProductScroll() {
+    $(window).off('scroll.product-image');
+    if ($('#product-image-holder').length) {
+      const $contentHolder = $('#product-content-holder')
+      const $imageHolder = $('#product-image-holder')
+
+      $(window).on('scroll.product-image', function(e) {
+        const contentHeight = $contentHolder.outerHeight(true);
+        const imageHeight = $imageHolder.outerHeight(true);
+        const scrollTop = $(this).scrollTop();
+        if (scrollTop + imageHeight >= contentHeight) {
+          $imageHolder.addClass('bottom');
+        } else {
+          $imageHolder.removeClass('bottom');
+        }
+      });
     }
   }
 
