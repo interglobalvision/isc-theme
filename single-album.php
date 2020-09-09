@@ -29,7 +29,7 @@ if (have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
-          <div class="album-cover-holder" class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
+          <div class="album-cover-holder <?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
             <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
             <?php if (!empty($images)) { ?>
               <span class="font-size-tiny font-sans">View Album Artwork</span>
