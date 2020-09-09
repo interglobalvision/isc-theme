@@ -134,7 +134,7 @@ class Player {
 
   bindControls() {
     const _this = this;
-    this.$playPause.on('click', function(e) {
+    this.$playPause.on('click', function() {
       $(this).blur();
       _this.isPlaying = !_this.isPlaying;
       _this.handlePlayPause();

@@ -332,7 +332,7 @@ class Site {
     }, title, url);
   }
 
-  updateMetaData(data, title, url) {
+  updateMetaData(data, title) {
     const $meta = $(data).filter('meta');
 
     document.title = title;
@@ -544,9 +544,9 @@ class Site {
           prevEl: '.prev-slide'
         },
         on: {
-          init: function(swiper) {
+          init: function() {
             $('#featured-albums-swiper').on({
-              mousemove: function(e) {
+              mousemove: function() {
                 if (event.pageX < _this.windowWidth / 2) {
                   $(this).removeClass('mouse-right')
                     .addClass('mouse-left');
@@ -555,7 +555,7 @@ class Site {
                     .addClass('mouse-right');
                 }
               },
-              mouseleave: function(e) {
+              mouseleave: function() {
                 $(this).removeClass('mouse-right mouse-left');
               }
             }).removeClass('hide');
@@ -591,7 +591,7 @@ class Site {
           prevEl: '.prev-slide'
         },
         on: {
-          resize: function(swiper) {
+          resize: function() {
             if (_this.windowWidth < _this.landscapeThreshold && this.overlaySwiper) {
               this.overlaySwiper.destroy(true);
             }
@@ -628,7 +628,7 @@ class Site {
         },
         slideToClickedSlide: false,
         on: {
-          init: function(swiper) {
+          init: function() {
             $('#post-selection-swiper').removeClass('hide');
             _this.bindLinks('.swiper-slide a');
           },
@@ -645,10 +645,10 @@ class Site {
   bindProductScroll() {
     $(window).off('scroll.product-image');
     if ($('#product-image-holder').length) {
-      const $contentHolder = $('#product-content-holder')
-      const $imageHolder = $('#product-image-holder')
+      const $contentHolder = $('#product-content-holder');
+      const $imageHolder = $('#product-image-holder');
 
-      $(window).on('scroll.product-image', function(e) {
+      $(window).on('scroll.product-image', function() {
         const contentHeight = $contentHolder.outerHeight(true);
         const imageHeight = $imageHolder.outerHeight(true);
         const scrollTop = $(this).scrollTop();

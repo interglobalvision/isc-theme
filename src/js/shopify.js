@@ -1,5 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Shopify, WP */
+/* global $, document, WP */
 
 import Client from 'shopify-buy';
 import Cookies from 'js-cookie';

@@ -624,7 +624,7 @@ var Site = function () {
     }
   }, {
     key: 'updateMetaData',
-    value: function updateMetaData(data, title, url) {
+    value: function updateMetaData(data, title) {
       var $meta = $(data).filter('meta');
 
       document.title = title;
@@ -850,16 +850,16 @@ var Site = function () {
             prevEl: '.prev-slide'
           },
           on: {
-            init: function init(swiper) {
+            init: function init() {
               $('#featured-albums-swiper').on({
-                mousemove: function mousemove(e) {
+                mousemove: function mousemove() {
                   if (event.pageX < _this.windowWidth / 2) {
                     $(this).removeClass('mouse-right').addClass('mouse-left');
                   } else {
                     $(this).removeClass('mouse-left').addClass('mouse-right');
                   }
                 },
-                mouseleave: function mouseleave(e) {
+                mouseleave: function mouseleave() {
                   $(this).removeClass('mouse-right mouse-left');
                 }
               }).removeClass('hide');
@@ -896,7 +896,7 @@ var Site = function () {
             prevEl: '.prev-slide'
           },
           on: {
-            resize: function resize(swiper) {
+            resize: function resize() {
               if (_this.windowWidth < _this.landscapeThreshold && this.overlaySwiper) {
                 this.overlaySwiper.destroy(true);
               }
@@ -935,7 +935,7 @@ var Site = function () {
           },
           slideToClickedSlide: false,
           on: {
-            init: function init(swiper) {
+            init: function init() {
               $('#post-selection-swiper').removeClass('hide');
               _this.bindLinks('.swiper-slide a');
             },
@@ -956,7 +956,7 @@ var Site = function () {
         var $contentHolder = $('#product-content-holder');
         var $imageHolder = $('#product-image-holder');
 
-        $(window).on('scroll.product-image', function (e) {
+        $(window).on('scroll.product-image', function () {
           var contentHeight = $contentHolder.outerHeight(true);
           var imageHeight = $imageHolder.outerHeight(true);
           var scrollTop = $(this).scrollTop();
@@ -11015,7 +11015,7 @@ var Player = function () {
     key: 'bindControls',
     value: function bindControls() {
       var _this = this;
-      this.$playPause.on('click', function (e) {
+      this.$playPause.on('click', function () {
         (0, _jquery2.default)(this).blur();
         _this.isPlaying = !_this.isPlaying;
         _this.handlePlayPause();
@@ -11243,7 +11243,7 @@ var _createClass = function () { function defineProperties(target, props) { for 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP */
+/* global $, document, WP */
 
 var Mailchimp = function () {
   function Mailchimp() {
@@ -11409,7 +11409,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 
 var _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }(); /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, Shopify, WP */
+/* global $, document, WP */
 
 var _shopifyBuy = __webpack_require__(12);
 
