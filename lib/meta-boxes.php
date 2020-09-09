@@ -214,7 +214,7 @@ function igv_cmb_metaboxes() {
   $product_metabox->add_field( array(
 		'name'       => __( 'Sample Embed', 'cmb2' ),
 		'id'         => $prefix . 'product_sample_embed',
-		'type'       => 'textarea_code',
+		'type'       => 'wysiwyg',
 	) );
 
   // TRACK
