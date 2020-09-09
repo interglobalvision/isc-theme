@@ -215,6 +215,7 @@ function igv_cmb_metaboxes() {
 		'name'       => __( 'Sample Embed', 'cmb2' ),
 		'id'         => $prefix . 'product_sample_embed',
 		'type'       => 'wysiwyg',
+    'sanitization_cb' => false
 	) );
 
   // TRACK
