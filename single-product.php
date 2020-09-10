@@ -50,6 +50,7 @@ if (have_posts()) {
     data-gws-available="true"
     data-gws-price="false"
     data-gws-in-cart="false"
+    data-gws-post-id="<?php echo $post->ID; ?>"
   >
     <div class="container">
       <div class="grid-row">
@@ -78,11 +79,17 @@ if (have_posts()) {
           <div class="grid-item margin-bottom-small">
             <span>Price $</span><span class="gws-product-price"></span><span> USD</span>
           </div>
-          <div class="grid-item margin-bottom-small">
-            <form class="gws-product-form" method="post" enctype='multipart/form-data'>
-              <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
-              <button type="submit" class="shop-button gws-product-add u-pointer">Add to Cart</button>
-            </form>
+          <div class="grid-item margin-bottom-small grid-row">
+            <div class="item-s-12 item-m-6 item-l-4">
+              <form class="gws-product-form" method="post" enctype='multipart/form-data'>
+                <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
+                <button type="submit" class="shop-button gws-product-add u-pointer">
+                  <span class="shop-button-add-to-cart">Add to Cart</span>
+                  <span class="shop-button-sold-out">SOLD OUT</span>
+                  <span class="shop-button-in-the-cart">In the Cart</span>
+                </button>
+              </form>
+            </div>
           </div>
           <div class="grid-item margin-bottom-small">
             <?php the_content(); ?>
