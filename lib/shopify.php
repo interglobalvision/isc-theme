@@ -102,6 +102,13 @@ function gws_register_settings() {
 		'icon_url'     => 'dashicons-products', // Menu icon. Only applicable if 'parent_slug' is left empty.
 	) );
 
+  $shop_options->add_field( array(
+    'name'    => esc_html__( 'Promo Message', 'igv' ),
+    'desc'    => esc_html__( '', 'igv' ),
+    'id'      => $prefix . 'shop_promo_message',
+    'type'    => 'text',
+  ) );
+
 	$shop_options->add_field( array(
     'name'    => esc_html__( 'Shopify Domain', 'igv' ),
     'desc'    => esc_html__( 'ex. my-shop.myshopify.com', 'igv' ),
