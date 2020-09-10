@@ -23,7 +23,12 @@ get_template_part('partials/seo');
 
   <?php wp_head(); ?>
 </head>
-<body <?php body_class(); ?>>
+<?php
+$classes = '';
+$isStorePage = is_page('cart') || is_singular('product') || is_post_type_archive('product');
+$classes .= $isStorePage ? 'background-pistachio' : '';
+?>
+<body <?php body_class($classes); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
 <?php
