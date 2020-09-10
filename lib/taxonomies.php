@@ -58,7 +58,7 @@ function create_album_taxonomies() {
 
 	register_taxonomy( 'style', array( 'album', 'product' ), $args );
 
-  /* REMOVE THIS */
+  /*
     // Add new taxonomy, make it hierarchical (like categories)
   	$labels = array(
   		'name'              => _x( 'Years', 'taxonomy general name', 'igv' ),
@@ -85,21 +85,21 @@ function create_album_taxonomies() {
   	);
 
   	register_taxonomy( 'year', array( 'album' ), $args );
-  /* REMOVE THIS */
+  */
 
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
-		'name'              => _x( 'Years New', 'taxonomy general name', 'igv' ),
-		'singular_name'     => _x( 'Year New', 'taxonomy singular name', 'igv' ),
-		'search_items'      => __( 'Search Years New', 'igv' ),
-		'all_items'         => __( 'All Years New', 'igv' ),
-		'parent_item'       => __( 'Parent Year New', 'igv' ),
-		'parent_item_colon' => __( 'Parent Year New:', 'igv' ),
-		'edit_item'         => __( 'Edit Year New', 'igv' ),
-		'update_item'       => __( 'Update Year New', 'igv' ),
-		'add_new_item'      => __( 'Add New Year New', 'igv' ),
-		'new_item_name'     => __( 'New Year Name New', 'igv' ),
-		'menu_name'         => __( 'Years New', 'igv' ),
+		'name'              => _x( 'Years', 'taxonomy general name', 'igv' ),
+		'singular_name'     => _x( 'Year', 'taxonomy singular name', 'igv' ),
+		'search_items'      => __( 'Search Years', 'igv' ),
+		'all_items'         => __( 'All Years', 'igv' ),
+		'parent_item'       => __( 'Parent Year', 'igv' ),
+		'parent_item_colon' => __( 'Parent Year:', 'igv' ),
+		'edit_item'         => __( 'Edit Year', 'igv' ),
+		'update_item'       => __( 'Update Year', 'igv' ),
+		'add_new_item'      => __( 'Add New Year', 'igv' ),
+		'new_item_name'     => __( 'New Year Name', 'igv' ),
+		'menu_name'         => __( 'Years', 'igv' ),
 	);
 
 	$args = array(
