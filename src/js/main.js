@@ -471,6 +471,21 @@ class Site {
     const _this = this;
 
     $('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open playlist-open');
+
+    const destinationUrl = new URL(href);
+
+    console.log(destinationUrl.pathname);
+
+    if (
+      destinationUrl.pathname.indexOf('/store') > -1 ||
+      destinationUrl.pathname.indexOf('/product') > -1 ||
+      destinationUrl.pathname.indexOf('/cart') > -1
+    ) {
+      $('body').addClass('background-pistachio');
+    } else {
+      $('body').removeClass('background-pistachio');
+    }
+
     this.destroyOverlaySwiper();
 
     $.ajax({
