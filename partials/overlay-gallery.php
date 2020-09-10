@@ -1,5 +1,5 @@
 <?php
-$images = get_post_meta($post->ID, '_igv_album_images', true);
+$images = get_post_meta($post->ID, '_igv_' . get_post_type() . '_images', true);
 ?>
 <div id="overlay-gallery" class="grid-row align-items-center">
   <div id="overlay-gallery-swiper" class="swiper-container">
