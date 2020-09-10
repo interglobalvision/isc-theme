@@ -57,8 +57,9 @@ function igv_query_vars( $qvars ) {
 add_filter( 'query_vars', 'igv_query_vars' );
 
 function igv_set_post_query_args($query){
-  $ppp = get_option( 'posts_per_page' );
-  $first_page_ppp = 2;
+  //$ppp = get_option( 'posts_per_page' );
+  //$first_page_ppp = 2;
+  $ppp = 6;
   $paged = $query->query_vars[ 'paged' ];
 
 
@@ -72,8 +73,9 @@ function igv_set_post_query_args($query){
 
     $latest_post = get_posts(array('numberposts' => 1));
     $query->set('post__not_in', array($latest_post[0]->ID)); //exclude queries by post ID
+    $query->set( 'posts_per_page', $ppp );
 
-    if( !is_paged() ) {
+    /*if( !is_paged() ) {
 
       $query->set( 'posts_per_page', $first_page_ppp );
 
@@ -84,10 +86,10 @@ function igv_set_post_query_args($query){
       $paged_offset = $first_page_ppp + ( ($paged - 2) * $ppp );
       $query->set( 'offset', $paged_offset );
 
-    }
+    }*/
   }
 }
-//add_action('pre_get_posts','igv_set_post_query_args');
+add_action('pre_get_posts','igv_set_post_query_args');
 
 function igv_homepage_offset_pagination( $found_posts, $query ) {
   $ppp = get_option( 'posts_per_page' );
