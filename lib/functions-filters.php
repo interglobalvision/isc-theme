@@ -64,12 +64,7 @@ function igv_set_post_query_args($query){
 
 
   if(!is_admin() && $query->is_main_query() && $query->is_home()){
-
-    //var_dump($query->query_vars[ 'paged' ]);
     $query->set( 'paged', $paged );
-    /*var_dump($query->paged);
-    var_dump(get_query_var('paged'));*/
-    //die;
 
     $latest_post = get_posts(array('numberposts' => 1));
     $query->set('post__not_in', array($latest_post[0]->ID)); //exclude queries by post ID
@@ -173,3 +168,21 @@ function igv_set_tag_archive_query_args($query) {
   return $query;
 }
 add_filter('pre_get_posts','igv_set_tag_archive_query_args');
+
+function igv_set_product_archive_query_args($query) {
+  if(!is_admin() && $query->is_main_query() && is_post_type_archive('product')){
+    $query->set('posts_per_page', 12);
+    $args = array(
+      'post_type' => array('product'),
+      'posts_per_page' => 1,
+      'meta_key'   => '_igv_product_featured',
+      'meta_value' => 'on'
+    );
+    $featured_product = get_posts($args);
+    if ($featured_product) {
+      $query->set('post__not_in', array($featured_product[0]->ID));
+    }
+  }
+  return $query;
+}
+add_filter('pre_get_posts','igv_set_product_archive_query_args');
