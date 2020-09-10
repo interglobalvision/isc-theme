@@ -67,7 +67,7 @@ $show_shop = get_show_shop();
           </div>
           <?php if ($show_shop) { ?>
             <div class="grid-item item-s-12 item-m-auto margin-bottom-tiny">
-              <a href="<?php echo home_url('shop'); ?>" class="toggle-nav">Store</a>
+              <a href="<?php echo home_url('store'); ?>" class="toggle-nav">Store</a>
             </div>
           <?php } ?>
           <div class="grid-item item-s-12 item-m-auto">
