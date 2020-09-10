@@ -715,7 +715,7 @@ body
 #product-image-holder
   display: none
 
-.shop-button
+a.shop-button
   display: inline-block
   text-align: center
   background: $color-black
@@ -732,3 +732,18 @@ body
   padding: .4em .8em .2em
   font-weight: normal
   text-align: center
+
+.icon-bag
+  width: 11px
+
+.remove-item
+  width: 11px
+
+#cart-empty
+  display: none
+
+[data-gws-cart-empty="true"]
+  #cart-holder
+    display: none
+  #cart-empty
+    display: block

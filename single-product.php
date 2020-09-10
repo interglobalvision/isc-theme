@@ -81,7 +81,7 @@ if (have_posts()) {
           <div class="grid-item margin-bottom-small">
             <form class="gws-product-form" method="post" enctype='multipart/form-data'>
               <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
-              <button type="submit" class="shop-button gws-product-add">Add to Cart</button>
+              <button type="submit" class="shop-button gws-product-add u-pointer">Add to Cart</button>
             </form>
           </div>
           <div class="grid-item margin-bottom-small">

@@ -9,7 +9,7 @@ if (have_posts()) {
     the_post();
 ?>
   <section class="gws-cart padding-bottom-large padding-top-mid mobile-margin-top">
-    <div class="container">
+    <div id="cart-holder" class="container">
       <div id="cart-items" class="gws-cart-items">
         <div class="gws-cart-item margin-bottom-basic">
           <div class="grid-row">
@@ -43,7 +43,7 @@ if (have_posts()) {
                   <span class="font-cond">Remove</span>
                 </div>
                 <div class="grid-item item-s-6 item-m-12">
-                  <span>X</span>
+                  <img class="remove-item u-pointer gws-cart-remove" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/close.png" />
                 </div>
               </div>
             </div>
@@ -71,6 +71,13 @@ if (have_posts()) {
           <div class="grid-item item-s-12 offset-m-7 item-l-3">
             <a href="" class="gws-checkout-link shop-button">Proceed to Checkout</a>
           </div>
+        </div>
+      </div>
+    </div>
+    <div id="cart-empty" class="container">
+      <div class="grid-row justify-center">
+        <div class="grid-item">
+          <span>Your cart is empty!</span>
         </div>
       </div>
     </div>
