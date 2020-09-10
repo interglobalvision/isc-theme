@@ -19,7 +19,7 @@ add_action( 'cmb2_admin_init', 'gws_register_settings' );
 add_action( 'cmb2_init', 'gws_register_metaboxes' );
 
 function gws_register_post_types() {
-  $archive_slug = gws_get_option('_gws_shopify_archive_slug') === false || empty(gws_get_option('_gws_shopify_archive_slug')) ? 'shop' : gws_get_option('_gws_shopify_archive_slug');
+  $archive_slug = gws_get_option('_gws_shopify_archive_slug') === false || empty(gws_get_option('_gws_shopify_archive_slug')) ? 'store' : gws_get_option('_gws_shopify_archive_slug');
 
   $item_slug = gws_get_option('_gws_shopify_item_slug') === false || empty(gws_get_option('_gws_shopify_item_slug')) ? 'product' : gws_get_option('_gws_shopify_item_slug');
 
@@ -117,7 +117,7 @@ function gws_register_settings() {
 
   $shop_options->add_field( array(
     'name'    => esc_html__( 'Archive Slug', 'igv' ),
-    'desc'    => esc_html__( 'Defaults to \'shop\'. You must update permalinks after changing.', 'igv' ),
+    'desc'    => esc_html__( 'Defaults to "store". You must update permalinks after changing.', 'igv' ),
     'id'      => $prefix . 'shopify_archive_slug',
     'type'    => 'text',
   ) );
