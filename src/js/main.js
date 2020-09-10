@@ -474,8 +474,6 @@ class Site {
 
     const destinationUrl = new URL(href);
 
-    console.log(destinationUrl.pathname);
-
     if (
       destinationUrl.pathname.indexOf('/store') > -1 ||
       destinationUrl.pathname.indexOf('/product') > -1 ||
