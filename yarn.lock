@@ -397,7 +397,7 @@ babel-minify:
     util.promisify "^1.0.0"
     yargs-parser "^5.0.0"
 
-babel-minify-webpack-plugin:
+babel-minify-webpack-plugin@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/babel-minify-webpack-plugin/-/babel-minify-webpack-plugin-0.2.0.tgz#ef9694d11a1b8ab8f3204d89f5c9278dd28fc2a9"
   dependencies:

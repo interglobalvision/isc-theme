@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 const glob = require('glob');
 
 module.exports = {
@@ -76,7 +77,7 @@ module.exports = {
 			optipng:{optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true},
 			svgo:{plugins: [{cleanupIDs: false}]},
 		}),
-
+    new MinifyPlugin(),
 	],
 
 	stats: {
