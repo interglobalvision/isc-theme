@@ -164,6 +164,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $product_metabox->add_field( array(
+		'name'       => __( 'Featured', 'cmb2' ),
+		'id'         => $prefix . 'product_featured',
+		'type'       => 'checkbox',
+	) );
+
+  $product_metabox->add_field( array(
 		'name'       => __( 'Images', 'cmb2' ),
 		'id'         => $prefix . 'product_images',
 		'type'       => 'file_list',
