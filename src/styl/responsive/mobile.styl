@@ -716,6 +716,7 @@ body
 #product-image-holder
   display: none
 
+.shop-button,
 a.shop-button
   display: inline-block
   text-align: center
@@ -725,9 +726,34 @@ a.shop-button
   border-radius: 2em
   color: $color-white
 
+.shop-button-sold-out,
+.shop-button-in-the-cart
+  display: none
+
+[data-gws-available="false"]
+  .shop-button.gws-product-add
+    pointer-events: none
+    background: $color-grey
+  .shop-button-add-to-cart
+    display: none
+  .shop-button-sold-out
+    display: block
+
+[data-gws-in-cart="true"]
+  .shop-button.gws-product-add
+    pointer-events: none
+    background: $color-grey
+    &:focus
+      box-shadow: none
+  .shop-button-add-to-cart
+    display: none
+  .shop-button-in-the-cart
+    display: block
+
+
 .gws-cart-thumb
   width: 96px
-  height: 65px
+  height: 96px
 
 .gws-cart-quantity
   padding: .4em .8em .2em
