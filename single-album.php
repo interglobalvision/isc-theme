@@ -16,7 +16,7 @@ if (have_posts()) {
 
     $styles = get_the_terms($post->ID, 'style');
     $labels = get_the_terms($post->ID, 'label');
-    $years = get_the_terms($post->ID, 'year');
+    $years = get_the_terms($post->ID, 'album_year');
     $countries = get_the_terms($post->ID, 'country');
     $tags = get_the_terms($post->ID, 'post_tag');
 
