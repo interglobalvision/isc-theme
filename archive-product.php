@@ -33,7 +33,7 @@ if ($current_page === 1) {
             <span class="font-size-extra font-cond"><?php echo !empty($promo_message) ? $promo_message : ''; ?></span>
           </div>
         </div>
-        <?php get_template_part('partials/product-item-recent'); ?>
+        <?php get_template_part('partials/product-item-featured'); ?>
       </div>
     </div>
   </section>
