@@ -134,6 +134,27 @@ if (have_posts()) {
               <?php } ?>
             </div>
           </div>
+
+          <?php if (!empty($tracklist)) { ?>
+            <div class="grid-item margin-bottom-small">
+              <div class="margin-bottom-tiny">
+                <span>Tracklist</span>
+              </div>
+              <div>
+                <?php echo apply_filters('the_content', $tracklist); ?>
+              </div>
+            </div>
+          <?php } if (!empty($credits)) { ?>
+            <div class="grid-item margin-bottom-small">
+              <div class="margin-bottom-tiny">
+                <span>Credits</span>
+              </div>
+              <div>
+                <?php echo apply_filters('the_content', $credits); ?>
+              </div>
+            </div>
+          <?php } ?>
+
           <?php if (!empty($sample_embed)) { ?>
             <div class="grid-item margin-bottom-small">
               <?php echo $sample_embed; ?>
