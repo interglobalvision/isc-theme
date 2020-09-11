@@ -35,7 +35,7 @@ if (have_posts()) {
           <div class="product-cover-holder <?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
             <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
             <?php if (!empty($images)) { ?>
-              <span class="font-size-tiny font-sans">View Album Artwork</span>
+              <span class="font-size-small font-sans">View Product Images</span>
               <?php get_template_part('assets/gallery-max.svg'); ?>
             <?php } ?>
           </div>
@@ -118,9 +118,18 @@ if (have_posts()) {
                 <div class="margin-bottom-micro">
                   <span class="font-cond margin-right-micro">Catalog Number: </span><span><?php echo $catalog_num; ?></span>
                 </div>
+              <?php } if (!empty($years)) { ?>
+                <div class="margin-bottom-micro">
+                  <span class="font-cond margin-right-micro">Released: </span><?php
+                    foreach($years as $key => $value) {
+                      echo '<span>' . $value->name . '</span>';
+                      echo $key + 1 !== count($years) ? ', ' : '';
+                    }
+                  ?>
+                </div>
               <?php } if (!empty($format)) { ?>
                 <div class="margin-bottom-micro">
-                  <span class="font-cond margin-right-micro">Released: </span><span><?php echo $format; ?></span>
+                  <span class="font-cond margin-right-micro">Format: </span><span><?php echo $format; ?></span>
                 </div>
               <?php } ?>
             </div>
