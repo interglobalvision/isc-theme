@@ -174,7 +174,7 @@ function igv_set_product_archive_query_args($query) {
     $query->set('posts_per_page', 12);
     $args = array(
       'post_type' => array('product'),
-      'posts_per_page' => 1,
+      'numberposts' => 1,
       'meta_key'   => '_igv_product_featured',
       'meta_value' => 'on'
     );
