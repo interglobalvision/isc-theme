@@ -30,7 +30,7 @@ if ($current_page === 1) {
         <div class="grid-item item-s-12 item-l-6">
           <h2>Featured Bundle</h2>
           <div class="margin-top-basic text-align-center">
-            <span class="font-size-extra"><?php echo !empty($promo_message) ? $promo_message : ''; ?></span>
+            <span class="font-size-extra font-cond"><?php echo !empty($promo_message) ? $promo_message : ''; ?></span>
           </div>
         </div>
         <?php get_template_part('partials/product-item-recent'); ?>
