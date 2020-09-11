@@ -179,6 +179,7 @@ function igv_set_product_archive_query_args($query) {
       'meta_value' => 'on'
     );
     $featured_product = get_posts($args);
+    pr($featured_product);
     if ($featured_product) {
       $query->set('post__not_in', array($featured_product[0]->ID));
     }
