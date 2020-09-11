@@ -138,7 +138,7 @@ if (have_posts()) {
           <?php if (!empty($tracklist)) { ?>
             <div class="grid-item margin-bottom-small">
               <div class="margin-bottom-tiny">
-                <span>Tracklist</span>
+                <span>Tracklist:</span>
               </div>
               <div>
                 <?php echo apply_filters('the_content', $tracklist); ?>
@@ -147,7 +147,7 @@ if (have_posts()) {
           <?php } if (!empty($credits)) { ?>
             <div class="grid-item margin-bottom-small">
               <div class="margin-bottom-tiny">
-                <span>Credits</span>
+                <span>Credits:</span>
               </div>
               <div>
                 <?php echo apply_filters('the_content', $credits); ?>
