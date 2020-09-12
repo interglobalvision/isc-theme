@@ -55,19 +55,19 @@ if (have_posts()) {
     <div class="container">
       <div class="grid-row">
         <div class="item-s-12 item-m-6 offset-m-6 grid-column margin-bottom-small">
-          <header class="grid-item margin-bottom-small">
+          <header class="grid-item margin-bottom-small" id="product-header">
             <h1 class="u-visuallyhidden"><?php the_title(); ?></h1>
-          <?php if (!empty($artist)) { ?>
-            <div>
-              <span class="font-cond font-size-large"><?php echo $artist; ?></span>
-            </div>
-          <?php } if (!empty($title)) { ?>
-            <div>
-              <span class="font-sans font-size-large"><?php echo $title; ?></span>
-            </div>
-          <?php } ?>
+            <?php if (!empty($artist)) { ?>
+              <div>
+                <span class="font-cond font-size-large"><?php echo $artist; ?></span>
+              </div>
+            <?php } if (!empty($title)) { ?>
+              <div>
+                <span class="font-sans font-size-large"><?php echo $title; ?></span>
+              </div>
+            <?php } ?>
           </header>
-          <div class="grid-item margin-top-small margin-bottom-basic mobile-only">
+          <div class="grid-item margin-top-small margin-bottom-basic mobile-only" id="product-image-mobile">
             <div class="product-cover-holder" class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
               <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
               <?php if (!empty($images)) { ?>
@@ -76,11 +76,11 @@ if (have_posts()) {
               <?php } ?>
             </div>
           </div>
-          <div class="grid-item margin-bottom-small">
+          <div class="grid-item margin-bottom-small" id="product-price">
             <span>Price $</span><span class="gws-product-price"></span><span> USD</span>
           </div>
           <div class="grid-item" id="product-options"></div>
-          <div class="grid-item margin-bottom-small grid-row">
+          <div class="grid-item margin-bottom-small grid-row" id="product-button">
             <div class="item-s-12 item-m-6">
               <form class="gws-product-form" method="post" enctype='multipart/form-data'>
                 <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
@@ -92,10 +92,10 @@ if (have_posts()) {
               </form>
             </div>
           </div>
-          <div class="grid-item margin-bottom-small">
+          <div class="grid-item margin-bottom-small" id="product-content">
             <?php the_content(); ?>
           </div>
-          <div class="grid-item grid-row margin-bottom-small">
+          <div class="grid-item grid-row margin-bottom-small" id="product-details">
             <div class="item-m-10 offset-m-2">
               <?php if (!empty($styles)) { ?>
                 <div class="margin-bottom-micro">
@@ -137,7 +137,7 @@ if (have_posts()) {
           </div>
 
           <?php if (!empty($tracklist)) { ?>
-            <div class="grid-item margin-bottom-small">
+            <div class="grid-item margin-bottom-small" id="product-tracklist">
               <div class="margin-bottom-tiny">
                 <span>Tracklist:</span>
               </div>
@@ -146,7 +146,7 @@ if (have_posts()) {
               </div>
             </div>
           <?php } if (!empty($credits)) { ?>
-            <div class="grid-item margin-bottom-small">
+            <div class="grid-item margin-bottom-small" id="product-credits">
               <div class="margin-bottom-tiny">
                 <span>Credits:</span>
               </div>
@@ -157,7 +157,7 @@ if (have_posts()) {
           <?php } ?>
 
           <?php if (!empty($sample_embed)) { ?>
-            <div class="grid-item margin-bottom-small">
+            <div class="grid-item margin-bottom-small" id="product-sample">
               <?php echo $sample_embed; ?>
             </div>
           <?php } ?>
