@@ -381,20 +381,20 @@ class GWS {
       }
 
       let optionHtml = `
-      <div class="grid-item item-s-12 no-gutter grid-row margin-bottom-basic align-items-center ${hidden}">
-        <div class="grid-item item-s-6 text-align-right">
-          <label for="option-${option.name}" class="font-uppercase font-size-small">${option.name}</label>
-        </div>
-        <div class="grid-item item-s-6">
-          <select id="option-${option.name}" class="gws-variant-select font-uppercase">`;
+      <div class="margin-bottom-small ${hidden}">
+        <label for="option-${option.name}" class="grid-row">
+          <div class="margin-bottom-tiny item-s-12"><span class="font-size-small">${option.name}</span></div>
+          <div class="item-s-12 item-m-6">
+            <select id="option-${option.name}" class="gws-variant-select text-align-center">`;
 
       option.values.map( option => {
         optionHtml += `<option value=\"${option.value}\">${option.value}</option>`;
       });
 
       optionHtml += `
-          </select>
-        </div>
+            </select>
+          </div>
+        </label>
       </div>`;
 
       $('#product-options').append(optionHtml);
@@ -404,7 +404,7 @@ class GWS {
   }
 
   handleOptionChange(element, variants) {
-    const selectedVariant = this.getSelectedVariant(element, variants)
+    const selectedVariant = this.getSelectedVariant(element, variants);
     this.updateProductVariant(element, selectedVariant);
   }
 
@@ -586,7 +586,7 @@ class GWS {
     const value = e.target.type === 'checkbox' ? e.target.checked.toString() : e.target.value;
     const input = {customAttributes: [{key, value}]};
 
-    this.client.checkout.updateAttributes(this.checkout.id, input).then((checkout) => {
+    this.client.checkout.updateAttributes(this.checkout.id, input).then(() => {
       //console.log(checkout);
     });
   }

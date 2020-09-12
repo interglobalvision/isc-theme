@@ -256,7 +256,8 @@ body
       opacity: 0
       pointer-events: none
 
-.filter-trigger, input
+.filter-trigger,
+input
   appearance: none
   background-color: transparent
   border: 1px solid $color-black
@@ -718,7 +719,9 @@ body
   display: none
 
 .shop-button,
-a.shop-button
+a.shop-button,
+.gws-variant-select
+  appearance: none
   display: inline-block
   text-align: center
   background: $color-black
@@ -726,6 +729,13 @@ a.shop-button
   width: 100%
   border-radius: 2em
   color: $color-white
+
+.gws-variant-select
+  background: $color-white
+  color: $color-black
+  border: 1px solid $color-black
+  font-family: $font-sans
+  text-align-last: center
 
 .shop-button-sold-out,
 .shop-button-in-the-cart

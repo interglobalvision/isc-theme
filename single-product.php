@@ -76,12 +76,12 @@ if (have_posts()) {
               <?php } ?>
             </div>
           </div>
-          <div class="grid-item margin-bottom-small" id="product-options"></div>
           <div class="grid-item margin-bottom-small">
             <span>Price $</span><span class="gws-product-price"></span><span> USD</span>
           </div>
+          <div class="grid-item" id="product-options"></div>
           <div class="grid-item margin-bottom-small grid-row">
-            <div class="item-s-12 item-m-6 item-l-4">
+            <div class="item-s-12 item-m-6">
               <form class="gws-product-form" method="post" enctype='multipart/form-data'>
                 <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
                 <button type="submit" class="shop-button gws-product-add u-pointer">
