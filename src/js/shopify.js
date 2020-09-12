@@ -10,6 +10,7 @@ class GWS {
 
     this.fetchProductMeta = this.fetchProductMeta.bind(this);
     this.updateActiveCurrency = this.updateActiveCurrency.bind(this);
+    this.handleOptionChange = this.handleOptionChange.bind(this);
 
     this.checkoutIdCookieKey = 'gwsCheckoutId';
     this.currencyCookieKey = 'gwsCurrency';
@@ -245,7 +246,7 @@ class GWS {
 
         // Generate variation selector
         if (product.variants.length > 1) {
-          this.generateOptions(element, product.variants);
+          this.generateOptions(product, element);
         }
 
         this.$addToCartButton.on('click', this.handleAddToCart.bind(this, element, product));
@@ -371,7 +372,7 @@ class GWS {
     });
   }
 
-  generateOptions(product) {
+  generateOptions(product, element) {
     product.options.map( option => {
       let hidden = '';
 
@@ -398,6 +399,13 @@ class GWS {
 
       $('#product-options').append(optionHtml);
     });
+
+    $(this.variantSelectClass).on('change', this.handleOptionChange.bind(this, element, product.variants));
+  }
+
+  handleOptionChange(element, variants) {
+    const selectedVariant = this.getSelectedVariant(element, variants)
+    this.updateProductVariant(element, selectedVariant);
   }
 
   getSelectedVariant(element, variants) {
@@ -564,7 +572,7 @@ class GWS {
     // Update the line item on the checkout (change the quantity or variant)
     this.client.checkout.updateLineItems(this.checkout.id, [{id: cartItemId, quantity}]).then((checkout) => {
       // Do something with the updated checkout
-      console.log(checkout); // Quantity of line item 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc4NTc5ODkzODQ=' updated to 2
+      //console.log(checkout); // Quantity of line item 'Z2lkOi8vc2hvcGlmeS9Qcm9kdWN0Lzc4NTc5ODkzODQ=' updated to 2
       var item = checkout.lineItems.find(function(item) {
         return item.id === cartItemId;
       });
@@ -579,7 +587,7 @@ class GWS {
     const input = {customAttributes: [{key, value}]};
 
     this.client.checkout.updateAttributes(this.checkout.id, input).then((checkout) => {
-      console.log(checkout);
+      //console.log(checkout);
     });
   }
 

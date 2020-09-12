@@ -76,6 +76,7 @@ if (have_posts()) {
               <?php } ?>
             </div>
           </div>
+          <div class="grid-item margin-bottom-small" id="product-options"></div>
           <div class="grid-item margin-bottom-small">
             <span>Price $</span><span class="gws-product-price"></span><span> USD</span>
           </div>
