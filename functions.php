@@ -46,7 +46,7 @@ function scripts_and_styles_method() {
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
-    
+
     'mailchimp' => $options['mailchimp_action'],
     'postsPerPage' => get_query_var('posts_per_page'),
 
@@ -68,7 +68,7 @@ function scripts_and_styles_method() {
   wp_enqueue_script('javascript-main');
 
   // Enqueue style
-  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css' );
+  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.0' );
 
   // dashicons for admin
   if (is_admin()) {
