@@ -1,7 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP */
-
-import $ from 'jquery';
+/* global $, document, WP */
 
 class Mailchimp {
   constructor() {

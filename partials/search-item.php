@@ -17,7 +17,7 @@ $post_type = get_post_type();
             $category = get_the_category($post->ID);
             echo $category[0]->slug === 'uncategorized' ? 'Feature' : $category[0]->name;
           } else {
-            echo '';
+            echo 'Product';
           }
         ?></span>
       </div>
@@ -27,6 +27,9 @@ $post_type = get_post_type();
             if ($post_type === 'album') {
               $artist = get_post_meta($post->ID, '_igv_album_artist', true);
               echo !empty($artist) ? '<span>' . $artist . '</span>' : '';
+            } else if ($post_type === 'product') {
+              $artist = get_post_meta($post->ID, '_igv_product_artist', true);
+              echo !empty($artist) ? '<span>' . $artist . '</span>' : '';
             } else {
               the_title();
             }
@@ -35,11 +38,14 @@ $post_type = get_post_type();
       </div>
       <div>
         <?php
-          if ($post_type === 'album') {
+          if ($post_type === 'post') {
+            guest_authors($post->ID);
+          } else if ($post_type === 'album') {
             $title = get_post_meta($post->ID, '_igv_album_title', true);
             echo !empty($title) ? $title : get_the_title();
-          } else {
-            guest_authors($post->ID);
+          } else if ($post_type === 'product') {
+            $title = get_post_meta($post->ID, '_igv_product_title', true);
+            echo !empty($title) ? $title : get_the_title();
           }
         ?>
       </div>

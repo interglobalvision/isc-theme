@@ -27,6 +27,9 @@
     &:after, &:before
       width: $margin-tiny
 
+  #header
+    position: absolute
+
   #main-nav
     height: auto
     pointer-events: none
@@ -34,6 +37,7 @@
     padding-bottom: 0
     opacity: 1
     pointer-events: none
+    overflow-x: hidden
     a
       pointer-events: auto
 
@@ -79,7 +83,7 @@
         transform: translateX(0) translateY(0)
 
   #welcome-panel
-    width: 60vw
+    width: 50vw
     height: 100vh
     box-shadow: 2px 0 12px 0 rgba(0,0,0,.5)
 
@@ -175,3 +179,43 @@
 
   #footer
     padding-bottom: $player-height + $margin-mid
+
+
+  // SHOP
+
+  #product-image-holder
+    display: block
+    position: fixed
+    top: 0
+    left: 0
+    width: 100vw
+    height: auto
+    pointer-events: none
+    .toggle-gallery
+      pointer-events: auto
+    &.bottom
+      position: absolute
+      bottom: 0
+      top: auto
+
+  #product-content-holder
+    min-height: 100vh
+
+  #product-header
+    order: 1
+  #product-price
+    order: 3
+  #product-options
+    order: 4
+  #product-button
+    order: 5
+  #product-content
+    order: 6
+  #product-details
+    order: 2
+  #product-tracklist
+    order: 7
+  #product-credits
+    order: 8
+  #product-sample
+    order: 9

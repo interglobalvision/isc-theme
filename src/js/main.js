@@ -1,13 +1,13 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP, URLSearchParams */
+/* global $, document, WP, URLSearchParams */
 
 // Import dependencies
-import $ from 'jquery';
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
 import Cookies from 'js-cookie';
 import Player from './player';
 import Mailchimp from './mailchimp';
+import GWS from './shopify';
 
 // Import style
 import '../styl/site.styl';
@@ -33,6 +33,7 @@ class Site {
   }
 
   onReady() {
+    this.gws = new GWS();
     this.audioPlayer = new Player();
 
     this.$mainContainer = $('#main-container');
@@ -50,6 +51,7 @@ class Site {
     this.setFooterHeight();
     this.bindMobileNav();
     this.initWelcomePanel();
+    this.bindProductScroll();
 
     //this.count();
     //this.thetime = 1;
@@ -82,6 +84,13 @@ class Site {
       $('body').removeClass('welcome-open');
       Cookies.set('wc', 'true');
     });
+  }
+
+  initShop() {
+    this.gws.getShopElements();
+    this.gws.initProducts();
+    this.gws.initCartSection();
+    this.gws.initCheckout();
   }
 
   bindMobileNav() {
@@ -313,13 +322,6 @@ class Site {
     $(document).off('click.outsideFilter');
   }
 
-  bindUpdateFilter() {
-    const _this = this;
-
-    //if ($('.filter').length) {
-
-  }
-
   pushState(data, url, context, filter) {
     const title = $(data).filter('title').text();
     this.updateMetaData(data, title, url);
@@ -330,16 +332,7 @@ class Site {
     }, title, url);
   }
 
-  /*
-  <meta property="og:title" content="Alice Coltrane &#8211; World Galaxy | In Sheeps Clothing" />
-  <meta property="og:site_name" content="In Sheeps Clothing" />
-  <meta name="twitter:card" value="summary_large_image">
-  <meta property="og:image" content="https://insheepsclothinghifi.com/wordpress/wp-content/uploads/2020/07/World-Galaxy-1000x630.jpg" />  <meta property="og:url" content="https://insheepsclothinghifi.com/wordpress/album/alice-coltrane-world-galaxy/"/>
-  <meta property="og:description" content="If you're new to Alice Coltrane, this is an exciting first album to catapult you straight to her planet, whereas other albums might fly you there more slowly. Recorded in two days and featuring a string orchestra of 16, this sonic kaleidoscope features originals by Alice Coltrane, as well as upside down inside out reimaginings of the classic &quot;My Favorite Things&quot; and her late husband John Coltrane's &quot;A Love Supreme.&quot; At its quietest, stillest moments, World Galaxy feels like the classical soundtrack to an old black and white Hollywood film – if the film were to suddenly start morphin..." />
-  <meta property="og:type" content="article" />
-  */
-
-  updateMetaData(data, title, url) {
+  updateMetaData(data, title) {
     const $meta = $(data).filter('meta');
 
     document.title = title;
@@ -358,7 +351,8 @@ class Site {
   bindBack() {
     const _this = this;
     $(window).on('popstate', function() {
-      _this.handleRequest(window.location.href, history.state.context, true);
+      const context = history.state ? history.state.context : 'content';
+      _this.handleRequest(window.location.href, context, true);
     });
   }
 
@@ -410,6 +404,8 @@ class Site {
         _this.bindFilterToggle();
         _this.setupSwiper();
 
+        _this.initShop();
+
         _this.pushState(data, url, 'filter', url.searchParams.toString());
 
         _this.currentArchivePage = 1;
@@ -453,6 +449,8 @@ class Site {
         _this.bindFilterToggle();
         _this.setupSwiper();
 
+        _this.initShop();
+
         _this.currentArchivePage = nextPage;
 
         if (_this.currentArchivePage === maxPages) {
@@ -473,6 +471,19 @@ class Site {
     const _this = this;
 
     $('body').addClass('loading').removeClass('welcome-open mobile-nav-open gallery-open search-open playlist-open');
+
+    const destinationUrl = new URL(href);
+
+    if (
+      destinationUrl.pathname.indexOf('/store') > -1 ||
+      destinationUrl.pathname.indexOf('/product') > -1 ||
+      destinationUrl.pathname.indexOf('/cart') > -1
+    ) {
+      $('body').addClass('background-pistachio');
+    } else {
+      $('body').removeClass('background-pistachio');
+    }
+
     this.destroyOverlaySwiper();
 
     $.ajax({
@@ -492,6 +503,10 @@ class Site {
         _this.bindLinks();
         _this.bindFilterToggle();
         _this.setupSwiper();
+        _this.bindProductScroll();
+
+        _this.initShop();
+
         _this.bindStreamButtons();
         _this.replaceOverlayGallery(data);
 
@@ -542,9 +557,9 @@ class Site {
           prevEl: '.prev-slide'
         },
         on: {
-          init: function(swiper) {
+          init: function() {
             $('#featured-albums-swiper').on({
-              mousemove: function(e) {
+              mousemove: function() {
                 if (event.pageX < _this.windowWidth / 2) {
                   $(this).removeClass('mouse-right')
                     .addClass('mouse-left');
@@ -553,7 +568,7 @@ class Site {
                     .addClass('mouse-right');
                 }
               },
-              mouseleave: function(e) {
+              mouseleave: function() {
                 $(this).removeClass('mouse-right mouse-left');
               }
             }).removeClass('hide');
@@ -589,7 +604,7 @@ class Site {
           prevEl: '.prev-slide'
         },
         on: {
-          resize: function(swiper) {
+          resize: function() {
             if (_this.windowWidth < _this.landscapeThreshold && this.overlaySwiper) {
               this.overlaySwiper.destroy(true);
             }
@@ -626,7 +641,7 @@ class Site {
         },
         slideToClickedSlide: false,
         on: {
-          init: function(swiper) {
+          init: function() {
             $('#post-selection-swiper').removeClass('hide');
             _this.bindLinks('.swiper-slide a');
           },
@@ -637,6 +652,25 @@ class Site {
       };
 
       this.selectionSwiper = new Swiper ('#post-selection-swiper', args);
+    }
+  }
+
+  bindProductScroll() {
+    $(window).off('scroll.product-image');
+    if ($('#product-image-holder').length) {
+      const $contentHolder = $('#product-content-holder');
+      const $imageHolder = $('#product-image-holder');
+
+      $(window).on('scroll.product-image', function() {
+        const contentHeight = $contentHolder.outerHeight(true);
+        const imageHeight = $imageHolder.outerHeight(true);
+        const scrollTop = $(this).scrollTop();
+        if (scrollTop + imageHeight >= contentHeight) {
+          $imageHolder.addClass('bottom');
+        } else {
+          $imageHolder.removeClass('bottom');
+        }
+      });
     }
   }
 

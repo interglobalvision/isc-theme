@@ -1,4 +1,4 @@
-<svg class="icon-close-welcome" width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class="icon-close" width="12px" height="12px" viewBox="0 0 12 12" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
     <g transform="translate(-467.000000, -24.000000)" fill="#000000" fill-rule="nonzero">
       <g transform="translate(467.000000, 24.000000)">

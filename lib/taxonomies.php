@@ -29,7 +29,7 @@ function create_album_taxonomies() {
     'show_in_rest'      => true,
 	);
 
-	register_taxonomy( 'artist', array( 'album' ), $args );
+	register_taxonomy( 'artist', array( 'album', 'product' ), $args );
 
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
@@ -56,9 +56,8 @@ function create_album_taxonomies() {
     'show_in_rest'      => true,
 	);
 
-	register_taxonomy( 'style', array( 'album' ), $args );
+	register_taxonomy( 'style', array( 'album', 'product' ), $args );
 
-/* REMOVE THIS */
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
 		'name'              => _x( 'Years', 'taxonomy general name', 'igv' ),
@@ -72,34 +71,6 @@ function create_album_taxonomies() {
 		'add_new_item'      => __( 'Add New Year', 'igv' ),
 		'new_item_name'     => __( 'New Year Name', 'igv' ),
 		'menu_name'         => __( 'Years', 'igv' ),
-	);
-
-	$args = array(
-		'hierarchical'      => false,
-		'labels'            => $labels,
-		'show_ui'           => true,
-		'show_admin_column' => true,
-		'query_var'         => true,
-		'rewrite'           => array( 'slug' => 'year' ),
-    'show_in_rest'      => true,
-	);
-
-	register_taxonomy( 'year', array( 'album' ), $args );
-/* REMOVE THIS */
-
-  // Add new taxonomy, make it hierarchical (like categories)
-	$labels = array(
-		'name'              => _x( 'Years New', 'taxonomy general name', 'igv' ),
-		'singular_name'     => _x( 'Year New', 'taxonomy singular name', 'igv' ),
-		'search_items'      => __( 'Search Years New', 'igv' ),
-		'all_items'         => __( 'All Years New', 'igv' ),
-		'parent_item'       => __( 'Parent Year New', 'igv' ),
-		'parent_item_colon' => __( 'Parent Year New:', 'igv' ),
-		'edit_item'         => __( 'Edit Year New', 'igv' ),
-		'update_item'       => __( 'Update Year New', 'igv' ),
-		'add_new_item'      => __( 'Add New Year New', 'igv' ),
-		'new_item_name'     => __( 'New Year Name New', 'igv' ),
-		'menu_name'         => __( 'Years New', 'igv' ),
 	);
 
 	$args = array(
@@ -139,7 +110,7 @@ function create_album_taxonomies() {
     'show_in_rest'      => true,
 	);
 
-	register_taxonomy( 'label', array( 'album' ), $args );
+	register_taxonomy( 'label', array( 'album', 'product' ), $args );
 
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(
@@ -166,7 +137,7 @@ function create_album_taxonomies() {
     'show_in_rest'      => true,
 	);
 
-	register_taxonomy( 'country', array( 'album' ), $args );
+	register_taxonomy( 'country', array( 'album', 'product' ), $args );
 
   // Add new taxonomy, make it hierarchical (like categories)
 	$labels = array(

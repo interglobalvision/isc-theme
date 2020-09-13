@@ -397,7 +397,7 @@ babel-minify:
     util.promisify "^1.0.0"
     yargs-parser "^5.0.0"
 
-babel-minify-webpack-plugin:
+babel-minify-webpack-plugin@^0.2.0:
   version "0.2.0"
   resolved "https://registry.yarnpkg.com/babel-minify-webpack-plugin/-/babel-minify-webpack-plugin-0.2.0.tgz#ef9694d11a1b8ab8f3204d89f5c9278dd28fc2a9"
   dependencies:
@@ -2989,11 +2989,6 @@ jpegtran-bin@^3.0.0:
     bin-wrapper "^3.0.0"
     logalot "^2.0.0"
 
-jquery@^3.4.1:
-  version "3.4.1"
-  resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.4.1.tgz#714f1f8d9dde4bdfa55764ba37ef214630d80ef2"
-  integrity sha512-36+AdBzCL+y6qjw5Tx7HgzeGCzC81MDDgaUP8ld2zhx58HdqXGoBd+tHdrBMiyjGQs0Hxs/MLZTu/eHNJJuWPw==
-
 js-base64@^2.1.9:
   version "2.3.2"
   resolved "https://registry.yarnpkg.com/js-base64/-/js-base64-2.3.2.tgz#a79a923666372b580f8e27f51845c6f7e8fbfbaf"
@@ -4583,6 +4578,11 @@ shebang-regex@^1.0.0:
 shelljs@0.3.x:
   version "0.3.0"
   resolved "https://registry.yarnpkg.com/shelljs/-/shelljs-0.3.0.tgz#3596e6307a781544f591f37da618360f31db57b1"
+
+shopify-buy@^2.11.0:
+  version "2.11.0"
+  resolved "https://registry.yarnpkg.com/shopify-buy/-/shopify-buy-2.11.0.tgz#0f7cb52741395e4ae778c336f32ddf3fe67c2f35"
+  integrity sha512-bGjS1b/VCPvCjazSstlKwgLtK1WBotWom06/12loja8yfo/cWkLuJsakBbQe1uEIDiOLhKaR0M0CAXZFheYDug==
 
 signal-exit@^3.0.0:
   version "3.0.1"

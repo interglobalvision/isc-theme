@@ -16,7 +16,7 @@ if (have_posts()) {
 
     $styles = get_the_terms($post->ID, 'style');
     $labels = get_the_terms($post->ID, 'label');
-    $years = get_the_terms($post->ID, 'year');
+    $years = get_the_terms($post->ID, 'album_year');
     $countries = get_the_terms($post->ID, 'country');
     $tags = get_the_terms($post->ID, 'post_tag');
 
@@ -32,7 +32,7 @@ if (have_posts()) {
           <div id="album-cover-holder" class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
             <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
             <?php if (!empty($images)) { ?>
-              <span class="font-size-tiny font-sans">View Album Artwork</span>
+              <span class="font-size-small font-sans">View Album Artwork</span>
               <?php get_template_part('assets/gallery-max.svg'); ?>
             <?php } ?>
           </div>

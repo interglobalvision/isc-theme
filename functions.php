@@ -37,26 +37,38 @@ function scripts_and_styles_method() {
     $playlist = false;
   }
 
+  $shopify_domain = gws_get_option('_gws_shopify_domain');
+  $shopify_token = gws_get_option('_gws_shopify_token');
+  $shopify_item_slug = gws_get_option('_gws_shopify_item_slug');
+  $shopify_currencies = gws_get_option('_gws_shopify_currencies');
+
   $javascriptVars = array(
     'siteUrl' => home_url(),
     'themeUrl' => get_template_directory_uri(),
     'isAdmin' => $is_admin,
+
     'mailchimp' => $options['mailchimp_action'],
     'postsPerPage' => get_query_var('posts_per_page'),
+
     'playerClientId' => $player_options['player_client_id'],
     'playerPlaylist' => json_encode($playlist),
-    //'playerPlaylistUrl' => $options['player_playlist_url']
+
+    'domain' => !empty($shopify_domain) ? $shopify_domain : null,
+    'storefrontAccessToken' => !empty($shopify_token) ? $shopify_token : null,
+    'itemSlug' => !empty($shopify_item_slug) ? $shopify_item_slug : null,
+    'currencies' => !empty($shopify_currencies) ? $shopify_currencies : null,
   );
 
-  wp_register_script('soundcloud', $soundcloudSdk);
-  wp_enqueue_script('soundcloud', $soundcloudSdk, '', '', true);
+  wp_enqueue_script('jquery');
 
-  wp_register_script('javascript-main', $javascriptMain);
+  wp_enqueue_script('soundcloud', $soundcloudSdk, array(), null, true);
+
+  wp_register_script('javascript-main', $javascriptMain, array(), null, true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
-  wp_enqueue_script('javascript-main', $javascriptMain, '', '', true);
+  wp_enqueue_script('javascript-main');
 
   // Enqueue style
-  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css' );
+  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.1' );
 
   // dashicons for admin
   if (is_admin()) {
@@ -99,6 +111,7 @@ get_template_part( 'lib/post-types' );
 get_template_part( 'lib/taxonomies' );
 get_template_part( 'lib/meta-boxes' );
 get_template_part( 'lib/site-options' );
+get_template_part( 'lib/shopify' );
 
 // Add custom functions
 

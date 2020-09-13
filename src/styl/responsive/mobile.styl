@@ -35,6 +35,9 @@ $player-height = 95px
 .background-almond
   background-color: $color-almond
 
+.background-pistachio
+  background-color: $color-pistachio
+
 .background-woodgrain
   position: relative
 
@@ -84,15 +87,14 @@ $player-height = 95px
       background: $color-orange
 
 #header
-  position: absolute
+  position: fixed
   top: 0
   left: 0
   width: 100%
   z-index: 400
   pointer-events: none
-  h1
-    a
-      pointer-events: auto
+  a
+    pointer-events: auto
 
 #main-nav
   position: fixed
@@ -108,22 +110,29 @@ $player-height = 95px
   opacity: 0
   pointer-events: none
   transition: opacity .3s ease-in-out
+  a
+    pointer-events: none
 
 #main-nav-row
   font-size: 56px
 
 #mobile-nav-toggle
-  position: fixed
-  top: $margin-small
-  right: $margin-small
+  position: relative
   z-index: 800
   width: 42px
   height: 42px
   pointer-events: auto
+  margin-right: $margin-tiny
+  margin-left: $margin-tiny
   div
     width: 100%
     height: 100%
+    top: 0
+    right: 0
     position: absolute
+    svg
+      width: 100%
+      height: 100%
 
 #nav-toggle-open
   visibility: hidden
@@ -139,7 +148,8 @@ $player-height = 95px
   max-width: 1100px;
   height: calc('100vh - (42px + ' + ($margin-small + $margin-small) + ')')
   background: $color-grey-light
-  overflow: scroll
+  overflow-y: scroll
+  overflow-x: hidden
   transform: translateY(10%)
   opacity: 0
   pointer-events: none
@@ -166,6 +176,9 @@ $player-height = 95px
   margin-left: 55px
   max-width: calc(unquote('100% - 55px'))
   flex-basis: calc(unquote('100% - 55px'))
+
+#main-content
+  position: relative
 
 body
   &.search-open
@@ -194,6 +207,8 @@ body
     #main-nav
       opacity: 1
       pointer-events: auto
+      a
+        pointer-events: auto
 
 .mobile-margin-top
   margin-top: $margin-mid
@@ -241,7 +256,8 @@ body
       opacity: 0
       pointer-events: none
 
-.filter-trigger, input
+.filter-trigger,
+input
   appearance: none
   background-color: transparent
   border: 1px solid $color-black
@@ -451,7 +467,8 @@ body
 .overlay-toggle-icon
   width: 1.5em
 
-#album-cover-holder
+#album-cover-holder,
+.product-cover-holder
   position: relative
   .overlay-toggle-icon
     position: absolute
@@ -627,8 +644,8 @@ hr
         width: 100%
         height: 100%
 
-  iframe
-    max-width: 100% !important
+iframe
+  max-width: 100% !important
 
 #overlay-gallery
   position: fixed
@@ -695,3 +712,79 @@ body
 
 .wolf-logo
   width: 90px
+
+// SHOP
+
+#product-wrapper
+  position: relative
+  
+#product-image-holder
+  display: none
+
+.shop-button,
+a.shop-button,
+.gws-variant-select
+  appearance: none
+  display: inline-block
+  text-align: center
+  background: $color-black
+  padding: 1em
+  width: 100%
+  border-radius: 2em
+  color: $color-white
+
+.gws-variant-select
+  background: $color-white
+  color: $color-black
+  border: 1px solid $color-black
+  font-family: $font-sans
+  text-align-last: center
+
+.shop-button-sold-out,
+.shop-button-in-the-cart
+  display: none
+
+[data-gws-available="false"]
+  .shop-button.gws-product-add
+    pointer-events: none
+    background: $color-grey
+  .shop-button-add-to-cart
+    display: none
+  .shop-button-sold-out
+    display: block
+
+[data-gws-in-cart="true"]
+  .shop-button.gws-product-add
+    pointer-events: none
+    background: $color-grey
+    &:focus
+      box-shadow: none
+  .shop-button-add-to-cart
+    display: none
+  .shop-button-in-the-cart
+    display: block
+
+
+.gws-cart-thumb
+  width: 96px
+  height: 96px
+
+.gws-cart-quantity
+  padding: .4em .8em .2em
+  font-weight: normal
+  text-align: center
+
+.icon-bag
+  width: 11px
+
+.remove-item
+  width: 11px
+
+#cart-empty
+  display: none
+
+[data-gws-cart-empty="true"]
+  #cart-holder
+    display: none
+  #cart-empty
+    display: block

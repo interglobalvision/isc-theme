@@ -5,6 +5,7 @@ const webpack = require('webpack');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const ImageminPlugin = require('imagemin-webpack-plugin').default;
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const MinifyPlugin = require('babel-minify-webpack-plugin');
 const glob = require('glob');
 
 module.exports = {
@@ -12,6 +13,9 @@ module.exports = {
 	output: {
 		path: path.resolve(__dirname, 'dist/js'),
 		filename: 'main.js'
+	},
+  externals: {
+		"jquery": "jQuery" // We declare jQuery as an externa dependency because we add it thru worpdress enqueue
 	},
 	resolve: {
 		extensions: ['.js', '.css', '.styl', '.svg']
@@ -73,7 +77,7 @@ module.exports = {
 			optipng:{optimizationLevel: 4, bitDepthReduction: true, colorTypeReduction: true, paletteReduction: true},
 			svgo:{plugins: [{cleanupIDs: false}]},
 		}),
-
+    new MinifyPlugin(),
 	],
 
 	stats: {

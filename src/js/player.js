@@ -1,8 +1,6 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global document, WP, SC */
+/* global $, document, WP, SC */
 // https://developers.soundcloud.com/docs/api/sdks#javascript
-
-import $ from 'jquery';
 
 class Player {
   constructor() {
@@ -134,7 +132,7 @@ class Player {
 
   bindControls() {
     const _this = this;
-    this.$playPause.on('click', function(e) {
+    this.$playPause.on('click', function() {
       $(this).blur();
       _this.isPlaying = !_this.isPlaying;
       _this.handlePlayPause();
