@@ -53,7 +53,7 @@ if ($current_page === 1) {
             if ($current_page === 1 && $wp_query->current_post === 0) {
         ?>
           <div class="grid-item item-s-12 margin-bottom-small">
-            <h2>Featured Items</h2>
+            <h2>Featured Selections</h2>
           </div>
         <?php
             }
