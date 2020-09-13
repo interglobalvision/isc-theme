@@ -373,34 +373,37 @@ class GWS {
   }
 
   generateOptions(product, element) {
-    product.options.map( option => {
-      let hidden = '';
+    //debugger;
+    if ($(element).has('#product-options').length) {
+      product.options.map( option => {
+        let hidden = '';
 
-      if (option.name === 'Title') {
-        hidden = 'u-hidden';
-      }
+        if (option.name === 'Title') {
+          hidden = 'u-hidden';
+        }
 
-      let optionHtml = `
-      <div class="margin-bottom-small ${hidden}">
-        <label for="option-${option.name}" class="grid-row">
-          <div class="margin-bottom-tiny item-s-12"><span class="font-size-small">${option.name}</span></div>
-          <div class="item-s-12 item-m-6">
-            <select id="option-${option.name}" class="gws-variant-select text-align-center">`;
+        let optionHtml = `
+        <div class="margin-bottom-small ${hidden}">
+          <label for="option-${option.name}" class="grid-row">
+            <div class="margin-bottom-tiny item-s-12"><span class="font-size-small">${option.name}</span></div>
+            <div class="item-s-12 item-m-6">
+              <select id="option-${option.name}" class="gws-variant-select text-align-center">`;
 
-      option.values.map( option => {
-        optionHtml += `<option value=\"${option.value}\">${option.value}</option>`;
+        option.values.map( option => {
+          optionHtml += `<option value=\"${option.value}\">${option.value}</option>`;
+        });
+
+        optionHtml += `
+              </select>
+            </div>
+          </label>
+        </div>`;
+
+        $('#product-options').append(optionHtml);
       });
 
-      optionHtml += `
-            </select>
-          </div>
-        </label>
-      </div>`;
-
-      $('#product-options').append(optionHtml);
-    });
-
-    $(this.variantSelectClass).on('change', this.handleOptionChange.bind(this, element, product.variants));
+      $(this.variantSelectClass).on('change', this.handleOptionChange.bind(this, element, product.variants));
+    }
   }
 
   handleOptionChange(element, variants) {
