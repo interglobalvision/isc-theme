@@ -165,6 +165,7 @@ if (have_posts()) {
       </div>
     </div>
   </section>
+  <?php get_template_part('partials/related-products'); ?>
 <?php
   }
 }
