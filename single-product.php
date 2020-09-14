@@ -34,9 +34,9 @@ if (have_posts()) {
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
             <div class="product-cover-holder <?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
-              <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
+              <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' product image', 'data-no-lazysizes' => 'true')); ?>
               <?php if (!empty($images)) { ?>
-                <span class="font-size-small font-sans">View Product Images</span>
+                <div><span class="font-size-small font-sans">View Product Images</span></div>
                 <?php get_template_part('assets/gallery-max.svg'); ?>
               <?php } ?>
             </div>
@@ -70,9 +70,9 @@ if (have_posts()) {
             </header>
             <div class="grid-item margin-top-small margin-bottom-basic mobile-only" id="product-image-mobile">
               <div class="product-cover-holder" class="<?php echo !empty($images) ? 'toggle-gallery' : ''; ?>">
-                <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' album cover', 'data-no-lazysizes' => 'true')); ?>
+                <?php the_post_thumbnail('large', array( 'alt' => get_the_title() . ' product image', 'data-no-lazysizes' => 'true')); ?>
                 <?php if (!empty($images)) { ?>
-                  <span class="font-size-tiny font-sans">View Product Images</span>
+                  <div><span class="font-size-tiny font-sans">View Product Images</span></div>
                   <?php get_template_part('assets/gallery-max.svg'); ?>
                 <?php } ?>
               </div>
