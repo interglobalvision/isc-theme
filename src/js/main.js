@@ -660,16 +660,28 @@ class Site {
     if ($('#product-image-holder').length) {
       const $contentHolder = $('#product-content-holder');
       const $imageHolder = $('#product-image-holder');
+      const $coverHolder = $('.product-cover-holder');
 
       $(window).on('scroll.product-image', function() {
         const contentHeight = $contentHolder.outerHeight(true);
         const imageHeight = $imageHolder.outerHeight(true);
+        const coverTop = $coverHolder.offset().top;
         const scrollTop = $(this).scrollTop();
+        console.log(scrollTop, coverTop);
+
         if (scrollTop + imageHeight >= contentHeight) {
           $imageHolder.addClass('bottom');
         } else {
           $imageHolder.removeClass('bottom');
         }
+
+        /*if (scrollTop + imageHeight >= contentHeight) {
+          $imageHolder.addClass('bottom').removeClass('fixed');
+        } else if (scrollTop + 30 < coverTop) {
+          $imageHolder.addClass('top').removeClass('bottom');
+        } else {
+          $imageHolder.removeClass('top bottom');
+        }*/
       });
     }
   }

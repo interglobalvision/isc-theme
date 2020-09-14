@@ -29,7 +29,7 @@ if (have_posts()) {
     $album_id = $post->ID;
 ?>
   <div id="product-wrapper">
-    <section id="product-image-holder" class="padding-top-mid mobile-margin-top">
+    <section id="product-image-holder" class="padding-top-mid mobile-margin-top top">
       <div class="container">
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
