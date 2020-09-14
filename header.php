@@ -43,7 +43,7 @@ $show_shop = get_show_shop();
         </div>
         <?php if ($show_shop) { ?>
           <div class="grid-item mobile-only">
-            <a href="<?php echo home_url('cart'); ?>">C</a>
+            <a href="<?php echo home_url('cart'); ?>"><?php get_template_part('assets/shopping-bag.svg'); ?></a>
             <span>(<span class="gws-cart-counter">0</span>)</span>
           </div>
         <?php } ?>
