@@ -6,6 +6,7 @@ $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $promo_message = gws_get_option('_gws_shop_promo_message');
 ?>
 <main id="main-content">
+<div class="mobile-padding-top">
 <?php
 if ($current_page === 1) {
   $has_featured = false;
@@ -24,12 +25,12 @@ if ($current_page === 1) {
     while ($query->have_posts()) {
       $query->the_post();
 ?>
-  <section class="padding-top-mid mobile-margin-top">
+  <section class="padding-top-mid">
     <div class="container">
       <div class="grid-row">
-        <div class="grid-item item-s-12 item-l-6">
+        <div class="grid-item item-s-12 item-m-6">
           <h2>Featured Bundle</h2>
-          <div class="margin-top-basic text-align-center">
+          <div class="margin-top-basic margin-bottom-basic text-align-center">
             <span class="font-size-extra font-cond"><?php echo !empty($promo_message) ? $promo_message : ''; ?></span>
           </div>
         </div>
@@ -43,7 +44,7 @@ if ($current_page === 1) {
   wp_reset_postdata();
 }
 ?>
-  <section class="<?php echo !$has_featured || $current_page !== 1 ? 'mobile-margin-top padding-top-mid' : 'padding-top-basic'; ?>  padding-bottom-basic">
+  <section class="<?php echo !$has_featured || $current_page !== 1 ? 'padding-top-mid' : 'padding-top-basic'; ?>  padding-bottom-basic">
     <div class="container">
       <div class="grid-row">
         <?php
@@ -86,6 +87,7 @@ if ($current_page === 1) {
       </div>
     </div>
   </section>
+</div>
 </main>
 <?php
 get_footer();

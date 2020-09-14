@@ -3,12 +3,13 @@ get_header();
 ?>
 
 <main id="main-content">
+<div class="mobile-padding-top">
 <?php
 if (have_posts()) {
   while (have_posts()) {
     the_post();
 ?>
-  <section class="gws-cart padding-bottom-large padding-top-mid mobile-margin-top">
+  <section class="gws-cart padding-bottom-large padding-top-mid">
     <div id="cart-holder" class="container">
       <div id="cart-items" class="gws-cart-items">
         <div class="gws-cart-item margin-bottom-basic">
@@ -86,6 +87,7 @@ if (have_posts()) {
   }
 }
 ?>
+</div>
 </main>
 
 <?php

@@ -28,8 +28,8 @@ if (have_posts()) {
     $the_content = get_the_content();
     $album_id = $post->ID;
 ?>
-  <div id="product-wrapper">
-    <section id="product-image-holder" class="padding-top-mid mobile-margin-top top">
+  <div id="product-wrapper" class="mobile-padding-top">
+    <section id="product-image-holder" class="padding-top-mid">
       <div class="container">
         <div class="grid-row">
           <div class="grid-item item-s-12 item-m-5 margin-bottom-basic">
@@ -46,7 +46,7 @@ if (have_posts()) {
     </section>
     <section
       id="product-content-holder"
-      class="gws-product padding-top-mid mobile-margin-top"
+      class="gws-product padding-top-mid"
       data-gws-product-handle="<?php echo $product_handle; ?>"
       data-gws-available="true"
       data-gws-price="false"
