@@ -68,7 +68,7 @@ function scripts_and_styles_method() {
   wp_enqueue_script('javascript-main');
 
   // Enqueue style
-  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.3' );
+  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.4' );
 
   // dashicons for admin
   if (is_admin()) {
