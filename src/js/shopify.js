@@ -249,7 +249,9 @@ class GWS {
           this.generateOptions(product, element);
         }
 
-        this.$addToCartButton.on('click', this.handleAddToCart.bind(this, element, product));
+        if ($(element).has('.gws-product-add').length) {
+          this.$addToCartButton.on('click', this.handleAddToCart.bind(this, element, product));
+        }
       })
       .catch( error => {
         console.log(error);
