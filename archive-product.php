@@ -61,7 +61,7 @@ if ($current_page === 1) {
             if ($current_page === 1 && $wp_query->current_post === 4) {
         ?>
           <div class="grid-item item-s-12 padding-top-basic margin-bottom-small">
-            <h2>All items chronologically ordered</h2>
+            <h2>Past Selections</h2>
           </div>
         <?php
             }
