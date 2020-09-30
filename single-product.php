@@ -87,7 +87,7 @@ if (have_posts()) {
                   <input type="hidden" name="variant-id" class="gws-variant-id" value="" />
                   <button type="submit" class="shop-button gws-product-add u-pointer">
                     <span class="shop-button-add-to-cart">Add to Cart</span>
-                    <span class="shop-button-sold-out">SOLD OUT</span>
+                    <span class="shop-button-sold-out">Out of Stock</span>
                     <span class="shop-button-in-the-cart">In the Cart</span>
                   </button>
                 </form>

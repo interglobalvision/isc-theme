@@ -16,6 +16,6 @@ $product_artist = get_post_meta($post->ID, '_igv_product_artist', true);
   <div class="grid-item item-s-12">
     <h3><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
     <div class="product-price"><span>$</span><span class="gws-product-price"></span></div>
-    <div class="product-sold-out"><span>SOLD OUT</span></div>
+    <div class="product-sold-out"><span>Out of Stock</span></div>
   </div>
 </article>
