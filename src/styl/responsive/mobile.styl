@@ -744,16 +744,20 @@ a.shop-button,
   text-align-last: center
 
 .shop-button-sold-out,
-.shop-button-in-the-cart
+.shop-button-in-the-cart,
+.product-sold-out
   display: none
 
 [data-gws-available="false"]
   .shop-button.gws-product-add
     pointer-events: none
     background: $color-grey
-  .shop-button-add-to-cart
+  .shop-button-add-to-cart,
+  .product-price,
+  #product-price
     display: none
-  .shop-button-sold-out
+  .shop-button-sold-out,
+  .product-sold-out
     display: block
 
 [data-gws-in-cart="true"]
