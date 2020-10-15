@@ -46,7 +46,7 @@ if ($current_page === 1) {
 ?>
   <section class="<?php echo !$has_featured || $current_page !== 1 ? 'padding-top-mid' : 'padding-top-basic'; ?>  padding-bottom-basic">
     <div class="container">
-      <div class="grid-row">
+      <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
         <?php
         if (have_posts()) {
           while (have_posts()) {
