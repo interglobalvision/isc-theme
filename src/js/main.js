@@ -74,15 +74,15 @@ class Site {
   }
 
   initWelcomePanel() {
-    const welcomeCookie = Cookies.get('wc');
+    const welcomeOption = localStorage.getItem('cookies-accepted');
 
-    if (!welcomeCookie) {
+    if (!welcomeOption) {
       $('body').addClass('welcome-open');
     }
 
     $('.close-welcome').on('click', function() {
       $('body').removeClass('welcome-open');
-      Cookies.set('wc', 'true');
+      localStorage.setItem('cookies-accepted', 'true');
     });
   }
 
