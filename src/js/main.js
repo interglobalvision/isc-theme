@@ -4,7 +4,6 @@
 // Import dependencies
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
-import Cookies from 'js-cookie';
 import Player from './player';
 import Mailchimp from './mailchimp';
 import GWS from './shopify';
