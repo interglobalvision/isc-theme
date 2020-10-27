@@ -169,10 +169,7 @@ class Player {
       _this.isPlaying = !_this.isPlaying;
       _this.handlePlayPause();
     });
-    this.$skip.on('click', function(e) {
-      $(this).blur();
-      _this.handleSkip(e);
-    });
+    this.$skip.on('click', this.handleSkip);
     this.$playlistToggle.on('click', function(e) {
       $(this).blur();
       _this.togglePlaylist(e);
@@ -207,6 +204,7 @@ class Player {
 
   handlePause() {
     if (this.player.isPlaying()) {
+      console.log('isPlaying');
       this.$playPause.children('.player-control-icon').toggleClass('hide');
       this.pausePlayer();
     }
@@ -282,8 +280,6 @@ class Player {
 
       this.playlist.splice(this.trackIndex, 0, albumTrack);
     }
-
-    this.isPlaying = true;
   }
 
   killPlayer() {
