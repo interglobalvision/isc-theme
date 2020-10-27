@@ -231,6 +231,7 @@ class Player {
       // track finished
       this.trackIndex = this.trackIndex === this.playlist.length - 1 ? 0 : this.trackIndex + 1;
     } else if ($(e.currentTarget).hasClass('album-stream')) {
+      // stream ISC HiFi
       this.insertAlbumTrack(e.currentTarget);
     } else if ($(e.currentTarget).hasClass('playlist-item')) {
       // playlist click
