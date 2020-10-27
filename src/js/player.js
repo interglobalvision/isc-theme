@@ -257,7 +257,7 @@ class Player {
     if ($playlistTrack.length) {
       // track is in playlist
 
-      this.trackIndex = $playlistTrack.index();
+      this.trackIndex = $playlistTrack.attr('data-index');
 
     } else {
       // create track in playlist
