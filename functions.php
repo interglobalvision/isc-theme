@@ -13,6 +13,8 @@ function scripts_and_styles_method() {
   $player_options = get_site_option('_igv_player_options');
   $playlist = array();
   if (!empty($player_options['player_playlist'])) {
+    $playlist_index = 0;
+
     foreach($player_options['player_playlist'] as $track_id) {
       $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
@@ -29,8 +31,11 @@ function scripts_and_styles_method() {
           'title' => get_the_title($track_id),
           'thumbUrl' => $thumb_url,
           'soundcloudUrl' => $soundcloudUrl,
-          'relatedAlbumUrl' => $related_album_url
+          'relatedAlbumUrl' => $related_album_url,
+          'index' => $playlist_index
         ]);
+
+        $playlist_index++;
       }
     }
   } else {

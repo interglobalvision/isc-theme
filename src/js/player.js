@@ -41,9 +41,31 @@ class Player {
     this.initSC();
   }
 
+  shuffle(array) {
+    var currentIndex = array.length, temporaryValue, randomIndex;
+
+    // While there remain elements to shuffle...
+    while (0 !== currentIndex) {
+
+      // Pick a remaining element...
+      randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex -= 1;
+
+      // And swap it with the current element.
+      temporaryValue = array[currentIndex];
+      array[currentIndex] = array[randomIndex];
+      array[randomIndex] = temporaryValue;
+    }
+
+    return array;
+  }
+
   initSC() {
     if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
-      this.playlist = JSON.parse(WP.playerPlaylist);
+      this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
+
+      this.shufflePlaylistElements();
+
       SC.initialize({
         client_id: WP.playerClientId
       });
@@ -51,6 +73,16 @@ class Player {
       this.bindControls();
       this.getTrack();
     }
+  }
+
+  shufflePlaylistElements() {
+    var _this = this;
+    var playlistItems = document.querySelectorAll('.playlist-item');
+    playlistItems.forEach(function(element, index) {
+      var playlistIndex = _this.playlist.findIndex(el => el.index === index);
+      element.style.order = playlistIndex
+      element.dataset.index = playlistIndex
+    });
   }
 
   /*
@@ -204,7 +236,7 @@ class Player {
       this.insertAlbumTrack(e.currentTarget);
     } else if ($(e.currentTarget).hasClass('playlist-item')) {
       // playlist click
-      this.trackIndex = parseInt($(e.currentTarget).index());
+      this.trackIndex = parseInt($(e.currentTarget).attr('data-index'));
     } else {
       if ($(e.currentTarget).attr('data-skip') === 'prev') {
         // skip prev
