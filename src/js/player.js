@@ -80,8 +80,8 @@ class Player {
     var playlistItems = document.querySelectorAll('.playlist-item');
     playlistItems.forEach(function(element, index) {
       var playlistIndex = _this.playlist.findIndex(el => el.index === index);
-      element.style.order = playlistIndex
-      element.dataset.index = playlistIndex
+      element.style.order = playlistIndex;
+      element.dataset.index = playlistIndex;
     });
   }
 
