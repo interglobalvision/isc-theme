@@ -68,7 +68,7 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('soundcloud', $soundcloudSdk, array(), null, true);
 
-  wp_register_script('javascript-main', $javascriptMain, array(), '2.0.0', true);
+  wp_register_script('javascript-main', $javascriptMain, array(), '2.0.3', true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main');
 
