@@ -17,13 +17,17 @@ if (have_posts()) {
           <div id="post-title-holder" class="grid-item item-s-12 item-l-6 margin-bottom-small">
             <h1 class="font-size-extra font-cond"><?php the_title(); ?></h1>
           </div>
-          <div id="post-details-holder" class="item-s-12 item-l-6 grid-row margin-bottom-small margin-top-tiny">
-            <div class="grid-item item-s-8 item-l-6 offset-l-2">
-              <?php guest_authors($post->ID); ?>
+          <div id="post-details-holder" class="item-s-12 item-l-6 margin-bottom-small margin-top-tiny font-size-small">
+            <div class="grid-row">
+              <div class="grid-item item-s-8 item-l-6 offset-l-2">
+                <?php guest_authors($post->ID); ?>
+              </div>
+              <div class="grid-item item-s-4 margin-bottom-tiny">
+                <time datetime="<?php echo get_the_date('Y-m-d'); ?>"><?php echo get_the_date(); ?></time>
+              </div>
             </div>
-            <div class="grid-item item-s-4">
-              <time datetime="<?php echo get_the_date('Y-m-d'); ?>" class="font-size-small"><?php echo get_the_date(); ?></time>
-            </div>
+            <?php get_template_part('partials/post-tags'); ?>
+            <?php get_template_part('partials/post-share'); ?>
           </div>
         </header>
       <?php if (empty($selection)) { ?>
