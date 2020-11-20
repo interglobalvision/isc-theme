@@ -35,53 +35,34 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
 $show_shop = get_show_shop();
 ?>
 <section id="main-container">
-  <header id="header">
+  <header id="header" class="background-almond">
     <div class="container">
-      <div class="grid-row padding-top-tiny align-items-center">
-        <div class="grid-item flex-grow margin-bottom-tiny">
+      <div class="grid-row padding-top-micro padding-bottom-micro align-items-center justify-between">
+        <div class="grid-item">
           <h1 class="font-bold font-size-large"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
         </div>
-        <?php if ($show_shop) { ?>
-          <div class="grid-item mobile-only">
-            <a href="<?php echo home_url('cart'); ?>"><?php get_template_part('assets/shopping-bag.svg'); ?></a>
-            <span>(<span class="gws-cart-counter">0</span>)</span>
-          </div>
-        <?php } ?>
-        <div id="mobile-nav-toggle" class="grid-item toggle-nav">
-          <div id="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
-          <div id="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
-        </div>
-      </div>
-    </div>
-    <nav id="main-nav">
-      <div class="container">
-        <div id="main-nav-row" class="font-cond grid-row padding-top-tiny">
-          <div class="grid-item font-size-large font-sans font-bold mobile-only margin-bottom-mid">
-            <a href="<?php echo home_url(); ?>" class="toggle-nav">ISCHiFi</a>
-          </div>
-          <div class="grid-item item-s-12 item-m-auto margin-bottom-tiny">
-            <a href="<?php echo home_url('collection'); ?>" class="toggle-nav">Collection</a>
-          </div>
-          <div class="grid-item item-s-12 item-m-auto margin-bottom-tiny">
-            <a href="<?php echo home_url('features'); ?>" class="toggle-nav">Features</a>
-          </div>
-          <?php if ($show_shop) { ?>
-            <div class="grid-item item-s-12 item-m-auto margin-bottom-tiny">
+        <nav>
+          <ul class="grid-row font-cond">
+            <li class="grid-item">
+              <a href="<?php echo home_url('collection'); ?>" class="toggle-nav">Collection</a>
+            </li>
+            <li class="grid-item">
+              <a href="<?php echo home_url('features'); ?>" class="toggle-nav">Features</a>
+            </li>
+            <li class="grid-item">
               <a href="<?php echo home_url('store'); ?>" class="toggle-nav">Store</a>
-            </div>
-          <?php } ?>
-          <div class="grid-item item-s-12 item-m-auto">
-            <a class="search-toggle" href="#" class="toggle-nav">Search</a>
-          </div>
-          <?php if ($show_shop) { ?>
-            <div class="grid-item item-m-auto not-mobile">
+            </li>
+            <li class="grid-item">
+              <a class="search-toggle" href="#" class="toggle-nav">Search</a>
+            </li>
+            <li class="grid-item">
               <a href="<?php echo home_url('cart'); ?>"><?php get_template_part('assets/shopping-bag.svg'); ?></a>
               <span>(<span class="gws-cart-counter">0</span>)</span>
-            </div>
-          <?php } ?>
-        </div>
+            </li>
+          </ul>
+        </nav>
       </div>
-    </nav>
+    </div>
   </header>
 
   <?php get_template_part('partials/welcome-panel'); ?>
