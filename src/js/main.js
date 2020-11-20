@@ -20,6 +20,8 @@ class Site {
     this.handleSearchToggle = this.handleSearchToggle.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleSearchTag = this.handleSearchTag.bind(this);
+    this.onScrollInterval = this.onScrollInterval.bind(this);
+    this.onScroll = this.onScroll.bind(this);
 
     $(window).resize(this.onResize.bind(this));
 
@@ -29,6 +31,9 @@ class Site {
 
   onResize() {
     this.windowWidth = $(window).width();
+    this.navbarHeight = $('#header').outerHeight();
+    this.windowHeight = $(window).height();
+    this.documentHeight = $(document).height();
   }
 
   onReady() {
@@ -38,6 +43,13 @@ class Site {
     this.$mainContainer = $('#main-container');
 
     this.windowWidth = $(window).width();
+    this.navbarHeight = $('#header').outerHeight();
+    this.windowHeight = $(window).height();
+    this.documentHeight = $(document).height();
+
+    this.didScroll = false;
+    this.lastScrollTop = 0;
+    this.delta = 5;
 
     lazySizes.init();
 
@@ -46,6 +58,7 @@ class Site {
     this.bindFilterToggle();
     this.bindBack();
     this.setupSwiper();
+    this.bindStickyHeader();
     this.bindSearchEvents();
     this.setFooterHeight();
     this.bindMobileNav();
@@ -90,6 +103,47 @@ class Site {
     this.gws.initProducts();
     this.gws.initCartSection();
     this.gws.initCheckout();
+  }
+
+  bindStickyHeader() {
+    $(window).scroll(this.onScroll);
+
+    setInterval(this.onScrollInterval, 250);
+  }
+
+  onScroll() {
+    this.didScroll = true;
+  }
+
+  onScrollInterval() {
+    if (this.didScroll) {
+      this.hasScrolled();
+      this.didScroll = false;
+    }
+  }
+
+  hasScrolled() {
+    var scrollTop = $(window).scrollTop();
+
+    // Make sure they scroll more than delta
+    if(Math.abs(this.lastScrollTop - scrollTop) <= this.delta) {
+      return;
+    }
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (scrollTop > this.lastScrollTop && scrollTop > this.navbarHeight){
+      // Scroll Down
+      //$('body').removeClass('search-open');
+      $('#header').removeClass('nav-down').addClass('nav-up');
+    } else {
+      // Scroll Up
+      if(scrollTop + this.windowHeight < this.documentHeight) {
+        $('#header').removeClass('nav-up').addClass('nav-down');
+      }
+    }
+
+    this.lastScrollTop = scrollTop;
   }
 
   bindMobileNav() {
@@ -173,14 +227,6 @@ class Site {
       this.$mainContainer.css('top', this.windowScrollTop * -1);
       this.$searchField.focus();
     }
-  }
-
-  enableMainContainerScroll() {
-
-  }
-
-  disableMainContainerScroll() {
-
   }
 
   handleSearchSubmit(e, searchTag = false) {
@@ -579,11 +625,9 @@ class Site {
             _this.bindLinks('.swiper-slide a');
           },
           slideChangeTransitionStart: function() {
-            console.log('start');
             $('#featured-albums-swiper').addClass('slide-transition');
           },
           slideChangeTransitionEnd: function() {
-            console.log('end');
             $('#featured-albums-swiper').removeClass('slide-transition');
           },
         }
