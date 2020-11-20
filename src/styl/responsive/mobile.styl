@@ -86,6 +86,7 @@ $player-height = 95px
     &:after, &:before
       background: $color-orange
 
+/*
 #header
   position: fixed
   top: 0
@@ -139,6 +140,14 @@ $player-height = 95px
 
 #nav-toggle-closed
   visibility: visible
+*/
+
+#header
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 500
 
 #search-panel
   position: fixed
@@ -194,13 +203,18 @@ body
     #search-toggle-overlay
       pointer-events: auto
   &.welcome-open
+    #welcome-panel
+      visibility: visible
+      pointer-events: auto
+/*
+  &.welcome-open
     #mobile-nav-toggle
       display: none
     #welcome-panel
       visibility: visible
       pointer-events: auto
   &.mobile-nav-open
-    #nav-toggle-open
+    /#nav-toggle-open
       visibility: visible
     #nav-toggle-closed
       visibility: hidden
@@ -208,7 +222,7 @@ body
       opacity: 1
       pointer-events: auto
       a
-        pointer-events: auto
+        pointer-events: auto*/
 
 .mobile-padding-top
   padding-top: $margin-mid
