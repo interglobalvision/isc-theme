@@ -27,6 +27,33 @@
     &:after, &:before
       width: $margin-tiny
 
+  #main-nav
+    position: relative
+    top: 0
+    left: 0
+    height: auto
+    width: auto
+    background: $color-almond
+    z-index: 0
+    overflow: hidden
+    opacity: 1
+    pointer-events: auto
+    transition: none
+    a
+      pointer-events: auto
+    ul
+      height: auto
+      display: flex
+      flex-direction: row
+      font-size: $font-size-basic
+      width: auto
+      margin: 0
+      padding-top: 0
+      li:last-of-type
+        font-size: $font-size-basic
+      .icon-bag
+        width: 11px
+
   .swiper-pagination-holder
     display: block
 
