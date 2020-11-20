@@ -547,7 +547,6 @@ class Site {
         loop: true,
         loopedSlides: 10,
         centeredSlides: true,
-        grabCursor: true,
         mousewheel: {
           forceToAxis: true,
         },
@@ -557,25 +556,35 @@ class Site {
         },
         on: {
           init: function() {
-            $('#featured-albums-swiper').on({
-              mousemove: function() {
-                if (event.pageX < _this.windowWidth / 2) {
-                  $(this).removeClass('mouse-right')
-                    .addClass('mouse-left');
-                } else {
-                  $(this).removeClass('mouse-left')
-                    .addClass('mouse-right');
-                }
-              },
-              mouseleave: function() {
-                $(this).removeClass('mouse-right mouse-left');
-              }
-            }).removeClass('hide');
+            $('#featured-albums-swiper').removeClass('hide');
+
+            var $mouseX = 0, $mouseY = 0;
+            var $xp = 0, $yp =0;
+
+            $(document).mousemove(function(e){
+              $mouseX = e.pageX;
+              $mouseY = e.pageY;
+            });
+
+            var $loop = setInterval(function(){
+              // change 12 to alter damping higher is slower
+              $xp += (($mouseX - $xp)/2);
+              $yp += (($mouseY - $yp)/2);
+              $("#featured-albums-swiper-pagination svg").css({left:$xp +'px', top:$yp +'px'});
+            }, 30);
 
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {
             _this.bindLinks('.swiper-slide a');
+          },
+          slideChangeTransitionStart: function() {
+            console.log('start');
+            $('#featured-albums-swiper').addClass('slide-transition');
+          },
+          slideChangeTransitionEnd: function() {
+            console.log('end');
+            $('#featured-albums-swiper').removeClass('slide-transition');
           },
         }
       };

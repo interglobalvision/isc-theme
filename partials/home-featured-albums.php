@@ -25,13 +25,9 @@ if (!empty($featured_albums)) {
       }
     ?>
     </div>
-    <div id="featured-albums-swiper-pagination" class="swiper-pagination-holder flex-grow margin-top-basic">
-      <div class="container">
-        <div class="grid-row justify-between">
-          <div class="grid-item u-pointer prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
-          <div class="grid-item u-pointer next-slide"><?php get_template_part('assets/arrow-right.svg'); ?></div>
-        </div>
-      </div>
+    <div id="featured-albums-swiper-pagination" class="swiper-pagination-holder">
+      <div class="prev-slide"><?php get_template_part('assets/arrow-left.svg'); ?></div>
+      <div class="next-slide"><?php get_template_part('assets/arrow-right.svg'); ?></div>
     </div>
   </div>
 

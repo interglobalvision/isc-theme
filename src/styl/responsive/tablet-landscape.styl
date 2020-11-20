@@ -31,18 +31,41 @@
     display: block
 
   #featured-albums-swiper
-    .next-slide,
-    .prev-slide
-      visibility: hidden
+    .swiper-slide
       pointer-events: none
-    &.mouse-left
-      .prev-slide
-        visibility: visible
+      &.swiper-slide-active a
         pointer-events: auto
-    &.mouse-right
-      .next-slide
-        visibility: visible
-        pointer-events: auto
+    &.slide-transition
+      .swiper-slide.swiper-slide-active a
+        pointer-events: none
+
+  #featured-albums-swiper-pagination
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    .prev-slide, .next-slide
+      position: absolute
+      top: 0
+      bottom: 0
+      width: 50%
+      svg
+        position: fixed
+        z-index: 1
+        height: auto
+        width: 56px
+        pointer-events: none
+        visibility: hidden
+      &:hover
+        svg
+          visibility: visible
+    .prev-slide
+      left: 0
+      cursor: none
+    .next-slide
+      right: 0
+      cursor: none
 
   .album-featured-slide,
   .post-selection-slide
