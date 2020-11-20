@@ -18,6 +18,7 @@ if (!empty($featured_albums)) {
       <article <?php post_class('swiper-slide album-featured-slide text-align-center'); ?> id="post-<?php echo $album_id; ?>">
         <a href="<?php echo get_the_permalink($album_id); ?>">
           <?php echo get_the_post_thumbnail($album_id, 'full', array('data-no-lazysizes' => 'true')); ?>
+          <div class="slide-info-icon not-desktop"><?php get_template_part('assets/info.svg'); ?></div>
         </a>
       </article>
     <?php
