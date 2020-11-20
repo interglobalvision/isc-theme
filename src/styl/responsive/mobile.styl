@@ -153,6 +153,11 @@ $player-height = 95px
   &.nav-up
     top: -75px
 
+body.mobile-nav-open
+  #header
+    &.nav-up
+      top: 0
+
 #main-nav
   position: absolute
   top: 0
@@ -161,6 +166,48 @@ $player-height = 95px
   width: 100vw
   background: $color-almond
   z-index: -1
+  overflow: scroll
+  opacity: 0
+  pointer-events: none
+  transition: opacity .3s ease-in-out
+  a
+    pointer-events: none
+  ul
+    height: 100%
+    display: flex
+    flex-direction: column
+    font-size: 48px
+    width: 96%
+    margin: 0 auto
+    padding-top: $margin-large + $margin-small
+    li:last-of-type
+      font-size: $font-size-large
+    .icon-bag
+      width: 20px
+
+#mobile-nav-toggle
+  position: relative
+  z-index: 800
+  width: 36px
+  height: 36px
+  pointer-events: auto
+  margin-right: $margin-tiny
+  margin-left: $margin-tiny
+  div
+    width: 100%
+    height: 100%
+    top: 0
+    right: 0
+    position: absolute
+    svg
+      width: 100%
+      height: 100%
+
+#nav-toggle-open
+  visibility: hidden
+
+#nav-toggle-closed
+  visibility: visible
 
 #search-panel
   position: fixed
@@ -219,15 +266,8 @@ body
     #welcome-panel
       visibility: visible
       pointer-events: auto
-/*
-  &.welcome-open
-    #mobile-nav-toggle
-      display: none
-    #welcome-panel
-      visibility: visible
-      pointer-events: auto
   &.mobile-nav-open
-    /#nav-toggle-open
+    #nav-toggle-open
       visibility: visible
     #nav-toggle-closed
       visibility: hidden
@@ -235,7 +275,15 @@ body
       opacity: 1
       pointer-events: auto
       a
-        pointer-events: auto*/
+        pointer-events: auto
+/*
+  &.welcome-open
+    #mobile-nav-toggle
+      display: none
+    #welcome-panel
+      visibility: visible
+      pointer-events: auto*/
+
 
 .mobile-padding-top
   padding-top: $margin-mid

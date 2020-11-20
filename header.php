@@ -41,7 +41,7 @@ $show_shop = get_show_shop();
         <div class="grid-item">
           <h1 class="font-bold font-size-large"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
         </div>
-        <nav>
+        <nav id="main-nav">
           <ul class="grid-row font-cond">
             <li class="grid-item">
               <a href="<?php echo home_url('collection'); ?>" class="toggle-nav">Collection</a>
@@ -61,6 +61,10 @@ $show_shop = get_show_shop();
             </li>
           </ul>
         </nav>
+        <div id="mobile-nav-toggle" class="grid-item toggle-nav">
+          <div id="nav-toggle-open"><?php get_template_part('assets/nav-open.svg'); ?></div>
+          <div id="nav-toggle-closed"><?php get_template_part('assets/nav-closed.svg'); ?></div>
+        </div>
       </div>
     </div>
   </header>

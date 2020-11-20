@@ -606,6 +606,7 @@ class Site {
 
             var $mouseX = 0, $mouseY = 0;
             var $xp = 0, $yp =0;
+            var damp = 3;
 
             $(document).mousemove(function(e){
               $mouseX = e.pageX;
@@ -614,8 +615,8 @@ class Site {
 
             var $loop = setInterval(function(){
               // change 12 to alter damping higher is slower
-              $xp += (($mouseX - $xp)/2);
-              $yp += (($mouseY - $yp)/2);
+              $xp += (($mouseX - $xp)/damp);
+              $yp += (($mouseY - $yp)/damp);
               $("#featured-albums-swiper-pagination svg").css({left:$xp +'px', top:$yp +'px'});
             }, 30);
 
