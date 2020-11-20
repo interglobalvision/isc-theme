@@ -120,8 +120,20 @@ function igv_cmb_metaboxes() {
 	) );
 
   $album_metabox->add_field( array(
+		'name'       => __( 'Qobuz URL', 'cmb2' ),
+		'id'         => $prefix . 'album_qobuz_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
 		'name'       => __( 'Tidal URL', 'cmb2' ),
 		'id'         => $prefix . 'album_tidal_url',
+		'type'       => 'text_url',
+	) );
+
+  $album_metabox->add_field( array(
+		'name'       => __( 'Amazon Music URL', 'cmb2' ),
+		'id'         => $prefix . 'album_amazon_url',
 		'type'       => 'text_url',
 	) );
 
