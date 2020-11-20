@@ -595,6 +595,7 @@ class Site {
         centeredSlides: true,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
@@ -651,6 +652,7 @@ class Site {
         centeredSlides: true,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
@@ -687,6 +689,7 @@ class Site {
         centeredSlides: false,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
