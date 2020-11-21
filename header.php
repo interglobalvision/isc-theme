@@ -17,10 +17,10 @@ get_template_part('partials/seo');
   <link rel="apple-touch-icon" href="<?php bloginfo('stylesheet_directory'); ?>/dist/img/favicon-touch.png">
   <link rel="apple-touch-icon" sizes="114x114" href="<?php bloginfo('stylesheet_directory'); ?>/dist/img/favicon.png">
 
-  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROM-Medium.woff2" as="font" type="font/woff2">
-  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROMCondensed-Medium.woff2" as="font" type="font/woff2">
-  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROM-Light.woff2" as="font" type="font/woff2">
-  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROMMono-Regular.woff2" as="font" type="font/woff2">
+  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROM-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROMCondensed-Medium.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROM-Light.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="preload" href="<?php bloginfo('stylesheet_directory'); ?>/dist/static/fonts/ROMMono-Regular.woff2" as="font" type="font/woff2" crossorigin>
 
 <?php if (is_singular() && pings_open(get_queried_object())) { ?>
   <link rel="pingback" href="<?php bloginfo('pingback_url'); ?>">
