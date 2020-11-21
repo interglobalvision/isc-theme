@@ -156,10 +156,17 @@ $player-height = 95px
   &.nav-up
     top: -75px
 
-body.mobile-nav-open
-  #header
-    &.nav-up
-      top: 0
+body
+  &.mobile-nav-open
+    #header
+      &.nav-up
+        top: 0
+  &.background-pistachio
+    #header
+      &.show-background
+        background-color: $color-pistachio
+    #main-nav
+      background-color: $color-almond
 
 #main-nav
   position: absolute
