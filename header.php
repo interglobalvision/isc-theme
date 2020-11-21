@@ -40,7 +40,7 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
 $show_shop = get_show_shop();
 ?>
 <section id="main-container">
-  <header id="header" class="background-almond nav-down">
+  <header id="header" class="nav-down">
     <div class="container">
       <div class="grid-row padding-top-micro padding-bottom-micro align-items-center justify-between">
         <div class="grid-item">

@@ -148,8 +148,11 @@ $player-height = 95px
   left: 0
   width: 100%
   z-index: 500
-  transition: top 0.2s ease-in-out
+  transition: top 0.2s ease-in-out, background-color 0.3s linear
   will-change: top
+  background-color: transparent
+  &.show-background
+    background-color: $color-almond
   &.nav-up
     top: -75px
 
@@ -164,7 +167,7 @@ body.mobile-nav-open
   left: 0
   height: 100vh
   width: 100vw
-  background: $color-almond
+  background-color: $color-almond
   z-index: -1
   overflow: scroll
   opacity: 0

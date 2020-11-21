@@ -130,16 +130,23 @@ class Site {
       return;
     }
 
+
+
     // If they scrolled down and are past the navbar, add class .nav-up.
     // This is necessary so you never see what is "behind" the navbar.
     if (scrollTop > this.lastScrollTop && scrollTop > this.navbarHeight){
       // Scroll Down
       //$('body').removeClass('search-open');
-      $('#header').removeClass('nav-down').addClass('nav-up');
+      $('#header').removeClass('nav-down show-background').addClass('nav-up');
     } else {
       // Scroll Up
+      console.log(scrollTop, this.windowHeight, this.documentHeight);
       if(scrollTop + this.windowHeight < this.documentHeight) {
-        $('#header').removeClass('nav-up').addClass('nav-down');
+        if (scrollTop > this.navbarHeight) {
+          $('#header').removeClass('nav-up').addClass('nav-down show-background');
+        } else {
+          $('#header').removeClass('nav-up show-background').addClass('nav-down');
+        }
       }
     }
 
