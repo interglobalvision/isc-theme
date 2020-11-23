@@ -68,6 +68,7 @@ $related_track = get_posts(array(
       'amazon',
       'apple',
       'spotify',
+      'youtube'
     );
 
     foreach ($services as $service) {
