@@ -11,9 +11,11 @@ if ($query->have_posts()) {
 <section class="border-box border-sides-brown background-white padding-top-basic">
   <div class="container">
     <div class="grid-row">
-      <div class="grid-item item-s-12 margin-bottom-small">
-        <h2>Featured Products</h2>
+      <div class="grid-item item-s-12 margin-bottom-basic">
+        <h2 class="font-size-mid font-uppercase">Store</h2>
       </div>
+    </div>
+    <div class="grid-row">
 <?php
   while ($query->have_posts()) {
     $query->the_post();

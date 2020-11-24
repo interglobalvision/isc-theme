@@ -13,6 +13,11 @@ if ($query->have_posts()) {
 <section class="padding-top-basic padding-bottom-small border-box background-almond">
   <div class="container">
     <div class="grid-row">
+      <div class="grid-item item-s-12 margin-bottom-basic">
+        <h2 class="font-size-mid font-uppercase">Recent Editorial</h2>
+      </div>
+    </div>
+    <div class="grid-row">
 <?php
   while ($query->have_posts()) {
     $query->the_post();
