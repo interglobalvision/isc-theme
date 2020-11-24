@@ -140,7 +140,6 @@ class Site {
       $('#header').removeClass('nav-down show-background').addClass('nav-up');
     } else {
       // Scroll Up
-      console.log(scrollTop, this.windowHeight, this.documentHeight);
       if(scrollTop + this.windowHeight < this.documentHeight) {
         if (scrollTop > this.navbarHeight) {
           $('#header').removeClass('nav-up').addClass('nav-down show-background');
@@ -276,8 +275,6 @@ class Site {
   getSearchResults() {
     const _this = this;
     const initialScrollTop = this.$searchPanel.scrollTop();
-
-    console.log(this.searchUrl.href);
 
     $.ajax({
       url: this.searchUrl.href,
@@ -730,7 +727,6 @@ class Site {
         const imageHeight = $imageHolder.outerHeight(true);
         const coverTop = $coverHolder.offset().top;
         const scrollTop = $(this).scrollTop();
-        console.log(scrollTop, coverTop);
 
         if (scrollTop + imageHeight >= contentHeight) {
           $imageHolder.addClass('bottom');
