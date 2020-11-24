@@ -68,12 +68,12 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('soundcloud', $soundcloudSdk, array(), null, true);
 
-  wp_register_script('javascript-main', $javascriptMain, array(), '2.0.3', true);
+  wp_register_script('javascript-main', $javascriptMain, array(), '2.0.6', true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main');
 
   // Enqueue style
-  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.6' );
+  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.8' );
 
   // dashicons for admin
   if (is_admin()) {

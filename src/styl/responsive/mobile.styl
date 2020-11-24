@@ -86,6 +86,7 @@ $player-height = 95px
     &:after, &:before
       background: $color-orange
 
+/*
 #header
   position: fixed
   top: 0
@@ -121,6 +122,86 @@ $player-height = 95px
   z-index: 800
   width: 42px
   height: 42px
+  pointer-events: auto
+  margin-right: $margin-tiny
+  margin-left: $margin-tiny
+  div
+    width: 100%
+    height: 100%
+    top: 0
+    right: 0
+    position: absolute
+    svg
+      width: 100%
+      height: 100%
+
+#nav-toggle-open
+  visibility: hidden
+
+#nav-toggle-closed
+  visibility: visible
+*/
+
+#header
+  position: fixed
+  top: 0
+  left: 0
+  width: 100%
+  z-index: 500
+  transition: top 0.2s ease-in-out, background-color 0.3s linear, opacity 0.2s ease-in-out
+  will-change: top, background-color, opacity
+  background-color: transparent
+  &.show-background
+    background-color: $color-almond
+  &.nav-up
+    top: -75px
+    opacity: 0
+
+body
+  &.mobile-nav-open
+    #header
+      &.nav-up
+        top: 0
+        opacity: 1
+  &.background-pistachio
+    #header
+      &.show-background
+        background-color: $color-pistachio
+    #main-nav
+      background-color: $color-almond
+
+#main-nav
+  position: absolute
+  top: 0
+  left: 0
+  height: 100vh
+  width: 100vw
+  background-color: $color-almond
+  z-index: -1
+  overflow: scroll
+  opacity: 0
+  pointer-events: none
+  transition: opacity .3s ease-in-out
+  a
+    pointer-events: none
+  ul
+    height: 100%
+    display: flex
+    flex-direction: column
+    font-size: 48px
+    width: 96%
+    margin: 0 auto
+    padding-top: $margin-large + $margin-small
+    li:last-of-type
+      font-size: $font-size-large
+    .icon-bag
+      width: 20px
+
+#mobile-nav-toggle
+  position: relative
+  z-index: 800
+  width: 36px
+  height: 36px
   pointer-events: auto
   margin-right: $margin-tiny
   margin-left: $margin-tiny
@@ -194,8 +275,6 @@ body
     #search-toggle-overlay
       pointer-events: auto
   &.welcome-open
-    #mobile-nav-toggle
-      display: none
     #welcome-panel
       visibility: visible
       pointer-events: auto
@@ -209,6 +288,14 @@ body
       pointer-events: auto
       a
         pointer-events: auto
+/*
+  &.welcome-open
+    #mobile-nav-toggle
+      display: none
+    #welcome-panel
+      visibility: visible
+      pointer-events: auto*/
+
 
 .mobile-padding-top
   padding-top: $margin-mid
@@ -331,7 +418,7 @@ input
   color: $color-white
   bottom: -20%
   left: 0
-  z-index: 400
+  z-index: 500
   transition: transform 0.35s ease-in-out, opacity 0.25s ease-in-out
   opacity: 0
   pointer-events: none

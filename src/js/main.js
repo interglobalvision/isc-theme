@@ -20,6 +20,8 @@ class Site {
     this.handleSearchToggle = this.handleSearchToggle.bind(this);
     this.handleSearchSubmit = this.handleSearchSubmit.bind(this);
     this.handleSearchTag = this.handleSearchTag.bind(this);
+    this.onScrollInterval = this.onScrollInterval.bind(this);
+    this.onScroll = this.onScroll.bind(this);
 
     $(window).resize(this.onResize.bind(this));
 
@@ -29,6 +31,9 @@ class Site {
 
   onResize() {
     this.windowWidth = $(window).width();
+    this.navbarHeight = $('#header').outerHeight();
+    this.windowHeight = $(window).height();
+    this.documentHeight = $(document).height();
   }
 
   onReady() {
@@ -38,6 +43,13 @@ class Site {
     this.$mainContainer = $('#main-container');
 
     this.windowWidth = $(window).width();
+    this.navbarHeight = $('#header').outerHeight();
+    this.windowHeight = $(window).height();
+    this.documentHeight = $(document).height();
+
+    this.didScroll = false;
+    this.lastScrollTop = 0;
+    this.delta = 5;
 
     lazySizes.init();
 
@@ -46,6 +58,7 @@ class Site {
     this.bindFilterToggle();
     this.bindBack();
     this.setupSwiper();
+    this.bindStickyHeader();
     this.bindSearchEvents();
     this.setFooterHeight();
     this.bindMobileNav();
@@ -90,6 +103,54 @@ class Site {
     this.gws.initProducts();
     this.gws.initCartSection();
     this.gws.initCheckout();
+  }
+
+  bindStickyHeader() {
+    $(window).scroll(this.onScroll);
+
+    setInterval(this.onScrollInterval, 250);
+  }
+
+  onScroll() {
+    this.didScroll = true;
+  }
+
+  onScrollInterval() {
+    if (this.didScroll) {
+      this.hasScrolled();
+      this.didScroll = false;
+    }
+  }
+
+  hasScrolled() {
+    var scrollTop = $(window).scrollTop();
+
+    // Make sure they scroll more than delta
+    if(Math.abs(this.lastScrollTop - scrollTop) <= this.delta) {
+      return;
+    }
+
+
+
+    // If they scrolled down and are past the navbar, add class .nav-up.
+    // This is necessary so you never see what is "behind" the navbar.
+    if (scrollTop > this.lastScrollTop && scrollTop > this.navbarHeight){
+      // Scroll Down
+      //$('body').removeClass('search-open');
+      $('#header').removeClass('nav-down show-background').addClass('nav-up');
+    } else {
+      // Scroll Up
+      console.log(scrollTop, this.windowHeight, this.documentHeight);
+      if(scrollTop + this.windowHeight < this.documentHeight) {
+        if (scrollTop > this.navbarHeight) {
+          $('#header').removeClass('nav-up').addClass('nav-down show-background');
+        } else {
+          $('#header').removeClass('nav-up show-background').addClass('nav-down');
+        }
+      }
+    }
+
+    this.lastScrollTop = scrollTop;
   }
 
   bindMobileNav() {
@@ -173,14 +234,6 @@ class Site {
       this.$mainContainer.css('top', this.windowScrollTop * -1);
       this.$searchField.focus();
     }
-  }
-
-  enableMainContainerScroll() {
-
-  }
-
-  disableMainContainerScroll() {
-
   }
 
   handleSearchSubmit(e, searchTag = false) {
@@ -547,9 +600,9 @@ class Site {
         loop: true,
         loopedSlides: 10,
         centeredSlides: true,
-        grabCursor: true,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
@@ -557,25 +610,34 @@ class Site {
         },
         on: {
           init: function() {
-            $('#featured-albums-swiper').on({
-              mousemove: function() {
-                if (event.pageX < _this.windowWidth / 2) {
-                  $(this).removeClass('mouse-right')
-                    .addClass('mouse-left');
-                } else {
-                  $(this).removeClass('mouse-left')
-                    .addClass('mouse-right');
-                }
-              },
-              mouseleave: function() {
-                $(this).removeClass('mouse-right mouse-left');
-              }
-            }).removeClass('hide');
+            $('#featured-albums-swiper').removeClass('hide');
+
+            var $mouseX = 0, $mouseY = 0;
+            var $xp = 0, $yp =0;
+            var damp = 3;
+
+            $(document).mousemove(function(e){
+              $mouseX = e.pageX;
+              $mouseY = e.pageY;
+            });
+
+            var $loop = setInterval(function(){
+              // change 12 to alter damping higher is slower
+              $xp += (($mouseX - $xp)/damp);
+              $yp += (($mouseY - $yp)/damp);
+              $("#featured-albums-swiper-pagination svg").css({left:$xp +'px', top:$yp +'px'});
+            }, 30);
 
             _this.bindLinks('.swiper-slide a');
           },
           loopFix: function() {
             _this.bindLinks('.swiper-slide a');
+          },
+          slideChangeTransitionStart: function() {
+            $('#featured-albums-swiper').addClass('slide-transition');
+          },
+          slideChangeTransitionEnd: function() {
+            $('#featured-albums-swiper').removeClass('slide-transition');
           },
         }
       };
@@ -597,6 +659,7 @@ class Site {
         centeredSlides: true,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
@@ -633,6 +696,7 @@ class Site {
         centeredSlides: false,
         mousewheel: {
           forceToAxis: true,
+          invert: true
         },
         navigation: {
           nextEl: '.next-slide',
