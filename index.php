@@ -5,7 +5,6 @@ global $wp_query;
 $max_pages = $wp_query->max_num_pages;
 $current_page = (get_query_var('paged')) ? get_query_var('paged') : 1;
 $current_query = $wp_query->query_vars;
-pr($current_query);
 ?>
 
 <main id="main-content">
