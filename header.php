@@ -55,6 +55,9 @@ $show_shop = get_show_shop();
               <a href="<?php echo home_url('features'); ?>" class="toggle-nav">Features</a>
             </li>
             <li class="grid-item">
+              <a href="<?php echo get_term_link('playlist', 'category'); ?>" class="toggle-nav">Playlists</a>
+            </li>
+            <li class="grid-item">
               <a href="<?php echo home_url('store'); ?>" class="toggle-nav">Store</a>
             </li>
             <li class="grid-item">
