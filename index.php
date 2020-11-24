@@ -12,9 +12,6 @@ $current_query = $wp_query->query_vars;
 <?php
 if ($current_page === 1) {
   $args = $current_query;
-  if (!is_home()) {
-    pr($args['post__not_in']);
-  }
   $args['posts_per_page'] = 1;
   $args['post__in'] = $args['post__not_in'];
   $args['post__not_in'] = array();
@@ -22,6 +19,9 @@ if ($current_page === 1) {
   $query = new WP_Query($args);
 
   if ($query->have_posts()) {
+    if (!is_home()) {
+      echo '!';
+    }
 ?>
 
   <section id="recent-post" class="padding-top-mid mobile-margin-top">
