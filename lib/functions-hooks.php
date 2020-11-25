@@ -64,6 +64,6 @@ function igv_allowed_block_types( $allowed_blocks, $post ) {
 add_filter( 'allowed_block_types', 'igv_allowed_block_types', 10, 2 );
 
 function igv_custom_excerpt_length( $length ) {
-  return 25;
+  return 28;
 }
 add_filter( 'excerpt_length', 'igv_custom_excerpt_length', 999 );
