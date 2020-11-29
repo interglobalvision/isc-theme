@@ -15,14 +15,18 @@ if (have_posts()) {
       <div class="grid-row">
         <header id="post-header" class="item-s-12 grid-row margin-bottom-tiny">
           <div id="post-title-holder" class="grid-item item-s-12 item-l-6 margin-bottom-small">
+            <div class="margin-bottom-tiny">
+              <span class="font-uppercase"><?php
+                $category = get_the_category($post->ID);
+                echo $category[0]->slug === 'uncategorized' ? 'Feature' : $category[0]->name;
+              ?></span>
+            </div>
             <h1 class="font-size-extra font-cond"><?php the_title(); ?></h1>
           </div>
           <div id="post-details-holder" class="item-s-12 item-l-6 margin-bottom-small margin-top-tiny font-size-small">
             <div class="grid-row">
-              <div class="grid-item item-s-2">
-                <span>By:&nbsp;</span>
-              </div>
-              <div class="grid-item item-s-6">
+              <div class="grid-item item-s-8 item-l-6 offset-l-2">
+                <div><span>Written By:&nbsp;</span></div>
                 <?php guest_authors($post->ID); ?>
               </div>
               <div class="grid-item item-s-4 margin-bottom-tiny">
