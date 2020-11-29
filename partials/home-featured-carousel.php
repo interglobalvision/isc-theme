@@ -43,7 +43,7 @@ if ($query->have_posts()) {
   <div class="container">
     <div class="grid-row justify-end margin-top-basic">
       <div class="grid-item">
-        <a class="link-underline" href="<?php echo get_category_link($category); ?>">View all <?php echo $category->name; ?></a>
+        <a class="link-underline" href="<?php echo get_category_link($category); ?>">View all Featured</a>
       </div>
     </div>
   </div>
