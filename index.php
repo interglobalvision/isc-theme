@@ -17,6 +17,7 @@ if ($is_first_playlist_page) {
 
   $args = array(
     'post_type' => 'post',
+    'is_category' => 'playlist',
     'posts_per_page' => 1
   );
 
@@ -64,7 +65,12 @@ if ($is_first_playlist_page) {
       if (have_posts()) {
         while (have_posts()) {
           the_post();
-          get_template_part('partials/post-item');
+
+          if ($is_playlist_archive) {
+            get_template_part('partials/post-item-small');
+          } else {
+            get_template_part('partials/post-item');
+          }
         }
       }
       ?>

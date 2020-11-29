@@ -1,22 +1,26 @@
+<section class="padding-top-basic padding-bottom-small border-box background-almond">
+  <div class="container">
+    <div class="grid-row">
+      <div class="grid-item item-s-12 margin-bottom-basic">
+        <h2 class="font-size-mid font-uppercase">Featured</h2>
+      </div>
+    </div>
+  </div>
+
 <?php
-global $featured_posts;
+$featured_posts = array();
 
 $args = array(
-  'post_type' => array('post'),
-  'posts_per_page' => 2,
+  'post_type' => 'post',
+  'is_category' => 'feature',
+  'posts_per_page' => 1
 );
 
 $query = new WP_Query($args);
 
 if ($query->have_posts()) {
 ?>
-<section class="padding-top-basic padding-bottom-small border-box background-almond">
   <div class="container">
-    <div class="grid-row">
-      <div class="grid-item item-s-12 margin-bottom-basic">
-        <h2 class="font-size-mid font-uppercase">Recent Editorial</h2>
-      </div>
-    </div>
     <div class="grid-row">
 <?php
   while ($query->have_posts()) {
@@ -24,12 +28,18 @@ if ($query->have_posts()) {
 
     array_push($featured_posts, $post->ID);
 
-    get_template_part('partials/post-item');
+    get_template_part('partials/post-item-first');
   }
 ?>
     </div>
   </div>
-</section>
 <?php
-}
-wp_reset_postdata();
+  }
+  wp_reset_postdata();
+
+  global $featured_posts;
+
+  get_template_part('partials/home-featured-carousel');
+?>
+
+</section>

@@ -3,13 +3,13 @@ $artist = get_post_meta($post->ID, '_igv_album_artist', true);
 $title = get_post_meta($post->ID, '_igv_album_title', true);
 $styles = get_the_terms($post->ID, 'style');
 ?>
-<article <?php post_class('album-item-recent grid-item item-s-12 item-m-4 grid-row margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
-  <div class="grid-item no-gutter item-m-12 item-l-6 margin-right-tiny">
+<article <?php post_class('album-item-recent grid-item item-s-6 item-m-3 margin-bottom-small'); ?> id="post-<?php the_ID(); ?>">
+  <div>
     <a href="<?php the_permalink(); ?>">
       <?php the_post_thumbnail('album-item', ['class' => 'recent-album-thumb']); ?>
     </a>
   </div>
-  <div class="grid-item no-gutter grid-column justify-between item-m-12 item-l-6">
+  <div>
     <div>
       <h3 class="u-visuallyhidden"><?php the_title(); ?></h3>
       <div>
