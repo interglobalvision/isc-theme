@@ -19,7 +19,10 @@ if (have_posts()) {
           </div>
           <div id="post-details-holder" class="item-s-12 item-l-6 margin-bottom-small margin-top-tiny font-size-small">
             <div class="grid-row">
-              <div class="grid-item item-s-8 item-l-6 offset-l-2">
+              <div class="grid-item item-s-2">
+                <span>By:&nbsp;</span>
+              </div>
+              <div class="grid-item item-s-6">
                 <?php guest_authors($post->ID); ?>
               </div>
               <div class="grid-item item-s-4 margin-bottom-tiny">
