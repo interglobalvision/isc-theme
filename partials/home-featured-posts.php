@@ -12,7 +12,7 @@ $featured_posts = array();
 
 $args = array(
   'post_type' => 'post',
-  'is_category' => 'feature',
+  'category_name' => 'feature',
   'posts_per_page' => 1
 );
 

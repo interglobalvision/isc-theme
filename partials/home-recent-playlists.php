@@ -1,7 +1,7 @@
 <?php
 $args = array(
   'post_type' => array('post'),
-  'is_category' => 'playlist',
+  'category_name' => 'playlist',
   'posts_per_page' => 6,
 );
 
