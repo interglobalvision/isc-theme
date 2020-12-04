@@ -9,7 +9,7 @@ if ($tags) {
   foreach ($tags as $i => $tag) {
 ?>
     <li class="u-inline-block">
-      <span><?php echo $tag->name; ?></span>
+      <a class="link-underline" href="<?php echo get_tag_link($tag); ?>"><?php echo $tag->name; ?></a>
       <?php if ($i + 1 < count($tags)) { ?>
         <span>&nbsp;/&nbsp;</span>
       <?php } ?>
@@ -21,5 +21,4 @@ if ($tags) {
 </div>
 <?php
 }
-/*<a href="<?php echo get_tag_link($tag->term_id); ?>"><?php echo $tag->name; ?></a>*/
 ?>

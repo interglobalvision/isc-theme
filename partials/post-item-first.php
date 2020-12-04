@@ -25,7 +25,7 @@
         <?php the_excerpt(); ?>
       </div>
       <div class="grid-item offset-s-9">
-        <a href="<?php the_permalink(); ?>">-></a>
+        <a href="<?php the_permalink(); ?>"><img class="icon-clickthru" src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/clickthru.png" /></a>
       </div>
     </div>
   </div>

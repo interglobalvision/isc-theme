@@ -13,7 +13,7 @@ if (!empty($selection)) {
   <div class="container">
     <div class="grid-row">
       <div class="grid-item margin-bottom-basic">
-        <span class="font-size-small font-color-grey"><?php echo $selection_name; ?></span>
+        <h2 class="font-size-mid font-uppercase"><?php echo $selection_name; ?></h2>
       </div>
     </div>
   </div>
