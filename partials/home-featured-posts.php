@@ -8,6 +8,8 @@
   </div>
 
 <?php
+global $featured_posts;
+
 $featured_posts = array();
 
 $args = array(
@@ -36,8 +38,6 @@ if ($query->have_posts()) {
 <?php
   }
   wp_reset_postdata();
-
-  global $featured_posts;
 
   get_template_part('partials/home-featured-carousel');
 ?>
