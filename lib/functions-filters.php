@@ -64,7 +64,8 @@ function igv_set_playlist_query_args($query){
   $query->is_category('playlist')) {
     $query->set( 'paged', $paged );
 
-    $latest_playlist = get_posts(array('category'=>'playlist','numberposts'=>1));
+    $cat = get_category_by_slug('playlist');
+    $latest_playlist = get_posts(array('category'=>$cat->term_id,'numberposts'=>1));
 
     $query->set('post__not_in', array($latest_playlist[0]->ID)); //exclude queries by post ID
     $query->set( 'posts_per_page', 6 );
