@@ -17,7 +17,7 @@ if ($is_first_playlist_page) {
 
   $args = array(
     'post_type' => 'post',
-    'category_name' => => 'playlist',
+    'category_name' => 'playlist',
     'posts_per_page' => 1
   );
 
