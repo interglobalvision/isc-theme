@@ -5,7 +5,7 @@ $category = get_category_by_slug('feature');
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => 6,
-  'category__in' => $category->term_id,
+  'category_name' => array('feature','news','archival'),
   'post__not_in' => $featured_posts
 );
 
@@ -30,7 +30,7 @@ if ($query->have_posts()) {
       while ($query->have_posts()) {
         $query->the_post();
     ?>
-      <div class="post-category-slide swiper-slide <?php echo $category_slug === 'news' ? 'post-category-slide-small' : ''; ?>">
+      <div class="post-category-slide swiper-slide">
         <?php get_template_part('partials/post-item'); ?>
       </div>
     <?php
@@ -43,7 +43,7 @@ if ($query->have_posts()) {
   <div class="container">
     <div class="grid-row justify-end margin-top-basic">
       <div class="grid-item">
-        <a class="link-underline" href="<?php echo get_category_link($category); ?>">View all Featured</a>
+        <a class="link-underline" href="<?php echo home_url('features'); ?>">View all Features</a>
       </div>
     </div>
   </div>
