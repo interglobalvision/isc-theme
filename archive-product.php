@@ -29,7 +29,7 @@ if ($current_page === 1) {
     <div class="container">
       <div class="grid-row">
         <div class="grid-item item-s-12 item-m-6">
-          <h2>Featured Bundle</h2>
+          <h2>Featured Item</h2>
           <div class="margin-top-basic margin-bottom-basic text-align-center">
             <span class="font-size-extra font-cond"><?php echo !empty($promo_message) ? $promo_message : ''; ?></span>
           </div>
