@@ -5,7 +5,7 @@ $category = get_category_by_slug('feature');
 $args = array(
   'post_type' => 'post',
   'posts_per_page' => 6,
-  'category_name' => array('feature','news','archival'),
+  'category_name' => 'feature,news,archival'),
   'post__not_in' => $featured_posts
 );
 
