@@ -3,7 +3,14 @@ $args = array(
   'post_type' => array('product'),
   'posts_per_page' => 4,
   'orderby' => 'rand',
-  'post__not_in' => array($post->ID)
+  'post__not_in' => array($post->ID),
+  'meta_query' => array(
+    array(
+      'key'     => '_igv_product_soldout',
+      'value'   => 'on',
+      'compare' => '!=',
+    ),
+  )
 );
 
 $query = new WP_Query($args);
