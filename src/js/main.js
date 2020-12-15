@@ -64,6 +64,7 @@ class Site {
     this.bindMobileNav();
     this.initWelcomePanel();
     this.bindProductScroll();
+    this.bindLinkCopy();
 
     //this.count();
     //this.thetime = 1;
@@ -783,6 +784,25 @@ class Site {
           $imageHolder.removeClass('top bottom');
         }*/
       });
+    }
+  }
+
+  bindLinkCopy() {
+    if ($('.copy-link').length) {
+      var $temp = $("<input>");
+      var $url = $(location).attr('href');
+      var timeout;
+
+      $('.copy-link').on('click', function() {
+        $("body").append($temp);
+        $temp.val($url).select();
+        document.execCommand("copy");
+        $temp.remove();
+        $('.copy-link-message').text("Link copied!");
+        timeout = setTimeout(function() {
+          $('.copy-link-message').text('');
+        }, 5000);
+      })
     }
   }
 

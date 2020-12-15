@@ -21,5 +21,8 @@ $email_body = rawurlencode('From In Sheep\'s Clothing HiFi: ' . $title . ' ' . $
     <li class="grid-item">
       <a class="social-icon" href="mailto:?&subject=<?php echo $email_subject; ?>&body=<?php echo $email_body; ?>"><img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/social-email.png" /></a>
     </li>
+    <li class="grid-item grid-row align-items-center">
+      <span class="social-icon copy-link u-pointer"><img src="<?php bloginfo('stylesheet_directory'); ?>/dist/img/social-email.png" /></span><span class="padding-left-micro copy-link-message">&nbsp;</span>
+    </li>
   </ul>
 </div>
