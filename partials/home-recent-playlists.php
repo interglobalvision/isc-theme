@@ -1,4 +1,6 @@
 <?php
+$category = get_category_by_slug('playlist');
+
 $args = array(
   'post_type' => array('post'),
   'category_name' => 'playlist',
@@ -23,6 +25,12 @@ if ($query->have_posts()) {
     get_template_part('partials/post-item-small');
   }
 ?>
+    </div>
+
+    <div class="grid-row justify-end">
+      <div class="grid-item">
+        <a class="link-underline" href="<?php echo get_category_link($category); ?>">View all <?php echo $category->name; ?></a>
+      </div>
     </div>
   </div>
 </section>
