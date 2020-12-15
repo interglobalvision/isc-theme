@@ -1,4 +1,4 @@
-<section class="padding-top-basic padding-bottom-small border-box background-almond">
+<section class="padding-top-basic padding-bottom-basic border-box background-almond">
   <div class="container">
     <div class="grid-row">
       <div class="grid-item item-s-12 margin-bottom-basic">
@@ -9,7 +9,6 @@
 
 <?php
 global $featured_posts;
-
 $featured_posts = array();
 
 $args = array(
