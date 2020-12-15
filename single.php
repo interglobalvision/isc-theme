@@ -58,6 +58,8 @@ if (have_posts()) {
 
   <?php get_template_part('partials/post-selection'); ?>
 
+  <?php get_template_part('partials/related-posts'); ?>
+
 <?php
   }
 }
