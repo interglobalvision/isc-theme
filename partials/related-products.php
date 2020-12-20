@@ -4,9 +4,18 @@ $args = array(
   'posts_per_page' => 4,
   'orderby' => 'rand',
   'post__not_in' => array(get_the_ID()),
-  'meta_key' => '_igv_product_soldout',
-	'meta_value' => 'on',
-	'meta_compare' => '!='
+  'meta_query' => array(
+    'relation' => 'OR',
+    array(
+      'key' => '_igv_product_soldout',
+      'compare' => 'NOT EXISTS'
+    ),
+    array(
+      'key' => '_igv_product_soldout',
+      'value'   => 'on',
+      'compare' => '!=',
+    )
+  )
 );
 
 $query = new WP_Query($args);
