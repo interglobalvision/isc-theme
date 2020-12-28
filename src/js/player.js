@@ -62,9 +62,8 @@ class Player {
 
   initSC() {
     if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
-      this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
-
-      this.shufflePlaylistElements();
+      //this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
+      //this.shufflePlaylistElements();
 
       SC.initialize({
         client_id: WP.playerClientId
