@@ -63,9 +63,8 @@ class Player {
   initSC() {
     if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
       //this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
-      //this.shufflePlaylistElements();
-
       this.playlist = JSON.parse(WP.playerPlaylist);
+      this.orderPlaylistElements();
 
       SC.initialize({
         client_id: WP.playerClientId
@@ -76,7 +75,7 @@ class Player {
     }
   }
 
-  shufflePlaylistElements() {
+  orderPlaylistElements() {
     var _this = this;
     var playlistItems = document.querySelectorAll('.playlist-item');
     playlistItems.forEach(function(element, index) {
