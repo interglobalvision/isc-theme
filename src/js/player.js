@@ -65,6 +65,8 @@ class Player {
       //this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
       //this.shufflePlaylistElements();
 
+      this.playlist = JSON.parse(WP.playerPlaylist);
+
       SC.initialize({
         client_id: WP.playerClientId
       });
