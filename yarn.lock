@@ -2086,6 +2086,11 @@ fastparse@^1.1.1:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/fastparse/-/fastparse-1.1.1.tgz#d1e2643b38a94d7583b479060e6c4affc94071f8"
 
+fbq@^0.1.4:
+  version "0.1.4"
+  resolved "https://registry.yarnpkg.com/fbq/-/fbq-0.1.4.tgz#38218b16b3229fd023703e81872c2281bb59f524"
+  integrity sha512-jRxVTLfoBFMumjjQD+96eZ/44AIGZWXfmEITNikzFM+XDOfrRg49ilb98/P4CvtbalrkJvOHG0FxfT8IOcuD8w==
+
 fd-slicer@~1.0.1:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/fd-slicer/-/fd-slicer-1.0.1.tgz#8b5bcbd9ec327c5041bf9ab023fd6750f1177e65"

@@ -4,6 +4,7 @@
 // Import dependencies
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
+import { init, track } from 'fbq'
 import Player from './player';
 import Mailchimp from './mailchimp';
 import GWS from './shopify';
@@ -50,6 +51,10 @@ class Site {
     this.didScroll = false;
     this.lastScrollTop = 0;
     this.delta = 5;
+
+    const pixel = '1351098861910831';
+    init(pixel);
+    track('PageView');
 
     lazySizes.init();
 

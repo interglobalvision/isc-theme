@@ -42,6 +42,7 @@
     "webpack": "^3.0.0"
   },
   "dependencies": {
+    "fbq": "^0.1.4",
     "js-cookie": "^2.2.1"
   }
 }
