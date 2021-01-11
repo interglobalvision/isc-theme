@@ -4,7 +4,7 @@
 // Import dependencies
 import lazySizes from 'lazysizes';
 import Swiper from 'swiper';
-import { init, track } from 'fbq'
+import { init, track } from 'fbq';
 import Player from './player';
 import Mailchimp from './mailchimp';
 import GWS from './shopify';
@@ -807,7 +807,7 @@ class Site {
         timeout = setTimeout(function() {
           $('.copy-link-message').text('');
         }, 5000);
-      })
+      });
     }
   }
 
