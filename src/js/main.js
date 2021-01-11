@@ -570,6 +570,8 @@ class Site {
         }
 
         $('body').removeClass('loading');
+
+        track('PageView');
       }
     });
   }
