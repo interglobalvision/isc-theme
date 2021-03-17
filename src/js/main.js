@@ -532,7 +532,7 @@ class Site {
     if (
       destinationUrl.pathname.indexOf('/store') > -1 ||
       destinationUrl.pathname.indexOf('/product') > -1 ||
-      destinationUrl.pathname.indexOf('/cart') > -1
+      destinationUrl.pathname.substr(destinationUrl.pathname.length - 5) === '/cart'
     ) {
       $('body').addClass('background-pistachio');
     } else {
