@@ -44,7 +44,12 @@ if (have_posts()) {
         </header>
       <?php if (empty($selection)) { ?>
         <div class="grid-item item-s-12 margin-bottom-mid text-align-center">
-          <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
+          <figure>
+            <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
+            <figcaption class="margin-top-micro font-size-small">
+              <?php the_post_thumbnail_caption(); ?>
+            </figcaption>
+          </figure>
         </div>
       <?php } ?>
         <div class="grid-item item-s-12 grid-row justify-center">
