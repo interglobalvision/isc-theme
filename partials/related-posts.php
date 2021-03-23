@@ -1,18 +1,48 @@
 <?php
 $post_id = get_the_ID();
 $post_cats = wp_get_post_categories($post_id);
+$post_tags = get_the_tags($post->ID);
+$tag_ids = array();
+
+if ($post_tags) {
+  foreach( $post_tags as $tag ) {
+    $tag_ids[] = $tag->term_id;
+  }
+}
 
 $args = array(
   'post_type' => 'post',
   'category__in' => $post_cats,
   'post__not_in' => array($post_id),
+  'tag__in' => $tag_ids,
   'posts_per_page' => 6,
   'orderby' => 'date',
 );
 
-$query = new WP_Query($args);
+$related_query = new WP_Query($args);
 
-if ($query->have_posts()) {
+if ($related_query->found_posts < 6) {
+  $tag_query_ids = wp_list_pluck( $related_query->posts, 'ID' );
+  $tag_query_found = $related_query->found_posts;
+  $tag_query = $related_query;
+
+  $args = array(
+    'post_type' => 'post',
+    'category__in' => $post_cats,
+    'post__not_in' => array($post_id),
+    'posts_per_page' => 6 - $tag_query_found,
+    'orderby' => 'date',
+  );
+
+  $cat_query = new WP_Query($args);
+
+  $related_query = new WP_Query();
+
+  $related_query->posts = array_merge( $tag_query->posts, $cat_query->posts );
+  $related_query->post_count = $tag_query->post_count + $cat_query->post_count;
+}
+
+if ($related_query->have_posts()) {
 ?>
 
 <section class="padding-top-basic padding-bottom-basic border-box background-almond">
@@ -28,8 +58,8 @@ if ($query->have_posts()) {
   <div class="post-category-swiper swiper-container container grid-row hide">
     <div class="swiper-wrapper">
     <?php
-      while ($query->have_posts()) {
-        $query->the_post();
+      while ($related_query->have_posts()) {
+        $related_query->the_post();
     ?>
       <div class="post-category-slide swiper-slide">
         <?php get_template_part('partials/post-item'); ?>
