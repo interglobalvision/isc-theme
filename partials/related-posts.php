@@ -22,14 +22,20 @@ $args = array(
 $related_query = new WP_Query($args);
 
 if ($related_query->found_posts < 6) {
-  $tag_query_ids = wp_list_pluck( $related_query->posts, 'ID' );
+  $exclude_ids = array($post_id);
   $tag_query_found = $related_query->found_posts;
+
+  if ($tag_query_found > 0) {
+    $tag_query_ids = wp_list_pluck( $related_query->posts, 'ID' );
+    $exclude_ids = array_merge(array($post_id), $tag_query_ids);
+  }
+
   $tag_query = $related_query;
 
   $args = array(
     'post_type' => 'post',
     'category__in' => $post_cats,
-    'post__not_in' => array($post_id),
+    'post__not_in' => $exclude_ids,
     'posts_per_page' => 6 - $tag_query_found,
     'orderby' => 'date',
   );
@@ -38,8 +44,12 @@ if ($related_query->found_posts < 6) {
 
   $related_query = new WP_Query();
 
-  $related_query->posts = array_merge( $tag_query->posts, $cat_query->posts );
-  $related_query->post_count = $tag_query->post_count + $cat_query->post_count;
+  if ($tag_query_found > 0) {
+    $related_query->posts = array_merge( $tag_query->posts, $cat_query->posts );
+    $related_query->post_count = $tag_query->post_count + $cat_query->post_count;
+  } else {
+    $related_query = $cat_query;
+  }
 }
 
 if ($related_query->have_posts()) {
