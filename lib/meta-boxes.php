@@ -344,7 +344,7 @@ function igv_cmb_metaboxes() {
   $partner_metabox->add_field( array(
 		'name'       => __( 'Logo', 'cmb2' ),
 		'id'         => $prefix . 'partner_logo',
-		'type'       => 'image',
+		'type'       => 'file',
 	) );
 
 }
