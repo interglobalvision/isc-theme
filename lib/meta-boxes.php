@@ -309,7 +309,7 @@ function igv_cmb_metaboxes() {
   ) );
 
   $partner_projects_id = $partner_metabox->add_field( array(
-  	'id'          => 'partner_projects',
+  	'id'          => $prefix . 'partner_projects',
   	'type'        => 'group',
   	'description' => __( 'Featured projects', 'cmb2' ),
   	// 'repeatable'  => false, // use false if you want non-repeatable group
@@ -341,7 +341,11 @@ function igv_cmb_metaboxes() {
   	'type' => 'file',
   ) );
 
-
+  $partner_metabox->add_field( array(
+		'name'       => __( 'Logo', 'cmb2' ),
+		'id'         => $prefix . 'partner_logo',
+		'type'       => 'image',
+	) );
 
 }
 ?>
