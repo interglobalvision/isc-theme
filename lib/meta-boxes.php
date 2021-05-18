@@ -300,5 +300,48 @@ function igv_cmb_metaboxes() {
   	) );
   }
 
+  // PARTNERS
+
+  $partner_metabox = new_cmb2_box( array(
+    'title'         => __( 'Options', 'cmb2' ),
+    'id'            => 'partner_metabox',
+    'object_types'  => array( 'partner', ), // Post type
+  ) );
+
+  $partner_projects_id = $partner_metabox->add_field( array(
+  	'id'          => 'partner_projects',
+  	'type'        => 'group',
+  	'description' => __( 'Featured projects', 'cmb2' ),
+  	// 'repeatable'  => false, // use false if you want non-repeatable group
+  	'options'     => array(
+  		'group_title'       => __( 'Project {#}', 'cmb2' ), // since version 1.1.4, {#} gets replaced by row number
+  		'add_button'        => __( 'Add Another Project', 'cmb2' ),
+  		'remove_button'     => __( 'Remove Project', 'cmb2' ),
+  		'sortable'          => true,
+  		// 'closed'         => true, // true to have the groups closed by default
+  		// 'remove_confirm' => esc_html__( 'Are you sure you want to remove?', 'cmb2' ), // Performs confirmation before removing group.
+  	),
+  ) );
+
+  $partner_metabox->add_group_field( $partner_projects_id, array(
+  	'name' => 'Title',
+  	'id'   => 'title',
+  	'type' => 'text',
+  ) );
+
+  $partner_metabox->add_group_field( $partner_projects_id, array(
+  	'name' => 'Link',
+  	'id'   => 'url',
+  	'type' => 'text_url',
+  ) );
+
+  $partner_metabox->add_group_field( $partner_projects_id, array(
+  	'name' => 'Image',
+  	'id'   => 'image',
+  	'type' => 'file',
+  ) );
+
+
+
 }
 ?>
