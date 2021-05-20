@@ -9,7 +9,7 @@ class GWS {
     this.mobileThreshold = 601;
 
     this.fetchProductMeta = this.fetchProductMeta.bind(this);
-    this.updateActiveCurrency = this.updateActiveCurrency.bind(this);
+    //this.updateActiveCurrency = this.updateActiveCurrency.bind(this);
     this.handleOptionChange = this.handleOptionChange.bind(this);
 
     this.checkoutIdCookieKey = 'gwsCheckoutId';
@@ -97,7 +97,7 @@ class GWS {
   /**
    * Add currency select options
    */
-  buildCurrencySelect() {
+  /*buildCurrencySelect() {
     if (this.$currencySelectHolder.length && WP.currencies !== null) {
       // add select element
       this.$currencySelectHolder.html('<select class="gws-currency-select"></select>');
@@ -114,12 +114,12 @@ class GWS {
       // bind currency select change handler
       this.$currencySelect.on('change', this.updateActiveCurrency);
     }
-  }
+  }*/
 
   /**
    * Set initial currency
    */
-  setInitialCurrency() {
+  /*setInitialCurrency() {
     // Get active currency from cookies
     let cookieCurrency = Cookies.get(this.currencyCookieKey);
 
@@ -135,12 +135,12 @@ class GWS {
         this.buildCurrencySelect();
       });
     }
-  }
+  }*/
 
   /**
    * Update active currency
    */
-  updateActiveCurrency() {
+  /*updateActiveCurrency() {
     this.activeCurrency = this.$currencySelect.val();
 
     // set active currency in cookies
@@ -177,7 +177,7 @@ class GWS {
         });
     }
     //console.log(this.checkout.lineItems[0].variant.id);
-  }
+  }*/
 
   /**
    * Init the Shopify checkout, current or new
@@ -193,35 +193,56 @@ class GWS {
       this.client.checkout.fetch(this.checkoutId)
         .then(checkout => {
           // Do something with the checkout
-          // console.log('EXISTING CHECKOUT', checkout);
+          console.log('EXISTING CHECKOUT', checkout);
 
-          // Save the checkout in object
-          this.checkout = checkout;
+          if (checkout.completedAt) {
+            // Create an empty checkout
+            console.log('checkout completed');
+            Cookies.remove(this.checkoutIdCookieKey);
+            this.clearLocalStorageItems();
+            this.createEmptyCheckout();
 
-          // Update cart display
-          this.updateCart(checkout);
+          } else {
+            // Save the checkout in object
+            this.checkout = checkout;
 
+            // Update cart display
+            this.updateCart(checkout);
+          }
         }).catch( error => {
           console.log(error);
         });
 
     } else { // Non existing checkout
-
+      console.log('Non existing checkout')
       // Create an empty checkout
-      this.client.checkout.create({
-        presentmentCurrencyCode: this.activeCurrency
-      })
-        .then((checkout) => {
-          // Do something with the checkout
-          // console.log('EMPTY CHECKOUT CREATED', checkout);
+      this.createEmptyCheckout();
 
-          // Save checkout in object
-          this.checkout = checkout;
-
-          // Save the shopifyCheckoutId in a cookie
-          Cookies.set(this.checkoutIdCookieKey, checkout.id, { expires: 7 }); // Expires in 7 days
-        });
     }
+  }
+
+  clearLocalStorageItems() {
+    Object.keys(localStorage).forEach(key => {
+      if (key !== 'WP_DATA_USER_1' && key !== 'cookies-accepted') {
+        localStorage.removeItem(key)
+      }
+    });
+  }
+
+  createEmptyCheckout() {
+    this.client.checkout.create({
+      presentmentCurrencyCode: this.activeCurrency
+    })
+      .then((checkout) => {
+        // Do something with the checkout
+        console.log('EMPTY CHECKOUT CREATED', checkout);
+
+        // Save checkout in object
+        this.checkout = checkout;
+
+        // Save the shopifyCheckoutId in a cookie
+        Cookies.set(this.checkoutIdCookieKey, checkout.id, { expires: 7 }); // Expires in 7 days
+      });
   }
 
   fetchProductMeta(index, element) {

@@ -131,3 +131,59 @@ function register_cpt_track() {
 
   register_post_type( 'track', $args );
 }
+
+add_action( 'init', 'register_cpt_partner' );
+
+function register_cpt_partner() {
+
+  $labels = array(
+    'name' => _x( 'Partners', 'igv' ),
+    'singular_name' => _x( 'Partner', 'igv' ),
+    'add_new' => _x( 'Add New', 'igv' ),
+    'add_new_item' => _x( 'Add New Partner', 'igv' ),
+    'edit_item' => _x( 'Edit Partner', 'igv' ),
+    'new_item' => _x( 'New Partner', 'igv' ),
+    'view_item' => _x( 'View Partner', 'igv' ),
+    'search_items' => _x( 'Search Partners', 'igv' ),
+    'not_found' => _x( 'No partners found', 'igv' ),
+    'not_found_in_trash' => _x( 'No partners found in Trash', 'igv' ),
+    'parent_item_colon' => _x( 'Parent Partner:', 'igv' ),
+    'menu_name' => _x( 'Partners', 'igv' ),
+  );
+
+  $args = array(
+    'labels' => $labels,
+    'hierarchical' => false,
+
+    'supports' => array( 'title', 'editor', 'thumbnail' ),
+
+    'public' => true,
+    'show_ui' => true,
+    'show_in_menu' => true,
+    'menu_position' => 5,
+
+    'show_in_nav_menus' => true,
+    'publicly_queryable' => true,
+    'exclude_from_search' => false,
+    'has_archive' => 'collection',
+    'query_var' => true,
+    'can_export' => true,
+    'rewrite' => true,
+    'capability_type' => 'post',
+
+    'taxonomies' => array('post_tag'),
+
+    'show_in_rest'        => true,
+    /*'template'          => array(
+      array( 'core/heading', array(
+        'level' => '5', 'content' => 'Some List' ) ),
+      array( 'core/list' ),
+      array( 'core/heading', array(
+        'level' => '5', 'content' => 'Some Text' ) ),
+      array( 'core/paragraph' )
+    ),*/
+		//'template_lock'     => 'all',
+  );
+
+  register_post_type( 'partner', $args );
+}
