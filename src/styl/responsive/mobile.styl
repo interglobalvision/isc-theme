@@ -21,6 +21,7 @@ space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-m
 font-sizes($font-size-basic, $font-size-extra, $font-size-large, $font-size-mid, $font-size-small, $font-size-tiny)
 
 $player-height = 95px
+$header-height = 53px
 
 *:focus
   outline: none
@@ -79,6 +80,8 @@ $player-height = 95px
     right: auto
   &.border-top-muck
     border-top-color: $color-muck
+  &.border-bottom-muck
+    border-bottom-color: $color-muck
   &.border-sides-brown
     &:after, &:before
       background: $color-brown
@@ -920,3 +923,12 @@ a.shop-button,
     display: none
   #cart-empty
     display: block
+
+#recent-community-post
+  background-size: cover
+  background-position: center
+  background-repeat: no-repeat
+  min-height: 400px
+  margin-top: $header-height
+  color: $color-white
+  text-shadow: 0px 2px 4px $color-black-half

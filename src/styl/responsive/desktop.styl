@@ -14,6 +14,7 @@
   space-maker($margin-micro, $margin-tiny, $margin-small, $margin-basic, $margin-mid, $margin-large)
 
   $player-height = 90px
+  $header-height = 75px
 
   #search-panel
     height: calc('100vh - ' + $player-height)
@@ -36,3 +37,7 @@
 
   #footer
     padding-bottom: $player-height + $margin-mid
+
+  #recent-community-post
+    margin-top: $header-height
+    min-height: 600px

@@ -73,6 +73,23 @@ function igv_set_playlist_query_args($query){
 }
 add_action('pre_get_posts','igv_set_playlist_query_args');
 
+function igv_set_community_query_args($query){
+  $paged = $query->query_vars[ 'paged' ];
+
+  if (!is_admin() &&
+  $query->is_main_query() &&
+  $query->is_category('community')) {
+    $query->set( 'paged', $paged );
+
+    $cat = get_category_by_slug('community');
+    $latest_community = get_posts(array('category'=>$cat->term_id,'numberposts'=>1));
+
+    $query->set('post__not_in', array($latest_community[0]->ID)); //exclude queries by post ID
+    $query->set( 'posts_per_page', 6 );
+  }
+}
+add_action('pre_get_posts','igv_set_community_query_args');
+
 function igv_set_album_query_args($query){
   if(!is_admin() && $query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);

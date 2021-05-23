@@ -308,6 +308,19 @@ function igv_cmb_metaboxes() {
     'object_types'  => array( 'partner', ), // Post type
   ) );
 
+  $partner_metabox->add_field( array(
+  	'name'     => 'Select Partner Tag',
+  	'id'       => $prefix . 'partner_tag',
+  	'desc'     => 'Type the name of the term and select from the options',
+  	'type'     => 'term_ajax_search',
+    'multiple-item' => true,
+		'limit'      	=> 1,
+		'query_args'	=> array(
+			'taxonomy'			=> 'post_tag',
+			'hide_empty'		=> false
+		)
+  ) );
+
   $partner_projects_id = $partner_metabox->add_field( array(
   	'id'          => $prefix . 'partner_projects',
   	'type'        => 'group',
