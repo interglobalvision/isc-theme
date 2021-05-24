@@ -19,7 +19,7 @@ if (!empty($featured_projects)) {
         <div class="grid-item item-s-12 item-m-6 item-l-4 margin-bottom-basic">
           <a href="<?php echo $project['url']; ?>">
             <div><img src="<?php echo $project['image']; ?>" /></div>
-            <span class="font-size-mid"><?php echo $project['title']; ?></span>
+            <span class="font-size-mid font-cond"><?php echo $project['title']; ?></span>
           </a>
         </div>
       <?php } ?>

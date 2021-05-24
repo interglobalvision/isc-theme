@@ -5,7 +5,7 @@ $partner_tag = get_post_meta($post->ID, '_igv_partner_tag', true);
 $args = array(
   'post_type' => 'post',
   'post__not_in' => array($post_id),
-  'posts_per_page' => 6,
+  'posts_per_page' => 3,
   'orderby' => 'date',
   'tax_query' => array(
     'relation' => 'OR',
@@ -35,25 +35,17 @@ if ($related_query->have_posts()) {
         <h2 class="font-size-mid font-uppercase">Community</h2>
       </div>
     </div>
-  </div>
 
-  <div class="post-category-swiper swiper-container container grid-row hide">
-    <div class="swiper-wrapper">
-    <?php
-      while ($related_query->have_posts()) {
-        $related_query->the_post();
-    ?>
-      <div class="post-category-slide swiper-slide">
-        <?php get_template_part('partials/post-item'); ?>
-      </div>
-    <?php
-      }
-    ?>
+    <div class="grid-row">
+      <?php
+        while ($related_query->have_posts()) {
+          $related_query->the_post();
+          get_template_part('partials/post-item-small'); 
+        }
+      ?>
     </div>
-    <div class="swiper-scrollbar"></div>
-  </div>
 
-  <div class="container">
+
     <div class="grid-row justify-end margin-top-basic">
       <div class="grid-item">
         <a class="link-underline" href="<?php echo get_term_link('community', 'category'); ?>">View Community Archive</a>
