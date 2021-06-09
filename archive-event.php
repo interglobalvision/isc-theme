@@ -102,7 +102,7 @@ if ($is_first_page) {
           while ($query->have_posts()) {
             $query->the_post();
 
-            get_template_part('partials/post-item-small');
+            get_template_part('partials/event-item');
           }
         }
         ?>
@@ -115,6 +115,8 @@ if ($is_first_page) {
 
   wp_reset_postdata();
 }
+
+if (have_posts()) {
 ?>
 
   <section class="border-box background-almond padding-bottom-basic padding-top-basic<?php echo $is_first_page ? '' : ' margin-top-mid mobile-margin-top'; ?>">
@@ -129,13 +131,11 @@ if ($is_first_page) {
 
       <div id="posts" class="grid-row" data-maxpages="<?php echo $max_pages; ?>">
         <?php
-        if (have_posts()) {
           while (have_posts()) {
             the_post();
 
-            get_template_part('partials/post-item-small');
+            get_template_part('partials/event-item');
           }
-        }
         ?>
       </div>
 
@@ -156,6 +156,9 @@ if ($is_first_page) {
     </div>
 
   </section>
+<?php
+}
+?>
 </main>
 
 <?php
