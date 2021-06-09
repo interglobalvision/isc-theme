@@ -380,5 +380,17 @@ function igv_cmb_metaboxes() {
 		'type'       => 'text_datetime_timestamp',
 	) );
 
+  $event_metabox->add_field( array(
+		'name'       => __( 'Summary', 'cmb2' ),
+		'id'         => $prefix . 'event_summary',
+		'type'       => 'textarea',
+	) );
+
+  $event_metabox->add_field( array(
+		'name'       => __( 'Eventbrite Embed', 'cmb2' ),
+		'id'         => $prefix . 'event_eventbrite_embed',
+		'type'       => 'textarea_code',
+	) );
+
 }
 ?>
