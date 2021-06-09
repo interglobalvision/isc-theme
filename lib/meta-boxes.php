@@ -360,5 +360,25 @@ function igv_cmb_metaboxes() {
 		'type'       => 'file',
 	) );
 
+  // EVENTS
+
+  $event_metabox = new_cmb2_box( array(
+    'title'         => __( 'Options', 'cmb2' ),
+    'id'            => 'event_metabox',
+    'object_types'  => array( 'event', ), // Post type
+  ) );
+
+  $event_metabox->add_field( array(
+		'name'       => __( 'Location', 'cmb2' ),
+		'id'         => $prefix . 'event_location',
+		'type'       => 'text',
+	) );
+
+  $event_metabox->add_field( array(
+		'name'       => __( 'Date & Time', 'cmb2' ),
+		'id'         => $prefix . 'event_datetime',
+		'type'       => 'text_datetime_timestamp',
+	) );
+
 }
 ?>
