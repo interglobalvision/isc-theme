@@ -19,16 +19,23 @@ if (have_posts()) {
         <header id="post-header" class="item-s-12 grid-row margin-bottom-tiny">
           <div class="grid-item item-s-12 item-l-6 margin-bottom-small">
             <h1 class="font-size-extra font-cond margin-bottom-small"><?php the_title(); ?></h1>
-            <div class="grid-row justify-between">
+            <div class="grid-row">
               <?php if (!empty($location)) { ?>
-                <div><span><?php echo $location; ?></span></div>
+                <div class="item-s-6"><span><?php echo $location; ?></span></div>
               <?php } if (!empty($datetime)) { ?>
-                <div><span><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></span></div>
+                <div class="item-s-6"><span><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></span></div>
               <?php } ?>
             </div>
           </div>
-          <div class="item-s-12 item-l-6 margin-bottom-small font-size-small grid-row">
-
+          <div class="item-s-12 item-l-6 margin-bottom-small font-size-small grid-column justify-between align-items-end">
+            <div class="text-align-right">
+              <?php get_template_part('partials/post-share'); ?>
+            </div>
+            <?php if (!empty($summary)) { ?>
+              <div class="font-mono font-size-basic">
+                <?php echo $summary; ?>
+              </div>
+            <?php } ?>
           </div>
         </header>
         <div class="grid-item item-s-12 margin-bottom-mid text-align-center">
