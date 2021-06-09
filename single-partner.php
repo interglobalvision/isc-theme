@@ -1,7 +1,5 @@
 <?php
 get_header();
-
-$selection = get_post_meta($post->ID, '_igv_post_selection', true);
 ?>
 
 <main id="main-content">
@@ -21,7 +19,6 @@ if (have_posts()) {
             <?php get_template_part('partials/post-share'); ?>
           </div>
         </header>
-      <?php if (empty($selection)) { ?>
         <div class="grid-item item-s-12 margin-bottom-mid text-align-center">
           <figure>
             <?php the_post_thumbnail('full', array('id' => 'post-featured-image')); ?>
@@ -30,7 +27,6 @@ if (have_posts()) {
             </figcaption>
           </figure>
         </div>
-      <?php } ?>
         <div class="grid-item item-s-12 grid-row justify-center">
           <div id="post-content">
             <?php the_content(); ?>
