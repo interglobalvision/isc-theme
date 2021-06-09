@@ -42,9 +42,6 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
 <body <?php body_class($classes); ?>>
 <!--[if lt IE 9]><p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p><![endif]-->
 
-<?php
-$show_shop = get_show_shop();
-?>
 <section id="main-container">
   <header id="header" class="nav-down">
     <div class="container">
@@ -57,9 +54,11 @@ $show_shop = get_show_shop();
             <li class="grid-item">
               <a href="<?php echo home_url('collection'); ?>" class="toggle-nav">Collection</a>
             </li>
+            <?php if (get_show_events()) { ?>
             <li class="grid-item">
               <a href="<?php echo home_url('events'); ?>" class="toggle-nav">Events</a>
             </li>
+            <?php } ?>
             <li class="grid-item">
               <a href="<?php echo home_url('features'); ?>" class="toggle-nav">Features</a>
             </li>

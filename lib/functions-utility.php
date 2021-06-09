@@ -75,11 +75,11 @@ function echo_post_meta($post_id, $field_id) {
   }
 }
 
-function get_show_shop() {
+function get_show_events() {
   $options = get_site_option('_igv_site_options');
-  if (array_key_exists('show_shop', $options)) {
-    if ($options['show_shop']) {
-      return $options['show_shop'];
+  if (array_key_exists('show_events', $options)) {
+    if ($options['show_events']) {
+      return $options['show_events'];
     }
   }
   return false;
