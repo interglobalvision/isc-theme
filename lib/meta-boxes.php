@@ -369,6 +369,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $event_metabox->add_field( array(
+		'name'       => __( 'Featured', 'cmb2' ),
+		'id'         => $prefix . 'event_featured',
+		'type'       => 'checkbox',
+	) );
+
+  $event_metabox->add_field( array(
 		'name'       => __( 'Location', 'cmb2' ),
 		'id'         => $prefix . 'event_location',
 		'type'       => 'text',
