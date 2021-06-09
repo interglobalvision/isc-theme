@@ -90,6 +90,40 @@ function igv_set_community_query_args($query){
 }
 add_action('pre_get_posts','igv_set_community_query_args');
 
+function igv_set_event_query_args($query){
+  $paged = $query->query_vars[ 'paged' ];
+
+  if (!is_admin() &&
+  $query->is_main_query() &&
+  is_post_type_archive('event')) {
+    $query->set( 'paged', $paged );
+
+    $time = time();
+    $upcoming_events = get_posts(array(
+      'post_type'=>'event',
+      'meta_query' => array(
+        array(
+          'key' => '_igv_event_datetime',
+          'compare' => '>',
+          'value' => $time
+        )
+      )
+    ));
+
+    function igv_return_post_id($p) {
+      return $p->ID;
+    }
+    $upcoming_ids = array_map('igv_return_post_id', $upcoming_events);
+
+    $query->set('post__not_in', $upcoming_ids); //exclude queries by post ID
+    $query->set('meta_key', '_igv_event_datetime');
+    $query->set('orderby', 'meta_value');
+    $query->set('order', 'DESC');
+    $query->set( 'posts_per_page', 6 );
+  }
+}
+add_action('pre_get_posts','igv_set_event_query_args');
+
 function igv_set_album_query_args($query){
   if(!is_admin() && $query->is_main_query() && is_post_type_archive('album')){
     $query->set('posts_per_page', 24);

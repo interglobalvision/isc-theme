@@ -21,9 +21,13 @@ if (have_posts()) {
             <h1 class="font-size-extra font-cond margin-bottom-small"><?php the_title(); ?></h1>
             <div class="grid-row">
               <?php if (!empty($location)) { ?>
-                <div class="item-s-6"><span><?php echo $location; ?></span></div>
+                <div class="item-s-6">
+                  <span><?php echo $location; ?></span>
+                </div>
               <?php } if (!empty($datetime)) { ?>
-                <div class="item-s-6"><span><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></span></div>
+                <div class="item-s-6">
+                  <time datetime="<?php echo data('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
+                </div>
               <?php } ?>
             </div>
           </div>

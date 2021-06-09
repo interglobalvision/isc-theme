@@ -58,6 +58,9 @@ $show_shop = get_show_shop();
               <a href="<?php echo home_url('collection'); ?>" class="toggle-nav">Collection</a>
             </li>
             <li class="grid-item">
+              <a href="<?php echo home_url('events'); ?>" class="toggle-nav">Events</a>
+            </li>
+            <li class="grid-item">
               <a href="<?php echo home_url('features'); ?>" class="toggle-nav">Features</a>
             </li>
             <li class="grid-item">
