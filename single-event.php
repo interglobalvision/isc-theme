@@ -26,7 +26,7 @@ if (have_posts()) {
                 </div>
               <?php } if (!empty($datetime)) { ?>
                 <div class="item-s-6">
-                  <time datetime="<?php echo data('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
+                  <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
                 </div>
               <?php } ?>
             </div>
