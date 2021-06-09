@@ -27,12 +27,12 @@ if (have_posts()) {
               <?php } ?>
             </div>
           </div>
-          <div class="item-s-12 item-l-6 margin-bottom-small font-size-small grid-column justify-between align-items-end">
-            <div class="text-align-right">
+          <div class="item-s-12 item-l-6 margin-bottom-small font-size-small grid-column justify-between">
+            <div class="">
               <?php get_template_part('partials/post-share'); ?>
             </div>
             <?php if (!empty($summary)) { ?>
-              <div class="font-mono font-size-basic">
+              <div class="grid-item font-mono font-size-basic margin-top-small">
                 <?php echo $summary; ?>
               </div>
             <?php } ?>
