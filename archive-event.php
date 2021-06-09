@@ -34,7 +34,7 @@ if ($is_first_page) {
       'posts_per_page' => 1,
       'meta_key' => '_igv_event_datetime',
       'orderby' => 'meta_value',
-      'order' => 'DESC',
+      'order' => 'ASC',
       'meta_query' => array(
         array(
           'key' => '_igv_event_datetime',
@@ -72,7 +72,7 @@ if ($is_first_page) {
     'posts_per_page' => 1,
     'meta_key' => '_igv_event_datetime',
     'orderby' => 'meta_value',
-    'order' => 'DESC',
+    'order' => 'ASC',
     'post__not_in' => array($featured_id),
     'meta_query' => array(
       array(
