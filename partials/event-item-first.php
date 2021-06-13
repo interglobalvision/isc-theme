@@ -1,6 +1,8 @@
 <?php
 $location = get_post_meta($post->ID, '_igv_event_location', true);
 $datetime = get_post_meta($post->ID, '_igv_event_datetime', true);
+$start_time = get_post_meta($post->ID, '_igv_event_start', true);
+$end_time = get_post_meta($post->ID, '_igv_event_end', true);
 $summary = get_post_meta($post->ID, '_igv_event_summary', true);
 ?>
 <article <?php post_class('padding-bottom-basic'); ?> id="post-<?php the_ID(); ?>">
@@ -51,7 +53,10 @@ $summary = get_post_meta($post->ID, '_igv_event_summary', true);
             </div>
             <div class="grid-item">
               <?php if (!empty($datetime)) { ?>
-                <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
+                <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php
+                  echo date("F j, Y", $datetime);
+                  echo !empty($start_time) && !empty($end_time) ? ' ' . $start_time . '–' . $end_time : '';
+                ?></time>
               <?php } ?>
             </div>
           </div>

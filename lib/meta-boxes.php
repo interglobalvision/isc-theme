@@ -390,12 +390,14 @@ function igv_cmb_metaboxes() {
 		'name'       => __( 'Start Time', 'cmb2' ),
 		'id'         => $prefix . 'event_start',
 		'type'       => 'text_time',
+    'time_format' => 'g:iA',
 	) );
 
   $event_metabox->add_field( array(
 		'name'       => __( 'End Time', 'cmb2' ),
 		'id'         => $prefix . 'event_end',
 		'type'       => 'text_time',
+    'time_format' => 'g:iA',
 	) );
 
   $event_metabox->add_field( array(

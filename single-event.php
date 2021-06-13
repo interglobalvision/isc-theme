@@ -28,7 +28,10 @@ if (have_posts()) {
                 </div>
               <?php } if (!empty($datetime)) { ?>
                 <div class="item-s-6">
-                  <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime) . ' ' . date("g:iA", $start_time) . '–' . date("g:iA", $end_time); ?></time>
+                  <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php
+                    echo date("F j, Y", $datetime);
+                    echo !empty($start_time) && !empty($end_time) ? ' ' . $start_time . '–' . $end_time : '';
+                  ?></time>
                 </div>
               <?php } ?>
             </div>
