@@ -10,6 +10,8 @@ if (have_posts()) {
 
     $location = get_post_meta($post->ID, '_igv_event_location', true);
     $datetime = get_post_meta($post->ID, '_igv_event_datetime', true);
+    $start_time = get_post_meta($post->ID, '_igv_event_start', true);
+    $end_time = get_post_meta($post->ID, '_igv_event_end', true);
     $summary = get_post_meta($post->ID, '_igv_event_summary', true);
     $eventbrite_embed = get_post_meta($post->ID, '_igv_event_eventbrite_embed', true);
 ?>
@@ -26,7 +28,7 @@ if (have_posts()) {
                 </div>
               <?php } if (!empty($datetime)) { ?>
                 <div class="item-s-6">
-                  <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
+                  <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime) . ' ' . date("g:iA", $start_time) . '–' . date("g:iA", $end_time); ?></time>
                 </div>
               <?php } ?>
             </div>

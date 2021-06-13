@@ -13,7 +13,7 @@ $datetime = get_post_meta($post->ID, '_igv_event_datetime', true);
     <?php if (!empty($location)) { ?>
       <div class="item-s-6"><span><?php echo $location; ?></span></div>
     <?php } if (!empty($datetime)) { ?>
-      <div class="item-s-6"><span><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></span></div>
+      <div class="item-s-6"><time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?></time></div>
     <?php } ?>
   </div>
 </article>

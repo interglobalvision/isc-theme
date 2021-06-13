@@ -14,7 +14,7 @@ $summary = get_post_meta($post->ID, '_igv_event_summary', true);
         </div>
         <div class="grid-item margin-bottom-tiny">
           <?php if (!empty($datetime)) { ?>
-            <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?> at <?php echo date("g:iA", $datetime); ?></time>
+            <time datetime="<?php echo date('Y-m-d', $datetime); ?>"><?php echo date("F j, Y", $datetime); ?></time>
           <?php } ?>
         </div>
       </div>

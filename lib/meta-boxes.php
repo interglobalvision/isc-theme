@@ -381,9 +381,21 @@ function igv_cmb_metaboxes() {
 	) );
 
   $event_metabox->add_field( array(
-		'name'       => __( 'Date & Time', 'cmb2' ),
+		'name'       => __( 'Date', 'cmb2' ),
 		'id'         => $prefix . 'event_datetime',
-		'type'       => 'text_datetime_timestamp',
+		'type'       => 'text_date_timestamp',
+	) );
+
+  $event_metabox->add_field( array(
+		'name'       => __( 'Start Time', 'cmb2' ),
+		'id'         => $prefix . 'event_start',
+		'type'       => 'text_time',
+	) );
+
+  $event_metabox->add_field( array(
+		'name'       => __( 'End Time', 'cmb2' ),
+		'id'         => $prefix . 'event_end',
+		'type'       => 'text_time',
 	) );
 
   $event_metabox->add_field( array(
