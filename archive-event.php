@@ -69,7 +69,7 @@ if ($is_first_page) {
 
   $args = array(
     'post_type' => 'event',
-    'posts_per_page' => 1,
+    'posts_per_page' => -1,
     'meta_key' => '_igv_event_datetime',
     'orderby' => 'meta_value',
     'order' => 'ASC',
