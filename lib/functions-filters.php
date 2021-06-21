@@ -100,7 +100,8 @@ function igv_set_event_query_args($query){
 
     $time = time();
     $upcoming_events = get_posts(array(
-      'post_type'=>'event',
+      'post_type' => 'event',
+      'numberposts' => -1,
       'meta_query' => array(
         array(
           'key' => '_igv_event_datetime',
@@ -119,7 +120,7 @@ function igv_set_event_query_args($query){
     $query->set('meta_key', '_igv_event_datetime');
     $query->set('orderby', 'meta_value');
     $query->set('order', 'DESC');
-    $query->set( 'posts_per_page', 6 );
+    $query->set('posts_per_page', 6);
   }
 }
 add_action('pre_get_posts','igv_set_event_query_args');
