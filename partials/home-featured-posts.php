@@ -16,7 +16,7 @@ $args = array(
   'category_name' => 'feature',
   'posts_per_page' => 1,
   'post__in' => get_option( 'sticky_posts' ),
-  'ignore_sticky_posts' => 1
+  //'ignore_sticky_posts' => 1
 );
 
 $query = new WP_Query($args);
