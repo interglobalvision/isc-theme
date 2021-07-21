@@ -106,7 +106,7 @@ function igv_set_event_query_args($query){
         array(
           'key' => '_igv_event_datetime',
           'compare' => '>',
-          'value' => $time
+          'value' => $time - 86400
         )
       )
     ));

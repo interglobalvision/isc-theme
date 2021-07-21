@@ -39,7 +39,7 @@ if ($is_first_page) {
         array(
           'key' => '_igv_event_datetime',
           'compare' => '>',
-          'value' => $time
+          'value' => $time - 86400
         )
       )
     );
@@ -78,7 +78,7 @@ if ($is_first_page) {
       array(
         'key' => '_igv_event_datetime',
         'compare' => '>',
-        'value' => $time
+        'value' => $time - 86400
       )
     )
   );
