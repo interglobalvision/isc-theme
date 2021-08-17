@@ -1,7 +1,7 @@
 
   <footer id="footer" class="background-white padding-top-basic font-size-small">
     <div class="container">
-      <?php get_template_part('partials/footer'); ?> 
+      <?php get_template_part('partials/footer'); ?>
     </div>
   </footer>
 
@@ -9,7 +9,7 @@
   if (!is_search()) {
     get_template_part('partials/search-panel');
   }
-  get_template_part('partials/player');
+  //get_template_part('partials/player');
   ?>
 
 </section>
