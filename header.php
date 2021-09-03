@@ -65,9 +65,9 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
             <li class="grid-item">
               <a href="<?php echo get_term_link('playlist', 'category'); ?>" class="toggle-nav">Playlists</a>
             </li>
-            <!--li class="grid-item">
+            <li class="grid-item">
               <a href="<?php echo get_term_link('community', 'category'); ?>" class="toggle-nav">Community</a>
-            </li-->
+            </li>
             <li class="grid-item">
               <a href="<?php echo home_url('store'); ?>" class="toggle-nav">Store</a>
             </li>
