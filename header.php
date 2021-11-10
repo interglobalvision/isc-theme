@@ -46,8 +46,10 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
   <header id="header" class="nav-down">
     <div class="container">
       <div class="grid-row padding-top-micro padding-bottom-micro align-items-center justify-between">
-        <div class="grid-item">
-          <h1 class="font-bold font-size-large"><a href="<?php echo home_url(); ?>">ISCHiFi</a></h1>
+        <div class="grid-item grid-row align-items-center">
+          <a href="<?php echo home_url(); ?>">
+            <?php get_template_part('assets/logo-isc.svg'); ?>
+          </a>
         </div>
         <nav id="main-nav">
           <ul class="grid-row font-cond">
