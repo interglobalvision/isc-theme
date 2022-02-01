@@ -18,14 +18,14 @@ $related_track = get_posts(array(
       $track_id = $related_track[0]->ID;
       $title = get_the_title($track_id);
       $thumb_url = get_the_post_thumbnail_url($track_id);
-      $soundcloud_url = get_post_meta($track_id, '_igv_track_soundcloud', true);
-      if (!empty($soundcloud_url)) {
+      $media_url = get_post_meta($track_id, '_igv_track_cloudinary', true);
+      if (!empty($media_url)) {
     ?>
       <div class="u-inline-block margin-bottom-tiny">
         <div class="stream-button player-skip album-stream u-pointer"
           data-title="<?php echo $title; ?>"
           data-thumb="<?php echo !empty($thumb_url) ? $thumb_url : get_the_post_thumbnail_url($post->ID); ?>"
-          data-soundcloud="<?php echo $soundcloud_url; ?>"
+          data-media="<?php echo $media_url; ?>"
           data-url="<?php echo get_permalink(); ?>"
           data-id="<?php echo $track_id; ?>">
             <?php get_template_part('assets/streaming-iscroom.svg'); ?>
