@@ -257,6 +257,12 @@ function igv_cmb_metaboxes() {
 	) );
 
   $track_metabox->add_field( array(
+    'name'       => __( 'Cloudinary URL', 'cmb2' ),
+    'id'         => $prefix . 'track_cloudinary',
+    'type'       => 'text_url',
+  ) );
+
+  $track_metabox->add_field( array(
     'name'      	=> __( 'Related Album', 'cmb2' ),
     'id'        	=> $prefix . 'track_album',
     'type'      	=> 'post_search_ajax',
