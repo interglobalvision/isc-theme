@@ -9,7 +9,7 @@
   if (!is_search()) {
     get_template_part('partials/search-panel');
   }
-  //get_template_part('partials/player');
+  get_template_part('partials/player');
   ?>
 
 </section>
