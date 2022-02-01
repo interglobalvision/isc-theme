@@ -78,7 +78,6 @@ class Player {
   }
 
   initAudio() {
-    var _this = this;
     this.audio = new Audio();
 
     this.audio.autoplay = false;
