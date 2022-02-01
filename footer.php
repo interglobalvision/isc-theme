@@ -9,7 +9,12 @@
   if (!is_search()) {
     get_template_part('partials/search-panel');
   }
-  get_template_part('partials/player');
+
+  $player_options = get_site_option('_igv_player_options');
+  if ($player_options['player_show']) {
+    get_template_part('partials/player');
+  }
+  
   ?>
 
 </section>
