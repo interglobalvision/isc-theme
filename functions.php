@@ -4,7 +4,6 @@
 
 function scripts_and_styles_method() {
   $templateuri = get_template_directory_uri();
-  $soundcloudSdk = 'https://connect.soundcloud.com/sdk/sdk-3.3.2.js';
   $javascriptMain = $templateuri . '/dist/js/main.js';
 
   $is_admin = current_user_can('administrator') ? 1 : 0;
@@ -16,12 +15,12 @@ function scripts_and_styles_method() {
     $playlist_index = 0;
 
     foreach($player_options['player_playlist'] as $track_id) {
-      $soundcloudUrl = get_post_meta($track_id, '_igv_track_soundcloud', true);
+      $mediaUrl = get_post_meta($track_id, '_igv_track_cloudinary', true);
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
       $related_album_url = !empty($related_album) ? get_the_permalink($related_album) : false;
       $thumb_url = get_the_post_thumbnail_url($track_id, 'thumbnail');
 
-      if (!empty($soundcloudUrl)) {
+      if (!empty($mediaUrl)) {
 
         if (!has_post_thumbnail($track_id) && !empty($related_album)) {
           $thumb_url = get_the_post_thumbnail_url($related_album);
@@ -30,7 +29,7 @@ function scripts_and_styles_method() {
         array_push($playlist, [
           'title' => get_the_title($track_id),
           'thumbUrl' => $thumb_url,
-          'soundcloudUrl' => $soundcloudUrl,
+          'mediaUrl' => $mediaUrl,
           'relatedAlbumUrl' => $related_album_url,
           'index' => $playlist_index
         ]);
@@ -55,8 +54,8 @@ function scripts_and_styles_method() {
     'mailchimp' => $options['mailchimp_action'],
     'postsPerPage' => get_query_var('posts_per_page'),
 
-    'playerClientId' => $player_options['player_client_id'],
     'playerPlaylist' => json_encode($playlist),
+    'playerShuffle' => $player_options['player_shuffle'] ?? false,
 
     'domain' => !empty($shopify_domain) ? $shopify_domain : null,
     'storefrontAccessToken' => !empty($shopify_token) ? $shopify_token : null,
@@ -66,14 +65,12 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('jquery');
 
-  wp_enqueue_script('soundcloud', $soundcloudSdk, array(), null, true);
-
-  wp_register_script('javascript-main', $javascriptMain, array(), '2.0.11', true);
+  wp_register_script('javascript-main', $javascriptMain, array(), '2.2', true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main');
 
   // Enqueue style
-  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.0.11' );
+  wp_enqueue_style( 'style-site', get_stylesheet_directory_uri() . '/dist/css/site.css', [], '2.1' );
 
   // dashicons for admin
   if (is_admin()) {

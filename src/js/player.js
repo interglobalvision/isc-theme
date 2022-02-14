@@ -1,6 +1,5 @@
 /* jshint esversion: 6, browser: true, devel: true, indent: 2, curly: true, eqeqeq: true, futurehostile: true, latedef: true, undef: true, unused: true */
-/* global $, document, WP, SC */
-// https://developers.soundcloud.com/docs/api/sdks#javascript
+/* global $, document, WP */
 
 class Player {
   constructor() {
@@ -8,15 +7,12 @@ class Player {
     this.playlist = null;
     this.currentTrack = null;
     this.trackIndex = 0;
-    this.player = null;
     this.isPlaying = false;
 
     // Bind functions
     this.onReady = this.onReady.bind(this);
-    this.handleTrack = this.handleTrack.bind(this);
-    this.handleStream = this.handleStream.bind(this);
     this.handlePlayPause = this.handlePlayPause.bind(this);
-    this.handlePause = this.handlePause.bind(this);
+    this.updateDuration = this.updateDuration.bind(this);
     this.handleSkip = this.handleSkip.bind(this);
     this.setCurrentTime = this.setCurrentTime.bind(this);
     this.updateCurrentTime = this.updateCurrentTime.bind(this);
@@ -28,6 +24,7 @@ class Player {
   onReady() {
     this.$mainContainer = $('#main-container');
     this.$player = $('#player');
+    this.$audio = $('#player-audio');
     this.$trackTitle = $('.player-track-title');
     this.$duration = $('.player-duration');
     this.$currentTime = $('.player-current-time');
@@ -38,7 +35,7 @@ class Player {
     this.$playerThumb = $('.player-thumb');
     this.$playerTrackInfo = $('.player-track-info');
 
-    this.initSC();
+    this.init();
   }
 
   shuffle(array) {
@@ -60,18 +57,12 @@ class Player {
     return array;
   }
 
-  initSC() {
-    if (WP.playerClientId && WP.playerPlaylist && this.$player.length) {
-      //this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
-      this.playlist = JSON.parse(WP.playerPlaylist);
+  init() {
+    if (WP.playerPlaylist && this.$player.length) {
+      this.playlist = WP.playerShuffle ? this.shuffle(JSON.parse(WP.playerPlaylist)) : JSON.parse(WP.playerPlaylist);
       this.orderPlaylistElements();
-
-      SC.initialize({
-        client_id: WP.playerClientId
-      });
-
-      this.bindControls();
-      this.getTrack();
+      this.initAudio();
+      this.setupSong();
     }
   }
 
@@ -85,81 +76,34 @@ class Player {
     });
   }
 
-  /*
-  getPlaylist() {
-    SC.resolve(WP.playerPlaylistUrl)
-    .then(this.handlePlaylist)
-    .catch(function(e) {
-      console.error('Playlist error', e);
-    });
+  initAudio() {
+    this.audio = new Audio();
+
+    this.audio.autoplay = false;
+    this.audio.loop = false;
+    this.audio.addEventListener('durationchange', this.updateDuration);
+    this.audio.addEventListener('ended', this.handleSkip);
+
+    this.bindControls();
   }
 
-  handlePlaylist(response) {
-    this.tracks = response.tracks;
-    this.createPlayer();
-  }
-  */
-
-  handleError(errorMsg, event) {
-    console.error(errorMsg, event);
-    this.isPlaying = false;
-    this.hasError = true;
-    this.$player.addClass('player-error');
-    this.$trackTitle.text(errorMsg);
+  updateDuration(event) {
+    const duration = this.durationToMinutesAndSeconds(event.path[0].duration);
+    this.$duration.text(duration);
   }
 
-  clearError() {
-    if (this.hasError) {
-      this.hasError = false;
-      this.$player.removeClass('player-error');
-      this.$trackTitle.html('&hellip;');
-    }
-  }
+  setupSong() {
+    this.currentTrack = this.playlist[this.trackIndex];
+    this.audio.src = this.currentTrack.mediaUrl;
 
-  getTrack() {
-    const _this = this;
-    this.clearError();
-    SC.resolve(this.playlist[this.trackIndex].soundcloudUrl)
-    .then(this.handleTrack)
-    .catch(function(e) {
-      _this.handleError('Playlist error', e);
-    });
-  }
-
-  handleTrack(response) {
-    this.currentTrack = response;
-    this.createPlayer();
-  }
-
-  createPlayer() {
-    const _this = this;
-    SC.stream('/tracks/' + this.currentTrack.id)
-      .then(this.handleStream)
-      .catch(function(e) {
-        _this.handleError('Stream error', e);
-      });
-  }
-
-  handleStream(player) {
-    this.player = player;
-    this.bindPlayerEvents();
     this.enablePlayPause();
-    this.setDuration();
     this.setTrackTitle();
     this.setTrackThumb();
     this.updateInfoLink();
+
     if (this.isPlaying) {
       this.handlePlayPause();
     }
-  }
-
-  bindPlayerEvents() {
-    this.player.on('finish', this.handleSkip);
-  }
-
-  setDuration() {
-    const duration = this.millisToMinutesAndSeconds(this.currentTrack.duration);
-    this.$duration.text(duration);
   }
 
   bindControls() {
@@ -169,7 +113,10 @@ class Player {
       _this.isPlaying = !_this.isPlaying;
       _this.handlePlayPause();
     });
-    this.$skip.on('click', this.handleSkip);
+    this.$skip.unbind('click').on('click', function (e) {
+      $(this).blur();
+      _this.handleSkip(e)
+    });
     this.$playlistToggle.on('click', function(e) {
       $(this).blur();
       _this.togglePlaylist(e);
@@ -195,37 +142,25 @@ class Player {
   handlePlayPause() {
     this.$playPause.children('.player-control-icon').toggleClass('hide');
 
-    if (this.player.isPlaying()) {
-      this.pausePlayer();
-    } else {
+    if (this.audio.paused) {
       this.playPlayer();
-    }
-  }
-
-  handlePause() {
-    if (this.player.isPlaying()) {
-      console.log('isPlaying');
-      this.$playPause.children('.player-control-icon').toggleClass('hide');
+    } else {
       this.pausePlayer();
     }
   }
 
   playPlayer() {
-    const _this = this;
-    this.player.play()
-      .then(this.setCurrentTime)
-      .catch(function(e){
-        _this.handleError('Playback rejected', e);
-      });
+    this.audio.play();
+    this.setCurrentTime();
   }
 
   pausePlayer() {
-    this.player.pause();
+    this.audio.pause();
     clearInterval(this.timeUpdater);
   }
 
   handleSkip(e) {
-    this.killPlayer();
+    this.clearSong();
 
     if (e === undefined) {
       // track finished
@@ -246,7 +181,22 @@ class Player {
       }
     }
 
-    this.getTrack();
+    this.setupSong();
+  }
+
+  clearSong() {
+    this.disablePlayPause();
+    if (this.isPlaying) {
+      // pause the player
+      // without changing isPlaying state
+      // this is important to resume playing
+      // after new player is created
+      this.handlePlayPause();
+    }
+    this.$trackTitle.html('&hellip;');
+    this.$playerThumb.removeClass('show');
+    this.$duration.text('0:00');
+    this.$currentTime.text('0:00');
   }
 
   insertAlbumTrack(target) {
@@ -264,7 +214,7 @@ class Player {
       const albumTrack = {
         title: trackData.title,
         thumbUrl: trackData.thumb,
-        soundcloudUrl: trackData.soundcloud,
+        mediaUrl: trackData.media,
         relatedAlbumUrl: trackData.url
       };
 
@@ -273,29 +223,22 @@ class Player {
 
       this.trackIndex++;
 
-      $newPlaylistItem.find('.playlist-item-title').text(albumTrack.title);
-      $newPlaylistItem.find('.playlist-item-thumb').attr('src', albumTrack.thumbUrl);
-      $newPlaylistItem.attr('data-id', trackData.id);
+      $newPlaylistItem
+        .attr('data-id', trackData.id)
+        .attr('data-index', this.trackIndex)
+        .find('.playlist-item-title')
+        .text(albumTrack.title);
 
+      if (albumTrack.thumbUrl) {
+        $newPlaylistItem.find('.playlist-item-thumb')
+          .attr('src', albumTrack.thumbUrl)
+          .removeClass('u-visuallyhidden');
+      }
+      
       $newPlaylistItem.insertAfter($currentPlaylistItem);
 
       this.playlist.splice(this.trackIndex, 0, albumTrack);
     }
-  }
-
-  killPlayer() {
-    if (this.isPlaying) {
-      // pause the player
-      // without changing isPlaying state
-      // this is important to resume playing
-      // after new player is created
-      this.handlePlayPause();
-    }
-    this.player.kill();
-    this.$trackTitle.html('&hellip;');
-    this.$playerThumb.removeClass('show');
-    this.$duration.text('0:00');
-    this.$currentTime.text('0:00');
   }
 
   togglePlaylist() {
@@ -343,14 +286,14 @@ class Player {
   }
 
   updateCurrentTime() {
-    const currentTime = this.millisToMinutesAndSeconds(this.player.currentTime());
+    const currentTime = this.durationToMinutesAndSeconds(this.audio.currentTime);
     this.$currentTime.text(currentTime);
   }
 
-  millisToMinutesAndSeconds(millis) {
-    var minutes = Math.floor(millis / 60000);
-    var seconds = ((millis % 60000) / 1000).toFixed(0);
-    return (seconds === 60 ? (minutes+1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
+  durationToMinutesAndSeconds(duration) {
+    var minutes = Math.floor(duration / 60);
+    var seconds = Math.floor(duration % 60);
+    return (seconds === 60 ? (minutes + 1) + ":00" : minutes + ":" + (seconds < 10 ? "0" : "") + seconds);
   }
 }
 

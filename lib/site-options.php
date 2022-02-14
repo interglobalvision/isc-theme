@@ -26,6 +26,18 @@ function igv_register_theme_options_metabox() {
   ) );
 
   $player_options->add_field( array(
+    'name'    => 'Show Player',
+    'id'      => 'player_show',
+    'type'    => 'checkbox'
+  ) );
+
+  $player_options->add_field( array(
+    'name'    => 'Shuffle Playlist',
+    'id'      => 'player_shuffle',
+    'type'    => 'checkbox'
+  ) );
+
+  $player_options->add_field( array(
     'name'    => esc_html__( 'Soundcloud Client ID', 'cmb2' ),
     'id'      => 'player_client_id',
     'type'    => 'text',
