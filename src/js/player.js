@@ -59,8 +59,7 @@ class Player {
 
   init() {
     if (WP.playerPlaylist && this.$player.length) {
-      //this.playlist = this.shuffle(JSON.parse(WP.playerPlaylist));
-      this.playlist = JSON.parse(WP.playerPlaylist);
+      this.playlist = WP.playerShuffle ? this.shuffle(JSON.parse(WP.playerPlaylist)) : JSON.parse(WP.playerPlaylist);
       this.orderPlaylistElements();
       this.initAudio();
       this.setupSong();

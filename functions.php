@@ -55,6 +55,7 @@ function scripts_and_styles_method() {
     'postsPerPage' => get_query_var('posts_per_page'),
 
     'playerPlaylist' => json_encode($playlist),
+    'playerShuffle' => $player_options['player_shuffle'] ?? false,
 
     'domain' => !empty($shopify_domain) ? $shopify_domain : null,
     'storefrontAccessToken' => !empty($shopify_token) ? $shopify_token : null,
@@ -64,7 +65,7 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('jquery');
 
-  wp_register_script('javascript-main', $javascriptMain, array(), '2.1', true);
+  wp_register_script('javascript-main', $javascriptMain, array(), '2.2', true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main');
 
