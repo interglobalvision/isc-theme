@@ -15,12 +15,20 @@ function scripts_and_styles_method() {
     $playlist_index = 0;
 
     foreach($player_options['player_playlist'] as $track_id) {
-      $mediaUrl = get_post_meta($track_id, '_igv_track_cloudinary', true);
+      $cloudinary_media_url = get_post_meta($track_id, '_igv_track_cloudinary', true);
+      $wordpress_media_url = get_post_meta($track_id, '_igv_track_wordpress', true);
       $related_album = get_post_meta($track_id, '_igv_track_album', true);
       $related_album_url = !empty($related_album) ? get_the_permalink($related_album) : false;
       $thumb_url = get_the_post_thumbnail_url($track_id, 'thumbnail');
 
-      if (!empty($mediaUrl)) {
+      if (!empty($cloudinary_media_url) || !empty($wordpress_media_url)) {
+
+        $media_url = null;
+        if (!empty($wordpress_media_url)) {
+          $media_url = $wordpress_media_url;
+        } else if (!empty($cloudinary_media_url)) {
+          $media_url = $cloudinary_media_url;
+        }
 
         if (!has_post_thumbnail($track_id) && !empty($related_album)) {
           $thumb_url = get_the_post_thumbnail_url($related_album);
@@ -29,7 +37,7 @@ function scripts_and_styles_method() {
         array_push($playlist, [
           'title' => get_the_title($track_id),
           'thumbUrl' => $thumb_url,
-          'mediaUrl' => $mediaUrl,
+          'mediaUrl' => $media_url,
           'relatedAlbumUrl' => $related_album_url,
           'index' => $playlist_index
         ]);
@@ -65,7 +73,7 @@ function scripts_and_styles_method() {
 
   wp_enqueue_script('jquery');
 
-  wp_register_script('javascript-main', $javascriptMain, array(), '2.2', true);
+  wp_register_script('javascript-main', $javascriptMain, array(), '2.21', true);
   wp_localize_script('javascript-main', 'WP', $javascriptVars);
   wp_enqueue_script('javascript-main');
 

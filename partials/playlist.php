@@ -9,8 +9,9 @@ if (!empty($playlist)) {
   <ul id="playlist-items" class="container padding-top-tiny padding-bottom-large grid-row">
   <?php
     foreach($playlist as $track_index => $track_id) {
-      $media_url = get_post_meta($track_id, '_igv_track_cloudinary', true);
-      if ($media_url) {
+      $cloudinary_media_url = get_post_meta($track_id, '_igv_track_cloudinary', true);
+      $wordpress_media_url = get_post_meta($track_id, '_igv_track_wordpress', true);
+      if ($cloudinary_media_url || $wordpress_media_url) {
         $related_album = get_post_meta($track_id, '_igv_track_album', true);
         $thumb_url = get_the_post_thumbnail_url($track_id);
 

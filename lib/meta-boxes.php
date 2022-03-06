@@ -263,6 +263,12 @@ function igv_cmb_metaboxes() {
   ) );
 
   $track_metabox->add_field( array(
+    'name'       => __( 'Wordpress Media', 'cmb2' ),
+    'id'         => $prefix . 'track_wordpress',
+    'type'       => 'file',
+  ) );
+
+  $track_metabox->add_field( array(
     'name'      	=> __( 'Related Album', 'cmb2' ),
     'id'        	=> $prefix . 'track_album',
     'type'      	=> 'post_search_ajax',
