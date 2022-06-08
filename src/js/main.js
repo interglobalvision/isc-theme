@@ -67,7 +67,7 @@ class Site {
     this.bindSearchEvents();
     this.setFooterHeight();
     this.bindMobileNav();
-    this.initWelcomePanel();
+    //this.initWelcomePanel();
     this.bindProductScroll();
     this.bindLinkCopy();
 

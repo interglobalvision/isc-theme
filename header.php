@@ -90,4 +90,4 @@ $classes .= $isStorePage ? 'background-pistachio' : '';
     </div>
   </header>
 
-  <?php get_template_part('partials/welcome-panel'); ?>
+  <?php //get_template_part('partials/welcome-panel'); ?>
